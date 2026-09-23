@@ -43,7 +43,7 @@ def load_company() -> Company:
         contacts=pd.read_csv(d / "contacts.csv"),
         products=pd.read_csv(d / "products.csv"),
         team=pd.read_csv(d / "team.csv"),
-        accounts=pd.read_csv(d / "accounts.csv"),
+        accounts=pd.read_csv(d / "accounts.csv") if (d / "accounts.csv").exists() else pd.DataFrame(columns=["account"]),
     )
 
 

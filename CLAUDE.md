@@ -15,6 +15,10 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
   data vs agent output, PRISM trajectory rule fails, stated-vs-computed numbers, quote
   existence, catalogue mismatches, data hygiene, calibration smells. When something goes
   wrong, extend the auditor with a check rather than fixing the symptom by hand.
+- Any CRM export: `scripts/ingest.py --preset hubspot|salesforce|ledger --deals … --activities … --out data/<name>`
+  then `LEDGER_DATA=data/<name> LEDGER_AS_OF=YYYY-MM-DD scripts/run.py v3`. Presets live in
+  `ledger/ingest.py` (column candidates, stage map, buying-role map); missing files degrade
+  (no catalogue → no scope/arithmetic checks; no contacts → champion from primary_contact).
 - Model responses are cached under `.cache/`; delete to force re-inference.
 - UI: `.venv/bin/uvicorn ledger.app:app --port 8787` → http://localhost:8787 (reads
   `runs/`; run `scripts/run.py eval v1 v2` first so receipts and Proof have data).

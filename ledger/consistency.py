@@ -82,7 +82,11 @@ def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
     except (TypeError, ValueError):
         units = total = None
     lp = list_price(co.products, d["product"])
-    if units and total and abs(total - units * lp) / max(units * lp, 1) > 0.05:
+    if lp is None:  # no catalogue: fall back to the CRM amount as the unit price when scope is 1
+        lp = deal_amount(co.products, d) if not units or units == 1 else None
+    if lp is None:
+        pass  # cannot check scope/arithmetic without a unit price
+    elif units and total and abs(total - units * lp) / max(units * lp, 1) > 0.05:
         add("M10_arithmetic", f"buyer says {units} × ${lp:,.0f} = ${total:,.0f}; that is ${units * lp:,.0f}", "total_stated_usd")
     elif units and units > 1 and abs(deal_amount(co.products, d) - units * lp) > 1:
         add("M5_scope_vs_amount", f"buyer scope {units} units (${units * lp:,.0f}); CRM amount ${deal_amount(co.products, d):,.0f}", "units_discussed")

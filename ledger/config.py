@@ -11,10 +11,10 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env")
 
-COMPANY_DIR = ROOT / "data" / "company"
+COMPANY_DIR = Path(os.getenv("LEDGER_DATA", ROOT / "data" / "company"))  # any ingested dataset
 RUNS_DIR = ROOT / "runs"
 CACHE_DIR = ROOT / ".cache" / "llm"
-SNAPSHOT = pd.Timestamp("2026-10-19")
+SNAPSHOT = pd.Timestamp(os.getenv("LEDGER_AS_OF", "2026-10-19"))  # "today" for the review
 BASE_WIN_RATE = 0.63
 
 OBJECTIONS = ["none", "budget", "competitor", "timing", "authority", "need"]

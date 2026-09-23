@@ -15,14 +15,17 @@ def price_table(products: pd.DataFrame) -> dict[str, float]:
     return {normalize_product(r.product): float(r.sales_price) for r in products.itertuples()}
 
 
-def list_price(products: pd.DataFrame, product: str) -> float:
-    return price_table(products)[normalize_product(product)]
+def list_price(products: pd.DataFrame, product: str) -> float | None:
+    """Catalogue price, or None when there is no catalogue / no such product."""
+    return price_table(products).get(normalize_product(str(product)))
 
 
 def deal_amount(products: pd.DataFrame, deal: pd.Series) -> float:
-    """CRM amount if the rep entered one, else catalogue list price."""
+    """CRM amount if the rep entered one, else catalogue list price, else 0 (and a rule will flag it)."""
     amt = deal.get("amount")
-    return float(amt) if pd.notna(amt) and amt != "" else list_price(products, deal["product"])
+    if pd.notna(amt) and amt != "":
+        return float(amt)
+    return list_price(products, deal["product"]) or 0.0
 
 
 def pipeline_total(products: pd.DataFrame, deals: pd.DataFrame) -> float:

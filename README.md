@@ -170,6 +170,24 @@ No paid inference is required: the default provider is a local Ollama model. The
 comparison above cost about $0.30 on Gemini Flash-Lite; a spend guard in `ledger/llm.py` stops
 metered providers at `GEMINI_BUDGET_USD`.
 
+## Bring your own pipeline
+
+```bash
+.venv/bin/python scripts/ingest.py --preset hubspot \
+    --deals ~/Downloads/hubspot-deals.csv --activities ~/Downloads/hubspot-engagements.csv \
+    --contacts ~/Downloads/hubspot-contacts.csv --out data/acme --company "Acme"
+LEDGER_DATA=data/acme LEDGER_AS_OF=2026-10-19 .venv/bin/python scripts/run.py v3
+LEDGER_DATA=data/acme .venv/bin/uvicorn ledger.app:app --port 8787
+```
+
+`ledger/ingest.py` maps HubSpot and Salesforce export columns, stage codes and buying roles
+onto Ledger's canonical files; `--mapping overrides.json` handles custom fields. Closed deals
+are dropped. Missing inputs degrade honestly: no product catalogue means no scope/arithmetic
+checks; no contacts file means the champion is the deal's primary contact and every late-stage
+deal is flagged for a missing economic buyer until one is logged. `ingest_report.json` says
+which columns were used. Verified by round-tripping the demo data through a HubSpot-shaped
+export (`data/acme_test`).
+
 ## Layout
 
 ```
