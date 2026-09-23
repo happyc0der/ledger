@@ -31,6 +31,11 @@ one action. Tick "reveal outcomes."
 **2:50 — Close (10s).** "If a pipeline review can't show its receipts, it's a guess with a
 nice UI. Ledger shows them — and PRISM is where we found out we needed to."
 
+**Optional beat if time allows (15s).** "We stopped reading traces by hand. A third agent — the
+auditor — reads PRISM's flags and rule results and the agents' outputs, and writes the
+findings. It found the invented phone numbers and attributed them to our data, not the model."
+Show `reports/audit.md`.
+
 ## If asked
 - *Is the data real?* Deals, values, dates, outcomes: yes (public Maven CRM dataset). Notes:
   synthetic, conditioned on the real outcome, disclosed in the README.
