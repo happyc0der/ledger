@@ -104,3 +104,100 @@ v1 vs v2 (60s). 5. Live: click a deal, buyer quote, one action (30s).
 ## 10. Ask in Discord
 Rubric + judges · pre-written code policy · Builder-tier PRISM · partner credits ·
 submission format + demo length.
+
+---
+
+# Revision 3 (2026-09-23): the agent must catch what doesn't make sense
+
+## Why the current story is not enough
+Everything v2 catches today is caught by determinism: amounts, day-gaps, quotes, product
+spelling. A RevOps checklist or a Clari "deal warning" rule does the same on CRM fields
+(past close date, no next step, dormant 30+ days, stage > 2× average, amount missing past
+qualification, duplicate open deals on one account, close date pushed >3×). That is the
+floor, not the product. A revenue agent earns its keep when the data is *syntactically fine
+and semantically wrong*: the stage says Negotiation, the buyer said "budget frozen"; the
+primary contact left the company; "PO next week" was three weeks ago; the deal is for one
+unit but the buyer is talking about two sites; the buyer already chose a competitor and the
+deal is still open. And it must say what is *missing*: no economic buyer on a $27K deal in
+Proposal, no timeline, no next step.
+
+Research: KC-Bench (arXiv 2609.03588) shows LLM agents "frequently fail to notice explicit
+conflicts" between user-provided data and system records even when they are obvious side
+by side. Its design lessons: explicit comparison mechanisms, mandatory cross-checking, safe
+defaults toward flagging. That is the architecture below, and it is also why v1 (ask the
+model "find the issues") will fail in a measurable way.
+
+## The idea: a claim ledger per deal
+1. **Extract (model, typed).** From the record, fill a fixed schema of *buyer-stated facts*,
+   each with a verbatim quote and date: budget status, decision timeline, economic buyer
+   named, champion status (active / left / unknown), competitor status (none / evaluating /
+   chosen), product & quantity discussed, commitment level (none / verbal / PO in flight),
+   last buyer promise (what + when). Missing = null, never guessed.
+2. **Compare (code).** Field by field against the CRM: stage, amount, product,
+   expected_close, primary contact & economic buyer, last_activity_date, activities' dates.
+   Each mismatch is a typed contradiction with the CRM value, the buyer quote, and the date.
+3. **Missing (code).** Required slots per stage (MEDDPICC-lite): past Proposal → economic
+   buyer, timeline, next step; past Negotiation → commitment evidence. Empty slot = finding.
+4. **Verify (code).** Every quote must exist in the record; every date must be inside the
+   deal's lifetime; otherwise the finding is dropped and logged to PRISM as check:*:dropped.
+5. **Judge (decision model).** Given contradictions + gaps, the existing v2 questions: win
+   probability, objection, next action, plus "should this deal be closed-lost / disqualified
+   now?"
+
+The model reads; code compares; every finding carries a receipt. Same principle as v2,
+pushed one level up: from numbers to meaning.
+
+## Anomaly taxonomy (planted in the generator, labelled in ground truth)
+Syntactic (rules should catch; the Clari floor):
+  S1 expected_close in the past · S2 no next step past Qualification · S3 dormant >30d ·
+  S4 amount blank past Qualification · S5 stage > 2× typical duration · S6 duplicate open
+  deal on same account+product · S7 activity dated before deal creation · S8 last_activity
+  field ≠ activities
+Semantic (rules cannot; the agent must):
+  M1 stage contradicts buyer words (Negotiation vs "budget frozen"/"chose competitor")
+  M2 contact contradiction: champion left (auto-reply) but still primary; econ buyer in
+     notes ≠ CRM econ buyer; junior title but "she owns the budget"
+  M3 expired promise: "PO next week" dated >14d ago, nothing since
+  M4 timeline contradiction: expected_close before the buyer's stated decision date
+  M5 amount/scope contradiction: buyer discusses two sites / phased 60-40 / a different
+     product; CRM amount is one unit of the deal product
+  M6 zombie: buyer wrote "we went with X" and the deal is still open
+  M7 cross-deal: auto-reply on deal A says the contact left; deal B at the same account
+     still lists them as primary
+  M8 happy ears: rep note positive after a buyer note that pauses/declines
+  M9 missing: no economic buyer / no timeline / no next step where the stage requires it
+  M10 quantity/price arithmetic in notes ("3 units at list = $X") that doesn't match amount
+Clean deals: ~60%. Some deals carry two anomalies. Some anomalies are near-misses (buyer
+says "decision in Q1" and expected_close is in Q1 → not a contradiction) to measure false
+positives, which is where "confident-looking noise" comes from.
+
+## Metrics (all against planted labels; outcomes stay for the revenue/Brier story)
+- Per-type precision / recall / F1, and overall, for three systems:
+  **v1** one prompt per rep: "list every issue you see" (the naive agent; expect KC-Bench
+  behaviour — misses explicit conflicts, invents others);
+  **rules** deterministic only (the Clari floor; expect S1–S8 ≈ perfect, M1–M10 ≈ 0);
+  **v3** claim ledger + code comparison + verifier (+ Jev or fallback for judgement).
+- False-positive rate on clean deals (the manager's trust metric).
+- Evidence validity: share of findings whose quote exists and whose date is consistent.
+- "Actionable missing": recall on M9.
+- Existing: revenue-in-top-20, Brier, fabrications (unchanged).
+
+## Demo shape
+"Here are 228 deals. 40% of them have something wrong that the CRM fields can't show you.
+A rules engine finds the easy half. The naive agent finds a third and invents a few. Ledger
+finds X% with a quote for every one and Y false alarms — and for each, says what to do."
+Then click a deal: CRM says Negotiation, $5,482, close Nov 12, contact Priya. Ledger:
+"Priya left (auto-reply, Oct 2). Buyer promised a PO on Sep 29; nothing since (20 days).
+No economic buyer identified. → multithread to Daniel Kowalski or disqualify."
+
+## Build plan (fits the 3-week runway)
+Wk 2a: anomaly generator + labels; rules baseline (extend audit.py checks S1–S8 to per-deal
+       findings); extraction schema + prompts; comparison + verifier; metrics.
+Wk 2b: v1 "find issues" baseline; v3 full run; UI "Issues" column + drawer section; PRISM
+       steps check:consistency:<type>:<pass|fail|dropped>.
+Wk 3:  Jev for the typed judgement if the key arrives; README/DEMO rewrite; rehearsal.
+Cost: extraction ≈ 2k tokens/deal → ~$0.15 per full run on flash-lite.
+
+Sources: KC-Bench arXiv 2609.03588; fullstackgtm CRM audit checklist (27 checks); crono.one
+pipeline hygiene (four-field weekly audit); Gong deal warnings (engagement, single-thread,
+stalled, pricing); AskElephant/vonlabs on combining signals before escalating.
