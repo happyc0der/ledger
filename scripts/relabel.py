@@ -7,7 +7,7 @@ SNAPSHOT = pd.Timestamp("2026-10-19"); LATE = {"Proposal", "Negotiation"}
 deals = pd.read_csv(D / "deals.csv", parse_dates=["created_date"]); acts = pd.read_csv(D / "activities.csv", parse_dates=["date"])
 truth = pd.read_csv(D / "ground_truth.csv").set_index("opportunity_id"); lab = pd.read_csv(D / "anomalies.csv")
 have = {(r.opportunity_id, r.type) for r in lab.itertuples()}; new = []
-promise_arch = {"clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging", "quiet_late_stage", "silent_then_signed"}
+promise_arch = {"clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging", "quiet_late_stage", "silent_then_signed", "no_authority"}
 for r in deals.itertuples():
     oid = r.opportunity_id
     if oid not in truth.index: continue

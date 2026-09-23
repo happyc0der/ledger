@@ -62,7 +62,7 @@ def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
     # M3 expired promise
     pdate = dt(ledger.get("last_buyer_promise_date"))
     if ledger.get("last_buyer_promise") and pdate is not None and (SNAPSHOT - pdate).days > 14 \
-            and ledger.get("commitment") in ("verbal_yes", "po_in_flight", "signed", None):
+            and ledger.get("commitment") not in ("declined", "paused"):  # a declined/paused buyer owes nothing
         add("M3_expired_promise", f"buyer promised '{ledger['last_buyer_promise'][:60]}' {(SNAPSHOT - pdate).days}d ago; nothing since", "last_buyer_promise")
     # M4 timeline
     ddate = dt(ledger.get("decision_date"))

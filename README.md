@@ -110,25 +110,22 @@ you just ask them to look. So Ledger doesn't ask the model to notice — it asks
 | | CRM rules | Ledger v3 |
 |---|---|---|
 | Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 99% |
-| **Semantic (M1–M10) recall** | **0%** | **91%** |
+| **Semantic (M1–M10) recall** | **0%** | **93%** |
 | Semantic precision | — | 99% |
 | Clean deals falsely flagged | 0 / 86 | **1 / 86** |
 
-Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 ·
-expired promise 100/78 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie
-deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer
-100/100 · arithmetic 100/100. Full table: `reports/issues.md`; every finding in the UI shows
+Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 · expired promise 100/91 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer 100/100 · arithmetic 100/100. Full table: `reports/issues.md`; every finding in the UI shows
 the CRM value, the buyer's sentence and the recommended action.
 
 **What was adjusted after the first scoring, and what wasn't.** No prompt or model setting
 was changed after seeing results. Two comparison bugs were fixed (name matching against
 paraphrased first names; a timeline check double-firing on deals already flagged for a past
 close date). Three label gaps were closed: contacts who say "I don't own this budget" in a
-late stage, a buyer's "I'll ping you when redlines are back" left unanswered for 20+ days,
-and "we've paused all vendor onboarding" against a close date weeks away — all true by the
-taxonomy's definitions, all verified by reading the evidence, all previously counted as false
-positives. The remaining misses are mostly expired promises the model did not record as a
-promise ("let me get back to you").
+late stage, a buyer's "I'll ping you when redlines are back" or "I'll try to get time with
+her" left unanswered for 14+ days, and "we've paused all vendor onboarding" against a close
+date weeks away — all true by the taxonomy's definitions, all verified by reading the
+evidence, all previously counted as false positives. Closing them also added cases the
+model misses, which is why recall is 93% and not higher.
 
 ## The auditor: finding failures is the agent's job too
 

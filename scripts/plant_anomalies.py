@@ -223,7 +223,7 @@ def main():
             label(r.opportunity_id, "S4_amount_blank_late", "amount blank past Qualification")
 
     # ---- derived M3: a buyer promise/callback older than 14 days with no buyer message since -----
-    promise_arch = {"clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging", "quiet_late_stage", "silent_then_signed"}
+    promise_arch = {"clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging", "quiet_late_stage", "silent_then_signed", "no_authority"}
     have = {(l["opportunity_id"], l["type"]) for l in labels}
     for r in deals.itertuples():
         if arch.get(r.opportunity_id) in promise_arch and (r.opportunity_id, "M3_expired_promise") not in have:
