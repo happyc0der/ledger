@@ -47,6 +47,11 @@
   #proof.show { display:block; }
   .muted { color:var(--muted); }
   .empty { padding:40px; color:var(--muted); text-align:center; }
+  .iss { display:inline-block; padding:1px 6px; border-radius:4px; font-size:11px; margin:1px 2px 1px 0; background:#2a1f1f; color:#ffb4b4; border:1px solid #4a2a2a; }
+  .iss.s { background:#26261c; color:#e6d38a; border-color:#4a4426; }
+  .issue { border-left:3px solid var(--bad); padding:6px 10px; margin:6px 0; background:#1b2130; }
+  .issue.s { border-left-color:var(--warn); }
+  .issue .t { font-weight:600; } .issue .a { color:var(--muted); }
 </style>
 </head>
 <body>
@@ -90,9 +95,10 @@ function renderList() {
       <td><span class="pill obj-${d.objection}">${d.objection}</span></td>
       <td>${(d.next_action || '').replace(/_/g, ' ')}</td>
       <td>${receipts(d)}</td>
+      <td>${(d.issue_types || []).map(t => `<span class="iss ${t[0] === 'S' ? 's' : ''}" title="${t}">${t.split('_')[0]}</span>`).join('') || '<span class="muted">—</span>'}</td>
     </tr>`).join('');
   $('#list').innerHTML = `<table><thead><tr><th>#</th><th>Deal</th><th>Rep stage</th><th class="num">Amount</th>
-    <th class="num">Win prob.</th><th>Objection</th><th>Next action</th><th>Receipts</th></tr></thead><tbody>${rows}</tbody></table>`;
+    <th class="num">Win prob.</th><th>Objection</th><th>Next action</th><th>Receipts</th><th>Issues</th></tr></thead><tbody>${rows}</tbody></table>`;
   document.querySelectorAll('tr.row').forEach(tr => tr.onclick = () => select(tr.dataset.id));
 }
 
@@ -120,6 +126,9 @@ async function select(id) {
     <div>${v.rationale || ''}</div>
     <div style="margin-top:6px">${receipts(v)}</div>
     ${outcome}
+    ${(v.issues && v.issues.length) ? `<h3>What doesn't add up (${v.issues.length})</h3>` + v.issues.map(i => `<div class="issue ${i.type[0] === 'S' ? 's' : ''}">
+        <div class="t">${i.type.replace(/_/g, ' ')}</div><div>${i.detail}</div>
+        ${i.evidence ? `<div class="muted">“${i.evidence}”</div>` : ''}<div class="a">→ ${i.action || ''}</div></div>`).join('') : ''}
     <h3>Both versions</h3>
     <table class="cmp"><tr><th></th><th class="num">p</th><th>objection</th><th>action</th><th>receipts</th></tr>${others}</table>
     <h3>Record (${d.activities.length})</h3>${acts}`;
@@ -130,6 +139,24 @@ function topBinNote(v1, v2) {
   const a = top(v1), b = top(v2);
   return `v1 puts ${a.n} of ${v1.deals} deals in its top confidence bin, so its "top 20" is mostly just the largest deals. ` +
          `When v1 says ${pct(a.stated)}, ${pct(a.actual)} close; when v2 says ${pct(b.stated)}, ${pct(b.actual)} close.`;
+}
+
+function renderIssues(scores) {
+  if (!scores.length) return;
+  const names = scores.map(s => s.name);
+  const row = (label, f) => `<tr><td>${label}</td>${scores.map(s => `<td class="num">${f(s)}</td>`).join('')}</tr>`;
+  const types = Object.keys(scores[0].per_type);
+  $('#issuesProof').innerHTML = `<h2 style="margin-top:24px">What's wrong in the pipeline: CRM rules vs Ledger</h2>
+    <table class="cmp" style="max-width:720px"><tr><th></th>${names.map(n => `<th class="num">${n}</th>`).join('')}</tr>
+      ${row('findings', s => s.findings)}
+      ${row('syntactic (S1–S8) recall', s => pct(s.syntactic.recall))}
+      ${row('semantic (M1–M10) recall', s => pct(s.semantic.recall))}
+      ${row('semantic precision', s => pct(s.semantic.precision))}
+      ${row('clean deals falsely flagged', s => `${s.clean_flagged}/${s.clean_deals}`)}
+    </table>
+    <details style="margin-top:8px"><summary class="muted">per type</summary><table class="cmp" style="max-width:720px"><tr><th>type</th>${names.map(n => `<th class="num">${n} P / R</th>`).join('')}</tr>
+      ${types.map(t => `<tr><td>${t}</td>${scores.map(s => { const p = s.per_type[t]; return `<td class="num">${pct(p.precision || 0)} / ${pct(p.recall || 0)} (${p.tp}/${p.tp + p.fn})</td>`; }).join('')}</tr>`).join('')}
+    </table></details>`;
 }
 
 function renderProof(c) {
@@ -155,6 +182,7 @@ function renderProof(c) {
       ${row('Deals reported', 'deals')}
       ${row('Duplicate deal reports', 'duplicate_deals', x => x, 'low')}
     </table>
+    <div id="issuesProof"></div>
     <div style="display:flex; gap:40px; margin-top:20px; flex-wrap:wrap">
       ${['v1', 'v2'].map(k => `<div><h3>Reliability — ${k}</h3><table class="cmp"><tr><th>stated p</th><th class="num">n</th><th class="num">mean stated</th><th class="num">actually won</th></tr>${rel(c[k])}</table></div>`).join('')}
     </div>
@@ -178,7 +206,7 @@ async function loadDeals() {
   });
   $('#reveal').onchange = e => { state.reveal = e.target.checked; if (state.sel) select(state.sel); };
   $('#viewList').onclick = () => { $('#mainList').style.display = 'grid'; $('#proof').classList.remove('show'); $('#viewList').classList.add('on'); $('#viewProof').classList.remove('on'); };
-  $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); };
+  $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); renderIssues(await api('/api/issues')); };
   await loadDeals();
 })();
 </script>

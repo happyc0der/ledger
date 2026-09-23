@@ -1,229 +1,236 @@
 opportunity_id,outcome,actual_close_date,actual_close_value,list_price,archetype,objection,correct_next_action,rep_stage_inflated,days_since_buyer_touch,competitor
-06AIY3IS,Won,2026-12-09,5712.0,5482,silent_then_signed,timing,re_engage_dormant,False,26,
-07FRJ44N,Lost,2026-10-21,0.0,5482,verbal_yes_then_lost,none,confirm_procurement_timeline,False,3,
-07WKR17A,Won,2027-01-05,6193.0,5482,stage_lagging,none,confirm_procurement_timeline,False,2,
-0AR9HD16,Won,2026-12-05,526.0,550,budget_unresolved_won,budget,offer_phased_pricing,False,8,
-0IF5FH68,Won,2026-11-21,5203.0,5482,price_resolved,budget,confirm_procurement_timeline,False,3,
-0TR3RU8A,Won,2026-12-29,61.0,55,quiet_late_stage,none,confirm_procurement_timeline,False,15,
-0W6S0ODT,Won,2026-10-21,49.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,5,Orion Hardware
-0WO582AV,Lost,2026-11-24,0.0,4821,feature_gap,need,disqualify,False,10,
-0YCAS0B9,Won,2026-12-15,6096.0,5482,price_resolved,budget,confirm_procurement_timeline,False,12,
-14V0RQBV,Lost,2026-12-15,0.0,4821,competitor_decided,competitor,disqualify,True,9,Bluewater Systems
-1Q5XFO8D,Lost,2026-12-09,0.0,550,feature_gap,need,disqualify,False,8,
-1UHFKBP6,Lost,2026-11-24,0.0,4821,feature_gap,need,disqualify,False,8,
-1V3IQVOF,Lost,2026-11-20,0.0,1096,competitor_decided,competitor,disqualify,True,10,Orion Hardware
-1XNXJUQM,Won,2026-11-28,1194.0,1096,price_resolved,budget,confirm_procurement_timeline,False,9,
-1Y9KPBXY,Lost,2026-12-29,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,20,
-1ZMWMU21,Won,2026-12-11,3407.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,7,Orion Hardware
-28S2Z15A,Won,2026-11-20,56.0,55,clean_run,none,confirm_procurement_timeline,False,2,
-2CZVRGQ4,Won,2026-10-24,4749.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Bluewater Systems
-2G82J8WD,Won,2026-12-30,4914.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,4,Orion Hardware
-2GN2TRVV,Lost,2026-12-11,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,16,Bluewater Systems
-2NPSMBLK,Lost,2026-11-26,0.0,4821,competitor_decided,competitor,disqualify,True,7,Kestrel Compute
-2ZEFCKS3,Won,2026-12-20,4835.0,4821,noisy_rep,none,confirm_procurement_timeline,False,8,
-379SDV6Y,Won,2026-11-23,1267.0,1096,stage_lagging,none,confirm_procurement_timeline,False,7,
-3AIA6RL3,Won,2026-12-08,1132.0,1096,stage_lagging,none,confirm_procurement_timeline,False,2,
-3DY60YA7,Lost,2026-10-24,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-3IIDRUGI,Lost,2027-01-16,0.0,55,competitor_decided,competitor,disqualify,True,7,Orion Hardware
-3ZG0719M,Won,2026-12-14,1075.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,5,Bluewater Systems
-45CMXP2K,Lost,2026-11-21,0.0,550,competitor_decided,competitor,disqualify,True,16,Bluewater Systems
-461LIUS7,Won,2026-10-25,1105.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Orion Hardware
-48INT6OA,Won,2026-11-23,4924.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,24,
-4F8MNVNP,Lost,2026-10-25,0.0,550,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0,
-4HP16LRH,Won,2026-10-27,3699.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Orion Hardware
-4ICL09BD,Won,2026-12-11,580.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,15,
-4N2KE2ER,Won,2026-12-12,987.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,8,Bluewater Systems
-4Q2GV039,Won,2026-12-12,3766.0,3393,noisy_rep,none,confirm_procurement_timeline,False,10,
-4UN65HWV,Won,2026-12-11,878.0,1096,silent_then_signed,timing,re_engage_dormant,False,32,
-5BGYQS4R,Won,2026-11-29,1110.0,1096,clean_run,none,confirm_procurement_timeline,False,7,
-5CFCTZ5K,Won,2026-12-21,501.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Kestrel Compute
-5O0597PP,Lost,2026-11-25,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,28,
-69XL3JMB,Won,2026-11-23,1017.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,9,Bluewater Systems
-6BV9IARK,Won,2026-10-19,4826.0,4821,noisy_rep,none,confirm_procurement_timeline,False,5,
-6C1DLYBH,Lost,2026-12-10,0.0,55,competitor_decided,competitor,disqualify,True,15,Bluewater Systems
-6CFONO4W,Won,2026-10-24,4635.0,4821,stage_lagging,none,confirm_procurement_timeline,False,2,
-6FUPOO3I,Won,2026-10-25,3865.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Orion Hardware
-6JWA8DFJ,Won,2026-12-25,4903.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,10,
-6OJAC85F,Lost,2026-12-17,0.0,4821,evaluating_open_lost,competitor,run_competitive_bakeoff,False,7,Bluewater Systems
-6VLA3FDQ,Won,2026-11-27,52.0,55,budget_unresolved_won,budget,offer_phased_pricing,False,10,
-7QIU2BCK,Won,2026-11-19,821.0,1096,price_resolved,budget,confirm_procurement_timeline,False,11,
-7SJD7M9K,Won,2026-12-08,4180.0,4821,price_resolved,budget,confirm_procurement_timeline,False,10,
-81NOKKSW,Won,2026-12-19,68.0,55,price_resolved,budget,confirm_procurement_timeline,False,10,
-8H19L55Y,Won,2026-10-25,4162.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Orion Hardware
-8QH99OEZ,Won,2027-01-01,1051.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,5,Orion Hardware
-94TA0AWF,Won,2026-12-14,5217.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,2,Orion Hardware
-95B6AKI1,Won,2026-10-20,839.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,3,Kestrel Compute
-99L2TNR5,Won,2026-12-12,3339.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,20,
-9C2RRH1Q,Lost,2027-01-07,0.0,1096,ghosted,timing,re_engage_dormant,True,48,
-9C9GO9XO,Lost,2026-12-09,0.0,1096,feature_gap,need,disqualify,False,15,
-9GQ6HQLK,Won,2027-01-08,1143.0,1096,noisy_rep,none,confirm_procurement_timeline,False,7,
-9KYX5G9K,Won,2026-10-19,4766.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,1,Kestrel Compute
-9WUD1Q5D,Lost,2026-11-28,0.0,55,no_authority,authority,multithread_to_economic_buyer,True,12,
-A3OROHUS,Won,2026-12-02,4270.0,4821,silent_then_signed,timing,re_engage_dormant,False,27,
-AFQG21L7,Lost,2026-10-19,0.0,4821,competitor_decided,competitor,disqualify,True,7,Kestrel Compute
-AHRCT8IP,Lost,2026-12-22,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,4,Bluewater Systems
-AIAX4W1O,Won,2026-12-29,5322.0,4821,price_resolved,budget,confirm_procurement_timeline,False,6,
-AR2T4LAR,Won,2026-12-10,4432.0,4821,price_resolved,budget,confirm_procurement_timeline,False,5,
-AUEAKRQV,Won,2027-01-07,5055.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,8,Orion Hardware
-AUS25SFH,Won,2026-10-21,504.0,550,stage_lagging,none,confirm_procurement_timeline,False,2,
-BNYWSG6W,Won,2027-01-01,3598.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,23,
-BTNSR87A,Won,2026-10-19,1149.0,1096,noisy_rep,none,confirm_procurement_timeline,False,10,
-C7NW3JB2,Won,2026-12-11,5223.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,23,
-CE852VBF,Lost,2026-12-13,0.0,1096,competitor_leaning,competitor,run_competitive_bakeoff,True,15,Bluewater Systems
-CM2GVLV6,Won,2026-10-26,5536.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,3,Bluewater Systems
-CMCVD0N8,Won,2026-10-26,5321.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Kestrel Compute
-CPL37MZC,Won,2026-11-20,6026.0,5482,stage_lagging,none,confirm_procurement_timeline,False,4,
-CVGTFBZE,Won,2026-11-20,3985.0,4821,noisy_rep,none,confirm_procurement_timeline,False,10,
-D5LEL3HF,Won,2026-12-28,2683.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,14,
-D5TGHX3Y,Lost,2026-11-28,0.0,4821,ghosted,timing,re_engage_dormant,True,67,
-D6XIVDQF,Won,2026-12-25,5625.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,14,
-DG7LABPD,Won,2027-01-16,3590.0,3393,budget_unresolved_won,budget,offer_phased_pricing,False,7,
-DJ60T39C,Won,2026-12-23,3621.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,9,Orion Hardware
-DLQTM07N,Won,2026-12-10,4787.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,1,Bluewater Systems
-DQ0DSK7P,Won,2026-10-20,1176.0,1096,stage_lagging,none,confirm_procurement_timeline,False,2,
-DXF00KY4,Lost,2026-12-03,0.0,3393,competitor_decided,competitor,disqualify,True,10,Kestrel Compute
-E4H6CBPJ,Won,2027-01-14,5449.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,4,Kestrel Compute
-EFWND7VS,Won,2027-01-18,587.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,5,Bluewater Systems
-EK0KWGQX,Won,2026-12-15,3177.0,3393,stage_lagging,none,confirm_procurement_timeline,False,3,
-EP0H3SJO,Won,2026-11-22,1275.0,1096,budget_unresolved_won,budget,offer_phased_pricing,False,9,
-ESH4HX52,Won,2026-12-09,5472.0,5482,stage_lagging,none,confirm_procurement_timeline,False,7,
-EWRVDN3U,Lost,2027-01-07,0.0,3393,competitor_decided,competitor,disqualify,True,11,Bluewater Systems
-F9XJYM9F,Won,2026-11-30,511.0,550,noisy_rep,none,confirm_procurement_timeline,False,10,
-FROU0UKW,Won,2026-12-13,5614.0,5482,price_resolved,budget,confirm_procurement_timeline,False,7,
-G1303HIC,Won,2026-10-20,5081.0,4821,stage_lagging,none,confirm_procurement_timeline,False,3,
-G17TENJ4,Lost,2027-01-10,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,6,Bluewater Systems
-G1XX0IB4,Won,2026-10-23,4181.0,5482,stage_lagging,none,confirm_procurement_timeline,False,3,
-G6X1B2K5,Won,2027-01-01,532.0,550,price_resolved,budget,confirm_procurement_timeline,False,10,
-GACP1E2I,Won,2026-11-29,5037.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,5,Bluewater Systems
-GC4YH9D0,Won,2026-11-30,570.0,550,clean_run,none,confirm_procurement_timeline,False,6,
-GIJ14130,Won,2026-12-23,519.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,3,Kestrel Compute
-GIP11NY3,Won,2026-12-07,3428.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,5,Kestrel Compute
-GIVVPRQQ,Won,2026-12-18,4606.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,7,Bluewater Systems
-GKHTT70P,Won,2027-01-05,4577.0,4821,clean_run,none,confirm_procurement_timeline,False,9,
-GVCMT0GZ,Lost,2026-12-13,0.0,4821,competitor_decided,competitor,disqualify,True,14,Kestrel Compute
-GX3SHSEA,Won,2026-11-26,56.0,55,noisy_rep,none,confirm_procurement_timeline,False,6,
-GZ5M7MIQ,Lost,2026-10-19,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,4,
-H5ZSM3IR,Lost,2026-12-20,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,2,
-H6TY7RBJ,Lost,2026-12-16,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,17,
-HBIQF55L,Won,2026-12-02,4359.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,22,
-HDITQL1S,Won,2026-12-24,2785.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,1,Orion Hardware
-HE5988NI,Lost,2026-11-27,0.0,1096,champion_left,authority,multithread_to_economic_buyer,True,40,
-HUCB9WIQ,Lost,2026-12-27,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,19,
-HZ283240,Lost,2026-12-26,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,19,Bluewater Systems
-I4YPNNTU,Won,2026-11-27,3808.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,6,Kestrel Compute
-I8WTUMTA,Won,2026-12-05,3560.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,5,Orion Hardware
-IJNOVBGU,Won,2026-12-22,3768.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,4,Bluewater Systems
-INAEAAI9,Won,2026-12-21,1093.0,1096,silent_then_signed,timing,re_engage_dormant,False,34,
-IRODLEGG,Won,2027-01-02,3449.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,2,Bluewater Systems
-IWQP4M72,Lost,2026-12-17,0.0,1096,competitor_leaning,competitor,run_competitive_bakeoff,True,17,Orion Hardware
-JEMEGXUG,Won,2026-12-07,517.0,550,stage_lagging,none,confirm_procurement_timeline,False,2,
-JFIBKWMQ,Lost,2026-10-27,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-JGG9CO2Y,Lost,2026-12-02,0.0,5482,verbal_yes_then_lost,none,confirm_procurement_timeline,False,4,
-JP2EY6QU,Won,2026-12-21,4929.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,4,Orion Hardware
-JT1UUOXN,Lost,2026-10-26,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0,
-K05LLUU4,Lost,2027-01-13,0.0,550,competitor_decided,competitor,disqualify,True,9,Orion Hardware
-K0HLZM4Q,Lost,2026-12-09,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,6,Kestrel Compute
-K6ZDH79M,Won,2026-12-04,5088.0,4821,noisy_rep,none,confirm_procurement_timeline,False,10,
-KAPP0SBT,Lost,2026-12-09,0.0,3393,ghosted,timing,re_engage_dormant,True,43,
-KCTYAQOR,Lost,2026-11-25,0.0,4821,competitor_decided,competitor,disqualify,True,13,Orion Hardware
-KMGXUADZ,Won,2026-11-24,5109.0,4821,silent_then_signed,timing,re_engage_dormant,False,32,
-KOI7M0RU,Lost,2026-12-03,0.0,550,budget_frozen,budget,disqualify,True,42,
-KTSB1KYT,Won,2026-12-28,460.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,6,Orion Hardware
-KTX7ETCE,Won,2026-11-23,528.0,550,stage_lagging,none,confirm_procurement_timeline,False,3,
-L2QMWU4H,Won,2026-12-31,4430.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,2,Bluewater Systems
-L58MN75X,Won,2027-01-03,5220.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,7,
-L71FBIF7,Lost,2026-12-29,0.0,55,feature_gap,need,disqualify,False,14,
-L8CG1IQO,Lost,2026-10-24,0.0,550,verbal_yes_then_lost,none,confirm_procurement_timeline,False,2,
-L9WWFYQW,Lost,2026-12-06,0.0,4821,competitor_decided,competitor,disqualify,True,7,Bluewater Systems
-LKMZWCKQ,Lost,2026-12-25,0.0,4821,looked_healthy,timing,re_engage_dormant,True,23,
-LPY6VIZV,Lost,2026-11-30,0.0,5482,competitor_leaning,competitor,run_competitive_bakeoff,True,20,Orion Hardware
-LZ6PSZ4T,Lost,2026-10-23,0.0,3393,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-M03IHS3P,Won,2026-11-24,917.0,1096,price_resolved,budget,confirm_procurement_timeline,False,3,
-M26BSX5S,Lost,2026-11-24,0.0,4821,looked_healthy,timing,re_engage_dormant,True,15,
-M4HY664H,Won,2027-01-13,918.0,1096,noisy_rep,none,confirm_procurement_timeline,False,12,
-MFO940S8,Lost,2026-12-12,0.0,55,evaluating_open_lost,competitor,run_competitive_bakeoff,False,10,Orion Hardware
-MHPI0ZW1,Lost,2026-12-23,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,16,
-MMUC1AXI,Won,2026-11-27,5647.0,4821,noisy_rep,none,confirm_procurement_timeline,False,11,
-MMWD47ZY,Lost,2026-12-17,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-NDMY5PPT,Lost,2026-12-15,0.0,4821,feature_gap,need,disqualify,False,9,
-NJC209SC,Won,2027-01-15,5961.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,11,
-NLKPA1KP,Won,2026-11-29,596.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,6,Orion Hardware
-NMN9DVEV,Won,2027-01-02,1102.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,3,Bluewater Systems
-NNKWGFDH,Won,2026-10-24,57.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Bluewater Systems
-NX4ODZY2,Won,2026-12-19,1028.0,1096,stage_lagging,none,confirm_procurement_timeline,False,3,
-NZB45UZX,Won,2026-12-22,4964.0,4821,clean_run,none,confirm_procurement_timeline,False,2,
-OBGCQ1BK,Lost,2027-01-09,0.0,550,champion_left,authority,multithread_to_economic_buyer,True,27,
-ODIX25WY,Lost,2026-11-24,0.0,550,looked_healthy,timing,re_engage_dormant,True,24,
-OEBJXZN6,Won,2026-12-01,3625.0,3393,noisy_rep,none,confirm_procurement_timeline,False,7,
-OES8ZX7B,Lost,2026-11-22,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,12,
-OG13XT4P,Won,2027-01-07,54.0,55,budget_unresolved_won,budget,offer_phased_pricing,False,12,
-ON9H54WD,Lost,2026-10-19,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0,
-OPL7DH0Q,Lost,2026-12-12,0.0,1096,budget_frozen,budget,disqualify,True,35,
-OZL7CDMQ,Lost,2026-10-21,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-P0BMLVSL,Won,2026-11-27,5820.0,4821,stage_lagging,none,confirm_procurement_timeline,False,5,
-P9VFKNR0,Lost,2026-11-19,0.0,4821,looked_healthy,timing,re_engage_dormant,True,22,
-PLYYX5CD,Won,2026-12-05,5769.0,5482,budget_unresolved_won,budget,offer_phased_pricing,False,12,
-PTKOWYW6,Lost,2026-12-16,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0,
-PUTILZZG,Won,2026-11-27,568.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Kestrel Compute
-Q5JU0LZJ,Won,2027-01-14,479.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,8,Kestrel Compute
-Q5R1PYJS,Lost,2026-12-30,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,7,
-Q7ST5E1W,Lost,2026-12-08,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,9,Kestrel Compute
-QCIG6H19,Won,2026-12-19,1114.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,9,Kestrel Compute
-QMUBRAT2,Lost,2026-12-16,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,24,
-QUOU67L5,Won,2026-12-02,1015.0,1096,noisy_rep,none,confirm_procurement_timeline,False,12,
-QWYRCDA8,Lost,2026-10-23,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,4,
-QYKTG5QA,Lost,2026-12-23,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,9,Orion Hardware
-R617R51D,Won,2026-12-22,540.0,550,silent_then_signed,timing,re_engage_dormant,False,32,
-RA77E84P,Won,2026-12-27,578.0,550,silent_then_signed,timing,re_engage_dormant,False,36,
-RGRUF328,Won,2026-12-02,48.0,55,stage_lagging,none,confirm_procurement_timeline,False,5,
-RJH0CL3Z,Lost,2026-10-20,0.0,55,feature_gap,need,disqualify,False,8,
-RLHNJZBW,Won,2026-11-29,5843.0,4821,noisy_rep,none,confirm_procurement_timeline,False,9,
-RQJKAR7E,Lost,2026-10-20,0.0,4821,feature_gap,need,disqualify,False,8,
-RXIQFV8D,Won,2026-11-27,60.0,55,stage_lagging,none,confirm_procurement_timeline,False,6,
-S983P5KR,Lost,2026-11-29,0.0,550,ghosted,timing,re_engage_dormant,True,43,
-SD8JJSKT,Won,2026-12-18,3422.0,3393,price_resolved,budget,confirm_procurement_timeline,False,10,
-SFBHZLHK,Won,2026-12-31,4138.0,4821,price_resolved,budget,confirm_procurement_timeline,False,5,
-SFCT64YG,Won,2026-12-24,545.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,18,
-SHETLR3T,Won,2026-12-18,4990.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,8,Orion Hardware
-SNGS64S7,Lost,2026-10-24,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0,
-SS9FXCS2,Won,2026-11-19,57.0,55,stage_lagging,none,confirm_procurement_timeline,False,4,
-SUXDAQNV,Lost,2026-12-16,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,30,
-SXV6VZVC,Won,2026-12-13,1118.0,1096,stage_lagging,none,confirm_procurement_timeline,False,5,
-SYJKN818,Won,2026-12-10,5195.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,10,
-T2J83GFD,Won,2026-10-21,54.0,55,reopened_then_closed,competitor,confirm_procurement_timeline,False,3,Kestrel Compute
-TAGD6XU9,Won,2026-12-13,3455.0,3393,stage_lagging,none,confirm_procurement_timeline,False,5,
-TLT4JJ0U,Lost,2027-01-01,0.0,3393,competitor_decided,competitor,disqualify,True,18,Bluewater Systems
-TPNU79C1,Won,2027-01-17,54.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Bluewater Systems
-U48PDN1F,Won,2026-11-28,5361.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,21,
-UJSFG18F,Won,2026-12-03,3290.0,3393,clean_run,none,confirm_procurement_timeline,False,4,
-UTJGDR3K,Lost,2026-12-13,0.0,4821,no_authority,authority,multithread_to_economic_buyer,True,21,
-UZN5JBF3,Won,2027-01-17,565.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Bluewater Systems
-V0V6O05H,Lost,2026-10-25,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1,
-V7DHDF8V,Lost,2026-11-25,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,17,
-V7Y78MPU,Won,2026-12-21,433.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,3,Kestrel Compute
-VA2JJZXD,Lost,2026-12-28,0.0,4821,no_authority,authority,multithread_to_economic_buyer,True,29,
-VF7DWQIH,Won,2026-12-13,5421.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,4,Bluewater Systems
-VP2CW520,Lost,2026-12-14,0.0,1096,looked_healthy,timing,re_engage_dormant,True,15,
-VRSTX620,Won,2026-10-20,932.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,4,Kestrel Compute
-VSZ4UVVN,Won,2027-01-08,1144.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,6,Bluewater Systems
-VYPIKMKO,Won,2026-12-15,612.0,550,stage_lagging,none,confirm_procurement_timeline,False,2,
-W5P1OLUL,Won,2026-11-21,554.0,550,stage_lagging,none,confirm_procurement_timeline,False,7,
-W604BPPE,Lost,2026-12-13,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,15,Kestrel Compute
-W8CSV90F,Lost,2026-12-11,0.0,4821,evaluating_open_lost,competitor,run_competitive_bakeoff,False,4,Kestrel Compute
-WB974HS4,Won,2027-01-06,984.0,1096,clean_run,none,confirm_procurement_timeline,False,9,
-WGSS08LF,Lost,2026-12-14,0.0,4821,looked_healthy,timing,re_engage_dormant,True,32,
-WJ81WITC,Lost,2026-12-04,0.0,5482,no_authority,authority,multithread_to_economic_buyer,True,16,
-X46ZXX2S,Lost,2026-11-29,0.0,1096,competitor_decided,competitor,disqualify,True,18,Kestrel Compute
-X66G66ZA,Won,2026-12-06,56.0,55,noisy_rep,none,confirm_procurement_timeline,False,5,
-XEP9GSSY,Lost,2026-11-25,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,7,Orion Hardware
-XWN6WWOD,Won,2026-11-19,57.0,55,quiet_late_stage,none,confirm_procurement_timeline,False,23,
-Y9SCLUH8,Won,2026-12-21,835.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,0,Kestrel Compute
-YQ6VELF1,Lost,2026-10-21,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,3,
-YQK2K6U5,Won,2026-12-10,576.0,550,clean_run,none,confirm_procurement_timeline,False,6,
-YRYMSUE3,Won,2026-10-21,557.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,6,Bluewater Systems
-Z032GGRE,Won,2026-11-30,4935.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,8,Orion Hardware
-Z64MQTF2,Won,2026-12-02,5310.0,4821,stage_lagging,none,confirm_procurement_timeline,False,2,
-ZA6AJ0N1,Won,2026-12-03,5191.0,4821,stage_lagging,none,confirm_procurement_timeline,False,4,
-ZGSQMEQ9,Won,2027-01-05,1063.0,1096,noisy_rep,none,confirm_procurement_timeline,False,9,
-ZIFDD41D,Won,2026-11-29,543.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,18,
-ZT6D57ED,Won,2026-12-21,6274.0,5482,stage_lagging,none,confirm_procurement_timeline,False,2,
+06AIY3IS,Won,2026-12-09,5712.0,5482,silent_then_signed,timing,re_engage_dormant,False,26.0,
+07FRJ44N,Lost,2026-10-21,0.0,5482,verbal_yes_then_lost,none,confirm_procurement_timeline,False,3.0,
+07WKR17A,Won,2027-01-05,6193.0,5482,stage_lagging,none,confirm_procurement_timeline,False,29.0,
+0AR9HD16,Won,2026-12-05,526.0,550,budget_unresolved_won,budget,offer_phased_pricing,False,8.0,
+0IF5FH68,Won,2026-11-21,5203.0,5482,price_resolved,budget,confirm_procurement_timeline,False,19.0,
+0TR3RU8A,Won,2026-12-29,61.0,55,quiet_late_stage,none,confirm_procurement_timeline,False,15.0,
+0W6S0ODT,Won,2026-10-21,49.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,4.0,Orion Hardware
+0WO582AV,Lost,2026-11-24,0.0,4821,feature_gap,need,disqualify,False,10.0,
+0YCAS0B9,Won,2026-12-15,6096.0,5482,price_resolved,budget,confirm_procurement_timeline,False,12.0,
+14V0RQBV,Lost,2026-12-15,0.0,4821,competitor_decided,competitor,disqualify,True,9.0,Bluewater Systems
+1Q5XFO8D,Lost,2026-12-09,0.0,550,feature_gap,need,disqualify,False,8.0,
+1UHFKBP6,Lost,2026-11-24,0.0,4821,feature_gap,need,disqualify,False,8.0,
+1V3IQVOF,Lost,2026-11-20,0.0,1096,competitor_decided,competitor,disqualify,True,10.0,Orion Hardware
+1XNXJUQM,Won,2026-11-28,1194.0,1096,price_resolved,budget,confirm_procurement_timeline,False,9.0,
+1Y9KPBXY,Lost,2026-12-29,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,20.0,
+1ZMWMU21,Won,2026-12-11,3407.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,7.0,Orion Hardware
+28S2Z15A,Won,2026-11-20,56.0,55,clean_run,none,confirm_procurement_timeline,False,2.0,
+2CZVRGQ4,Won,2026-10-24,4749.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Bluewater Systems
+2G82J8WD,Won,2026-12-30,4914.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,4.0,Orion Hardware
+2GN2TRVV,Lost,2026-12-11,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,16.0,Bluewater Systems
+2NPSMBLK,Lost,2026-11-26,0.0,4821,competitor_decided,competitor,disqualify,True,7.0,Kestrel Compute
+2ZEFCKS3,Won,2026-12-20,4835.0,4821,noisy_rep,none,confirm_procurement_timeline,False,8.0,
+379SDV6Y,Won,2026-11-23,1267.0,1096,stage_lagging,none,confirm_procurement_timeline,False,7.0,
+3AIA6RL3,Won,2026-12-08,1132.0,1096,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+3DY60YA7,Lost,2026-10-24,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1.0,
+3IIDRUGI,Lost,2027-01-16,0.0,55,competitor_decided,competitor,disqualify,True,7.0,Orion Hardware
+3ZG0719M,Won,2026-12-14,1075.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,5.0,Bluewater Systems
+45CMXP2K,Lost,2026-11-21,0.0,550,competitor_decided,competitor,disqualify,True,16.0,Bluewater Systems
+461LIUS7,Won,2026-10-25,1105.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Orion Hardware
+48INT6OA,Won,2026-11-23,4924.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,23.0,
+4F8MNVNP,Lost,2026-10-25,0.0,550,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0.0,
+4HP16LRH,Won,2026-10-27,3699.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Orion Hardware
+4ICL09BD,Won,2026-12-11,580.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,15.0,
+4N2KE2ER,Won,2026-12-12,987.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,7.0,Bluewater Systems
+4Q2GV039,Won,2026-12-12,3766.0,3393,noisy_rep,none,confirm_procurement_timeline,False,10.0,
+4UN65HWV,Won,2026-12-11,878.0,1096,silent_then_signed,timing,re_engage_dormant,False,32.0,
+5BGYQS4R,Won,2026-11-29,1110.0,1096,clean_run,none,confirm_procurement_timeline,False,7.0,
+5CFCTZ5K,Won,2026-12-21,501.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Kestrel Compute
+5O0597PP,Lost,2026-11-25,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,28.0,
+69XL3JMB,Won,2026-11-23,1017.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,9.0,Bluewater Systems
+6BV9IARK,Won,2026-10-19,4826.0,4821,noisy_rep,none,confirm_procurement_timeline,False,5.0,
+6C1DLYBH,Lost,2026-12-10,0.0,55,competitor_decided,competitor,disqualify,True,15.0,Bluewater Systems
+6CFONO4W,Won,2026-10-24,4635.0,4821,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+6FUPOO3I,Won,2026-10-25,3865.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Orion Hardware
+6JWA8DFJ,Won,2026-12-25,4903.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,10.0,
+6OJAC85F,Lost,2026-12-17,0.0,4821,evaluating_open_lost,competitor,run_competitive_bakeoff,False,7.0,Bluewater Systems
+6VLA3FDQ,Won,2026-11-27,52.0,55,budget_unresolved_won,budget,offer_phased_pricing,False,10.0,
+7QIU2BCK,Won,2026-11-19,821.0,1096,price_resolved,budget,confirm_procurement_timeline,False,11.0,
+7SJD7M9K,Won,2026-12-08,4180.0,4821,price_resolved,budget,confirm_procurement_timeline,False,10.0,
+81NOKKSW,Won,2026-12-19,68.0,55,price_resolved,budget,confirm_procurement_timeline,False,10.0,
+8H19L55Y,Won,2026-10-25,4162.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Orion Hardware
+8QH99OEZ,Won,2027-01-01,1051.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,5.0,Orion Hardware
+94TA0AWF,Won,2026-12-14,5217.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,2.0,Orion Hardware
+95B6AKI1,Won,2026-10-20,839.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,3.0,Kestrel Compute
+99L2TNR5,Won,2026-12-12,3339.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,20.0,
+9C2RRH1Q,Lost,2027-01-07,0.0,1096,ghosted,timing,re_engage_dormant,True,,
+9C9GO9XO,Lost,2026-12-09,0.0,1096,feature_gap,need,disqualify,False,15.0,
+9GQ6HQLK,Won,2027-01-08,1143.0,1096,noisy_rep,none,confirm_procurement_timeline,False,7.0,
+9KYX5G9K,Won,2026-10-19,4766.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,1.0,Kestrel Compute
+9WUD1Q5D,Lost,2026-11-28,0.0,55,no_authority,authority,multithread_to_economic_buyer,True,12.0,
+A3OROHUS,Won,2026-12-02,4270.0,4821,silent_then_signed,timing,re_engage_dormant,False,27.0,
+AFQG21L7,Lost,2026-10-19,0.0,4821,competitor_decided,competitor,disqualify,True,7.0,Kestrel Compute
+AHRCT8IP,Lost,2026-12-22,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,4.0,Bluewater Systems
+AIAX4W1O,Won,2026-12-29,5322.0,4821,price_resolved,budget,confirm_procurement_timeline,False,6.0,
+AR2T4LAR,Won,2026-12-10,4432.0,4821,price_resolved,budget,confirm_procurement_timeline,False,5.0,
+AUEAKRQV,Won,2027-01-07,5055.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,8.0,Orion Hardware
+AUS25SFH,Won,2026-10-21,504.0,550,stage_lagging,none,confirm_procurement_timeline,False,22.0,
+BNYWSG6W,Won,2027-01-01,3598.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,23.0,
+BTNSR87A,Won,2026-10-19,1149.0,1096,noisy_rep,none,confirm_procurement_timeline,False,10.0,
+C7NW3JB2,Won,2026-12-11,5223.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,23.0,
+CE852VBF,Lost,2026-12-13,0.0,1096,competitor_leaning,competitor,run_competitive_bakeoff,True,15.0,Bluewater Systems
+CM2GVLV6,Won,2026-10-26,5536.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,3.0,Bluewater Systems
+CMCVD0N8,Won,2026-10-26,5321.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Kestrel Compute
+CPL37MZC,Won,2026-11-20,6026.0,5482,stage_lagging,none,confirm_procurement_timeline,False,4.0,
+CVGTFBZE,Won,2026-11-20,3985.0,4821,noisy_rep,none,confirm_procurement_timeline,False,10.0,
+D5LEL3HF,Won,2026-12-28,2683.0,3393,quiet_late_stage,none,confirm_procurement_timeline,False,14.0,
+D5TGHX3Y,Lost,2026-11-28,0.0,4821,ghosted,timing,re_engage_dormant,True,,
+D6XIVDQF,Won,2026-12-25,5625.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,14.0,
+DG7LABPD,Won,2027-01-16,3590.0,3393,budget_unresolved_won,budget,offer_phased_pricing,False,7.0,
+DJ60T39C,Won,2026-12-23,3621.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,9.0,Orion Hardware
+DLQTM07N,Won,2026-12-10,4787.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,1.0,Bluewater Systems
+DQ0DSK7P,Won,2026-10-20,1176.0,1096,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+DXF00KY4,Lost,2026-12-03,0.0,3393,competitor_decided,competitor,disqualify,True,10.0,Kestrel Compute
+E4H6CBPJ,Won,2027-01-14,5449.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,4.0,Kestrel Compute
+EFWND7VS,Won,2027-01-18,587.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,5.0,Bluewater Systems
+EK0KWGQX,Won,2026-12-15,3177.0,3393,stage_lagging,none,confirm_procurement_timeline,False,3.0,
+EP0H3SJO,Won,2026-11-22,1275.0,1096,budget_unresolved_won,budget,offer_phased_pricing,False,9.0,
+ESH4HX52,Won,2026-12-09,5472.0,5482,stage_lagging,none,confirm_procurement_timeline,False,7.0,
+EWRVDN3U,Lost,2027-01-07,0.0,3393,competitor_decided,competitor,disqualify,True,11.0,Bluewater Systems
+F9XJYM9F,Won,2026-11-30,511.0,550,noisy_rep,none,confirm_procurement_timeline,False,10.0,
+FROU0UKW,Won,2026-12-13,5614.0,5482,price_resolved,budget,confirm_procurement_timeline,False,20.0,
+G1303HIC,Won,2026-10-20,5081.0,4821,stage_lagging,none,confirm_procurement_timeline,False,3.0,
+G17TENJ4,Lost,2027-01-10,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,6.0,Bluewater Systems
+G1XX0IB4,Won,2026-10-23,4181.0,5482,stage_lagging,none,confirm_procurement_timeline,False,21.0,
+G6X1B2K5,Won,2027-01-01,532.0,550,price_resolved,budget,confirm_procurement_timeline,False,10.0,
+GACP1E2I,Won,2026-11-29,5037.0,4821,reopened_then_closed,competitor,confirm_procurement_timeline,False,5.0,Bluewater Systems
+GC4YH9D0,Won,2026-11-30,570.0,550,clean_run,none,confirm_procurement_timeline,False,6.0,
+GIJ14130,Won,2026-12-23,519.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,3.0,Kestrel Compute
+GIP11NY3,Won,2026-12-07,3428.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,5.0,Kestrel Compute
+GIVVPRQQ,Won,2026-12-18,4606.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,7.0,Bluewater Systems
+GKHTT70P,Won,2027-01-05,4577.0,4821,clean_run,none,confirm_procurement_timeline,False,9.0,
+GVCMT0GZ,Lost,2026-12-13,0.0,4821,competitor_decided,competitor,disqualify,True,14.0,Kestrel Compute
+GX3SHSEA,Won,2026-11-26,56.0,55,noisy_rep,none,confirm_procurement_timeline,False,18.0,
+GZ5M7MIQ,Lost,2026-10-19,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,27.0,
+H5ZSM3IR,Lost,2026-12-20,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,2.0,
+H6TY7RBJ,Lost,2026-12-16,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,17.0,
+HBIQF55L,Won,2026-12-02,4359.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,22.0,
+HDITQL1S,Won,2026-12-24,2785.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,1.0,Orion Hardware
+HE5988NI,Lost,2026-11-27,0.0,1096,champion_left,authority,multithread_to_economic_buyer,True,,
+HUCB9WIQ,Lost,2026-12-27,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,19.0,
+HZ283240,Lost,2026-12-26,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,19.0,Bluewater Systems
+I4YPNNTU,Won,2026-11-27,3808.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,6.0,Kestrel Compute
+I8WTUMTA,Won,2026-12-05,3560.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,5.0,Orion Hardware
+IJNOVBGU,Won,2026-12-22,3768.0,3393,reopened_then_closed,competitor,confirm_procurement_timeline,False,3.0,Bluewater Systems
+INAEAAI9,Won,2026-12-21,1093.0,1096,silent_then_signed,timing,re_engage_dormant,False,34.0,
+IRODLEGG,Won,2027-01-02,3449.0,3393,bakeoff_won,competitor,confirm_procurement_timeline,False,1.0,Bluewater Systems
+IWQP4M72,Lost,2026-12-17,0.0,1096,competitor_leaning,competitor,run_competitive_bakeoff,True,17.0,Orion Hardware
+JEMEGXUG,Won,2026-12-07,517.0,550,stage_lagging,none,confirm_procurement_timeline,False,1.0,
+JFIBKWMQ,Lost,2026-10-27,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1.0,
+JGG9CO2Y,Lost,2026-12-02,0.0,5482,verbal_yes_then_lost,none,confirm_procurement_timeline,False,4.0,
+JP2EY6QU,Won,2026-12-21,4929.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,4.0,Orion Hardware
+JT1UUOXN,Lost,2026-10-26,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0.0,
+K05LLUU4,Lost,2027-01-13,0.0,550,competitor_decided,competitor,disqualify,True,9.0,Orion Hardware
+K0HLZM4Q,Lost,2026-12-09,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,6.0,Kestrel Compute
+K6ZDH79M,Won,2026-12-04,5088.0,4821,noisy_rep,none,confirm_procurement_timeline,False,29.0,
+KAPP0SBT,Lost,2026-12-09,0.0,3393,ghosted,timing,re_engage_dormant,True,,
+KCTYAQOR,Lost,2026-11-25,0.0,4821,competitor_decided,competitor,disqualify,True,13.0,Orion Hardware
+KMGXUADZ,Won,2026-11-24,5109.0,4821,silent_then_signed,timing,re_engage_dormant,False,32.0,
+KOI7M0RU,Lost,2026-12-03,0.0,550,budget_frozen,budget,disqualify,True,42.0,
+KTSB1KYT,Won,2026-12-28,460.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,5.0,Orion Hardware
+KTX7ETCE,Won,2026-11-23,528.0,550,stage_lagging,none,confirm_procurement_timeline,False,3.0,
+L2QMWU4H,Won,2026-12-31,4430.0,5482,bakeoff_won,competitor,confirm_procurement_timeline,False,2.0,Bluewater Systems
+L58MN75X,Won,2027-01-03,5220.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,7.0,
+L71FBIF7,Lost,2026-12-29,0.0,55,feature_gap,need,disqualify,False,14.0,
+L8CG1IQO,Lost,2026-10-24,0.0,550,verbal_yes_then_lost,none,confirm_procurement_timeline,False,2.0,
+L9WWFYQW,Lost,2026-12-06,0.0,4821,competitor_decided,competitor,disqualify,True,7.0,Bluewater Systems
+LKMZWCKQ,Lost,2026-12-25,0.0,4821,looked_healthy,timing,re_engage_dormant,True,23.0,
+LPY6VIZV,Lost,2026-11-30,0.0,5482,competitor_leaning,competitor,run_competitive_bakeoff,True,20.0,Orion Hardware
+LZ6PSZ4T,Lost,2026-10-23,0.0,3393,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1.0,
+M03IHS3P,Won,2026-11-24,917.0,1096,price_resolved,budget,confirm_procurement_timeline,False,3.0,
+M26BSX5S,Lost,2026-11-24,0.0,4821,looked_healthy,timing,re_engage_dormant,True,15.0,
+M4HY664H,Won,2027-01-13,918.0,1096,noisy_rep,none,confirm_procurement_timeline,False,12.0,
+MFO940S8,Lost,2026-12-12,0.0,55,evaluating_open_lost,competitor,run_competitive_bakeoff,False,10.0,Orion Hardware
+MHPI0ZW1,Lost,2026-12-23,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,16.0,
+MMUC1AXI,Won,2026-11-27,5647.0,4821,noisy_rep,none,confirm_procurement_timeline,False,20.0,
+MMWD47ZY,Lost,2026-12-17,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,28.0,
+NDMY5PPT,Lost,2026-12-15,0.0,4821,feature_gap,need,disqualify,False,9.0,
+NJC209SC,Won,2027-01-15,5961.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,11.0,
+NLKPA1KP,Won,2026-11-29,596.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,6.0,Orion Hardware
+NMN9DVEV,Won,2027-01-02,1102.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,2.0,Bluewater Systems
+NNKWGFDH,Won,2026-10-24,57.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Bluewater Systems
+NX4ODZY2,Won,2026-12-19,1028.0,1096,stage_lagging,none,confirm_procurement_timeline,False,3.0,
+NZB45UZX,Won,2026-12-22,4964.0,4821,clean_run,none,confirm_procurement_timeline,False,2.0,
+OBGCQ1BK,Lost,2027-01-09,0.0,550,champion_left,authority,multithread_to_economic_buyer,True,,
+ODIX25WY,Lost,2026-11-24,0.0,550,looked_healthy,timing,re_engage_dormant,True,24.0,
+OEBJXZN6,Won,2026-12-01,3625.0,3393,noisy_rep,none,confirm_procurement_timeline,False,7.0,
+OES8ZX7B,Lost,2026-11-22,0.0,1096,no_authority,authority,multithread_to_economic_buyer,True,12.0,
+OG13XT4P,Won,2027-01-07,54.0,55,budget_unresolved_won,budget,offer_phased_pricing,False,12.0,
+ON9H54WD,Lost,2026-10-19,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0.0,
+OPL7DH0Q,Lost,2026-12-12,0.0,1096,budget_frozen,budget,disqualify,True,35.0,
+OZL7CDMQ,Lost,2026-10-21,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,1.0,
+P0BMLVSL,Won,2026-11-27,5820.0,4821,stage_lagging,none,confirm_procurement_timeline,False,5.0,
+P9VFKNR0,Lost,2026-11-19,0.0,4821,looked_healthy,timing,re_engage_dormant,True,22.0,
+PLYYX5CD,Won,2026-12-05,5769.0,5482,budget_unresolved_won,budget,offer_phased_pricing,False,12.0,
+PTKOWYW6,Lost,2026-12-16,0.0,55,verbal_yes_then_lost,none,confirm_procurement_timeline,False,29.0,
+PUTILZZG,Won,2026-11-27,568.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Kestrel Compute
+Q5JU0LZJ,Won,2027-01-14,479.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,7.0,Kestrel Compute
+Q5R1PYJS,Lost,2026-12-30,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,7.0,
+Q7ST5E1W,Lost,2026-12-08,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,9.0,Kestrel Compute
+QCIG6H19,Won,2026-12-19,1114.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,9.0,Kestrel Compute
+QMUBRAT2,Lost,2026-12-16,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,24.0,
+QUOU67L5,Won,2026-12-02,1015.0,1096,noisy_rep,none,confirm_procurement_timeline,False,12.0,
+QWYRCDA8,Lost,2026-10-23,0.0,1096,verbal_yes_then_lost,none,confirm_procurement_timeline,False,4.0,
+QYKTG5QA,Lost,2026-12-23,0.0,3393,evaluating_open_lost,competitor,run_competitive_bakeoff,False,9.0,Orion Hardware
+R617R51D,Won,2026-12-22,540.0,550,silent_then_signed,timing,re_engage_dormant,False,32.0,
+RA77E84P,Won,2026-12-27,578.0,550,silent_then_signed,timing,re_engage_dormant,False,36.0,
+RGRUF328,Won,2026-12-02,48.0,55,stage_lagging,none,confirm_procurement_timeline,False,5.0,
+RJH0CL3Z,Lost,2026-10-20,0.0,55,feature_gap,need,disqualify,False,8.0,
+RLHNJZBW,Won,2026-11-29,5843.0,4821,noisy_rep,none,confirm_procurement_timeline,False,9.0,
+RQJKAR7E,Lost,2026-10-20,0.0,4821,feature_gap,need,disqualify,False,8.0,
+RXIQFV8D,Won,2026-11-27,60.0,55,stage_lagging,none,confirm_procurement_timeline,False,6.0,
+S983P5KR,Lost,2026-11-29,0.0,550,ghosted,timing,re_engage_dormant,True,,
+SD8JJSKT,Won,2026-12-18,3422.0,3393,price_resolved,budget,confirm_procurement_timeline,False,10.0,
+SFBHZLHK,Won,2026-12-31,4138.0,4821,price_resolved,budget,confirm_procurement_timeline,False,5.0,
+SFCT64YG,Won,2026-12-24,545.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,18.0,
+SHETLR3T,Won,2026-12-18,4990.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,7.0,Orion Hardware
+SNGS64S7,Lost,2026-10-24,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,0.0,
+SS9FXCS2,Won,2026-11-19,57.0,55,stage_lagging,none,confirm_procurement_timeline,False,4.0,
+SUXDAQNV,Lost,2026-12-16,0.0,550,no_authority,authority,multithread_to_economic_buyer,True,30.0,
+SXV6VZVC,Won,2026-12-13,1118.0,1096,stage_lagging,none,confirm_procurement_timeline,False,5.0,
+SYJKN818,Won,2026-12-10,5195.0,4821,budget_unresolved_won,budget,offer_phased_pricing,False,10.0,
+T2J83GFD,Won,2026-10-21,54.0,55,reopened_then_closed,competitor,confirm_procurement_timeline,False,3.0,Kestrel Compute
+TAGD6XU9,Won,2026-12-13,3455.0,3393,stage_lagging,none,confirm_procurement_timeline,False,5.0,
+TLT4JJ0U,Lost,2027-01-01,0.0,3393,competitor_decided,competitor,disqualify,True,18.0,Bluewater Systems
+TPNU79C1,Won,2027-01-17,54.0,55,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Bluewater Systems
+U48PDN1F,Won,2026-11-28,5361.0,4821,quiet_late_stage,none,confirm_procurement_timeline,False,21.0,
+UJSFG18F,Won,2026-12-03,3290.0,3393,clean_run,none,confirm_procurement_timeline,False,4.0,
+UTJGDR3K,Lost,2026-12-13,0.0,4821,no_authority,authority,multithread_to_economic_buyer,True,21.0,
+UZN5JBF3,Won,2027-01-17,565.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Bluewater Systems
+V0V6O05H,Lost,2026-10-25,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,19.0,
+V7DHDF8V,Lost,2026-11-25,0.0,3393,no_authority,authority,multithread_to_economic_buyer,True,17.0,
+V7Y78MPU,Won,2026-12-21,433.0,550,bakeoff_won,competitor,confirm_procurement_timeline,False,3.0,Kestrel Compute
+VA2JJZXD,Lost,2026-12-28,0.0,4821,no_authority,authority,multithread_to_economic_buyer,True,29.0,
+VF7DWQIH,Won,2026-12-13,5421.0,5482,reopened_then_closed,competitor,confirm_procurement_timeline,False,4.0,Bluewater Systems
+VP2CW520,Lost,2026-12-14,0.0,1096,looked_healthy,timing,re_engage_dormant,True,15.0,
+VRSTX620,Won,2026-10-20,932.0,1096,reopened_then_closed,competitor,confirm_procurement_timeline,False,4.0,Kestrel Compute
+VSZ4UVVN,Won,2027-01-08,1144.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,6.0,Bluewater Systems
+VYPIKMKO,Won,2026-12-15,612.0,550,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+W5P1OLUL,Won,2026-11-21,554.0,550,stage_lagging,none,confirm_procurement_timeline,False,7.0,
+W604BPPE,Lost,2026-12-13,0.0,550,competitor_leaning,competitor,run_competitive_bakeoff,True,15.0,Kestrel Compute
+W8CSV90F,Lost,2026-12-11,0.0,4821,evaluating_open_lost,competitor,run_competitive_bakeoff,False,4.0,Kestrel Compute
+WB974HS4,Won,2027-01-06,984.0,1096,clean_run,none,confirm_procurement_timeline,False,27.0,
+WGSS08LF,Lost,2026-12-14,0.0,4821,looked_healthy,timing,re_engage_dormant,True,32.0,
+WJ81WITC,Lost,2026-12-04,0.0,5482,no_authority,authority,multithread_to_economic_buyer,True,16.0,
+X46ZXX2S,Lost,2026-11-29,0.0,1096,competitor_decided,competitor,disqualify,True,18.0,Kestrel Compute
+X66G66ZA,Won,2026-12-06,56.0,55,noisy_rep,none,confirm_procurement_timeline,False,5.0,
+XEP9GSSY,Lost,2026-11-25,0.0,550,evaluating_open_lost,competitor,run_competitive_bakeoff,False,7.0,Orion Hardware
+XWN6WWOD,Won,2026-11-19,57.0,55,quiet_late_stage,none,confirm_procurement_timeline,False,23.0,
+Y9SCLUH8,Won,2026-12-21,835.0,1096,bakeoff_won,competitor,confirm_procurement_timeline,False,0.0,Kestrel Compute
+YQ6VELF1,Lost,2026-10-21,0.0,4821,verbal_yes_then_lost,none,confirm_procurement_timeline,False,3.0,
+YQK2K6U5,Won,2026-12-10,576.0,550,clean_run,none,confirm_procurement_timeline,False,22.0,
+YRYMSUE3,Won,2026-10-21,557.0,550,reopened_then_closed,competitor,confirm_procurement_timeline,False,5.0,Bluewater Systems
+Z032GGRE,Won,2026-11-30,4935.0,4821,bakeoff_won,competitor,confirm_procurement_timeline,False,7.0,Orion Hardware
+Z64MQTF2,Won,2026-12-02,5310.0,4821,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+ZA6AJ0N1,Won,2026-12-03,5191.0,4821,stage_lagging,none,confirm_procurement_timeline,False,4.0,
+ZGSQMEQ9,Won,2027-01-05,1063.0,1096,noisy_rep,none,confirm_procurement_timeline,False,9.0,
+ZIFDD41D,Won,2026-11-29,543.0,550,quiet_late_stage,none,confirm_procurement_timeline,False,18.0,
+ZT6D57ED,Won,2026-12-21,6274.0,5482,stage_lagging,none,confirm_procurement_timeline,False,2.0,
+6OJAC8DP,Lost,2026-12-17,0.0,4821,duplicate,competitor,run_competitive_bakeoff,False,,Bluewater Systems
+4N2KE2DP,Lost,2026-12-12,0.0,1096,duplicate,competitor,confirm_procurement_timeline,False,,Bluewater Systems
+BNYWSGDP,Lost,2027-01-01,0.0,3393,duplicate,none,confirm_procurement_timeline,False,,
+5O0597DP,Lost,2026-11-25,0.0,3393,duplicate,authority,multithread_to_economic_buyer,True,,
+6JWA8DDP,Lost,2026-12-25,0.0,4821,duplicate,budget,offer_phased_pricing,False,,
+G6X1B2DP,Lost,2027-01-01,0.0,550,duplicate,budget,confirm_procurement_timeline,False,,
+P0BMLVDP,Lost,2026-11-27,0.0,4821,duplicate,none,confirm_procurement_timeline,False,,

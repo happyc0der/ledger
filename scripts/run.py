@@ -41,8 +41,25 @@ def main():
         print(audit.report(fs, label=a.label))
         return
 
+    if a.version == "issues":  # score rules vs agent findings against planted anomalies
+        from ledger import score_issues
+        from ledger.rules import Issue, run_rules
+        ids = list(co.deals.opportunity_id)
+        scores = [score_issues.score(run_rules(co), ids, "rules")]
+        for ver in a.more or ["v3"]:
+            p = RUNS_DIR / f"{ver}.jsonl"
+            if p.exists():
+                rows = [json.loads(l) for l in p.read_text().splitlines()]
+                iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
+                scores.append(score_issues.score(iss, ids, ver))
+        md = score_issues.table(scores)
+        Path("reports").mkdir(exist_ok=True); Path("reports/issues.md").write_text(md); print(md)
+        return
+
     if a.version == "v1":
         from ledger.agent_v1 import run_rep
+    elif a.version == "v3":
+        from ledger.agent_v3 import run_rep
     else:
         from ledger.agent_v2 import run_rep
 
@@ -58,6 +75,10 @@ def main():
             f.write("\n".join(json.dumps(x) for x in r) + "\n")
         n += len(r)
         print(f"{rep}: {len(r)} deals in {time.time() - t0:.0f}s", flush=True)
+    if a.version == "v3":  # cross-deal checks across the whole team, then rewrite
+        from ledger.agent_v3 import team_cross_deal
+        rows = team_cross_deal(co, [json.loads(l) for l in out.read_text().splitlines()])
+        out.write_text("\n".join(json.dumps(r, default=str) for r in rows) + "\n")
     print(f"wrote {n} rows -> {out}")
 
 

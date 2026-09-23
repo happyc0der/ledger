@@ -68,8 +68,15 @@ def deals(version: str = "v2"):
     r = _rows(version)
     cols = ["opportunity_id", "account", "product", "sales_agent", "stage", "amount_usd", "win_probability",
             "ev", "objection", "next_action", "buyer_quote", "rationale", "days_since_last_buyer_touch",
-            "amount_ok", "gap_ok", "quote_ok", "fabrications", "primary_contact"]
-    return _clean(r[[c for c in cols if c in r]].to_dict("records"))
+            "amount_ok", "gap_ok", "quote_ok", "fabrications", "primary_contact", "issues"]
+    recs = _clean(r[[c for c in cols if c in r]].to_dict("records"))
+    for rec in recs:
+        iss = rec.get("issues") if isinstance(rec.get("issues"), list) else []
+        rec["issue_types"] = [i["type"] for i in iss]
+        rec["n_semantic"] = sum(1 for i in iss if i["type"].startswith("M"))
+        rec["n_rules"] = sum(1 for i in iss if i["type"].startswith("S"))
+        rec.pop("issues", None)
+    return recs
 
 
 @app.get("/api/deal/{oid}")
@@ -95,6 +102,21 @@ def deal(oid: str):
                                  "actual_close_date": tr.actual_close_date, "objection": tr.objection,
                                  "correct_next_action": tr.correct_next_action})
     return out
+
+
+@app.get("/api/issues")
+def issues():
+    """Rules vs agent findings, scored against planted anomalies (demo/proof only)."""
+    from . import score_issues
+    from .rules import Issue, run_rules
+    ids = list(CO.deals.opportunity_id)
+    scores = [score_issues.score(run_rules(CO), ids, "rules")]
+    p = RUNS_DIR / "v3.jsonl"
+    if p.exists():
+        rows = [json.loads(l) for l in p.read_text().splitlines()]
+        iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
+        scores.append(score_issues.score(iss, ids, "ledger (v3)"))
+    return _clean(scores)
 
 
 @app.get("/api/compare")

@@ -1,744 +1,798 @@
 activity_id,opportunity_id,date,type,author,text
-06AIY3IS-1,06AIY3IS,2026-09-21,call,Marty Freudenburg,Discovery with Grace Abara; needs GTX Plus Pro for a site refresh.
-06AIY3IS-2,06AIY3IS,2026-09-22,email,Marty Freudenburg,Sent proposal and pricing.
+06AIY3IS-1,06AIY3IS,2026-09-21,call,Marty Freudenburg,disc w/ Grace Abara. needs GTX Plus Pro for site refresh.
+06AIY3IS-2,06AIY3IS,2026-09-22,email,Marty Freudenburg,Sent proposal & pricing over. quick update while I run to my next thing.
 06AIY3IS-3,06AIY3IS,2026-09-23,email,Grace Abara,Things are hectic here — haven't forgotten about this. Let me get back to you.
 06AIY3IS-4,06AIY3IS,2026-10-17,call,Marty Freudenburg,Left VM.
 07FRJ44N-1,07FRJ44N,2026-10-14,meeting,Gladys Colclough,Final review with Ethan Moreau and Luke Adeyemi. No open questions.
-07FRJ44N-2,07FRJ44N,2026-10-16,email,Ethan Moreau,Luke Adeyemi just gave the green light for GTX Plus Pro. Expect the PO next week!
+07FRJ44N-2,07FRJ44N,2026-10-16,email,Ethan Moreau,"It is confirmed that we are proceeding with GTX Plus Pro. Approval has been granted by Luke Adeyemi, and the purchase order is anticipated to be issued next week."
 07FRJ44N-3,07FRJ44N,2026-10-17,call,Gladys Colclough,Confirmed PO is routing.
-07WKR17A-1,07WKR17A,2026-10-16,call,Gladys Colclough,Intro with Priya Okafor. Existing customer expanding to a new site.
-07WKR17A-2,07WKR17A,2026-10-17,email,Priya Okafor,"Hey there! We are officially going with GTX Plus Pro for the new site. Ben Delgado gave the green light, so could you please shoot over the paperwork this week?"
+07WKR17A-1,07WKR17A,2026-09-19,call,Gladys Colclough,Intro with Priya Okafor. Existing customer expanding to a new site.
+07WKR17A-2,07WKR17A,2026-09-20,email,Priya Okafor,The deployment for the new site will standardise exclusively on GTX Plus Pro. Formal sign-off has been secured from Ben Delgado. Could you please dispatch the requisite documentation within the current week?
 0AR9HD16-1,0AR9HD16,2026-08-28,call,Darcel Schlecht,Demo of GTX Basic for Luke Abara's team.
 0AR9HD16-2,0AR9HD16,2026-10-11,email,Luke Abara,team liked it number is a stretch for this quarters budget though is there any flexibility on structure
 0AR9HD16-3,0AR9HD16,2026-10-15,call,Darcel Schlecht,Discussed options with Luke Abara. No answer yet; she will talk to Ethan Petrov.
-0IF5FH68-1,0IF5FH68,2026-08-15,call,Jonathan Berthelot,"Just wrapped the GTX Plus Pro demo with Tom Marchetti. Fit looks solid. He literally said, ""Honestly the number is higher than what we budgeted."""
-0IF5FH68-2,0IF5FH68,2026-09-05,email,Jonathan Berthelot,"sent Tom Marchetti phased option: 60% units this qtr, rest Jan. unit price stays same."
-0IF5FH68-3,0IF5FH68,2026-09-25,call,Jonathan Berthelot,"Tom Marchetti showed the phased plan to Aisha Ivanova. Buyer said: ""The split works for us — finance is fine with two POs."" Sending order form now."
-0IF5FH68-4,0IF5FH68,2026-10-16,email,Tom Marchetti,"- Order form in hand
+0IF5FH68-1,0IF5FH68,2026-07-30,call,Jonathan Berthelot,"I conducted a demonstration of the GTX Plus Pro with Tom Marchetti, and the product fit is good. Regarding the financial aspect, the buyer stated, ""Honestly the number is higher than what we budgeted."""
+0IF5FH68-2,0IF5FH68,2026-08-20,email,Jonathan Berthelot,"Sent Tom Marchetti a phased option: 60% of units this quarter, remainder in January. Same unit price."
+0IF5FH68-3,0IF5FH68,2026-09-09,call,Jonathan Berthelot,"Tom Marchetti presented the phased structure to Aisha Ivanova. The buyer stated, ""The split works for us — finance is fine with two POs."" I am currently sending the order form."
+0IF5FH68-4,0IF5FH68,2026-09-30,email,Tom Marchetti,"- Order form in hand
 - Routing for signature now"
-0TR3RU8A-1,0TR3RU8A,2026-10-01,meeting,Niesha Huffines,"Hey everyone! Just had a great technical review with Marcus Petrov's team, and I'm happy to report that all requirements were fully met. One of the buyers even told me, ""We're going to move on this; it just has to clear legal."""
-0TR3RU8A-2,0TR3RU8A,2026-10-04,email,Marcus Petrov,Legal is reviewing the MSA. Nothing needed from you for now — I'll come back once redlines are in.
-0W6S0ODT-1,0W6S0ODT,2026-10-12,call,Gladys Colclough,Noah Farouk verified active evaluation of Orion Hardware. Primary decision factor: failover performance.
-0W6S0ODT-2,0W6S0ODT,2026-10-13,meeting,Gladys Colclough,"During the laboratory comparative evaluation, MG Special demonstrated superior failover recovery metrics compared to Orion Hardware. The buyer remarked, ""That settles it for the engineering team."""
-0W6S0ODT-3,0W6S0ODT,2026-10-14,email,Noah Farouk,Engineering recommendation went to Yuki Bergström in favour of MG Special. Please send the final quote.
+0TR3RU8A-1,0TR3RU8A,2026-10-01,meeting,Niesha Huffines,"met with marcus petrovs team for tech review, checked all the boxes, buyer said ""were going to move on this; it just has to clear legal"""
+0TR3RU8A-2,0TR3RU8A,2026-10-04,email,Marcus Petrov,legal has msa now. u don't need to do anything rn—ill ping u when redlines drop.
+0W6S0ODT-1,0W6S0ODT,2026-10-12,call,Gladys Colclough,- Noah Farouk confirmed evaluation of Orion Hardware too - Failover performance is the top criterion
+0W6S0ODT-2,0W6S0ODT,2026-10-13,meeting,Gladys Colclough,"- Customer lab side-by-side test
+- MG Special outperformed Orion Hardware on failover recovery
+- Buyer quote: ""That settles it for the engineering team."""
+0W6S0ODT-3,0W6S0ODT,2026-10-14,email,Noah Farouk,"Hey there! Just wanted to share that the engineering recommendation actually went over to Yuki Bergström, and they are leaning toward MG Special. Could you please send over the final quote?"
+0W6S0ODT-4,0W6S0ODT,2026-10-15,email,Noah Farouk,"To confirm scope: we'd take 2 units of MG Special at list, $110 total."
 0WO582AV-1,0WO582AV,2026-08-29,call,Darcel Schlecht,Requirements call with Kwame Moreau.
 0WO582AV-2,0WO582AV,2026-10-09,email,Kwame Moreau,"Hey there! So, following our technical review, it turns out we really need native support for our SAN fabric, and unfortunately, GTXPro just doesn't offer that. Unless you guys are planning to add it to the roadmap this year, I'm afraid we won't be able to move forward."
-0YCAS0B9-1,0YCAS0B9,2026-09-27,call,Jonathan Berthelot,"Showed Victor Nakamura the GTX Plus Pro. Fit looks solid. He told me ""Honestly the number is higher than what we budgeted."""
+0YCAS0B9-1,0YCAS0B9,2026-09-27,call,Jonathan Berthelot,"Demo of GTX Plus Pro with Victor Nakamura. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
 0YCAS0B9-2,0YCAS0B9,2026-10-03,email,Jonathan Berthelot,"Sent Victor Nakamura a phased option: 60% of units this quarter, remainder in January. Same unit price."
-0YCAS0B9-3,0YCAS0B9,2026-10-06,call,Jonathan Berthelot,"Victor Nakamura brought the phased approach over to Ines Reyes. Client said: ""The split works for us — finance is fine with two POs."" Sending the order form now."
-0YCAS0B9-4,0YCAS0B9,2026-10-07,email,Victor Nakamura,Order form has been acquired and is currently being routed for execution.
+0YCAS0B9-3,0YCAS0B9,2026-10-06,call,Jonathan Berthelot,"Victor Nakamura presented the phased structure to Ines Reyes. The buyer stated, ""The split works for us — finance is fine with two POs."" I am currently sending the order form."
+0YCAS0B9-4,0YCAS0B9,2026-10-07,email,Victor Nakamura,Got the order form. Sending it for sig right now.
 14V0RQBV-1,14V0RQBV,2026-09-16,call,Darcel Schlecht,"Conducted a pricing review with Priya Reyes, noting that Bluewater Systems is participating in the bidding process as well."
 14V0RQBV-2,14V0RQBV,2026-09-21,email,Darcel Schlecht,Sent revised quote for GTXPro.
-14V0RQBV-3,14V0RQBV,2026-10-10,email,Priya Reyes,Appreciate the quick turnaround. We have selected Bluewater Systems for this cycle. Thank you for your time — happy to revisit next year.
+14V0RQBV-3,14V0RQBV,2026-10-10,email,Priya Reyes,"Thank you for the prompt response. We have ultimately chosen to partner with Bluewater Systems for this current cycle. I appreciate the time you have dedicated to us, and we would certainly be open to reconnecting next year."
 14V0RQBV-4,14V0RQBV,2026-10-19,call,Darcel Schlecht,"Left VM for Priya Reyes, want to understand what it would take to win this back."
-1Q5XFO8D-1,1Q5XFO8D,2026-08-28,call,Jonathan Berthelot,Call w/ Ingrid Marchetti for requirements. Quick rundown:
-1Q5XFO8D-2,1Q5XFO8D,2026-10-11,email,Ingrid Marchetti,post tech review: we need native support for our SAN fabric which gtx basic lacks unless thats on your roadmap this year we cant proceed
+1Q5XFO8D-1,1Q5XFO8D,2026-08-28,call,Jonathan Berthelot,I conducted a requirements call with Ingrid Marchetti.
+1Q5XFO8D-2,1Q5XFO8D,2026-10-11,email,Ingrid Marchetti,- technical review complete - need native SAN fabric support - GTX Basic lacks this - won't move forward unless it's on this year's roadmap
 1UHFKBP6-1,1UHFKBP6,2026-09-27,call,Darcel Schlecht,Requirements call with Jorge Adeyemi.
-1UHFKBP6-2,1UHFKBP6,2026-10-11,email,Jorge Adeyemi,tech review done and they need native san fabric support which gtxpro lacks unless thats on this years roadmap it is a dealbreaker
-1V3IQVOF-1,1V3IQVOF,2026-10-07,call,Gladys Colclough,Conducted a pricing review with Aisha Lindqvist. Noted that Orion Hardware is also participating in the bidding process.
-1V3IQVOF-2,1V3IQVOF,2026-10-08,email,Gladys Colclough,Revised quote for GTX Plus Basic transmitted.
+1UHFKBP6-2,1UHFKBP6,2026-10-11,email,Jorge Adeyemi,"- Post-tech review update:
+- Must have native SAN fabric support
+- GTXPro lacks this
+- Deal blocked unless it's on this year's roadmap"
+1V3IQVOF-1,1V3IQVOF,2026-10-07,call,Gladys Colclough,- Talked pricing with Aisha Lindqvist - Orion Hardware is also on the bid
+1V3IQVOF-2,1V3IQVOF,2026-10-08,email,Gladys Colclough,Sent revised quote for GTX Plus Basic.
 1V3IQVOF-3,1V3IQVOF,2026-10-09,email,Aisha Lindqvist,- Appreciate fast response - Chose Orion Hardware for this cycle - Thanks for time - Happy to revisit next year
-1V3IQVOF-4,1V3IQVOF,2026-10-10,call,Gladys Colclough,"Left VM for Aisha Lindqvist, want to understand what it would take to win this back."
-1XNXJUQM-1,1XNXJUQM,2026-09-07,call,Jonathan Berthelot,"Ran demo of GTX Plus Basic with Marcus Ivanova. Fit looks solid. Buyer said, ""Honestly the number is higher than what we budgeted."""
-1XNXJUQM-2,1XNXJUQM,2026-09-23,email,Jonathan Berthelot,"Sent Marcus Ivanova a phased option today. 60% of units this qtr, rest in Jan. Price stays same."
-1XNXJUQM-3,1XNXJUQM,2026-09-28,call,Jonathan Berthelot,"Marcus Ivanova brought the phased layout to Priya Delgado. Buyer said: ""The split works for us — finance is fine with two POs."" Sending order form now."
-1XNXJUQM-4,1XNXJUQM,2026-10-10,email,Marcus Ivanova,"got the order form, routing it for signature now"
+1V3IQVOF-4,1V3IQVOF,2026-10-10,call,Gladys Colclough,"- Left VM for Aisha Lindqvist
+- Objective: determine requirements to win back account"
+1XNXJUQM-1,1XNXJUQM,2026-09-07,call,Jonathan Berthelot,"Demo of GTX Plus Basic with Marcus Ivanova. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
+1XNXJUQM-2,1XNXJUQM,2026-09-23,email,Jonathan Berthelot,"Sent Marcus Ivanova a phased option: 60% of units this quarter, remainder in January. Same unit price."
+1XNXJUQM-3,1XNXJUQM,2026-09-28,call,Jonathan Berthelot,"Marcus Ivanova presented the phased structure to Priya Delgado. The buyer remarked, ""The split works for us — finance is fine with two POs."" I am currently sending the order form."
+1XNXJUQM-4,1XNXJUQM,2026-10-10,email,Marcus Ivanova,"Order form received, routing for signature."
 1Y9KPBXY-1,1Y9KPBXY,2026-08-28,call,Darcel Schlecht,Victor Castellano expressed high satisfaction with the platform and formally requested pricing information.
-1Y9KPBXY-2,1Y9KPBXY,2026-09-29,email,Victor Castellano,Thanks for the quote! I'll try to get time with Fatima Mensah. To be honest I don't own this budget and she has other priorities this quarter.
+1Y9KPBXY-2,1Y9KPBXY,2026-09-29,email,Victor Castellano,"Appreciate the quote! I'm going to see if I can carve out some time with Fatima Mensah. Just being real with you though, I don't control the budget here and she's got a bunch of other focuses this quarter."
 1Y9KPBXY-3,1Y9KPBXY,2026-10-01,email,Darcel Schlecht,"I followed up with Victor Castellano; currently, there are no new developments regarding Fatima Mensah's availability."
-1ZMWMU21-1,1ZMWMU21,2026-09-15,call,Marty Freudenburg,"During our conversation, Omar Castellano verified that they are currently assessing Orion Hardware as well. He emphasized that failover performance remains their primary evaluation criterion."
-1ZMWMU21-2,1ZMWMU21,2026-10-04,meeting,Marty Freudenburg,"During the side-by-side evaluation conducted at the customer laboratory, MG Advanced successfully outperformed Orion Hardware in failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
-1ZMWMU21-3,1ZMWMU21,2026-10-12,email,Omar Castellano,Engineering issued its formal recommendation to Hannah Thornton selecting MG Advanced; please transmit the final quotation.
+1ZMWMU21-1,1ZMWMU21,2026-09-15,call,Marty Freudenburg,Omar Castellano said they're looking at Orion Hardware too. Failover performance is the big thing for them.
+1ZMWMU21-2,1ZMWMU21,2026-10-04,meeting,Marty Freudenburg,"lab test today side-by-side. mg advanced wiped the floor w/ orion hardware on failover recovery. buyer literally said ""that settles it for the engineering team."""
+1ZMWMU21-3,1ZMWMU21,2026-10-12,email,Omar Castellano,"The engineering team has delivered their formal recommendation to Hannah Thornton, and they are backing MG Advanced. Please proceed with sending the final quote."
 28S2Z15A-1,28S2Z15A,2026-10-14,call,Darcel Schlecht,"Discovery with Priya Hughes. Replacing end-of-life units across two sites. Buyer: ""We need this racked before the Q4 freeze."""
-28S2Z15A-2,28S2Z15A,2026-10-15,email,Priya Hughes,Thanks Darcel Schlecht. MG Special spec sent over to Mei Reyes. She needs one quote covering both locations. Please prep the formal proposal.
+28S2Z15A-2,28S2Z15A,2026-10-15,email,Priya Hughes,Thanks Darcel Schlecht. Forwarded the MG Special spec to Mei Reyes — she wants a single-quote for both sites. Can you send a formal proposal?
 28S2Z15A-3,28S2Z15A,2026-10-16,meeting,Darcel Schlecht,"Conducted proposal review alongside Priya Hughes and Mei Reyes. Mei Reyes confirmed budget clearance at the list price of $55. Procurement is currently generating the PO, and legal has been provided with our MSA."
-28S2Z15A-4,28S2Z15A,2026-10-17,email,Priya Hughes,"- PO currently sitting with procurement
-- anticipating signature over next couple weeks"
+28S2Z15A-4,28S2Z15A,2026-10-17,email,Priya Hughes,PO currently w/ procurement. Should get sig in next couple weeks.
 2CZVRGQ4-1,2CZVRGQ4,2026-10-19,call,Darcel Schlecht,Jorge Hughes verified that they are concurrently assessing Bluewater Systems. Their primary evaluation metric centers on failover performance.
 2CZVRGQ4-2,2CZVRGQ4,2026-10-19,meeting,Darcel Schlecht,"The lab-based comparative evaluation demonstrated that GTXPro outperformed Bluewater Systems regarding failover recovery metrics. The engineering stakeholder remarked, ""That settles it for the engineering team."""
-2CZVRGQ4-3,2CZVRGQ4,2026-10-19,email,Jorge Hughes,"The engineering team has submitted their official recommendation to Ingrid Adeyemi, choosing the GTXPro. Please proceed with sending the final quote."
+2CZVRGQ4-3,2CZVRGQ4,2026-10-19,email,Jorge Hughes,eng recommendation went to ingrid adeyemi in favour of gtxpro please send the final quote
 2G82J8WD-1,2G82J8WD,2026-09-15,call,Darcel Schlecht,Clara Reyes verified that Orion Hardware is under active evaluation as well. Failover performance represents their primary decision metric.
 2G82J8WD-2,2G82J8WD,2026-09-29,meeting,Darcel Schlecht,"During the laboratory side-by-side evaluation, GTXPro outperformed Orion Hardware regarding failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
-2G82J8WD-3,2G82J8WD,2026-10-15,email,Clara Reyes,Engineering recommendation went to Victor Hughes in favour of GTXPro. Please send the final quote.
-2GN2TRVV-1,2GN2TRVV,2026-10-02,call,Jonathan Berthelot,Quick pricing call w/ Jorge Delgado. Said they got another quote from Bluewater Systems too.
-2GN2TRVV-2,2GN2TRVV,2026-10-03,email,Jorge Delgado,honest update team is leaning bluewater systems cheaper price and monitoring stack integration already finished
-2GN2TRVV-3,2GN2TRVV,2026-10-09,call,Jonathan Berthelot,Spoke with Jorge Delgado. Reiterated our roadmap. Feel we are still in it.
+2G82J8WD-3,2G82J8WD,2026-10-15,email,Clara Reyes,Engineering issued their formal recommendation to Victor Hughes selecting GTXPro; please transmit the final quote.
+2GN2TRVV-1,2GN2TRVV,2026-10-02,call,Jonathan Berthelot,"I conducted a pricing call today with Jorge Delgado. During our discussion, he mentioned that they also currently possess a competing quote from Bluewater Systems."
+2GN2TRVV-2,2GN2TRVV,2026-10-03,email,Jorge Delgado,"- Full transparency: team favoring Bluewater Systems
+- Cheaper pricing
+- Existing monitoring stack integration already completed"
+2GN2TRVV-3,2GN2TRVV,2026-10-09,call,Jonathan Berthelot,I spoke with Jorge Delgado today and reiterated our roadmap. I feel we are still in it.
 2NPSMBLK-1,2NPSMBLK,2026-09-08,call,Darcel Schlecht,Pricing discussion conducted with Raj Farouk. Note that Kestrel Compute is also participating in the bidding process.
 2NPSMBLK-2,2NPSMBLK,2026-10-04,email,Darcel Schlecht,Sent revised quote for GTXPro.
-2NPSMBLK-3,2NPSMBLK,2026-10-12,email,Raj Farouk,"- Thx for fast turnaround
-- Chose Kestrel Compute this cycle
-- Appreciated time
-- ""happy to revisit next year"""
+2NPSMBLK-3,2NPSMBLK,2026-10-12,email,Raj Farouk,thanks for the fast reply we picked kestrel compute this time around appreciate your time lets talk again next year
 2NPSMBLK-4,2NPSMBLK,2026-10-18,call,Darcel Schlecht,"Left VM for Raj Farouk, want to understand what it would take to win this back."
-2ZEFCKS3-1,2ZEFCKS3,2026-08-18,call,Niesha Huffines,Left VM for Ruth Petrov re: GTXPro proposal.
-2ZEFCKS3-2,2ZEFCKS3,2026-09-24,call,Niesha Huffines,Left VM.
+2ZEFCKS3-1,2ZEFCKS3,2026-08-18,call,Niesha Huffines,left vm for ruth petrov regarding the gtxpro proposal
+2ZEFCKS3-2,2ZEFCKS3,2026-09-24,call,Niesha Huffines,left vm
 2ZEFCKS3-3,2ZEFCKS3,2026-10-11,email,Ruth Petrov,"Sorry Niesha Huffines, been travelling. Yes, we're moving ahead — Mei Adeyemi approved it. PO should go out next week."
-2ZEFCKS3-4,2ZEFCKS3,2026-10-14,call,Niesha Huffines,Left VM to confirm PO timing.
-379SDV6Y-1,379SDV6Y,2026-10-06,call,Niesha Huffines,Intro with Mei Lindqvist. Existing customer expanding to a new site.
-379SDV6Y-2,379SDV6Y,2026-10-12,email,Mei Lindqvist,We've decided to standardise on GTX Plus Basic for the new site. Victor Whitfield signed off; can you send the paperwork this week?
-3AIA6RL3-1,3AIA6RL3,2026-10-11,call,Jonathan Berthelot,Intro with Yuki Petrov. Existing customer expanding to a new site.
-3AIA6RL3-2,3AIA6RL3,2026-10-17,email,Yuki Petrov,The decision has been made to standardise on GTX Plus Basic for the new site. Clara Okafor has given her sign-off; could you please send over the paperwork this week?
+2ZEFCKS3-4,2ZEFCKS3,2026-10-14,call,Niesha Huffines,left vm for po timing check
+379SDV6Y-1,379SDV6Y,2026-10-06,call,Niesha Huffines,intro with mei lindqvist existing customer expanding to a new site
+379SDV6Y-2,379SDV6Y,2026-10-12,email,Mei Lindqvist,"We have reached the decision to standardize on GTX Plus Basic for the new site implementation. Since Victor Whitfield has provided his formal sign-off, could you please forward the necessary paperwork over the course of this week?"
+3AIA6RL3-1,3AIA6RL3,2026-10-11,call,Jonathan Berthelot,I conducted an introductory discussion with Yuki Petrov. The account is an existing customer currently expanding operations to a new site.
+3AIA6RL3-2,3AIA6RL3,2026-10-17,email,Yuki Petrov,"Hey there! So, we are officially going with GTX Plus Basic for the new site. Clara Okafor gave the green light, so could you please shoot over the paperwork sometime this week?"
 3DY60YA7-1,3DY60YA7,2026-10-17,meeting,Darcel Schlecht,Final review with Aisha Thornton and Marcus Sato. No open questions.
 3DY60YA7-2,3DY60YA7,2026-10-18,email,Aisha Thornton,"- Moving forward with GTXPro.
 - Marcus Sato approved.
 - Expecting the PO next week."
 3DY60YA7-3,3DY60YA7,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
-3IIDRUGI-1,3IIDRUGI,2026-10-06,call,Gladys Colclough,Pricing discussion with Daniel Farouk. Orion Hardware is also bidding.
-3IIDRUGI-2,3IIDRUGI,2026-10-08,email,Gladys Colclough,Dispatched revised pricing documentation for the MG Special configuration.
-3IIDRUGI-3,3IIDRUGI,2026-10-12,email,Daniel Farouk,thx for the fast reply. we decided on Orion Hardware for this round. appreciate your time -- let's catch up next year.
-3IIDRUGI-4,3IIDRUGI,2026-10-13,call,Gladys Colclough,"Left VM for Daniel Farouk, want to understand what it would take to win this back."
+3IIDRUGI-1,3IIDRUGI,2026-10-06,call,Gladys Colclough,Call with Daniel Farouk - discussed pricing. Orion Hardware is also in the bidding.
+3IIDRUGI-2,3IIDRUGI,2026-10-08,email,Gladys Colclough,- MG Special updated quote sent.
+3IIDRUGI-3,3IIDRUGI,2026-10-12,email,Daniel Farouk,"- Appreciate the quick turnaround - Decided on Orion Hardware for this cycle - Thanks for your time - ""Happy to revisit next year"""
+3IIDRUGI-4,3IIDRUGI,2026-10-13,call,Gladys Colclough,Left VM for Daniel Farouk - exploring what it takes to win business back.
 3ZG0719M-1,3ZG0719M,2026-10-01,call,Darcel Schlecht,Sofia Adeyemi stated that Bluewater Systems submitted a more cost-effective bid.
-3ZG0719M-2,3ZG0719M,2026-10-06,email,Sofia Adeyemi,compared both options decided on gtx plus basic because of their support team legal has the msa now
-3ZG0719M-3,3ZG0719M,2026-10-14,email,Sofia Adeyemi,one more thing before i sign off - sec team needs the firmware-signing doc for gtx plus basic can you shoot that over this week not a blocker just checking a box
+3ZG0719M-2,3ZG0719M,2026-10-06,email,Sofia Adeyemi,"Hey there! So we checked out both options, and we're totally going with the GTX Plus Basic plan because their support model is just amazing. Legal has the MSA right now!"
+3ZG0719M-3,3ZG0719M,2026-10-14,email,Sofia Adeyemi,"Before I sign off, just one little thing: our security folks are asking for the firmware-signing document for the GTX Plus Basic. Could you possibly shoot that over this week? It is definitely not a blocker, more of a quick checkbox for them."
 45CMXP2K-1,45CMXP2K,2026-09-26,call,Darcel Schlecht,Conducted pricing review with Daniel Haddad. Noted that Bluewater Systems is participating in the competitive bid.
 45CMXP2K-2,45CMXP2K,2026-09-28,email,Darcel Schlecht,Transmitted the updated GTX Basic proposal.
 45CMXP2K-3,45CMXP2K,2026-10-03,email,Daniel Haddad,"Appreciate the swift response. For this evaluation cycle, we have selected Bluewater Systems. Thank you for your time; we are open to reconnecting next year."
 45CMXP2K-4,45CMXP2K,2026-10-13,call,Darcel Schlecht,"Left VM for Daniel Haddad, want to understand what it would take to win this back."
-461LIUS7-1,461LIUS7,2026-10-18,call,Gladys Colclough,Victor Quinn verified their concurrent evaluation of Orion Hardware. Their evaluation centers primarily on failover performance metrics.
-461LIUS7-2,461LIUS7,2026-10-18,meeting,Gladys Colclough,"During the laboratory comparative evaluation, GTX Plus Basic demonstrated superior performance over Orion Hardware regarding failover recovery metrics. The engineering stakeholder remarked, ""That settles it for the engineering team."""
+461LIUS7-1,461LIUS7,2026-10-18,call,Gladys Colclough,- Victor Quinn confirmed: also looking at Orion Hardware - Core requirement: failover performance
+461LIUS7-2,461LIUS7,2026-10-18,meeting,Gladys Colclough,"- Customer lab side-by-side test.
+- GTX Plus Basic outperformed Orion Hardware during failover recovery.
+- Buyer remark: ""That settles it for the engineering team."""
 461LIUS7-3,461LIUS7,2026-10-19,email,Victor Quinn,Engineering recommendation went to Fatima Quinn in favour of GTX Plus Basic. Please send the final quote.
-48INT6OA-1,48INT6OA,2026-09-18,meeting,Jonathan Berthelot,"Tech rev w/ Sofia Fischer team. Everything checked out, all reqs met. Buyer said ""We're going to move on this; it just has to clear legal."""
+461LIUS7-4,461LIUS7,2026-10-19,email,Victor Quinn,"To confirm scope: 4 units of GTX Plus Basic at list, so $6,576 total. Please quote that."
+48INT6OA-1,48INT6OA,2026-09-18,meeting,Jonathan Berthelot,"During the technical review conducted with Sofia Fischer and her team, we confirmed that all requirements have been successfully satisfied. The buyer stated, ""We're going to move on this; it just has to clear legal."""
 48INT6OA-2,48INT6OA,2026-09-25,email,Sofia Fischer,legal is looking at the msa right now no action on your end ill ping you when the redlines come back
+48INT6OA-3,48INT6OA,2026-09-26,email,Sofia Fischer,"To confirm scope: we'd take 4 units of GTXPro at list, $19,284 total."
 4F8MNVNP-1,4F8MNVNP,2026-10-19,meeting,Jonathan Berthelot,Final review with Samuel Whitfield and Ines Adeyemi. No open questions.
-4F8MNVNP-2,4F8MNVNP,2026-10-19,email,Samuel Whitfield,"gtx basic is a go. ines adeyemi approved it, po coming next week."
+4F8MNVNP-2,4F8MNVNP,2026-10-19,email,Samuel Whitfield,ines adeyemi approved gtx basic po lands next week
 4F8MNVNP-3,4F8MNVNP,2026-10-19,call,Jonathan Berthelot,Confirmed PO is routing.
-4HP16LRH-1,4HP16LRH,2026-10-19,call,Marty Freudenburg,"During our discussion, Ben Nakamura verified that their team is simultaneously assessing Orion Hardware. He emphasized that failover performance remains their primary evaluation criterion."
-4HP16LRH-2,4HP16LRH,2026-10-19,meeting,Marty Freudenburg,"During the side-by-side evaluation conducted at the customer laboratory, MG Advanced successfully outperformed Orion Hardware in failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
-4HP16LRH-3,4HP16LRH,2026-10-19,email,Ben Nakamura,"The engineering team has officially submitted their recommendation to Fatima Ivanova, selecting MG Advanced. Please proceed with sending the final quote at your earliest convenience."
-4ICL09BD-1,4ICL09BD,2026-10-03,meeting,Jonathan Berthelot,"Tech review w/ Kwame Delgado team done. All reqs checked out. Buyer said: ""We're going to move on this; it just has to clear legal."""
-4ICL09BD-2,4ICL09BD,2026-10-04,email,Kwame Delgado,legal has the msa now holding off on your end till i see the redlines
+4HP16LRH-1,4HP16LRH,2026-10-19,call,Marty Freudenburg,Ben Nakamura just told me they're looking at Orion Hardware too. Failover performance is their big thing.
+4HP16LRH-2,4HP16LRH,2026-10-19,meeting,Marty Freudenburg,"lab test today side-by-side. mg advanced wiped the floor w/ orion hardware on failover recovery. buyer literally said ""that settles it for the engineering team."""
+4HP16LRH-3,4HP16LRH,2026-10-19,email,Ben Nakamura,- Eng recommendation delivered to Fatima Ivanova - Chose MG Advanced - Please send final quote
+4HP16LRH-4,4HP16LRH,2026-10-19,email,Ben Nakamura,"To confirm scope: 4 units of MG Advanced at list, so $16,965 total. Please quote that."
+4ICL09BD-1,4ICL09BD,2026-10-03,meeting,Jonathan Berthelot,"Technical review with Kwame Delgado's team. All requirements met. Buyer: ""We're going to move on this; it just has to clear legal."""
+4ICL09BD-2,4ICL09BD,2026-10-04,email,Kwame Delgado,Hey there! Just wanted to give you a quick heads-up that Legal is currently looking over the MSA. You're totally off the hook for now—I will circle back as soon as I get those redlines!
+4N2KE2DP-1,4N2KE2DP,2026-09-01,call,Darcel Schlecht,Intro call with Patrick Quinn about GTX Plus Basic.
 4N2KE2ER-1,4N2KE2ER,2026-09-20,call,Darcel Schlecht,Patrick Quinn validated their ongoing assessment of Bluewater Systems as well. Failover performance remains the primary evaluation criterion.
 4N2KE2ER-2,4N2KE2ER,2026-09-24,meeting,Darcel Schlecht,"During the lab-based comparative evaluation, the GTX Plus Basic architecture outperformed Bluewater Systems regarding failover recovery metrics. The technical stakeholder explicitly stated, ""That settles it for the engineering team."""
 4N2KE2ER-3,4N2KE2ER,2026-10-11,email,Patrick Quinn,Engineering recommendation went to Hannah Reyes in favour of GTX Plus Basic. Please send the final quote.
+4N2KE2ER-4,4N2KE2ER,2026-10-12,email,Patrick Quinn,"To confirm scope: 4 units of GTX Plus Basic at list, so $6,576 total. Please quote that."
 4Q2GV039-1,4Q2GV039,2026-09-03,call,Darcel Schlecht,Left VM for Victor Fischer regarding MG Advanced proposal.
 4Q2GV039-2,4Q2GV039,2026-09-05,call,Darcel Schlecht,Left VM.
 4Q2GV039-3,4Q2GV039,2026-10-09,email,Victor Fischer,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Jorge Bergström approved it. PO should go out next week."
 4Q2GV039-4,4Q2GV039,2026-10-10,call,Darcel Schlecht,Left VM to confirm PO timing.
 4UN65HWV-1,4UN65HWV,2026-08-23,call,Darcel Schlecht,Discovery with Sofia Petrov; needs GTX Plus Basic for a site refresh.
 4UN65HWV-2,4UN65HWV,2026-08-29,email,Darcel Schlecht,Delivered the official proposal along with detailed pricing metrics.
-4UN65HWV-3,4UN65HWV,2026-09-17,email,Sofia Petrov,"Things are so hectic here right now, but I definitely haven't forgotten about this—let me get back to you soon!"
+4UN65HWV-3,4UN65HWV,2026-09-17,email,Sofia Petrov,Things are hectic here — haven't forgotten about this. Let me get back to you.
 4UN65HWV-4,4UN65HWV,2026-10-06,call,Darcel Schlecht,Left VM.
 5BGYQS4R-1,5BGYQS4R,2026-09-06,call,Darcel Schlecht,"Conducted discovery session with Noah Whitfield regarding deployment of replacement hardware for end-of-life units across both facilities. The buyer stated: ""We need this racked before the Q4 freeze."""
 5BGYQS4R-2,5BGYQS4R,2026-09-18,email,Noah Whitfield,thanks darcel schlecht passed gtx plus basic specs to sofia abara she needs one quote covering both sites send over the formal proposal please
 5BGYQS4R-3,5BGYQS4R,2026-09-24,meeting,Darcel Schlecht,"Conducted a proposal review alongside Noah Whitfield and Sofia Abara. Sofia Abara formally signed off on the budget at list, totaling $1,096. Currently, procurement is generating the purchase order, and the MSA is under legal review."
 5BGYQS4R-4,5BGYQS4R,2026-10-12,email,Noah Whitfield,po sits with procurement expecting signature coming two weeks
-5CFCTZ5K-1,5CFCTZ5K,2026-10-17,call,Jonathan Berthelot,Quick update on Patrick Kowalski - looks like they're looking at Kestrel Compute too. Failover performance is their big thing rn.
-5CFCTZ5K-2,5CFCTZ5K,2026-10-18,meeting,Jonathan Berthelot,"Ran side-by-side at customer lab. GTX Basic smoked Kestrel Compute on failover recovery. Buyer said: ""That settles it for the engineering team."""
-5CFCTZ5K-3,5CFCTZ5K,2026-10-19,email,Patrick Kowalski,Engineering recommendation went to Grace Thornton in favour of GTX Basic. Please send the final quote.
+5CFCTZ5K-1,5CFCTZ5K,2026-10-17,call,Jonathan Berthelot,Patrick Kowalski confirmed that their organization is also evaluating Kestrel Compute. He noted that their primary selection criterion is failover performance.
+5CFCTZ5K-2,5CFCTZ5K,2026-10-18,meeting,Jonathan Berthelot,"During the side-by-side test conducted at the customer laboratory, GTX Basic successfully outperformed Kestrel Compute regarding failover recovery capabilities. The buyer stated that ""that settles it for the engineering team."""
+5CFCTZ5K-3,5CFCTZ5K,2026-10-19,email,Patrick Kowalski,"Hey there! Just wanted to share that the engineering team gave their recommendation to Grace Thornton, and they're going with GTX Basic. Could you please send over the final quote?"
+5O0597DP-1,5O0597DP,2026-09-22,call,Darcel Schlecht,Intro call with Ben Petrov about MG Advanced.
 5O0597PP-1,5O0597PP,2026-09-20,call,Darcel Schlecht,Ben Petrov expressed strong enthusiasm for the solution and requested pricing documentation.
-5O0597PP-2,5O0597PP,2026-09-21,email,Ben Petrov,thanks for the quote ill try to get time with samuel nakamura to be honest i dont own this budget and she has other priorities this quarter
+5O0597PP-2,5O0597PP,2026-09-21,email,Ben Petrov,"Thank you for providing the quote. I will make an effort to secure some time with Samuel Nakamura. To be completely candid, I do not manage this budget myself, and she currently has other focal points for this quarter."
 5O0597PP-3,5O0597PP,2026-10-04,email,Darcel Schlecht,Checked in with Ben Petrov. No update yet on Samuel Nakamura's availability.
-69XL3JMB-1,69XL3JMB,2026-09-26,call,Marty Freudenburg,"During our discussion, Priya Haddad mentioned that Bluewater Systems submitted a lower quote."
-69XL3JMB-2,69XL3JMB,2026-10-01,email,Priya Haddad,"Hey everyone, we've weighed both options and are moving forward with GTX Plus Basic! The support model totally won us over. Also, Legal has the MSA now."
-69XL3JMB-3,69XL3JMB,2026-10-10,email,Priya Haddad,"Oh, just one last thing before I sign off! The security team is asking for the firmware-signing doc for the GTX Plus Basic. Could you possibly shoot that over to us sometime this week? Totally not a blocker or anything, just need it to check a box."
+69XL3JMB-1,69XL3JMB,2026-09-26,call,Marty Freudenburg,Priya Haddad said Bluewater Systems came in with a lower number.
+69XL3JMB-2,69XL3JMB,2026-10-01,email,Priya Haddad,Evaluation complete. We selected GTX Plus Basic primarily due to their support framework. The MSA is currently under Legal review.
+69XL3JMB-3,69XL3JMB,2026-10-10,email,Priya Haddad,"Before finalizing, their security group requested the firmware-signing documentation for the GTX Plus Basic model; please deliver this document during the current week. It is categorized merely as a compliance requirement rather than a functional blocker."
 6BV9IARK-1,6BV9IARK,2026-10-10,call,Darcel Schlecht,Left VM for Omar Quinn re: GTXPro proposal.
 6BV9IARK-2,6BV9IARK,2026-10-11,call,Darcel Schlecht,Left VM.
 6BV9IARK-3,6BV9IARK,2026-10-14,email,Omar Quinn,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Priya Whitfield approved it. PO should go out next week."
 6BV9IARK-4,6BV9IARK,2026-10-19,call,Darcel Schlecht,Left VM to confirm PO timing.
-6C1DLYBH-1,6C1DLYBH,2026-09-02,call,Niesha Huffines,Pricing discussion with Sofia Fischer. Bluewater Systems is also bidding.
-6C1DLYBH-2,6C1DLYBH,2026-09-06,email,Niesha Huffines,Sent revised quote for MG Special.
+6C1DLYBH-1,6C1DLYBH,2026-09-02,call,Niesha Huffines,talked pricing with sofia fischer bluewater systems is in the running too
+6C1DLYBH-2,6C1DLYBH,2026-09-06,email,Niesha Huffines,sent revised quote for mg special
 6C1DLYBH-3,6C1DLYBH,2026-10-04,email,Sofia Fischer,thanks for the fast reply. we picked bluewater systems this round. appreciate your time and let us check in again next year.
-6C1DLYBH-4,6C1DLYBH,2026-10-13,call,Niesha Huffines,"Left VM for Sofia Fischer, want to understand what it would take to win this back."
+6C1DLYBH-4,6C1DLYBH,2026-10-13,call,Niesha Huffines,left vm for sofia fischer trying to figure out what it takes to win this back
 6CFONO4W-1,6CFONO4W,2026-10-16,call,Darcel Schlecht,Intro with Luke Brennan. Existing customer expanding to a new site.
 6CFONO4W-2,6CFONO4W,2026-10-17,email,Luke Brennan,"- chose GTXPro for the new site
 - Noah Whitfield gave the green light
 - action item: send paperwork this week"
-6FUPOO3I-1,6FUPOO3I,2026-10-17,call,Gladys Colclough,Marcus Okafor verified that Orion Hardware is currently under evaluation. Failover performance represents their primary evaluation criterion.
-6FUPOO3I-2,6FUPOO3I,2026-10-18,meeting,Gladys Colclough,"During the side-by-side evaluation conducted in the customer laboratory, MG Advanced outperformed Orion Hardware concerning failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
+6FUPOO3I-1,6FUPOO3I,2026-10-17,call,Gladys Colclough,- Marcus Okafor verified current evaluation of Orion Hardware.- Critical deciding factor: failover performance.
+6FUPOO3I-2,6FUPOO3I,2026-10-18,meeting,Gladys Colclough,"- Customer lab side-by-side test.
+- MG Advanced outperformed Orion Hardware on failover recovery.
+- Buyer quote: ""That settles it for the engineering team."""
 6FUPOO3I-3,6FUPOO3I,2026-10-19,email,Marcus Okafor,Engineering recommendation went to Nadia Delgado in favour of MG Advanced. Please send the final quote.
+6FUPOO3I-4,6FUPOO3I,2026-10-19,email,Marcus Okafor,"To confirm scope: we'd take 2 units of MG Advanced at list, $6,786 total."
+6JWA8DDP-1,6JWA8DDP,2026-09-24,call,Darcel Schlecht,Intro call with Sofia Nakamura about GTXPro.
 6JWA8DFJ-1,6JWA8DFJ,2026-09-24,call,Darcel Schlecht,Demo of GTXPro for Sofia Nakamura's team.
-6JWA8DFJ-2,6JWA8DFJ,2026-10-09,email,Sofia Nakamura,Team liked it. The number is a stretch for this quarter's budget though — is there any flexibility on structure?
+6JWA8DFJ-2,6JWA8DFJ,2026-10-09,email,Sofia Nakamura,"The team responded favorably to the proposal; however, the specified figure exceeds current budgetary constraints for the quarter. Could we explore structural flexibility?"
 6JWA8DFJ-3,6JWA8DFJ,2026-10-15,call,Darcel Schlecht,Discussed options with Sofia Nakamura. No answer yet; she will talk to Victor Adeyemi.
 6OJAC85F-1,6OJAC85F,2026-10-01,call,Darcel Schlecht,Requirements call with Victor Thornton.
 6OJAC85F-2,6OJAC85F,2026-10-12,email,Victor Thornton,We're evaluating GTXPro against Bluewater Systems; decision in about three weeks. Could you get us a loaner unit for the lab?
 6OJAC85F-3,6OJAC85F,2026-10-16,email,Darcel Schlecht,Loaner request submitted.
-6VLA3FDQ-1,6VLA3FDQ,2026-09-30,call,Gladys Colclough,Conducted a technical demonstration of MG Special specifically for Kwame Abara's engineering group.
-6VLA3FDQ-2,6VLA3FDQ,2026-10-09,email,Kwame Abara,Team liked it. Number's a stretch for Q budget tho - any flex on structure?
+6OJAC8DP-1,6OJAC8DP,2026-09-22,call,Darcel Schlecht,Intro call with Victor Thornton about GTXPro.
+6VLA3FDQ-1,6VLA3FDQ,2026-09-30,call,Gladys Colclough,- Showcased MG Special - Presented to Kwame Abara and his team
+6VLA3FDQ-2,6VLA3FDQ,2026-10-09,email,Kwame Abara,"The evaluation team approved the offering. However, the proposed figure exceeds our current quarterly resource allocation. Can we negotiate the financial architecture?"
 6VLA3FDQ-3,6VLA3FDQ,2026-10-13,call,Gladys Colclough,Discussed options with Kwame Abara. No answer yet; she will talk to Aisha Mensah.
-7QIU2BCK-1,7QIU2BCK,2026-08-19,call,Gladys Colclough,"Conducted a GTX Plus Basic demo with Noah Lindqvist. The functional fit is solid. The buyer noted: ""Honestly the number is higher than what we budgeted."""
+7QIU2BCK-1,7QIU2BCK,2026-08-19,call,Gladys Colclough,"- Demoed GTX Plus Basic for Noah Lindqvist.
+- Fit looks solid.
+- Buyer quote: ""Honestly the number is higher than what we budgeted."""
 7QIU2BCK-2,7QIU2BCK,2026-09-20,email,Gladys Colclough,"Sent Noah Lindqvist a phased option: 60% of units this quarter, remainder in January. Same unit price."
-7QIU2BCK-3,7QIU2BCK,2026-09-26,call,Gladys Colclough,"Noah Lindqvist took the phased structure to Samuel Osei. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-7QIU2BCK-4,7QIU2BCK,2026-10-08,email,Noah Lindqvist,"got the order form, sending it over for signature"
-7SJD7M9K-1,7SJD7M9K,2026-09-15,call,Jonathan Berthelot,"Quick call, showed GTXPro to Victor Sandoval. Fit looks solid. He said, ""Honestly the number is higher than what we budgeted."""
-7SJD7M9K-2,7SJD7M9K,2026-09-28,email,Jonathan Berthelot,"Sent Victor Sandoval a phased option: 60% of units this quarter, rest in Jan. Unit price stays the same."
-7SJD7M9K-3,7SJD7M9K,2026-09-29,call,Jonathan Berthelot,"Victor Sandoval took the phased structure to Clara Whitfield. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-7SJD7M9K-4,7SJD7M9K,2026-10-09,email,Victor Sandoval,"Hey team, just got the order form! I am sending it over now to get those signatures locked in."
-81NOKKSW-1,81NOKKSW,2026-09-30,call,Gladys Colclough,"Demo of MG Special with Omar Reyes. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
+7QIU2BCK-3,7QIU2BCK,2026-09-26,call,Gladys Colclough,"- Noah Lindqvist presented phased structure to Samuel Osei.- Buyer: ""The split works for us — finance is fine with two POs.""- Sending order form."
+7QIU2BCK-4,7QIU2BCK,2026-10-08,email,Noah Lindqvist,The order form has been received and is now being routed for the necessary signatures.
+7SJD7M9K-1,7SJD7M9K,2026-09-15,call,Jonathan Berthelot,"I conducted a demonstration of the GTXPro for Victor Sandoval, and the product fit appears to be strong. Regarding the pricing, the buyer remarked, ""Honestly the number is higher than what we budgeted."""
+7SJD7M9K-2,7SJD7M9K,2026-09-28,email,Jonathan Berthelot,"Sent Victor Sandoval a phased option: 60% of units this quarter, remainder in January. Same unit price."
+7SJD7M9K-3,7SJD7M9K,2026-09-29,call,Jonathan Berthelot,"Victor Sandoval presented the phased structure to Clara Whitfield. The buyer stated, ""The split works for us — finance is fine with two POs."" I am currently sending the order form."
+7SJD7M9K-4,7SJD7M9K,2026-10-09,email,Victor Sandoval,Order documentation has been received; initiating internal routing for final authorization signatures.
+81NOKKSW-1,81NOKKSW,2026-09-30,call,Gladys Colclough,"- Call w/ Omar Reyes - Demoed MG Special - Fit solid - Buyer noted: ""Honestly the number is higher than what we budgeted."""
 81NOKKSW-2,81NOKKSW,2026-10-04,email,Gladys Colclough,"Sent Omar Reyes a phased option: 60% of units this quarter, remainder in January. Same unit price."
-81NOKKSW-3,81NOKKSW,2026-10-05,call,Gladys Colclough,"Omar Reyes took the phased structure to Tom Whitfield. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-81NOKKSW-4,81NOKKSW,2026-10-09,email,Omar Reyes,Order form received - routing for signature.
+81NOKKSW-3,81NOKKSW,2026-10-05,call,Gladys Colclough,"- Omar Reyes shared phased structure with Tom Whitfield
+- Buyer quote: ""The split works for us — finance is fine with two POs""
+- Sending order form now"
+81NOKKSW-4,81NOKKSW,2026-10-09,email,Omar Reyes,"got the order form, pushing it through for sig right now"
 8H19L55Y-1,8H19L55Y,2026-10-17,call,Darcel Schlecht,Daniel Ivanova confirmed evaluation of Orion Hardware. Primary evaluation metric is failover performance.
 8H19L55Y-2,8H19L55Y,2026-10-18,meeting,Darcel Schlecht,"During the laboratory side-by-side evaluation, GTXPro outperformed Orion Hardware regarding failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
-8H19L55Y-3,8H19L55Y,2026-10-19,email,Daniel Ivanova,The engineering team has issued their recommendation in support of GTXPro to Ruth Lindqvist. Please proceed with sending the final quote.
-8QH99OEZ-1,8QH99OEZ,2026-10-11,call,Jonathan Berthelot,Victor Bergström just confirmed they are looking at Orion Hardware too. Failover performance is their big thing.
-8QH99OEZ-2,8QH99OEZ,2026-10-12,meeting,Jonathan Berthelot,"Ran side-by-side test at customer lab today. GTX Plus Basic completely outperformed Orion Hardware on failover recovery time. Buyer literally said, ""That settles it for the engineering team."""
+8H19L55Y-3,8H19L55Y,2026-10-19,email,Daniel Ivanova,eng rec went to ruth lindqvist for gtxpro send final quote please
+8QH99OEZ-1,8QH99OEZ,2026-09-28,call,Jonathan Berthelot,"During our conversation, Victor Bergström verified that his organization is currently assessing Orion Hardware as well. He emphasized that their primary evaluation metric remains failover performance."
+8QH99OEZ-2,8QH99OEZ,2026-10-12,meeting,Jonathan Berthelot,"During the side-by-side evaluation conducted at the customer laboratory, GTX Plus Basic outperformed Orion Hardware specifically regarding failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
 8QH99OEZ-3,8QH99OEZ,2026-10-14,email,Victor Bergström,Engineering recommendation went to Fatima Hughes in favour of GTX Plus Basic. Please send the final quote.
-94TA0AWF-1,94TA0AWF,2026-10-15,call,Marty Freudenburg,"Ethan Adeyemi verified that his organization is currently assessing Orion Hardware as an alternative. Furthermore, he noted that failover performance remains their primary evaluation criterion."
-94TA0AWF-2,94TA0AWF,2026-10-16,meeting,Marty Freudenburg,"During the side-by-side evaluation conducted at the customer laboratory, the GTX Plus Pro successfully outperformed Orion Hardware regarding failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
+94TA0AWF-1,94TA0AWF,2026-10-15,call,Marty Freudenburg,Quick update on Ethan Adeyemi - confirmed they're looking at Orion Hardware too. Big thing for them is failover performance.
+94TA0AWF-2,94TA0AWF,2026-10-16,meeting,Marty Freudenburg,"Ran side-by-side at customer lab. GTX Plus Pro crushed Orion Hardware on failover recovery. Buyer said: ""That settles it for the engineering team."""
 94TA0AWF-3,94TA0AWF,2026-10-17,email,Ethan Adeyemi,Engineering recommendation went to Noah Whitfield in favour of GTX Plus Pro. Please send the final quote.
-95B6AKI1-1,95B6AKI1,2026-10-14,call,Marty Freudenburg,Elena Thornton noted that Kestrel Compute submitted a more economical figure.
-95B6AKI1-2,95B6AKI1,2026-10-15,email,Elena Thornton,We compared both. Going with GTX Plus Basic — the support model won it. Legal has the MSA.
-95B6AKI1-3,95B6AKI1,2026-10-16,email,Elena Thornton,"Oh, just one last thing before I sign off! The security crew is asking for the firmware-signing documentation for the GTX Plus Basic. Any chance you could shoot that over sometime this week? It's not a dealbreaker or anything, just a quick box they need to check."
-99L2TNR5-1,99L2TNR5,2026-09-19,meeting,Gladys Colclough,"Conducted a technical review session alongside Priya Farouk and her team. All specified requirements have been fully satisfied. The buyer stated, ""We're going to move on this; it just has to clear legal."""
-99L2TNR5-2,99L2TNR5,2026-09-29,email,Priya Farouk,The Legal team is currently evaluating the MSA. No immediate action is required on your end; I will re-engage as soon as the redlined version is available.
-9C2RRH1Q-1,9C2RRH1Q,2026-08-29,call,Niesha Huffines,Solid first call with Luke Brennan. Interested in GTX Plus Basic for a refresh.
-9C2RRH1Q-2,9C2RRH1Q,2026-08-30,email,Niesha Huffines,Sent pricing and datasheet.
-9C2RRH1Q-3,9C2RRH1Q,2026-08-31,call,Niesha Huffines,Left VM.
+95B6AKI1-1,95B6AKI1,2026-10-14,call,Marty Freudenburg,Elena Thornton dropped that Kestrel Compute came in lower.
+95B6AKI1-2,95B6AKI1,2026-10-15,email,Elena Thornton,weighed em both. choosing GTX Plus Basic bc of their support. legal's got the MSA now.
+95B6AKI1-3,95B6AKI1,2026-10-16,email,Elena Thornton,"Before I sign off - sec team needs the firmware-signing doc for the GTX Plus Basic. Can we get that over this week? Not a blocker, just checking a box."
+99L2TNR5-1,99L2TNR5,2026-09-19,meeting,Gladys Colclough,"- Tech review alongside Priya Farouk and team. - All criteria satisfied. - Buyer stated: ""We're going to move on this; it just has to clear legal."""
+99L2TNR5-2,99L2TNR5,2026-09-29,email,Priya Farouk,Legal is reviewing the MSA. Nothing needed from you for now — I'll come back once redlines are in.
+9C2RRH1Q-1,9C2RRH1Q,2026-08-29,call,Niesha Huffines,solid first call with luke brennan interested in gtx plus basic for a refresh
+9C2RRH1Q-2,9C2RRH1Q,2026-08-30,email,Niesha Huffines,sent pricing and datasheet
+9C2RRH1Q-3,9C2RRH1Q,2026-08-31,call,Niesha Huffines,left vm
 9C2RRH1Q-4,9C2RRH1Q,2026-09-01,call,Niesha Huffines,Left VM again. Will keep trying.
-9C9GO9XO-1,9C9GO9XO,2026-10-02,call,Niesha Huffines,Requirements call with Samuel Sato.
-9C9GO9XO-2,9C9GO9XO,2026-10-04,email,Samuel Sato,"post-tech review update: they def need native SAN fabric support, and GTX Plus Basic just doesnt do it. unless thats coming to the roadmap this year, deal is dead."
-9GQ6HQLK-1,9GQ6HQLK,2026-10-07,call,Gladys Colclough,Left VM for Victor Haddad re: GTX Plus Basic proposal.
-9GQ6HQLK-2,9GQ6HQLK,2026-10-08,call,Gladys Colclough,Left VM.
+9C9GO9XO-1,9C9GO9XO,2026-10-02,call,Niesha Huffines,had a requirements call with samuel sato
+9C9GO9XO-2,9C9GO9XO,2026-10-04,email,Samuel Sato,"After the technical review: we need native support for our SAN fabric, which GTX Plus Basic doesn't have. Unless that's on your roadmap this year we can't proceed."
+9GQ6HQLK-1,9GQ6HQLK,2026-10-07,call,Gladys Colclough,- Left VM for Victor Haddad - GTX Plus Basic proposal
+9GQ6HQLK-2,9GQ6HQLK,2026-10-08,call,Gladys Colclough,- Left VM.
 9GQ6HQLK-3,9GQ6HQLK,2026-10-12,email,Victor Haddad,"Sorry Gladys Colclough, been travelling. Yes, we're moving ahead — Leah Lindqvist approved it. PO should go out next week."
-9GQ6HQLK-4,9GQ6HQLK,2026-10-19,call,Gladys Colclough,Left VM to confirm PO timing.
-9KYX5G9K-1,9KYX5G9K,2026-10-16,call,Niesha Huffines,"Hey there! Just wanted to drop a quick note that Luke Lindqvist let me know they're checking out Kestrel Compute too, and honestly, their main thing is all about failover performance."
-9KYX5G9K-2,9KYX5G9K,2026-10-17,meeting,Niesha Huffines,"Side-by-side test at customer lab. GTX Plus Pro beat Kestrel Compute on failover recovery. Buyer: ""That settles it for the engineering team."""
+9GQ6HQLK-5,9GQ6HQLK,2026-10-18,email,system,Auto-reply: Victor Haddad is no longer with Inity. For infrastructure enquiries please contact Leah Lindqvist.
+9GQ6HQLK-4,9GQ6HQLK,2026-10-19,call,Gladys Colclough,"- Left VM
+- Confirmed PO timing"
+9KYX5G9K-1,9KYX5G9K,2026-10-16,call,Niesha Huffines,luke lindqvist confirmed they are also looking at kestrel compute main thing they care about is failover performance
+9KYX5G9K-2,9KYX5G9K,2026-10-17,meeting,Niesha Huffines,"ran the side by side at the customer lab gtx plus pro smoked kestrel compute on failover recovery buyer said ""that settles it for the engineering team"""
 9KYX5G9K-3,9KYX5G9K,2026-10-18,email,Luke Lindqvist,Engineering recommendation went to Samuel Bergström in favour of GTX Plus Pro. Please send the final quote.
-9WUD1Q5D-1,9WUD1Q5D,2026-09-27,call,Marty Freudenburg,Ruth Bergström expressed great enthusiasm for the product and subsequently requested a formal price quote.
-9WUD1Q5D-2,9WUD1Q5D,2026-10-07,email,Ruth Bergström,"Thanks so much for the quote! I'll definitely try to carve out some time with Kwame Whitfield. To be completely honest, I don't actually own this budget and she has other priorities on her plate this quarter."
-9WUD1Q5D-3,9WUD1Q5D,2026-10-17,email,Marty Freudenburg,"I followed up with Ruth Bergström regarding the matter. At this time, there is still no update concerning Kwame Whitfield's availability."
+9WUD1Q5D-1,9WUD1Q5D,2026-09-27,call,Marty Freudenburg,Spoke w Ruth Bergström. She loves the product and asked for a quote.
+9WUD1Q5D-2,9WUD1Q5D,2026-10-07,email,Ruth Bergström,thanks for the quote i will try to get time with kwame whitfield honestly i dont own this budget and she has other priorities this quarter
+9WUD1Q5D-3,9WUD1Q5D,2026-10-17,email,Marty Freudenburg,"Just checked w/ Ruth Bergström. Still waiting to hear on Kwame Whitfield's availability, no update yet."
 A3OROHUS-1,A3OROHUS,2026-09-15,call,Darcel Schlecht,Completed a discovery session with Ingrid Sandoval regarding her requirement for the GTXPro to execute a site refresh.
 A3OROHUS-2,A3OROHUS,2026-09-18,email,Darcel Schlecht,Delivered the official proposal along with detailed pricing metrics.
 A3OROHUS-3,A3OROHUS,2026-09-22,email,Ingrid Sandoval,Things are hectic here — haven't forgotten about this. Let me get back to you.
 A3OROHUS-4,A3OROHUS,2026-10-12,call,Darcel Schlecht,Left VM.
+A3OROHUS-5,A3OROHUS,2026-10-15,email,system,Auto-reply: Ingrid Sandoval is no longer with Globex Corporation. For infrastructure enquiries please contact Ben Adeyemi.
 AFQG21L7-1,AFQG21L7,2026-10-10,call,Darcel Schlecht,"Conducted a pricing negotiation with Clara Ivanova today, noting active competitive pressure from Kestrel Compute."
 AFQG21L7-2,AFQG21L7,2026-10-11,email,Darcel Schlecht,Sent revised quote for GTXPro.
-AFQG21L7-3,AFQG21L7,2026-10-12,email,Clara Ivanova,appreciate the quick turnaround we chose kestrel compute for this cycle thanks for your time happy to revisit next year
+AFQG21L7-3,AFQG21L7,2026-10-12,email,Clara Ivanova,thx for the fast reply. we went w/ Kestrel Compute this round. thx for your time — lets talk again next yr.
 AFQG21L7-4,AFQG21L7,2026-10-18,call,Darcel Schlecht,"Left VM for Clara Ivanova, want to understand what it would take to win this back."
-AHRCT8IP-1,AHRCT8IP,2026-10-08,call,Marty Freudenburg,Requirements call with Leah Farouk.
+AHRCT8IP-1,AHRCT8IP,2026-10-08,call,Marty Freudenburg,Quick notes from requirements call w/ Leah Farouk.
 AHRCT8IP-2,AHRCT8IP,2026-10-15,email,Leah Farouk,We're evaluating GTX Basic against Bluewater Systems; decision in about three weeks. Could you get us a loaner unit for the lab?
 AHRCT8IP-3,AHRCT8IP,2026-10-16,email,Marty Freudenburg,Loaner request submitted.
 AIAX4W1O-1,AIAX4W1O,2026-10-02,call,Darcel Schlecht,"Demo of GTXPro with Kwame Thornton. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
 AIAX4W1O-2,AIAX4W1O,2026-10-09,email,Darcel Schlecht,"Sent Kwame Thornton a phased option: 60% of units this quarter, remainder in January. Same unit price."
 AIAX4W1O-3,AIAX4W1O,2026-10-10,call,Darcel Schlecht,"Kwame Thornton took the phased structure to Grace Marchetti. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-AIAX4W1O-4,AIAX4W1O,2026-10-13,email,Kwame Thornton,"- Order form is in.
-- Routing it now for signatures."
+AIAX4W1O-4,AIAX4W1O,2026-10-13,email,Kwame Thornton,Order form received; routing for signature.
 AR2T4LAR-1,AR2T4LAR,2026-09-21,call,Darcel Schlecht,"Conducted a GTXPro demonstration for Aisha Fischer, confirming technical alignment with requirements. The stakeholder stated, ""Honestly the number is higher than what we budgeted."""
 AR2T4LAR-2,AR2T4LAR,2026-09-26,email,Darcel Schlecht,"Sent Aisha Fischer a phased option: 60% of units this quarter, remainder in January. Same unit price."
 AR2T4LAR-3,AR2T4LAR,2026-10-06,call,Darcel Schlecht,"Aisha Fischer took the phased structure to Noah Sato. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-AR2T4LAR-4,AR2T4LAR,2026-10-14,email,Aisha Fischer,Order documentation has been received and is currently being routed for authorized signatures.
-AUEAKRQV-1,AUEAKRQV,2026-10-03,call,Marty Freudenburg,"During our discussion, Ines Delgado noted that Orion Hardware submitted a more economical bid."
-AUEAKRQV-2,AUEAKRQV,2026-10-10,email,Ines Delgado,- Evaluated both options - Selected GTXPro due to superior support - Legal department reviewing MSA
-AUEAKRQV-3,AUEAKRQV,2026-10-11,email,Ines Delgado,"- One last detail before signing.- Security needs the firmware-signing doc for GTXPro.- Can you shoot it over this week?- Not a blocker, purely a checkbox."
-AUS25SFH-1,AUS25SFH,2026-10-16,call,Jonathan Berthelot,Intro with Nadia Mensah. Existing customer expanding to a new site.
-AUS25SFH-2,AUS25SFH,2026-10-17,email,Nadia Mensah,"Hey there! Good news—Luke Kowalski just gave the green light, so we are totally moving forward with GTX Basic for the fresh site. Could you shoot over the paperwork sometime this week?"
-BNYWSG6W-1,BNYWSG6W,2026-09-25,meeting,Gladys Colclough,"Conducted a technical review alongside Jorge Kowalski and his engineering unit. All specified functional criteria have been satisfied. The buyer stated, ""We're going to move on this; it just has to clear legal."""
-BNYWSG6W-2,BNYWSG6W,2026-09-26,email,Jorge Kowalski,Hey there! Just wanted to drop a quick note that Legal is currently looking over the MSA. No action needed on your end right now — I will circle back as soon as I have those redlines.
-BTNSR87A-1,BTNSR87A,2026-10-07,call,Jonathan Berthelot,Left VM for Daniel Thornton about the GTX Plus Basic proposal.
+AR2T4LAR-4,AR2T4LAR,2026-10-14,email,Aisha Fischer,Got the order form! Sending over for signatures now.
+AUEAKRQV-1,AUEAKRQV,2026-10-03,call,Marty Freudenburg,Ines Delgado said Orion Hardware came in lower.
+AUEAKRQV-2,AUEAKRQV,2026-10-10,email,Ines Delgado,Hey there! So we looked at both options and decided to go with GTXPro—their support model completely won us over. Legal has the MSA now too!
+AUEAKRQV-3,AUEAKRQV,2026-10-11,email,Ines Delgado,"Hey! Just one last thing before I sign off—our security folks are asking for the firmware-signing doc covering the GTXPro. Would you mind sending it over sometime this week? It is definitely not a blocker at all, just one of those little boxes they need checked!"
+AUS25SFH-1,AUS25SFH,2026-09-26,call,Jonathan Berthelot,Introduction was conducted with Nadia Mensah. The account is an existing customer currently expanding operations to a new site.
+AUS25SFH-2,AUS25SFH,2026-09-27,email,Nadia Mensah,"Hey there! Good news—Luke Kowalski just gave the green light, so we are totally moving forward with GTX Basic for the fresh site. Could you shoot over the paperwork sometime this week?"
+BNYWSG6W-1,BNYWSG6W,2026-09-25,meeting,Gladys Colclough,"- Technical review with Jorge Kowalski and crew. - All requirements fully checked off. - Buyer quote: ""We're going to move on this; it just has to clear legal."""
+BNYWSG6W-2,BNYWSG6W,2026-09-26,email,Jorge Kowalski,legal is looking at the msa nothing needed from your end yet ill circle back when the redlines land
+BNYWSGDP-1,BNYWSGDP,2026-09-25,call,Gladys Colclough,Intro call with Jorge Kowalski about MG Advanced.
+BTNSR87A-1,BTNSR87A,2026-10-07,call,Jonathan Berthelot,Left VM for Daniel Thornton re: GTX Plus Basic proposal.
 BTNSR87A-2,BTNSR87A,2026-10-08,call,Jonathan Berthelot,Left VM.
 BTNSR87A-3,BTNSR87A,2026-10-09,email,Daniel Thornton,"Sorry Jonathan Berthelot, been travelling. Yes, we're moving ahead — Daniel Lindqvist approved it. PO should go out next week."
-BTNSR87A-4,BTNSR87A,2026-10-13,call,Jonathan Berthelot,Called and left VM to check on PO timing.
+BTNSR87A-4,BTNSR87A,2026-10-13,call,Jonathan Berthelot,Left VM to confirm PO timing.
 C7NW3JB2-1,C7NW3JB2,2026-09-24,meeting,Darcel Schlecht,"Conducted a technical review alongside Yuki Quinn's engineering group. Full compliance verified across all stated specifications. Per the buyer: ""We're going to move on this; it just has to clear legal."""
-C7NW3JB2-2,C7NW3JB2,2026-09-26,email,Yuki Quinn,Hey! Legal is currently looking over the MSA. You don't need to do anything right now — I will definitely touch base as soon as those redlines come in!
-CE852VBF-1,CE852VBF,2026-08-30,call,Niesha Huffines,Hey everyone! Niesha here. I just got off a super nice pricing chat with Leah Nakamura. Turns out they also have a quote from Bluewater Systems floating around.
-CE852VBF-2,CE852VBF,2026-10-04,email,Leah Nakamura,"Just wanted to be totally upfront with you: ""the team is leaning toward Bluewater Systems."" They're feeling that way mostly because their price is lower and the integration with our monitoring stack is already done."
+C7NW3JB2-2,C7NW3JB2,2026-09-26,email,Yuki Quinn,- MSA currently with Legal- no action required on your end- will update once redlines come back
+CE852VBF-1,CE852VBF,2026-08-30,call,Niesha Huffines,pricing call with leah nakamura they got another quote from bluewater systems too
+CE852VBF-2,CE852VBF,2026-10-04,email,Leah Nakamura,"- Team leaning Bluewater Systems.
+- Lower price tag.
+- Monitoring stack integration already complete."
 CE852VBF-3,CE852VBF,2026-10-07,call,Niesha Huffines,Spoke with Leah Nakamura. Reiterated our roadmap. Feel we are still in it.
 CM2GVLV6-1,CM2GVLV6,2026-10-14,call,Darcel Schlecht,Clara Osei noted that Bluewater Systems submitted a more economical bid.
-CM2GVLV6-2,CM2GVLV6,2026-10-15,email,Clara Osei,we compared both options and picked gtx plus pro because their support model is better legal has the msa now
-CM2GVLV6-3,CM2GVLV6,2026-10-16,email,Clara Osei,one quick thing before i sign off our security team needs the firmware signing doc for the gtx plus pro can you shoot that over this week not a blocker just a box to check
+CM2GVLV6-2,CM2GVLV6,2026-10-15,email,Clara Osei,checked both options. picking GTX Plus Pro bc of their support. legal has the msa now.
+CM2GVLV6-3,CM2GVLV6,2026-10-16,email,Clara Osei,"One quick thing before I sign off - security needs the firmware-signing doc for GTX Plus Pro. Can you get that over this week? Not blocking anything, just need to check the box."
 CMCVD0N8-1,CMCVD0N8,2026-10-18,call,Darcel Schlecht,Clara Hughes verified concurrent assessment of Kestrel Compute. Primary evaluation vector centers strictly on failover performance metrics.
 CMCVD0N8-2,CMCVD0N8,2026-10-19,meeting,Darcel Schlecht,"During the laboratory benchmark comparison, the GTXPro outperformed Kestrel Compute within the failover recovery phase. The customer stakeholder stated, ""That settles it for the engineering team."""
-CMCVD0N8-3,CMCVD0N8,2026-10-19,email,Clara Hughes,Engineering issued their formal recommendation to Mei Sato favoring the GTXPro. Please dispatch the final quotation.
+CMCVD0N8-3,CMCVD0N8,2026-10-19,email,Clara Hughes,Engineering recommendation went to Mei Sato in favour of GTXPro. Please send the final quote.
+CMCVD0N8-4,CMCVD0N8,2026-10-19,email,Clara Hughes,"To confirm scope: 2 units of GTXPro at list, so $14,463 total. Please quote that."
 CPL37MZC-1,CPL37MZC,2026-10-05,call,Darcel Schlecht,Intro with Patrick Whitfield. Existing customer expanding to a new site.
-CPL37MZC-2,CPL37MZC,2026-10-15,email,Patrick Whitfield,Luke Fischer has authorized the standardization on GTX Plus Pro for the new site deployment; please transmit the requisite documentation this week.
+CPL37MZC-2,CPL37MZC,2026-10-15,email,Patrick Whitfield,"- New site standard: GTX Plus Pro
+- Luke Fischer approved
+- Send paperwork this week"
 CVGTFBZE-1,CVGTFBZE,2026-09-19,call,Darcel Schlecht,Left VM for Fatima Sandoval re: GTXPro proposal.
 CVGTFBZE-2,CVGTFBZE,2026-09-22,call,Darcel Schlecht,Left VM.
-CVGTFBZE-3,CVGTFBZE,2026-10-09,email,Fatima Sandoval,"Sorry Darcel Schlecht, been traveling. Yep we're moving ahead - Tom Nakamura approved it. PO should go out next week."
+CVGTFBZE-3,CVGTFBZE,2026-10-09,email,Fatima Sandoval,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Tom Nakamura approved it. PO should go out next week."
 CVGTFBZE-4,CVGTFBZE,2026-10-19,call,Darcel Schlecht,Left VM to confirm PO timing.
 D5LEL3HF-1,D5LEL3HF,2026-10-04,meeting,Darcel Schlecht,"Conducted a technical review alongside Sofia Hughes and her personnel. All technical requirements were fully satisfied. The buyer stated, ""We're going to move on this; it just has to clear legal."""
-D5LEL3HF-2,D5LEL3HF,2026-10-05,email,Sofia Hughes,Legal is reviewing the MSA. Nothing needed from you for now — I'll come back once redlines are in.
+D5LEL3HF-2,D5LEL3HF,2026-10-05,email,Sofia Hughes,"MSA is with legal now. U dont need to do anything rn, ill ping u as soon as i get the redlines back."
+D5LEL3HF-3,D5LEL3HF,2026-10-07,email,system,Auto-reply: Sofia Hughes is no longer with Rangreen. For infrastructure enquiries please contact Elena Bergström.
 D5TGHX3Y-1,D5TGHX3Y,2026-08-10,call,Darcel Schlecht,Solid first call with Patrick Mensah. Interested in GTXPro for a refresh.
 D5TGHX3Y-2,D5TGHX3Y,2026-08-11,email,Darcel Schlecht,Forwarded the pricing schedule and technical datasheet.
 D5TGHX3Y-3,D5TGHX3Y,2026-08-12,call,Darcel Schlecht,Left VM.
 D5TGHX3Y-4,D5TGHX3Y,2026-08-13,call,Darcel Schlecht,Left VM again. Will keep trying.
-D6XIVDQF-1,D6XIVDQF,2026-09-12,meeting,Jonathan Berthelot,"tech review w Clara Castellano team. all reqs checked out. buyer said ""were gonna move on this; it just has to clear legal."""
+D6XIVDQF-1,D6XIVDQF,2026-09-12,meeting,Jonathan Berthelot,"I conducted a technical review alongside Clara Castellano and her team today. All requirements were successfully addressed and met during the session. The buyer explicitly stated, ""We're going to move on this; it just has to clear legal."""
 D6XIVDQF-2,D6XIVDQF,2026-10-05,email,Clara Castellano,legal has msa right now. nothing for u to do - ill ping u when redlines come back
-DG7LABPD-1,DG7LABPD,2026-10-11,call,Marty Freudenburg,I conducted a demonstration of MG Advanced today for the team of Luke Lindqvist.
-DG7LABPD-2,DG7LABPD,2026-10-12,email,Luke Lindqvist,"Hey there! The team actually really liked it. That price tag is a bit of a stretch for what we have left in this quarter's budget, though — do you think there's any wiggle room on the structure?"
+DG7LABPD-1,DG7LABPD,2026-10-11,call,Marty Freudenburg,Quick demo of MG Advanced for Luke Lindqvist and team.
+DG7LABPD-2,DG7LABPD,2026-10-12,email,Luke Lindqvist,team liked it but that number is a real stretch for this quarters budget can we get some flexibility on structure
 DG7LABPD-3,DG7LABPD,2026-10-19,call,Marty Freudenburg,Discussed options with Luke Lindqvist. No answer yet; she will talk to Andre Farouk.
-DJ60T39C-1,DJ60T39C,2026-10-06,call,Gladys Colclough,Sofia Haddad indicated that Orion Hardware submitted a lower pricing figure.
+DJ60T39C-1,DJ60T39C,2026-10-06,call,Gladys Colclough,Sofia Haddad noted Orion Hardware submitted a cheaper bid.
 DJ60T39C-2,DJ60T39C,2026-10-08,email,Sofia Haddad,Evaluated both solutions. Selecting MG Advanced due to superior support infrastructure. The MSA is currently under legal review.
 DJ60T39C-3,DJ60T39C,2026-10-10,email,Sofia Haddad,"As a final item, the security engineering group requests the firmware-signing documentation for MG Advanced. Please provide this documentation within the current week; it is merely a compliance verification and not a functional blocker."
-DLQTM07N-1,DLQTM07N,2026-09-22,call,Gladys Colclough,Ruth Adeyemi confirmed they are also evaluating Bluewater Systems. Main criterion is failover performance.
-DLQTM07N-2,DLQTM07N,2026-09-28,meeting,Gladys Colclough,"Conducted a side-by-side evaluation at the customer laboratory. The GTXPro outperformed Bluewater Systems regarding failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
-DLQTM07N-3,DLQTM07N,2026-10-18,email,Ruth Adeyemi,Engineering recommendation went to Tom Hughes in favour of GTXPro. Please send the final quote.
-DQ0DSK7P-1,DQ0DSK7P,2026-10-16,call,Marty Freudenburg,Introductory discussion conducted with Hannah Abara regarding an expansion by our existing customer to a new site.
+DLQTM07N-1,DLQTM07N,2026-09-22,call,Gladys Colclough,"- Ruth Adeyemi stated they are also looking at Bluewater Systems
+- Failover performance is the top criterion"
+DLQTM07N-2,DLQTM07N,2026-09-28,meeting,Gladys Colclough,"- Customer lab side-by-side test executed.
+- GTXPro outpaced Bluewater Systems regarding failover recovery.
+- Buyer remark: ""That settles it for the engineering team."""
+DLQTM07N-3,DLQTM07N,2026-10-18,email,Ruth Adeyemi,"The engineering department has officially submitted its recommendation to Tom Hughes, endorsing the selection of GTXPro. Please proceed with sending the final quote."
+DQ0DSK7P-1,DQ0DSK7P,2026-10-16,call,Marty Freudenburg,Intro with Hannah Abara. Existing customer expanding to a new site.
 DQ0DSK7P-2,DQ0DSK7P,2026-10-17,email,Hannah Abara,We've decided to standardise on GTX Plus Basic for the new site. Andre Moreau signed off; can you send the paperwork this week?
 DXF00KY4-1,DXF00KY4,2026-10-07,call,Darcel Schlecht,Pricing discussion with Luke Lindqvist. Kestrel Compute is also bidding.
 DXF00KY4-2,DXF00KY4,2026-10-08,email,Darcel Schlecht,Transmitted the updated quotation for MG Advanced.
-DXF00KY4-3,DXF00KY4,2026-10-09,email,Luke Lindqvist,Appreciate the quick turnaround. We've decided to go with Kestrel Compute for this cycle. Thanks for your time — happy to revisit next year.
+DXF00KY4-3,DXF00KY4,2026-10-09,email,Luke Lindqvist,thanks for the fast reply. we went with kestrel compute this round. appreciate your time and let's check in again next year
 DXF00KY4-4,DXF00KY4,2026-10-11,call,Darcel Schlecht,"Left VM for Luke Lindqvist, want to understand what it would take to win this back."
 E4H6CBPJ-1,E4H6CBPJ,2026-10-09,call,Darcel Schlecht,Ingrid Quinn reported that Kestrel Compute submitted a lower bid.
-E4H6CBPJ-2,E4H6CBPJ,2026-10-10,email,Ingrid Quinn,checked both options out. we're going with GTXPro b/c of their support model. legal has the msa now.
-E4H6CBPJ-3,E4H6CBPJ,2026-10-15,email,Ingrid Quinn,"One quick add before I sign off - sec team needs the firmware-signing doc for GTXPro. Can u get that over sometime this week? No blocker, purely a checkbox."
-EFWND7VS-1,EFWND7VS,2026-10-11,call,Niesha Huffines,"Hey everyone, just wanted to share that Raj Moreau let me know they're looking at Bluewater Systems too! Their number one thing they care about most is failover performance."
-EFWND7VS-2,EFWND7VS,2026-10-12,meeting,Niesha Huffines,"Side-by-side test at customer lab. GTX Basic beat Bluewater Systems on failover recovery. Buyer: ""That settles it for the engineering team."""
+E4H6CBPJ-2,E4H6CBPJ,2026-10-10,email,Ingrid Quinn,Comparative evaluation complete: selected GTXPro strictly due to their support infrastructure. Legal currently possesses the MSA document.
+E4H6CBPJ-3,E4H6CBPJ,2026-10-15,email,Ingrid Quinn,"Prior to execution, our information security architecture group requires the firmware-signing documentation specific to GTXPro; kindly transmit this material within the current week. While not an impediment to progress, it remains a compliance requirement."
+EFWND7VS-1,EFWND7VS,2026-10-11,call,Niesha Huffines,raj moreau verified they are looking at bluewater systems too failover performance is their big thing
+EFWND7VS-2,EFWND7VS,2026-10-12,meeting,Niesha Huffines,"ran a side-by-side test in their lab gtx basic outperformed bluewater systems on failover recovery buyer said ""that settles it for the engineering team"""
 EFWND7VS-3,EFWND7VS,2026-10-14,email,Raj Moreau,Engineering recommendation went to Ben Petrov in favour of GTX Basic. Please send the final quote.
-EK0KWGQX-1,EK0KWGQX,2026-10-10,call,Gladys Colclough,Introductory session executed with Priya Ivanova regarding the expansion of our existing customer footprint to a new operational site.
-EK0KWGQX-2,EK0KWGQX,2026-10-16,email,Priya Ivanova,"Hi there! Great news – Andre Delgado gave the final green light, so we are totally going with MG Advanced for the new site! Could you please shoot over the paperwork sometime this week?"
-EP0H3SJO-1,EP0H3SJO,2026-09-13,call,Marty Freudenburg,I conducted a comprehensive demonstration of the GTX Plus Basic solution for Ines Reyes and her team.
+EK0KWGQX-1,EK0KWGQX,2026-10-10,call,Gladys Colclough,Intro with Priya Ivanova. Existing customer expanding to a new site.
+EK0KWGQX-2,EK0KWGQX,2026-10-16,email,Priya Ivanova,mg advanced chosen for the new site andre delgado approved send the paperwork this week
+EP0H3SJO-1,EP0H3SJO,2026-09-13,call,Marty Freudenburg,showed GTX Plus Basic to Ines Reyes team
 EP0H3SJO-2,EP0H3SJO,2026-10-10,email,Ines Reyes,"- team liked the demo
 - figure is too high for current budget
 - asked: ""is there any flexibility on structure?"""
 EP0H3SJO-3,EP0H3SJO,2026-10-17,call,Marty Freudenburg,Discussed options with Ines Reyes. No answer yet; she will talk to Andre Castellano.
 ESH4HX52-1,ESH4HX52,2026-10-07,call,Marty Freudenburg,Intro with Fatima Farouk. Existing customer expanding to a new site.
 ESH4HX52-2,ESH4HX52,2026-10-12,email,Fatima Farouk,"We have officially decided to standardise on GTX Plus Pro for the new site. Daniel Okafor has provided his sign-off, so could you please send over the paperwork this week?"
-EWRVDN3U-1,EWRVDN3U,2026-09-30,call,Marty Freudenburg,I engaged in a pricing discussion with Daniel Lindqvist today. It should be noted that Bluewater Systems is also participating in the bidding process.
-EWRVDN3U-2,EWRVDN3U,2026-10-01,email,Marty Freudenburg,I have successfully transmitted the updated price estimate regarding MG Advanced.
-EWRVDN3U-3,EWRVDN3U,2026-10-08,email,Daniel Lindqvist,Hey there! Thanks so much for getting back to me so fast. We actually decided to go with Bluewater Systems for this cycle. Really appreciate all your time—let's definitely touch base and revisit this next year!
-EWRVDN3U-4,EWRVDN3U,2026-10-12,call,Marty Freudenburg,"Left VM for Daniel Lindqvist, want to understand what it would take to win this back."
+EWRVDN3U-1,EWRVDN3U,2026-09-30,call,Marty Freudenburg,talked pricing w/ Daniel Lindqvist today. heads up: Bluewater Systems is also bidding on this.
+EWRVDN3U-2,EWRVDN3U,2026-10-01,email,Marty Freudenburg,Sent revised quote for MG Advanced.
+EWRVDN3U-3,EWRVDN3U,2026-10-08,email,Daniel Lindqvist,Appreciate the rapid response. We have selected Bluewater Systems for this current cycle. Thank you for your time and we are open to reconnecting next year.
+EWRVDN3U-4,EWRVDN3U,2026-10-12,call,Marty Freudenburg,Left VM for Daniel Lindqvist. Need to figure out what it'll take to win this back.
 F9XJYM9F-1,F9XJYM9F,2026-08-27,call,Jonathan Berthelot,Left VM for Grace Nakamura re: GTX Basic proposal.
 F9XJYM9F-2,F9XJYM9F,2026-09-21,call,Jonathan Berthelot,Left VM.
-F9XJYM9F-3,F9XJYM9F,2026-10-09,email,Grace Nakamura,"Sorry Jonathan Berthelot, been travelling. Yes, we're moving ahead — Marcus Hughes approved it. PO should go out next week."
-F9XJYM9F-4,F9XJYM9F,2026-10-10,call,Jonathan Berthelot,Called and left VM to check on PO timing.
-FROU0UKW-1,FROU0UKW,2026-10-07,call,Darcel Schlecht,"Demonstrated the GTX Plus Pro to Nadia Delgado; functionality fit is optimal. Client stated: ""Honestly the number is higher than what we budgeted."""
-FROU0UKW-2,FROU0UKW,2026-10-08,email,Darcel Schlecht,"Sent Nadia Delgado a phased option: 60% of units this quarter, remainder in January. Same unit price."
-FROU0UKW-3,FROU0UKW,2026-10-11,call,Darcel Schlecht,"Nadia Delgado took the phased structure to Ethan Castellano. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-FROU0UKW-4,FROU0UKW,2026-10-12,email,Nadia Delgado,"- Order form came in
-- Now routing for signature"
+F9XJYM9F-3,F9XJYM9F,2026-10-09,email,Grace Nakamura,sorry jonathan berthelot missed you due to travel marcus hughes gave the green light so we are good to go expect the po next week
+F9XJYM9F-4,F9XJYM9F,2026-10-10,call,Jonathan Berthelot,Left VM to confirm PO timing.
+FROU0UKW-1,FROU0UKW,2026-09-03,call,Darcel Schlecht,"Demonstrated the GTX Plus Pro to Nadia Delgado; functionality fit is optimal. Client stated: ""Honestly the number is higher than what we budgeted."""
+FROU0UKW-2,FROU0UKW,2026-09-25,email,Darcel Schlecht,"Sent Nadia Delgado a phased option: 60% of units this quarter, remainder in January. Same unit price."
+FROU0UKW-3,FROU0UKW,2026-09-28,call,Darcel Schlecht,"Nadia Delgado took the phased structure to Ethan Castellano. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
+FROU0UKW-4,FROU0UKW,2026-09-29,email,Nadia Delgado,Received the order form; currently initiating internal routing for signature execution.
 G1303HIC-1,G1303HIC,2026-10-15,call,Gladys Colclough,Intro with Noah Abara. Existing customer expanding to a new site.
 G1303HIC-2,G1303HIC,2026-10-16,email,Noah Abara,"Hey there! Priya Brennan gave the final green light, so we are officially locking in GTXPro for the new site. Can you shoot over the paperwork sometime this week?"
-G17TENJ4-1,G17TENJ4,2026-10-12,call,Marty Freudenburg,I recently conducted a requirements gathering call with Grace Quinn.
+G17TENJ4-1,G17TENJ4,2026-10-12,call,Marty Freudenburg,Requirements call with Grace Quinn.
 G17TENJ4-2,G17TENJ4,2026-10-13,email,Grace Quinn,We're evaluating MG Advanced against Bluewater Systems; decision in about three weeks. Could you get us a loaner unit for the lab?
 G17TENJ4-3,G17TENJ4,2026-10-19,email,Marty Freudenburg,Loaner request submitted.
-G1XX0IB4-1,G1XX0IB4,2026-10-15,call,Marty Freudenburg,Intro with Omar Abara. Existing customer expanding to a new site.
-G1XX0IB4-2,G1XX0IB4,2026-10-16,email,Omar Abara,"- Picked GTX Plus Pro for the new site standard - Aisha Adeyemi approved - Send paperwork this week, please"
-G6X1B2K5-1,G6X1B2K5,2026-09-27,call,Jonathan Berthelot,"Ran GTX Basic demo for Aisha Sandoval. Good fit overall. She mentioned: ""Honestly the number is higher than what we budgeted."""
-G6X1B2K5-2,G6X1B2K5,2026-09-30,email,Jonathan Berthelot,"Sent Aisha Sandoval phased option: 60% units this Q, rest in Jan. Price stays same."
-G6X1B2K5-3,G6X1B2K5,2026-10-01,call,Jonathan Berthelot,"Aisha Sandoval brought the phased setup to Omar Haddad. Buyer said: ""The split works for us — finance is fine with two POs."" Sending order form now."
-G6X1B2K5-4,G6X1B2K5,2026-10-09,email,Aisha Sandoval,"Hey everyone, just got the order form! I am sending it over for signatures right now."
+G1XX0IB4-1,G1XX0IB4,2026-09-27,call,Marty Freudenburg,Intro with Omar Abara. Existing customer expanding to a new site.
+G1XX0IB4-2,G1XX0IB4,2026-09-28,email,Omar Abara,"- Picked GTX Plus Pro for the new site standard - Aisha Adeyemi approved - Send paperwork this week, please"
+G6X1B2DP-1,G6X1B2DP,2026-09-29,call,Jonathan Berthelot,Intro call with Aisha Sandoval about GTX Basic.
+G6X1B2K5-1,G6X1B2K5,2026-09-17,call,Jonathan Berthelot,"Demo of GTX Basic with Aisha Sandoval. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
+G6X1B2K5-2,G6X1B2K5,2026-09-30,email,Jonathan Berthelot,"Sent Aisha Sandoval a phased option: 60% of units this quarter, remainder in January. Same unit price."
+G6X1B2K5-3,G6X1B2K5,2026-10-01,call,Jonathan Berthelot,"I was informed by Aisha Sandoval that she presented the phased structure to Omar Haddad. The buyer stated, ""The split works for us — finance is fine with two POs."" I am currently in the process of sending the order form."
+G6X1B2K5-4,G6X1B2K5,2026-10-09,email,Aisha Sandoval,Got the order form! Sending over for signature now.
 GACP1E2I-1,GACP1E2I,2026-09-15,call,Darcel Schlecht,Priya Petrov noted that Bluewater Systems submitted a lower pricing figure.
-GACP1E2I-2,GACP1E2I,2026-10-06,email,Priya Petrov,Evaluated both options. Selected GTXPro due to their superior support framework. MSA currently with legal.
-GACP1E2I-3,GACP1E2I,2026-10-14,email,Priya Petrov,"Before finalizing, our security division requires the GTXPro firmware-signing documentation. Please provide this documentation within the current week; it is not a blocker, merely a compliance checkbox."
-GC4YH9D0-1,GC4YH9D0,2026-09-22,call,Jonathan Berthelot,"Disc w Leah Ivanova. Swap out EOL units at both sites. She said ""We need this racked before the Q4 freeze."""
-GC4YH9D0-2,GC4YH9D0,2026-09-24,email,Leah Ivanova,Thanks Jonathan Berthelot. GTX Basic spec sent to Samuel Osei — she needs a single quote covering both sites. Please provide a formal proposal.
-GC4YH9D0-3,GC4YH9D0,2026-09-25,meeting,Jonathan Berthelot,quick prop review w/ Leah Ivanova & Samuel Osei. Samuel approved full list budget ($550). Procurement working on PO now and legal has our MSA.
-GC4YH9D0-4,GC4YH9D0,2026-10-13,email,Leah Ivanova,"- PO at procurement
-- signature coming in two weeks"
-GIJ14130-1,GIJ14130,2026-09-25,call,Jonathan Berthelot,Spoke to Tom Castellano. He said they're looking at Kestrel Compute too. Main thing for them is failover performance.
-GIJ14130-2,GIJ14130,2026-10-05,meeting,Jonathan Berthelot,"Ran side-by-side at customer lab. GTX Basic smoked Kestrel Compute on failover recovery. Buyer said: ""That settles it for the engineering team."""
+GACP1E2I-2,GACP1E2I,2026-10-06,email,Priya Petrov,Compared both options. We're picking GTXPro bc of their support model. Legal has the MSA now.
+GACP1E2I-3,GACP1E2I,2026-10-14,email,Priya Petrov,"forgot one last thing before signoff. sec team needs the firmware-signing doc for GTXPro. pls send this week? not a blocker, just checking a box"
+GC4YH9D0-1,GC4YH9D0,2026-09-22,call,Jonathan Berthelot,"I conducted a discovery call with Leah Ivanova concerning the replacement of end-of-life units across two separate sites. During our discussion, the buyer stated, ""We need this racked before the Q4 freeze."""
+GC4YH9D0-2,GC4YH9D0,2026-09-24,email,Leah Ivanova,Thanks Jonathan Berthelot. Forwarded the GTX Basic spec to Samuel Osei — she wants a single-quote for both sites. Can you send a formal proposal?
+GC4YH9D0-3,GC4YH9D0,2026-09-25,meeting,Jonathan Berthelot,"I conducted a proposal review session with Leah Ivanova and Samuel Osei. Samuel Osei officially approved the budget at the list price of $550. Procurement is currently drafting the purchase order, and legal is reviewing our master services agreement."
+GC4YH9D0-4,GC4YH9D0,2026-10-13,email,Leah Ivanova,PO is with procurement. Expect signature in the next two weeks.
+GIJ14130-1,GIJ14130,2026-09-25,call,Jonathan Berthelot,"Tom Castellano verified that they are additionally assessing Kestrel Compute, noting that failover performance serves as their primary criterion."
+GIJ14130-2,GIJ14130,2026-10-05,meeting,Jonathan Berthelot,"During the side-by-side test conducted at the customer laboratory, GTX Basic successfully outperformed Kestrel Compute regarding failover recovery capabilities. The buyer stated that ""that settles it for the engineering team."""
 GIJ14130-3,GIJ14130,2026-10-16,email,Tom Castellano,Engineering recommendation went to Tom Lindqvist in favour of GTX Basic. Please send the final quote.
-GIP11NY3-1,GIP11NY3,2026-09-22,call,Marty Freudenburg,"During our conversation, Tom Adeyemi stated that Kestrel Compute submitted a bid with a lower figure."
-GIP11NY3-2,GIP11NY3,2026-09-29,email,Tom Adeyemi,"Hey! We took a look at both options and ended up choosing MG Advanced, mostly because their support setup is just so much better. Legal has the MSA in their hands now."
-GIP11NY3-3,GIP11NY3,2026-10-14,email,Tom Adeyemi,"Oh, one quick thing before I sign off—our security folks are hoping to get their hands on that firmware-signing doc for MG Advanced. Any chance you could shoot it over this week? It's not a blocker or anything, just something they want to check off their list."
-GIVVPRQQ-1,GIVVPRQQ,2026-09-17,call,Jonathan Berthelot,Daniel Ivanova confirmed they are also looking at Bluewater Systems. Big thing for them is failover performance.
-GIVVPRQQ-2,GIVVPRQQ,2026-09-27,meeting,Jonathan Berthelot,"Ran side-by-side test at customer lab today. GTXPro completely crushed Bluewater Systems on failover recovery speed. Buyer told me: ""That settles it for the engineering team."""
-GIVVPRQQ-3,GIVVPRQQ,2026-10-12,email,Daniel Ivanova,"The engineering team has officially submitted their recommendation to Mei Adeyemi, choosing the GTXPro. Please proceed with sending the final quote."
+GIP11NY3-1,GIP11NY3,2026-08-24,call,Marty Freudenburg,tom adeyemi just dropped that kestrel compute gave em a cheaper bid
+GIP11NY3-2,GIP11NY3,2026-09-29,email,Tom Adeyemi,- evaluated both options - selected MG Advanced - support framework sealed the deal - MSA currently with Legal
+GIP11NY3-3,GIP11NY3,2026-10-14,email,Tom Adeyemi,"- Quick final request from security team: firmware-signing doc for MG Advanced- Need it this week if possible- Not a blocker, just a checkbox"
+GIVVPRQQ-1,GIVVPRQQ,2026-09-17,call,Jonathan Berthelot,Daniel Ivanova confirmed that they are concurrently evaluating Bluewater Systems. He noted that their primary criterion is failover performance.
+GIVVPRQQ-2,GIVVPRQQ,2026-09-27,meeting,Jonathan Berthelot,"During the side-by-side evaluation conducted at the customer laboratory, the GTXPro solution successfully outperformed Bluewater Systems regarding failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
+GIVVPRQQ-3,GIVVPRQQ,2026-10-12,email,Daniel Ivanova,Engineering recommendation went to Mei Adeyemi in favour of GTXPro. Please send the final quote.
 GKHTT70P-1,GKHTT70P,2026-10-05,call,Darcel Schlecht,"Discovery call conducted with Patrick Ivanova regarding the replacement of end-of-life hardware units across two distinct facilities. The buyer stated: ""We need this racked before the Q4 freeze."""
 GKHTT70P-2,GKHTT70P,2026-10-06,email,Patrick Ivanova,Thanks Darcel Schlecht. Forwarded the GTXPro spec to Raj Adeyemi — she wants a single-quote for both sites. Can you send a formal proposal?
 GKHTT70P-3,GKHTT70P,2026-10-09,meeting,Darcel Schlecht,"Proposal review executed with Patrick Ivanova and Raj Adeyemi. Budget formally authorized by Raj Adeyemi at list pricing of $4,821. Current operational status: procurement is generating the PO, and legal possesses our MSA."
-GKHTT70P-4,GKHTT70P,2026-10-10,email,Patrick Ivanova,The purchase order is currently undergoing procurement review; authorization is projected within the next fourteen days.
-GVCMT0GZ-1,GVCMT0GZ,2026-09-07,call,Jonathan Berthelot,Pricing discussion with Hannah Bergström. Kestrel Compute is also bidding.
-GVCMT0GZ-2,GVCMT0GZ,2026-09-12,email,Jonathan Berthelot,Sent revised quote for GTXPro.
-GVCMT0GZ-3,GVCMT0GZ,2026-10-05,email,Hannah Bergström,appreciate the fast reply kestrel compute won this round thanks for the time let us check back next year
-GVCMT0GZ-4,GVCMT0GZ,2026-10-18,call,Jonathan Berthelot,Left VM for Hannah Bergström. Need to figure out what it'll take to win this back.
-GX3SHSEA-1,GX3SHSEA,2026-09-27,call,Gladys Colclough,Left VM for Daniel Delgado re: MG Special proposal.
-GX3SHSEA-2,GX3SHSEA,2026-10-05,call,Gladys Colclough,Left VM.
-GX3SHSEA-3,GX3SHSEA,2026-10-13,email,Daniel Delgado,"Sorry Gladys Colclough, been travelling. Yes, we're moving ahead — Omar Abara approved it. PO should go out next week."
-GX3SHSEA-4,GX3SHSEA,2026-10-17,call,Gladys Colclough,Left VM to confirm PO timing.
-GZ5M7MIQ-1,GZ5M7MIQ,2026-10-14,meeting,Darcel Schlecht,Final review with Ethan Sandoval and Sofia Petrov. No open questions.
-GZ5M7MIQ-2,GZ5M7MIQ,2026-10-15,email,Ethan Sandoval,"- Moving forward with GTX Plus Basic.
+GKHTT70P-4,GKHTT70P,2026-10-10,email,Patrick Ivanova,PO is with procurement. Expect signature in the next two weeks.
+GVCMT0GZ-1,GVCMT0GZ,2026-09-07,call,Jonathan Berthelot,"I engaged in a pricing discussion with Hannah Bergström today, during which she noted that Kestrel Compute is also actively bidding on the project."
+GVCMT0GZ-2,GVCMT0GZ,2026-09-12,email,Jonathan Berthelot,I have successfully transmitted the updated pricing quotation for the GTXPro model.
+GVCMT0GZ-3,GVCMT0GZ,2026-10-05,email,Hannah Bergström,"I appreciate your prompt response regarding this matter. We have ultimately chosen to partner with Kestrel Compute for the current cycle. Thank you very much for your time and assistance, and I would be glad to reconnect next year."
+GVCMT0GZ-4,GVCMT0GZ,2026-10-18,call,Jonathan Berthelot,"Left VM for Hannah Bergström, want to understand what it would take to win this back."
+GX3SHSEA-1,GX3SHSEA,2026-09-15,call,Gladys Colclough,Left VM for Daniel Delgado re: MG Special proposal.
+GX3SHSEA-2,GX3SHSEA,2026-09-23,call,Gladys Colclough,- Left VM.
+GX3SHSEA-3,GX3SHSEA,2026-10-01,email,Daniel Delgado,sorry gladys colclough out traveling we are moving ahead omar abara gave the green light po out next week
+GX3SHSEA-4,GX3SHSEA,2026-10-15,call,Gladys Colclough,"- Left VM
+- Confirmed PO timing"
+GZ5M7MIQ-1,GZ5M7MIQ,2026-09-14,meeting,Darcel Schlecht,Final review with Ethan Sandoval and Sofia Petrov. No open questions.
+GZ5M7MIQ-2,GZ5M7MIQ,2026-09-22,email,Ethan Sandoval,"- Moving forward with GTX Plus Basic.
 - Sofia Petrov gave the green light.
 - PO arriving next week."
-GZ5M7MIQ-3,GZ5M7MIQ,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
+GZ5M7MIQ-3,GZ5M7MIQ,2026-10-18,call,Darcel Schlecht,Confirmed PO is routing.
 H5ZSM3IR-1,H5ZSM3IR,2026-10-16,meeting,Gladys Colclough,Final review with Mei Sato and Samuel Mensah. No open questions.
-H5ZSM3IR-2,H5ZSM3IR,2026-10-17,email,Mei Sato,mg special is a go samuel mensah approved it po drops next week
+H5ZSM3IR-2,H5ZSM3IR,2026-10-17,email,Mei Sato,"Great news! Samuel Mensah just gave the green light for MG Special, so we can totally move forward. Expecting that PO to land sometime next week!"
 H5ZSM3IR-3,H5ZSM3IR,2026-10-19,call,Gladys Colclough,Confirmed PO is routing.
-H6TY7RBJ-1,H6TY7RBJ,2026-09-30,call,Jonathan Berthelot,"Yuki Whitfield is all in on the product, wants pricing asap."
-H6TY7RBJ-2,H6TY7RBJ,2026-10-02,email,Yuki Whitfield,thanks for the quote ill try to get time with grace ivanova to be honest i dont own this budget and she has other priorities this quarter
+H6TY7RBJ-1,H6TY7RBJ,2026-09-30,call,Jonathan Berthelot,Yuki Whitfield expressed great enthusiasm for the product and formally requested a pricing quote.
+H6TY7RBJ-2,H6TY7RBJ,2026-10-02,email,Yuki Whitfield,"- Got the quote - Aiming to meet with Grace Ivanova - Honestly, I lack budget control here - ""she has other priorities this quarter"""
 H6TY7RBJ-3,H6TY7RBJ,2026-10-14,email,Jonathan Berthelot,Checked in with Yuki Whitfield. No update yet on Grace Ivanova's availability.
 HBIQF55L-1,HBIQF55L,2026-09-04,meeting,Darcel Schlecht,"Conducted a technical review alongside the engineering group of Victor Brennan. All specified criteria were satisfied. The buyer stated, ""We're going to move on this; it just has to clear legal."""
-HBIQF55L-2,HBIQF55L,2026-09-27,email,Victor Brennan,Legal's looking at the MSA right now. U don't need to do anything yet—I'll ping u when the redlines are back.
-HDITQL1S-1,HDITQL1S,2026-09-26,call,Marty Freudenburg,"During our discussion, Ben Delgado confirmed that their team is currently considering Orion Hardware as well. He emphasized that failover performance remains their primary evaluation criterion."
-HDITQL1S-2,HDITQL1S,2026-10-05,meeting,Marty Freudenburg,"During the side-by-side evaluation conducted at the customer laboratory, MG Advanced successfully outperformed Orion Hardware in failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
-HDITQL1S-3,HDITQL1S,2026-10-18,email,Ben Delgado,Engineering recommendation went to Luke Kowalski in favour of MG Advanced. Please send the final quote.
+HBIQF55L-2,HBIQF55L,2026-09-27,email,Victor Brennan,legal has the msa now nothing needed on your end ill ping when redlines come back
+HDITQL1S-1,HDITQL1S,2026-09-26,call,Marty Freudenburg,Quick update on Ben Delgado - they're looking at Orion Hardware too. Failover performance is the big thing for them.
+HDITQL1S-2,HDITQL1S,2026-10-05,meeting,Marty Freudenburg,"lab test today side-by-side. mg advanced wiped the floor w/ orion hardware on failover recovery. buyer literally said ""that settles it for the engineering team."""
+HDITQL1S-3,HDITQL1S,2026-10-18,email,Ben Delgado,"Hey there! Just wanted to drop a quick note that the engineering team gave their thumbs up to Luke Kowalski, choosing MG Advanced. Whenever you get a chance, please shoot over the final quote!"
 HE5988NI-1,HE5988NI,2026-08-29,meeting,Darcel Schlecht,Conducted a productive engagement with Sofia Brennan; internal advocacy for the GTX Plus Basic tier is forthcoming.
 HE5988NI-2,HE5988NI,2026-09-01,email,Darcel Schlecht,The proposal has been formally dispatched to Sofia Brennan.
 HE5988NI-3,HE5988NI,2026-09-09,email,system,autoreply sofia brennan left globex corporation for infrastructure enquiries contact elena kowalski
 HUCB9WIQ-1,HUCB9WIQ,2026-09-11,call,Darcel Schlecht,Ingrid Adeyemi expressed high enthusiasm for the solution and requested a formal pricing estimate.
-HUCB9WIQ-2,HUCB9WIQ,2026-09-30,email,Ingrid Adeyemi,"- Thx for the quote! - Will attempt to book time w/ Ingrid Moreau. - TBH, I lack budget ownership here. - She has competing priorities this quarter."
+HUCB9WIQ-2,HUCB9WIQ,2026-09-30,email,Ingrid Adeyemi,"I appreciate you providing the quote. I will attempt to schedule some time with Ingrid Moreau. To be completely candid, I am not the owner of this budget, and she currently has alternative priorities for this quarter."
 HUCB9WIQ-3,HUCB9WIQ,2026-10-03,email,Darcel Schlecht,Checked in with Ingrid Adeyemi. No update yet on Ingrid Moreau's availability.
-HZ283240-1,HZ283240,2026-09-29,call,Niesha Huffines,"Hey everyone! Just got off a great pricing call with Ruth Hughes. Quick heads up, they currently have a quote from Bluewater Systems to compare us against."
+HZ283240-1,HZ283240,2026-09-29,call,Niesha Huffines,pricing call with ruth hughes they mentioned a quote from bluewater systems too
 HZ283240-2,HZ283240,2026-09-30,email,Ruth Hughes,"- Being transparent
 - Team leaning toward Bluewater Systems
 - Price lower
 - Integration with monitoring stack already done"
 HZ283240-3,HZ283240,2026-10-13,call,Niesha Huffines,Spoke with Ruth Hughes. Reiterated our roadmap. Feel we are still in it.
-I4YPNNTU-1,I4YPNNTU,2026-09-18,call,Jonathan Berthelot,Spoke to Yuki Brennan. Kestrel Compute came in lower.
-I4YPNNTU-2,I4YPNNTU,2026-10-10,email,Yuki Brennan,We compared both. Going with MG Advanced — the support model won it. Legal has the MSA.
-I4YPNNTU-3,I4YPNNTU,2026-10-13,email,Yuki Brennan,"Before finalizing, I should mention that our security team requires the firmware-signing documentation for MG Advanced. Could you please provide this document within the week? Although it is not a blocker, it remains a necessary checkbox for us."
+I4YPNNTU-1,I4YPNNTU,2026-09-18,call,Jonathan Berthelot,"During our discussion, Yuki Brennan stated that Kestrel Compute submitted a bid with a lower figure."
+I4YPNNTU-2,I4YPNNTU,2026-10-10,email,Yuki Brennan,Evaluated both options. Selected MG Advanced due to superior support framework. MSA is currently with Legal.
+I4YPNNTU-3,I4YPNNTU,2026-10-13,email,Yuki Brennan,"Before I sign off, our security organization requested the firmware-signing documentation for MG Advanced. Please provide this documentation within the current week; it is merely an administrative checkbox rather than an operational blocker."
 I8WTUMTA-1,I8WTUMTA,2026-09-25,call,Darcel Schlecht,Aisha Mensah verified that their evaluation process also encompasses Orion Hardware. Their primary evaluation metric centers on failover performance.
 I8WTUMTA-2,I8WTUMTA,2026-10-03,meeting,Darcel Schlecht,"Conducted a side-by-side lab evaluation. MG Advanced outperformed Orion Hardware in failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
 I8WTUMTA-3,I8WTUMTA,2026-10-14,email,Aisha Mensah,Engineering recommendation went to Hannah Sato in favour of MG Advanced. Please send the final quote.
+I8WTUMTA-4,I8WTUMTA,2026-10-16,email,system,Auto-reply: Aisha Mensah is no longer with Codehow. For infrastructure enquiries please contact Hannah Sato.
 IJNOVBGU-1,IJNOVBGU,2026-10-02,call,Darcel Schlecht,Mei Thornton noted that Bluewater Systems submitted a more cost-effective bid.
-IJNOVBGU-2,IJNOVBGU,2026-10-06,email,Mei Thornton,We compared both. Going with MG Advanced — the support model won it. Legal has the MSA.
-IJNOVBGU-3,IJNOVBGU,2026-10-15,email,Mei Thornton,"Hey there! Just one last thing before I sign off: our security folks are asking for the firmware-signing doc for MG Advanced. Could you shoot that over sometime this week? It is definitely not a blocker, more of a quick checkbox for them."
-INAEAAI9-1,INAEAAI9,2026-08-29,call,Jonathan Berthelot,Quick discovery call w/ Ines Moreau. Site refresh coming up so she needs GTX Plus Basic ASAP.
-INAEAAI9-2,INAEAAI9,2026-09-02,email,Jonathan Berthelot,Just sent over the proposal & pricing.
+IJNOVBGU-2,IJNOVBGU,2026-10-06,email,Mei Thornton,"- Evaluated both options
+- Chose MG Advanced because of their support model
+- MSA currently with Legal"
+IJNOVBGU-3,IJNOVBGU,2026-10-15,email,Mei Thornton,"- Security squad needs the firmware-signing doc for MG Advanced.- Please email this week.- Not a blocker, just a checkbox.- ""Can you send it this week?"""
+IJNOVBGU-4,IJNOVBGU,2026-10-16,email,Mei Thornton,"To confirm scope: we'd take 4 units of MG Advanced at list, $13,572 total."
+INAEAAI9-1,INAEAAI9,2026-08-29,call,Jonathan Berthelot,"During my discovery session with Ines Moreau, she stated that she requires the GTX Plus Basic solution to support an upcoming site refresh."
+INAEAAI9-2,INAEAAI9,2026-09-02,email,Jonathan Berthelot,Sent proposal and pricing.
 INAEAAI9-3,INAEAAI9,2026-09-15,email,Ines Moreau,Things are hectic here — haven't forgotten about this. Let me get back to you.
 INAEAAI9-4,INAEAAI9,2026-10-03,call,Jonathan Berthelot,Left VM.
-IRODLEGG-1,IRODLEGG,2026-10-06,call,Niesha Huffines,"Hey everyone, Hannah Farouk let me know they are checking out Bluewater Systems as well, and their big thing is definitely failover performance!"
-IRODLEGG-2,IRODLEGG,2026-10-16,meeting,Niesha Huffines,"Side-by-side test at customer lab. MG Advanced beat Bluewater Systems on failover recovery. Buyer: ""That settles it for the engineering team."""
-IRODLEGG-3,IRODLEGG,2026-10-17,email,Hannah Farouk,Engineering recommendation went to Mei Marchetti in favour of MG Advanced. Please send the final quote.
-IWQP4M72-1,IWQP4M72,2026-09-20,call,Jonathan Berthelot,quick pricing call w/ samuel osei today. fyi they also got a quote from orion hardware.
-IWQP4M72-2,IWQP4M72,2026-10-02,email,Samuel Osei,"Just wanted to be totally upfront with you—the team's actually leaning toward Orion Hardware right now. Their price point is lower, and plus, the integration with our current monitoring stack is already built out."
-IWQP4M72-3,IWQP4M72,2026-10-05,call,Jonathan Berthelot,Spoke with Samuel Osei. Reiterated our roadmap. Feel we are still in it.
-JEMEGXUG-1,JEMEGXUG,2026-09-28,call,Marty Freudenburg,I conducted an introduction with Tom Brennan regarding an existing customer who is currently expanding to a new site.
-JEMEGXUG-2,JEMEGXUG,2026-10-17,email,Tom Brennan,nadia bergström signed off on gtx basic for the new site so send the paperwork over this week
-JFIBKWMQ-1,JFIBKWMQ,2026-10-17,meeting,Gladys Colclough,Final review with Victor Hughes and Nadia Adeyemi. No open questions.
-JFIBKWMQ-2,JFIBKWMQ,2026-10-18,email,Victor Hughes,We're going ahead with MG Special. Nadia Adeyemi signed off; PO should be out next week.
+IRODLEGG-1,IRODLEGG,2026-10-06,call,Niesha Huffines,hannah farouk said they are looking at bluewater systems too failover performance is the big thing for them
+IRODLEGG-2,IRODLEGG,2026-10-16,meeting,Niesha Huffines,mg advanced crushed bluewater systems in the lab failover test buyer said that settles it for the engineering team
+IRODLEGG-3,IRODLEGG,2026-10-17,email,Hannah Farouk,"Hi team, good news! The engineering team's recommendation went right over to Mei Marchetti, and they are going with MG Advanced instead. Could you please send them the final quote now?"
+IRODLEGG-4,IRODLEGG,2026-10-18,email,Hannah Farouk,"To confirm scope: 2 units of MG Advanced at list, so $8,482 total. Please quote that."
+IWQP4M72-1,IWQP4M72,2026-09-20,call,Jonathan Berthelot,Pricing call with Samuel Osei. They have a quote from Orion Hardware as well.
+IWQP4M72-2,IWQP4M72,2026-10-02,email,Samuel Osei,transparently the team is leaning toward orion hardware price is lower and monitoring stack integration is already done
+IWQP4M72-3,IWQP4M72,2026-10-05,call,Jonathan Berthelot,I spoke with Samuel Osei today and reiterated our roadmap. I feel we are still in it.
+JEMEGXUG-1,JEMEGXUG,2026-09-28,call,Marty Freudenburg,Intro with Tom Brennan. Existing customer expanding to a new site.
+JEMEGXUG-2,JEMEGXUG,2026-10-17,email,Tom Brennan,We've decided to standardise on GTX Basic for the new site. Nadia Bergström signed off; can you send the paperwork this week?
+JEMEGXUG-3,JEMEGXUG,2026-10-18,email,Tom Brennan,"To confirm scope: we'd take 2 units of GTX Basic at list, $1,100 total."
+JFIBKWMQ-1,JFIBKWMQ,2026-10-17,meeting,Gladys Colclough,- Concluded final review - Attendees: Victor Hughes and Nadia Adeyemi - Status: No open questions remain
+JFIBKWMQ-2,JFIBKWMQ,2026-10-18,email,Victor Hughes,"mg special is a go! nadia adeyemi approved it, po coming next week."
 JFIBKWMQ-3,JFIBKWMQ,2026-10-19,call,Gladys Colclough,Confirmed PO is routing.
-JGG9CO2Y-1,JGG9CO2Y,2026-10-14,meeting,Marty Freudenburg,Final review with Hannah Haddad and Andre Delgado. No open questions.
-JGG9CO2Y-2,JGG9CO2Y,2026-10-15,email,Hannah Haddad,Andre Delgado has authorized the acquisition of GTX Plus Pro; anticipate formal PO issuance next week.
+JGG9CO2Y-1,JGG9CO2Y,2026-10-14,meeting,Marty Freudenburg,Final review w/ Hannah Haddad & Andre Delgado done. No open q's left.
+JGG9CO2Y-2,JGG9CO2Y,2026-10-15,email,Hannah Haddad,"gtx plus pro is a go! andre delgado gave the green light, po coming next week."
 JGG9CO2Y-3,JGG9CO2Y,2026-10-16,call,Marty Freudenburg,Confirmed PO is routing.
-JP2EY6QU-1,JP2EY6QU,2026-09-15,call,Jonathan Berthelot,Noah Brennan confirmed they're looking at Orion Hardware too. Failover performance is their main criterion.
-JP2EY6QU-2,JP2EY6QU,2026-10-01,meeting,Jonathan Berthelot,"Ran side-by-side at customer lab. GTXPro totally wiped Orion Hardware on failover recovery speed. Buyer said it best: ""That settles it for the engineering team."""
+JP2EY6QU-1,JP2EY6QU,2026-09-06,call,Jonathan Berthelot,Noah Brennan has confirmed that they are concurrently evaluating Orion Hardware. Their primary evaluation criterion centers strictly upon failover performance.
+JP2EY6QU-2,JP2EY6QU,2026-10-01,meeting,Jonathan Berthelot,"During the side-by-side evaluation conducted at the client laboratory, the GTXPro solution outperformed Orion Hardware in failover recovery testing. The buyer stated, ""That settles it for the engineering team."""
 JP2EY6QU-3,JP2EY6QU,2026-10-15,email,Noah Brennan,"The engineering team submitted their formal recommendation to Leah Thornton, endorsing GTXPro. Please dispatch the final pricing proposal immediately."
 JT1UUOXN-1,JT1UUOXN,2026-10-18,meeting,Niesha Huffines,Final review with Aisha Osei and Patrick Nakamura. No open questions.
 JT1UUOXN-2,JT1UUOXN,2026-10-19,email,Aisha Osei,gtxpro is a go patrick nakamura approved it po drops next week
 JT1UUOXN-3,JT1UUOXN,2026-10-19,call,Niesha Huffines,Confirmed PO is routing.
-K05LLUU4-1,K05LLUU4,2026-09-20,call,Niesha Huffines,Hey everyone! Just had a great chat with Marcus Thornton about pricing. Looks like Orion Hardware is also bidding on this one.
-K05LLUU4-2,K05LLUU4,2026-09-28,email,Niesha Huffines,Sent revised quote for GTX Basic.
-K05LLUU4-3,K05LLUU4,2026-10-10,email,Marcus Thornton,Hey there! Really appreciate you getting back to us so quickly. Just wanted to let you know we decided to go with Orion Hardware for this cycle. Thanks so much for your time today—definitely happy to revisit next year!
-K05LLUU4-4,K05LLUU4,2026-10-17,call,Niesha Huffines,"Left VM for Marcus Thornton, want to understand what it would take to win this back."
-K0HLZM4Q-1,K0HLZM4Q,2026-10-07,call,Jonathan Berthelot,Call w/ Luke Farouk re reqs.
+K05LLUU4-1,K05LLUU4,2026-09-20,call,Niesha Huffines,talked pricing with marcus thornton orion hardware is also bidding
+K05LLUU4-2,K05LLUU4,2026-09-28,email,Niesha Huffines,sent revised quote for gtx basic
+K05LLUU4-3,K05LLUU4,2026-10-10,email,Marcus Thornton,"- Appreciate the rapid response
+- Going with Orion Hardware this cycle
+- Thanks for the time
+- ""happy to revisit next year"""
+K05LLUU4-4,K05LLUU4,2026-10-17,call,Niesha Huffines,left vm for marcus thornton trying to figure out what it takes to win this back
+K0HLZM4Q-1,K0HLZM4Q,2026-10-07,call,Jonathan Berthelot,I conducted a requirements call with Luke Farouk.
 K0HLZM4Q-2,K0HLZM4Q,2026-10-13,email,Luke Farouk,We're evaluating GTX Basic against Kestrel Compute; decision in about three weeks. Could you get us a loaner unit for the lab?
 K0HLZM4Q-3,K0HLZM4Q,2026-10-18,email,Jonathan Berthelot,Loaner request submitted.
-K6ZDH79M-1,K6ZDH79M,2026-10-07,call,Darcel Schlecht,Left VM for Raj Sato re: GTXPro proposal.
-K6ZDH79M-2,K6ZDH79M,2026-10-08,call,Darcel Schlecht,Left VM.
-K6ZDH79M-3,K6ZDH79M,2026-10-09,email,Raj Sato,sorry darcel schlecht travelling a lot yes moving forward jorge lindqvist gave the green light po coming next week
-K6ZDH79M-4,K6ZDH79M,2026-10-15,call,Darcel Schlecht,Left VM to confirm PO timing.
-KAPP0SBT-1,KAPP0SBT,2026-09-03,call,Marty Freudenburg,Solid first call with Aisha Ivanova. Interested in MG Advanced for a refresh.
-KAPP0SBT-2,KAPP0SBT,2026-09-04,email,Marty Freudenburg,Sent pricing and datasheet.
+K6ZDH79M-1,K6ZDH79M,2026-09-18,call,Darcel Schlecht,Left VM for Raj Sato re: GTXPro proposal.
+K6ZDH79M-2,K6ZDH79M,2026-09-19,call,Darcel Schlecht,Left VM.
+K6ZDH79M-3,K6ZDH79M,2026-09-20,email,Raj Sato,"Sorry Darcel Schlecht, been traveling. Yes we are moving ahead, Jorge Lindqvist approved it. PO should go out next week."
+K6ZDH79M-4,K6ZDH79M,2026-10-16,call,Darcel Schlecht,Left VM to confirm PO timing.
+KAPP0SBT-1,KAPP0SBT,2026-09-03,call,Marty Freudenburg,Solid first call w/ Aisha Ivanova. She's interested in MG Advanced for a refresh.
+KAPP0SBT-2,KAPP0SBT,2026-09-04,email,Marty Freudenburg,Sent pricing + datasheet.
 KAPP0SBT-3,KAPP0SBT,2026-09-05,call,Marty Freudenburg,Left VM.
 KAPP0SBT-4,KAPP0SBT,2026-09-06,call,Marty Freudenburg,Left VM again. Will keep trying.
-KCTYAQOR-1,KCTYAQOR,2026-08-28,call,Gladys Colclough,Conducted financial negotiations concerning cost parameters with Yuki Sandoval. Noted that Orion Hardware is also submitting a competing bid.
-KCTYAQOR-2,KCTYAQOR,2026-09-10,email,Gladys Colclough,Sent revised quote for GTXPro.
-KCTYAQOR-3,KCTYAQOR,2026-10-06,email,Yuki Sandoval,Thanks a bunch for getting back to us so quickly! We decided to go with Orion Hardware this time around. I really appreciate you taking the time to chat—let's definitely catch up and revisit next year!
-KCTYAQOR-4,KCTYAQOR,2026-10-19,call,Gladys Colclough,"Left VM for Yuki Sandoval, want to understand what it would take to win this back."
-KMGXUADZ-1,KMGXUADZ,2026-09-15,call,Gladys Colclough,Discovery with Nadia Okafor; needs GTXPro for a site refresh.
-KMGXUADZ-2,KMGXUADZ,2026-09-16,email,Gladys Colclough,Proposal and pricing transmitted.
+KCTYAQOR-1,KCTYAQOR,2026-08-28,call,Gladys Colclough,"- Talked pricing with Yuki Sandoval.
+- Orion Hardware competing for the deal."
+KCTYAQOR-2,KCTYAQOR,2026-09-10,email,Gladys Colclough,- Sent revised quote for GTXPro.
+KCTYAQOR-3,KCTYAQOR,2026-10-06,email,Yuki Sandoval,thanks for turning that around fast we decided to go with orion hardware for this cycle appreciate your time and we are happy to revisit next year
+KCTYAQOR-4,KCTYAQOR,2026-10-19,call,Gladys Colclough,"- Left VM for Yuki Sandoval
+- Goal: find out what's needed to win this back"
+KMGXUADZ-1,KMGXUADZ,2026-09-15,call,Gladys Colclough,- Discovery call completed with Nadia Okafor.- Discussed GTXPro.- Requirement: site refresh.
+KMGXUADZ-2,KMGXUADZ,2026-09-16,email,Gladys Colclough,"- Proposal sent
+- Pricing provided"
 KMGXUADZ-3,KMGXUADZ,2026-09-17,email,Nadia Okafor,Things are hectic here — haven't forgotten about this. Let me get back to you.
-KMGXUADZ-4,KMGXUADZ,2026-10-04,call,Gladys Colclough,Left VM.
-KOI7M0RU-1,KOI7M0RU,2026-08-25,call,Jonathan Berthelot,Good disc w/ Clara Fischer. Clear need for GTX Basic.
-KOI7M0RU-2,KOI7M0RU,2026-09-07,email,Clara Fischer,"Hi team! Just wanted to share a quick update from our end: Jorge Kowalski has completely frozen all new capex until the upcoming fiscal year. I am still totally on board to make this happen, but unfortunately, there is simply no budget line available right now."
-KOI7M0RU-3,KOI7M0RU,2026-09-25,call,Jonathan Berthelot,Left VM for Clara Fischer. Still think we can pull this into Q.
-KTSB1KYT-1,KTSB1KYT,2026-10-08,call,Jonathan Berthelot,Leah Bergström confirmed they are also evaluating Orion Hardware. Main criterion is failover performance.
-KTSB1KYT-2,KTSB1KYT,2026-10-10,meeting,Jonathan Berthelot,"quick update: lab test side by side today. GTX Basic crushed Orion Hardware on failover recovery. buyer literally said ""that settles it for the engineering team."""
-KTSB1KYT-3,KTSB1KYT,2026-10-13,email,Leah Bergström,Engineering recommendation went to Omar Okafor in favour of GTX Basic. Please send the final quote.
-KTX7ETCE-1,KTX7ETCE,2026-08-25,call,Niesha Huffines,Intro with Ingrid Lindqvist. Existing customer expanding to a new site.
-KTX7ETCE-2,KTX7ETCE,2026-10-16,email,Ingrid Lindqvist,"Hi! We are totally going with GTX Basic for the new site now. Sofia Farouk gave it the green light, so could you please shoot over the paperwork sometime this week?"
+KMGXUADZ-4,KMGXUADZ,2026-10-04,call,Gladys Colclough,- Left VM.
+KOI7M0RU-1,KOI7M0RU,2026-08-25,call,Jonathan Berthelot,Good discovery with Clara Fischer. Clear need for GTX Basic.
+KOI7M0RU-2,KOI7M0RU,2026-09-07,email,Clara Fischer,- Jorge Kowalski: all new capex frozen until next fiscal year - I remain very keen on this - currently lacking a budget line
+KOI7M0RU-3,KOI7M0RU,2026-09-25,call,Jonathan Berthelot,Left voicemail for Clara Fischer. Still think we can pull this into this quarter.
+KTSB1KYT-1,KTSB1KYT,2026-10-08,call,Jonathan Berthelot,Leah Bergström confirmed that they are concurrently evaluating Orion Hardware. Their primary evaluation criterion focuses on failover performance.
+KTSB1KYT-2,KTSB1KYT,2026-10-10,meeting,Jonathan Berthelot,"During the side-by-side test conducted at the customer laboratory, GTX Basic outperformed Orion Hardware specifically regarding failover recovery. The buyer stated that ""that settles it for the engineering team."""
+KTSB1KYT-3,KTSB1KYT,2026-10-13,email,Leah Bergström,The engineering recommendation has been delivered to Omar Okafor in support of the GTX Basic selection. Please proceed with sending the final quote.
+KTSB1KYT-4,KTSB1KYT,2026-10-14,email,Leah Bergström,"To confirm scope: 4 units of GTX Basic at list, so $3,300 total. Please quote that."
+KTX7ETCE-1,KTX7ETCE,2026-08-25,call,Niesha Huffines,intro with ingrid lindqvist existing customer expanding to a new site
+KTX7ETCE-2,KTX7ETCE,2026-10-16,email,Ingrid Lindqvist,we decided on gtx basic for the new site sofia farouk signed off send the paperwork this week
 L2QMWU4H-1,L2QMWU4H,2026-10-15,call,Darcel Schlecht,Samuel Marchetti verified their concurrent evaluation of Bluewater Systems. Failover performance remains the primary evaluation criterion.
 L2QMWU4H-2,L2QMWU4H,2026-10-16,meeting,Darcel Schlecht,"Conducted a side-by-side lab evaluation at the client facility. GTX Plus Pro outperformed Bluewater Systems during failover recovery testing. The buyer stated, ""That settles it for the engineering team."""
 L2QMWU4H-3,L2QMWU4H,2026-10-17,email,Samuel Marchetti,Engineering recommendation went to Daniel Kowalski in favour of GTX Plus Pro. Please send the final quote.
-L58MN75X-1,L58MN75X,2026-10-07,call,Jonathan Berthelot,quick demo of GTXPro with Ben Bergströms team today.
-L58MN75X-2,L58MN75X,2026-10-12,email,Ben Bergström,"- Team liked it.
-- Cost is a stretch for Q budget.
-- ""Is there any flexibility on structure?"""
+L58MN75X-1,L58MN75X,2026-10-07,call,Jonathan Berthelot,Demo of GTXPro for Ben Bergström's team.
+L58MN75X-2,L58MN75X,2026-10-12,email,Ben Bergström,Team liked it. The number is a stretch for this quarter's budget though — is there any flexibility on structure?
 L58MN75X-3,L58MN75X,2026-10-16,call,Jonathan Berthelot,Discussed options with Ben Bergström. No answer yet; she will talk to Sofia Delgado.
 L71FBIF7-1,L71FBIF7,2026-09-13,call,Marty Freudenburg,Requirements call with Marcus Moreau.
 L71FBIF7-2,L71FBIF7,2026-10-05,email,Marcus Moreau,- Tech review complete - Need native SAN fabric support - Missing in MG Special - Not buying unless this ships this year
 L8CG1IQO-1,L8CG1IQO,2026-10-16,meeting,Darcel Schlecht,Final review with Kwame Thornton and Hannah Mensah. No open questions.
-L8CG1IQO-2,L8CG1IQO,2026-10-17,email,Kwame Thornton,- GTX Basic chosen.- Hannah Mensah approved.- PO arriving next week.
+L8CG1IQO-2,L8CG1IQO,2026-10-17,email,Kwame Thornton,"The implementation of GTX Basic is confirmed. Hannah Mensah gave formal authorization, and the corresponding purchase order is scheduled for release next week."
 L8CG1IQO-3,L8CG1IQO,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
 L9WWFYQW-1,L9WWFYQW,2026-09-22,call,Darcel Schlecht,"Conducted a pricing discussion with Marcus Quinn today, noting that Bluewater Systems is also actively bidding on the opportunity."
 L9WWFYQW-2,L9WWFYQW,2026-09-26,email,Darcel Schlecht,Sent revised quote for GTXPro.
-L9WWFYQW-3,L9WWFYQW,2026-10-12,email,Marcus Quinn,thx for the fast reply. we went w/ bluewater systems this round. appreciate the time tho — def open to chatting again next yr.
+L9WWFYQW-3,L9WWFYQW,2026-10-12,email,Marcus Quinn,Thanks for the rapid response. We have opted for Bluewater Systems for the current deployment cycle. Appreciate your time and look forward to potentially re-evaluating this next year.
 L9WWFYQW-4,L9WWFYQW,2026-10-15,call,Darcel Schlecht,"Left VM for Marcus Quinn, want to understand what it would take to win this back."
-LKMZWCKQ-1,LKMZWCKQ,2026-09-18,meeting,Gladys Colclough,"Demonstration with Kwame Lindqvist's technical group concluded successfully; participant stated, ""This is exactly what we need, let's do it."""
-LKMZWCKQ-2,LKMZWCKQ,2026-09-19,email,Gladys Colclough,Sent proposal for GTXPro.
-LKMZWCKQ-3,LKMZWCKQ,2026-09-26,email,Kwame Lindqvist,FYI: told to hold off on new vendor onboarding till reorg dust settles. Not us — will ping when back on.
-LKMZWCKQ-4,LKMZWCKQ,2026-10-03,call,Gladys Colclough,"Checked in with Kwame Lindqvist. Still very warm, expect this to close this quarter."
-LPY6VIZV-1,LPY6VIZV,2026-09-01,call,Marty Freudenburg,"I conducted a pricing call with Luke Marchetti today. During our conversation, he mentioned that they have also received a quote from Orion Hardware."
-LPY6VIZV-2,LPY6VIZV,2026-09-29,email,Luke Marchetti,Being transparent: team's leaning Orion Hardware. Price is lower & integration w/ our monitoring stack is already done.
+LKMZWCKQ-1,LKMZWCKQ,2026-09-18,meeting,Gladys Colclough,"- Great demo with Kwame Lindqvist's team - Buyer: ""This is exactly what we need, let's do it."""
+LKMZWCKQ-2,LKMZWCKQ,2026-09-19,email,Gladys Colclough,- Proposal sent for GTXPro.
+LKMZWCKQ-3,LKMZWCKQ,2026-09-26,email,Kwame Lindqvist,heads up new vendor onboarding is paused until the reorg settles nothing to do with you ill reach out when i can
+LKMZWCKQ-4,LKMZWCKQ,2026-10-03,call,Gladys Colclough,"- Checked in with Kwame Lindqvist
+- Remains very warm
+- Expecting close this quarter"
+LPY6VIZV-1,LPY6VIZV,2026-09-01,call,Marty Freudenburg,Quick pricing call w/ Luke Marchetti. Mentioned they got a quote from Orion Hardware too.
+LPY6VIZV-2,LPY6VIZV,2026-09-29,email,Luke Marchetti,"To be completely transparent with you, the team is leaning toward Orion Hardware. Their pricing is more affordable, and the integration with our monitoring stack is already completed."
 LPY6VIZV-3,LPY6VIZV,2026-10-18,call,Marty Freudenburg,Spoke with Luke Marchetti. Reiterated our roadmap. Feel we are still in it.
-LZ6PSZ4T-1,LZ6PSZ4T,2026-10-17,meeting,Jonathan Berthelot,Final review with Nadia Reyes and Mei Delgado. No open questions.
+LZ6PSZ4T-1,LZ6PSZ4T,2026-10-17,meeting,Jonathan Berthelot,The final review has been successfully conducted with Nadia Reyes and Mei Delgado. There are currently no open questions.
 LZ6PSZ4T-2,LZ6PSZ4T,2026-10-18,email,Nadia Reyes,"Hey everyone, great news—we are totally moving forward with MG Advanced! Mei Delgado gave it the green light, so we should see that PO come through next week."
 LZ6PSZ4T-3,LZ6PSZ4T,2026-10-19,call,Jonathan Berthelot,Confirmed PO is routing.
-M03IHS3P-1,M03IHS3P,2026-09-17,call,Gladys Colclough,"Conducted product demonstration of the GTX Plus Basic solution for Fatima Delgado. System alignment is favorable. The buyer stated: ""Honestly the number is higher than what we budgeted."""
+M03IHS3P-1,M03IHS3P,2026-09-17,call,Gladys Colclough,"- Demonstrated GTX Plus Basic to Fatima Delgado.
+- Product fit looks solid.
+- Buyer remark: ""Honestly the number is higher than what we budgeted."""
 M03IHS3P-2,M03IHS3P,2026-09-19,email,Gladys Colclough,"Sent Fatima Delgado a phased option: 60% of units this quarter, remainder in January. Same unit price."
-M03IHS3P-3,M03IHS3P,2026-10-12,call,Gladys Colclough,"Fatima Delgado took the phased structure to Omar Thornton. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-M03IHS3P-4,M03IHS3P,2026-10-16,email,Fatima Delgado,"Order form received, routing for signature."
-M26BSX5S-1,M26BSX5S,2026-09-15,meeting,Jonathan Berthelot,"solid demo w/ yuki thornton team. buyer said, ""this is exactly what we need, let's do it."""
-M26BSX5S-2,M26BSX5S,2026-09-19,email,Jonathan Berthelot,Just sent the GTXPro proposal.
-M26BSX5S-3,M26BSX5S,2026-10-04,email,Yuki Thornton,"Hey there! Just wanted to give you a quick heads-up that we've been asked to pause all new vendor onboarding until the reorg settles down. Honestly, it has nothing to do with you at all! I will definitely reach out again when I can."
-M26BSX5S-4,M26BSX5S,2026-10-16,call,Jonathan Berthelot,"quick check-in w/ Yuki Thornton. still super warm on this, looks like it'll close this qtr."
-M4HY664H-1,M4HY664H,2026-10-04,call,Jonathan Berthelot,Left VM for Andre Moreau re: GTX Plus Basic proposal
+M03IHS3P-3,M03IHS3P,2026-10-12,call,Gladys Colclough,"- Fatima Delgado pitched phased approach to Omar Thornton.
+- Buyer: ""The split works for us — finance is fine with two POs.""
+- Sending order form now."
+M03IHS3P-4,M03IHS3P,2026-10-16,email,Fatima Delgado,Got the order form! Sending it over for signature rn.
+M26BSX5S-1,M26BSX5S,2026-09-15,meeting,Jonathan Berthelot,"I conducted an exceptional demonstration with the team led by Yuki Thornton. The buyer remarked, ""This is exactly what we need, let's do it."""
+M26BSX5S-2,M26BSX5S,2026-09-19,email,Jonathan Berthelot,I have successfully transmitted the formal proposal regarding the GTXPro.
+M26BSX5S-3,M26BSX5S,2026-10-04,email,Yuki Thornton,Heads-up: we've been asked to pause all new vendor onboarding until the reorg settles. Nothing to do with you — I'll reach out when I can.
+M26BSX5S-4,M26BSX5S,2026-10-16,call,Jonathan Berthelot,"I recently followed up with Yuki Thornton. She remains very receptive, and I anticipate that we will finalize this agreement within the current quarter."
+M4HY664H-1,M4HY664H,2026-10-04,call,Jonathan Berthelot,Left VM for Andre Moreau re: GTX Plus Basic proposal.
 M4HY664H-2,M4HY664H,2026-10-05,call,Jonathan Berthelot,Left VM.
 M4HY664H-3,M4HY664H,2026-10-07,email,Andre Moreau,"Sorry Jonathan Berthelot, been travelling. Yes, we're moving ahead — Samuel Abara approved it. PO should go out next week."
-M4HY664H-4,M4HY664H,2026-10-16,call,Jonathan Berthelot,Called and left VM to check on PO timing.
+M4HY664H-4,M4HY664H,2026-10-16,call,Jonathan Berthelot,Left VM to confirm PO timing.
 MFO940S8-1,MFO940S8,2026-09-24,call,Darcel Schlecht,Requirements call with Hannah Quinn.
-MFO940S8-2,MFO940S8,2026-10-09,email,Hannah Quinn,We're evaluating MG Special against Orion Hardware; decision in about three weeks. Could you get us a loaner unit for the lab?
+MFO940S8-2,MFO940S8,2026-10-09,email,Hannah Quinn,"- Evaluating MG Special vs. Orion Hardware - Approx. three-week timeline for decision - ""Could you get us a loaner unit for the lab?"""
 MFO940S8-3,MFO940S8,2026-10-10,email,Darcel Schlecht,Loaner request submitted.
 MHPI0ZW1-1,MHPI0ZW1,2026-10-02,call,Darcel Schlecht,Tom Sandoval expressed high satisfaction with the platform and formally requested pricing.
-MHPI0ZW1-2,MHPI0ZW1,2026-10-03,email,Tom Sandoval,appreciate the quote will try to book time with noah mensah honestly i dont own this budget and she has other priorities this quarter
+MHPI0ZW1-2,MHPI0ZW1,2026-10-03,email,Tom Sandoval,"Hey there! Thanks so much for the quote! I'll definitely try to carve out some time with Noah Mensah. Honestly though, I don't own this budget and she's got totally different priorities on her plate this quarter, dude."
 MHPI0ZW1-3,MHPI0ZW1,2026-10-12,email,Darcel Schlecht,Checked in with Tom Sandoval. No update yet on Noah Mensah's availability.
-MMUC1AXI-1,MMUC1AXI,2026-09-12,call,Darcel Schlecht,Left VM for Clara Sandoval re: GTXPro proposal.
-MMUC1AXI-2,MMUC1AXI,2026-10-03,call,Darcel Schlecht,Left VM.
-MMUC1AXI-3,MMUC1AXI,2026-10-08,email,Clara Sandoval,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Marcus Adeyemi approved it. PO should go out next week."
-MMUC1AXI-4,MMUC1AXI,2026-10-15,call,Darcel Schlecht,Left VM to confirm PO timing.
-MMWD47ZY-1,MMWD47ZY,2026-10-17,meeting,Gladys Colclough,"Concluded final review sessions with Hannah Brennan and Andre Reyes. All inquiries are resolved, leaving no open questions."
-MMWD47ZY-2,MMWD47ZY,2026-10-18,email,Hannah Brennan,"Great news! Andre Reyes just gave the green light for the GTX Plus Basic plan, so we are officially moving forward. They should be sending the PO over sometime next week."
-MMWD47ZY-3,MMWD47ZY,2026-10-19,call,Gladys Colclough,Confirmed PO is routing.
+MMUC1AXI-1,MMUC1AXI,2026-09-03,call,Darcel Schlecht,Left VM for Clara Sandoval re: GTXPro proposal.
+MMUC1AXI-2,MMUC1AXI,2026-09-24,call,Darcel Schlecht,Left VM.
+MMUC1AXI-3,MMUC1AXI,2026-09-29,email,Clara Sandoval,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Marcus Adeyemi approved it. PO should go out next week."
+MMUC1AXI-4,MMUC1AXI,2026-10-17,call,Darcel Schlecht,Left VM to confirm PO timing.
+MMWD47ZY-1,MMWD47ZY,2026-09-20,meeting,Gladys Colclough,Final review with Hannah Brennan and Andre Reyes. No open questions.
+MMWD47ZY-2,MMWD47ZY,2026-09-21,email,Hannah Brennan,"Andre Reyes approved the deployment of GTX Plus Basic, and we anticipate the official purchase order next week."
+MMWD47ZY-3,MMWD47ZY,2026-10-13,call,Gladys Colclough,Confirmed PO is routing.
 NDMY5PPT-1,NDMY5PPT,2026-10-08,call,Darcel Schlecht,Requirements call with Ben Brennan.
 NDMY5PPT-2,NDMY5PPT,2026-10-10,email,Ben Brennan,"After the technical review: we need native support for our SAN fabric, which GTXPro doesn't have. Unless that's on your roadmap this year we can't proceed."
 NJC209SC-1,NJC209SC,2026-09-29,call,Darcel Schlecht,Demo of GTXPro for Ines Mensah's team.
-NJC209SC-2,NJC209SC,2026-10-08,email,Ines Mensah,Team liked it. The number is a stretch for this quarter's budget though — is there any flexibility on structure?
+NJC209SC-2,NJC209SC,2026-10-08,email,Ines Mensah,Hey there! The whole team is actually really into it. That price tag is definitely a bit much for our current quarter's budget though — do you think we can mess around with the structure at all?
 NJC209SC-3,NJC209SC,2026-10-19,call,Darcel Schlecht,Discussed options with Ines Mensah. No answer yet; she will talk to Raj Brennan.
 NLKPA1KP-1,NLKPA1KP,2026-09-07,call,Darcel Schlecht,Leah Moreau indicated that Orion Hardware submitted a lower pricing figure.
 NLKPA1KP-2,NLKPA1KP,2026-09-13,email,Leah Moreau,"Hey there! So we weighed our options and decided to go with GTX Basic—honestly, the support model totally won us over. Legal has the MSA now too!"
 NLKPA1KP-3,NLKPA1KP,2026-10-13,email,Leah Moreau,"Oh, one quick thing before I sign off! The security crew is asking for the firmware-signing doc for GTX Basic—think you could shoot that over sometime this week? It's totally not a blocker or anything, just one last little checkbox they need."
-NMN9DVEV-1,NMN9DVEV,2026-10-14,call,Gladys Colclough,Kwame Farouk confirmed they are also evaluating Bluewater Systems. Main criterion is failover performance.
-NMN9DVEV-2,NMN9DVEV,2026-10-15,meeting,Gladys Colclough,"Side-by-side test at customer lab. GTX Plus Basic beat Bluewater Systems on failover recovery. Buyer: ""That settles it for the engineering team."""
-NMN9DVEV-3,NMN9DVEV,2026-10-16,email,Kwame Farouk,Engineering recommendation went to Kwame Castellano in favour of GTX Plus Basic. Please send the final quote.
-NNKWGFDH-1,NNKWGFDH,2026-10-18,call,Darcel Schlecht,"Priya Whitfield verified concurrent evaluation of Bluewater Systems, emphasizing that failover performance serves as their primary evaluation criterion."
+NMN9DVEV-1,NMN9DVEV,2026-10-14,call,Gladys Colclough,"- Kwame Farouk verified eval of Bluewater Systems too.
+- Top priority: failover performance."
+NMN9DVEV-2,NMN9DVEV,2026-10-15,meeting,Gladys Colclough,"- Lab side-by-side trial completed.- GTX Plus Basic outperformed Bluewater Systems on failover recovery.- Buyer verdict: ""That settles it for the engineering team."""
+NMN9DVEV-3,NMN9DVEV,2026-10-16,email,Kwame Farouk,Eng rec went to Kwame Castellano for GTX Plus Basic. Send final quote please.
+NMN9DVEV-4,NMN9DVEV,2026-10-17,email,Kwame Farouk,"To confirm scope: we'd take 2 units of GTX Plus Basic at list, $2,192 total."
+NNKWGFDH-1,NNKWGFDH,2026-10-06,call,Darcel Schlecht,"Priya Whitfield verified concurrent evaluation of Bluewater Systems, emphasizing that failover performance serves as their primary evaluation criterion."
 NNKWGFDH-2,NNKWGFDH,2026-10-18,meeting,Darcel Schlecht,"Conducted a side-by-side evaluation protocol at the client's laboratory facility. MG Special demonstrated superior failover recovery metrics compared to Bluewater Systems. According to the buyer, ""That settles it for the engineering team."""
-NNKWGFDH-3,NNKWGFDH,2026-10-19,email,Priya Whitfield,eng gave the nod to ruth haddad for mg special please send the final quote
+NNKWGFDH-3,NNKWGFDH,2026-10-19,email,Priya Whitfield,"The engineering recommendation has been forwarded to Ruth Haddad, resulting in a decision favoring MG Special. Please proceed with sending the final quote."
 NX4ODZY2-1,NX4ODZY2,2026-10-15,call,Darcel Schlecht,Intro with Ingrid Haddad. Existing customer expanding to a new site.
-NX4ODZY2-2,NX4ODZY2,2026-10-16,email,Ingrid Haddad,"Nadia Moreau just gave the green light, we're standardising on GTX Plus Basic for the new site. Can you shoot over the paperwork sometime this week pls"
+NX4ODZY2-2,NX4ODZY2,2026-10-16,email,Ingrid Haddad,- decision made: standardising on GTX Plus Basic for the new site - Nadia Moreau signed off - request: send paperwork this week
 NZB45UZX-1,NZB45UZX,2026-10-14,call,Darcel Schlecht,"Discovery session executed with Clara Fischer regarding the replacement of end-of-life hardware units spanning two facilities. The buyer stated, ""We need this racked before the Q4 freeze."""
 NZB45UZX-2,NZB45UZX,2026-10-15,email,Clara Fischer,Thanks Darcel Schlecht. Forwarded the GTXPro spec to Daniel Petrov — she wants a single-quote for both sites. Can you send a formal proposal?
 NZB45UZX-3,NZB45UZX,2026-10-16,meeting,Darcel Schlecht,"Conducted a proposal review with Clara Fischer and Daniel Petrov. Daniel Petrov greenlit the expenditure at list pricing of $4,821. The procurement team is currently drafting the PO, and our MSA remains under legal review."
 NZB45UZX-4,NZB45UZX,2026-10-17,email,Clara Fischer,PO is with procurement. Expect signature in the next two weeks.
-OBGCQ1BK-1,OBGCQ1BK,2026-09-20,meeting,Niesha Huffines,"Hey everyone, I just had a wonderful session with Raj Lindqvist! He told me, ""I will push GTX Basic internally."""
-OBGCQ1BK-2,OBGCQ1BK,2026-09-21,email,Niesha Huffines,Sent proposal to Raj Lindqvist.
+OBGCQ1BK-1,OBGCQ1BK,2026-09-20,meeting,Niesha Huffines,had a solid call with raj lindqvist he is going to champion gtx basic internally
+OBGCQ1BK-2,OBGCQ1BK,2026-09-21,email,Niesha Huffines,sent the proposal to raj lindqvist
 OBGCQ1BK-3,OBGCQ1BK,2026-09-22,email,system,auto-reply raj lindqvist left domzoom for infra questions reach out to tom haddad
-ODIX25WY-1,ODIX25WY,2026-09-09,meeting,Marty Freudenburg,"I conducted an exceptional demonstration with Raj Hughes and his team today. One buyer explicitly stated, ""This is exactly what we need, let's do it."""
-ODIX25WY-2,ODIX25WY,2026-09-10,email,Marty Freudenburg,I have officially transmitted the proposal regarding the GTX Basic offering.
-ODIX25WY-3,ODIX25WY,2026-09-25,email,Raj Hughes,"quick heads up - new vendor onboarding is paused till this reorg shakes out. nothing you did, totally unrelated to your team. ill ping you when things clear up."
-ODIX25WY-4,ODIX25WY,2026-09-30,call,Marty Freudenburg,"I recently followed up with Raj Hughes. He remains very enthusiastic, and I anticipate that we will finalize this agreement within the current quarter."
+ODIX25WY-1,ODIX25WY,2026-09-09,meeting,Marty Freudenburg,"had a great demo w/ raj hughes team. buyer told me: ""this is exactly what we need, let's do it."""
+ODIX25WY-2,ODIX25WY,2026-09-10,email,Marty Freudenburg,Sent proposal for GTX Basic.
+ODIX25WY-3,ODIX25WY,2026-09-25,email,Raj Hughes,- Quick heads-up: new vendor onboarding on hold pending reorg completion - Not a reflection of your team - Will reconnect once things clear up
+ODIX25WY-4,ODIX25WY,2026-09-30,call,Marty Freudenburg,"Checked Raj Hughes. Still super warm, looking to close this qtr."
+ODIX25WY-5,ODIX25WY,2026-10-03,email,system,Auto-reply: Raj Hughes is no longer with Conecom. For infrastructure enquiries please contact Yuki Castellano.
 OEBJXZN6-1,OEBJXZN6,2026-09-30,call,Darcel Schlecht,Left VM for Daniel Kowalski re: MG Advanced proposal.
 OEBJXZN6-2,OEBJXZN6,2026-10-04,call,Darcel Schlecht,Left VM.
 OEBJXZN6-3,OEBJXZN6,2026-10-12,email,Daniel Kowalski,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Nadia Osei approved it. PO should go out next week."
 OEBJXZN6-4,OEBJXZN6,2026-10-16,call,Darcel Schlecht,Left VM to confirm PO timing.
-OES8ZX7B-1,OES8ZX7B,2026-10-01,call,Niesha Huffines,Clara Petrov loves the product and asked for a quote.
-OES8ZX7B-2,OES8ZX7B,2026-10-07,email,Clara Petrov,"I appreciate you providing the quote. I will make an attempt to schedule some time with Aisha Lindqvist. To be completely candid, I am not the owner of this budget, and she has allocated her attention to different priorities during the current quarter."
-OES8ZX7B-3,OES8ZX7B,2026-10-13,email,Niesha Huffines,Checked in with Clara Petrov. No update yet on Aisha Lindqvist's availability.
-OG13XT4P-1,OG13XT4P,2026-10-04,call,Niesha Huffines,Demo of MG Special for Fatima Nakamura's team.
+OES8ZX7B-1,OES8ZX7B,2026-10-01,call,Niesha Huffines,clara petrov is loving the product and wants a quote
+OES8ZX7B-2,OES8ZX7B,2026-10-07,email,Clara Petrov,"Appreciate the pricing estimate; I will attempt to schedule time with Aisha Lindqvist. Realistically, budget authority resides elsewhere, and competing quarterly imperatives currently dominate her focus."
+OES8ZX7B-3,OES8ZX7B,2026-10-13,email,Niesha Huffines,talked to clara petrov no word on aisha lindqvists availability yet
+OG13XT4P-1,OG13XT4P,2026-10-04,call,Niesha Huffines,showed mg special to fatima nakamuras crew
 OG13XT4P-2,OG13XT4P,2026-10-07,email,Fatima Nakamura,"The evaluation team responded favorably to the proposal. However, the current financial figure exceeds this quarter's allocated budget ceiling, prompting the inquiry: ""is there any flexibility on structure?"""
 OG13XT4P-3,OG13XT4P,2026-10-14,call,Niesha Huffines,Discussed options with Fatima Nakamura. No answer yet; she will talk to Omar Kowalski.
-ON9H54WD-1,ON9H54WD,2026-10-19,meeting,Niesha Huffines,Final review with Victor Fischer and Patrick Ivanova. No open questions.
-ON9H54WD-2,ON9H54WD,2026-10-19,email,Victor Fischer,"The GTXPro deployment is officially greenlit; Patrick Ivanova approved the purchase, and we anticipate the PO issuance next week."
+ON9H54WD-1,ON9H54WD,2026-10-19,meeting,Niesha Huffines,final review wrapped up with victor fischer and patrick ivanova zero open questions remaining
+ON9H54WD-2,ON9H54WD,2026-10-19,email,Victor Fischer,"- Moving forward with GTXPro
+- Patrick Ivanova approved
+- PO expected next week"
 ON9H54WD-3,ON9H54WD,2026-10-19,call,Niesha Huffines,Confirmed PO is routing.
-OPL7DH0Q-1,OPL7DH0Q,2026-09-01,call,Niesha Huffines,Good discovery with Clara Kowalski. Clear need for GTX Plus Basic.
-OPL7DH0Q-2,OPL7DH0Q,2026-09-14,email,Clara Kowalski,"Status update: Nadia Castellano has placed a freeze on all incoming capital expenditures through the upcoming fiscal year. While my intention to proceed remains unchanged, current funding is unavailable."
-OPL7DH0Q-3,OPL7DH0Q,2026-10-12,call,Niesha Huffines,"Hey there! Just wanted to let you know I dropped a voicemail for Clara Kowalski today. Honestly, I still totally think we can pull this into this quarter!"
-OZL7CDMQ-1,OZL7CDMQ,2026-10-17,meeting,Jonathan Berthelot,Final review with Raj Okafor and Kwame Whitfield. No open questions.
-OZL7CDMQ-2,OZL7CDMQ,2026-10-18,email,Raj Okafor,"Please be advised that we are proceeding with the GTX Plus Basic plan. Kwame Whitfield has given his formal approval, and the purchase order is anticipated to be issued next week."
+OPL7DH0Q-1,OPL7DH0Q,2026-09-01,call,Niesha Huffines,good discovery with clara kowalski she clearly needs gtx plus basic
+OPL7DH0Q-2,OPL7DH0Q,2026-09-14,email,Clara Kowalski,"Hey everyone, just wanted to give a quick update from our end! Nadia Castellano decided to freeze all new capex until the next fiscal year. I'm still super keen to push ahead with this, but honestly, there is just no budget line right now."
+OPL7DH0Q-3,OPL7DH0Q,2026-10-12,call,Niesha Huffines,left vm for clara kowalski still think we can pull this into this quarter
+OZL7CDMQ-1,OZL7CDMQ,2026-10-17,meeting,Jonathan Berthelot,"I conducted the final review meeting with Raj Okafor and Kwame Whitfield, and we concluded with no open questions remaining."
+OZL7CDMQ-2,OZL7CDMQ,2026-10-18,email,Raj Okafor,Kwame Whitfield has authorized the deployment of GTX Plus Basic; expect the PO to be issued next week.
 OZL7CDMQ-3,OZL7CDMQ,2026-10-19,call,Jonathan Berthelot,Confirmed PO is routing.
+P0BMLVDP-1,P0BMLVDP,2026-08-06,call,Darcel Schlecht,Intro call with Luke Thornton about GTXPro.
 P0BMLVSL-1,P0BMLVSL,2026-08-22,call,Darcel Schlecht,Intro with Luke Thornton. Existing customer expanding to a new site.
-P0BMLVSL-2,P0BMLVSL,2026-10-14,email,Luke Thornton,Marcus Fischer approved the deployment; we are standardising the new site on GTXPro. Please issue the documentation this week.
+P0BMLVSL-2,P0BMLVSL,2026-10-14,email,Luke Thornton,We've decided to standardise on GTXPro for the new site. Marcus Fischer signed off; can you send the paperwork this week?
 P9VFKNR0-1,P9VFKNR0,2026-08-31,meeting,Darcel Schlecht,"Great demo with Kwame Whitfield's team. Buyer: ""This is exactly what we need, let's do it."""
 P9VFKNR0-2,P9VFKNR0,2026-09-12,email,Darcel Schlecht,Delivered the formal proposal regarding GTXPro.
-P9VFKNR0-3,P9VFKNR0,2026-09-27,email,Kwame Whitfield,"- Quick heads-up: all new vendor onboarding on hold until the reorg settles.
-- Nothing to do with you.
-- I will reach out when I can."
+P9VFKNR0-3,P9VFKNR0,2026-09-27,email,Kwame Whitfield,"Please be advised that we have been instructed to suspend all new vendor onboarding until the current reorganization concludes. This decision is entirely unrelated to your organization, and I will contact you as soon as I am able to resume."
 P9VFKNR0-4,P9VFKNR0,2026-10-18,call,Darcel Schlecht,"Completed touchpoint with Kwame Whitfield. Engagement remains high, and I anticipate deal closure within the current quarter."
-PLYYX5CD-1,PLYYX5CD,2026-09-16,call,Jonathan Berthelot,Ran demo of GTX Plus Pro for Raj Lindqvist and team.
-PLYYX5CD-2,PLYYX5CD,2026-10-07,email,Raj Lindqvist,"- Team liked it.
-- Number is a stretch for this quarter's budget.
-- Asking about flexibility on structure."
+P9VFKNR0-5,P9VFKNR0,2026-10-18,email,system,Auto-reply: Kwame Whitfield is no longer with Dontechi. For infrastructure enquiries please contact Fatima Sato.
+PLYYX5CD-1,PLYYX5CD,2026-09-16,call,Jonathan Berthelot,I conducted a demonstration of the GTX Plus Pro solution for the team led by Raj Lindqvist.
+PLYYX5CD-2,PLYYX5CD,2026-10-07,email,Raj Lindqvist,team liked it number is a bit heavy for this quarter budget is there any wiggle room on structure
 PLYYX5CD-3,PLYYX5CD,2026-10-08,call,Jonathan Berthelot,Discussed options with Raj Lindqvist. No answer yet; she will talk to Raj Quinn.
-PTKOWYW6-1,PTKOWYW6,2026-10-19,meeting,Gladys Colclough,Final review with Ben Moreau and Tom Lindqvist. No open questions.
-PTKOWYW6-2,PTKOWYW6,2026-10-19,email,Ben Moreau,"Great news, we are officially moving forward with MG Special! Tom Lindqvist gave the green light, so we should see the PO come through next week."
-PTKOWYW6-3,PTKOWYW6,2026-10-19,call,Gladys Colclough,Confirmed PO is routing.
-PUTILZZG-1,PUTILZZG,2026-10-18,call,Niesha Huffines,"Hey everyone, just wanted to share that Hannah Okafor let me know they're looking at Kestrel Compute as well! Their biggest thing is definitely failover performance."
-PUTILZZG-2,PUTILZZG,2026-10-18,meeting,Niesha Huffines,"Hey everyone, so we ran that side-by-side test over at the customer lab today! It turns out our GTX Basic completely beat out Kestrel Compute when it came to failover recovery. The buyer even told me, ""That settles it for the engineering team."""
-PUTILZZG-3,PUTILZZG,2026-10-19,email,Hannah Okafor,Engineering recommendation went to Elena Marchetti in favour of GTX Basic. Please send the final quote.
-Q5JU0LZJ-1,Q5JU0LZJ,2026-09-25,call,Niesha Huffines,Hey everyone! Just wanted to share a quick update from Ben Adeyemi. He let me know that Kestrel Compute came in with a lower number.
+PTKOWYW6-1,PTKOWYW6,2026-09-20,meeting,Gladys Colclough,Final review with Ben Moreau and Tom Lindqvist. No open questions.
+PTKOWYW6-2,PTKOWYW6,2026-09-20,email,Ben Moreau,"Great news, we are officially moving forward with MG Special! Tom Lindqvist gave the green light, so we should see the PO come through next week."
+PTKOWYW6-3,PTKOWYW6,2026-10-16,call,Gladys Colclough,Confirmed PO is routing.
+PUTILZZG-1,PUTILZZG,2026-10-18,call,Niesha Huffines,hannah okafor let me know they are looking at kestrel compute too main thing they care about is failover performance
+PUTILZZG-2,PUTILZZG,2026-10-18,meeting,Niesha Huffines,ran a side-by-side test at the customer lab and gtx basic outperformed kestrel compute on failover recovery the buyer said that settles it for the engineering team
+PUTILZZG-3,PUTILZZG,2026-10-19,email,Hannah Okafor,"Following engineering assessment, the technical recommendation was submitted to Elena Marchetti, resulting in selection of the GTX Basic tier; please issue the final pricing quote."
+Q5JU0LZJ-1,Q5JU0LZJ,2026-09-25,call,Niesha Huffines,ben adeyemi said kestrel compute came in lower
 Q5JU0LZJ-2,Q5JU0LZJ,2026-09-27,email,Ben Adeyemi,"Hey there! We took a good look at both options and decided to go with GTX Basic, mostly because their support model totally won us over. Legal has the MSA now."
 Q5JU0LZJ-3,Q5JU0LZJ,2026-10-11,email,Ben Adeyemi,"Oh, one last thing before I sign off: the security folks are asking for the firmware-signing doc for the GTX Basic. Any chance you could shoot that over this week? It's not holding anything up, just a quick box they need to check."
+Q5JU0LZJ-4,Q5JU0LZJ,2026-10-12,email,Ben Adeyemi,"To confirm scope: we'd take 4 units of GTX Basic at list, $2,200 total."
 Q5R1PYJS-1,Q5R1PYJS,2026-10-11,meeting,Darcel Schlecht,Final review with Fatima Thornton and Priya Thornton. No open questions.
-Q5R1PYJS-2,Q5R1PYJS,2026-10-12,email,Fatima Thornton,Proceeding with GTXPro. Priya Thornton approved the purchase; expect the PO next week.
+Q5R1PYJS-2,Q5R1PYJS,2026-10-12,email,Fatima Thornton,- Moving forward with GTXPro.- Priya Thornton approved.- Purchase order coming next week.
 Q5R1PYJS-3,Q5R1PYJS,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
-Q7ST5E1W-1,Q7ST5E1W,2026-10-06,call,Gladys Colclough,Call regarding requirements conducted with Ethan Fischer.
+Q7ST5E1W-1,Q7ST5E1W,2026-10-06,call,Gladys Colclough,- Spoke with Ethan Fischer on requirements call - Discussed needs - Covered all project details
 Q7ST5E1W-2,Q7ST5E1W,2026-10-10,email,Ethan Fischer,We're evaluating MG Advanced against Kestrel Compute; decision in about three weeks. Could you get us a loaner unit for the lab?
-Q7ST5E1W-3,Q7ST5E1W,2026-10-13,email,Gladys Colclough,Loaner request submitted.
+Q7ST5E1W-3,Q7ST5E1W,2026-10-13,email,Gladys Colclough,- Loaner request submitted.
 QCIG6H19-1,QCIG6H19,2026-09-28,call,Darcel Schlecht,Sofia Nakamura stated that Kestrel Compute submitted a lower bid.
-QCIG6H19-2,QCIG6H19,2026-10-01,email,Sofia Nakamura,we compared both options. we are going with gtx plus basic - their support model sold them. legal has the msa now.
-QCIG6H19-3,QCIG6H19,2026-10-10,email,Sofia Nakamura,"Oh one last thing before I sign off - security needs that firmware-signing doc for the GTX Plus Basic. Can u send this week pls? Not a blocker at all, just a checkbox for them."
-QMUBRAT2-1,QMUBRAT2,2026-09-24,call,Gladys Colclough,Sofia Okafor expressed enthusiasm for the product and requested a pricing quotation.
+QCIG6H19-2,QCIG6H19,2026-10-01,email,Sofia Nakamura,"Following a direct feature-by-feature evaluation, we are advancing with GTX Plus Basic. The deciding factor was their support framework. Currently, Legal is reviewing the MSA."
+QCIG6H19-3,QCIG6H19,2026-10-10,email,Sofia Nakamura,"Prior to sign-off, the security group requested the firmware-signing documentation for the GTX Plus Basic. Please provide this documentation within the current week; while non-blocking, it remains a required compliance item."
+QMUBRAT2-1,QMUBRAT2,2026-09-24,call,Gladys Colclough,"- Sofia Okafor is a big fan of the product
+- Requested a pricing quote"
 QMUBRAT2-2,QMUBRAT2,2026-09-25,email,Sofia Okafor,"Thanks so much for sending over that quote! I am going to try to set up some time to chat with Ben Okafor. Honestly speaking, I do not actually own this budget and she has got a few other priorities she is focusing on this quarter."
-QMUBRAT2-3,QMUBRAT2,2026-10-10,email,Gladys Colclough,"Contacted Sofia Okafor to follow up. Presently, there is no status update regarding Ben Okafor's availability."
-QUOU67L5-1,QUOU67L5,2026-08-28,call,Gladys Colclough,Left VM for Kwame Hughes re: GTX Plus Basic proposal.
-QUOU67L5-2,QUOU67L5,2026-09-06,call,Gladys Colclough,Left VM.
+QMUBRAT2-3,QMUBRAT2,2026-10-10,email,Gladys Colclough,"- Checked in with Sofia Okafor
+- Still no update regarding Ben Okafor's availability"
+QUOU67L5-1,QUOU67L5,2026-08-28,call,Gladys Colclough,Left VM - Kwame Hughes - GTX Plus Basic proposal.
+QUOU67L5-2,QUOU67L5,2026-09-06,call,Gladys Colclough,- Left VM.
 QUOU67L5-3,QUOU67L5,2026-10-07,email,Kwame Hughes,"Sorry Gladys Colclough, been travelling. Yes, we're moving ahead — Patrick Kowalski approved it. PO should go out next week."
-QUOU67L5-4,QUOU67L5,2026-10-14,call,Gladys Colclough,Left VM to confirm PO timing.
+QUOU67L5-4,QUOU67L5,2026-10-14,call,Gladys Colclough,"- Left VM
+- Confirmed PO timing"
 QWYRCDA8-1,QWYRCDA8,2026-10-14,meeting,Niesha Huffines,Final review with Ben Mensah and Kwame Adeyemi. No open questions.
 QWYRCDA8-2,QWYRCDA8,2026-10-15,email,Ben Mensah,"- GTX Plus Basic chosen
 - Kwame Adeyemi approved
 - PO coming next week"
 QWYRCDA8-3,QWYRCDA8,2026-10-17,call,Niesha Huffines,Confirmed PO is routing.
-QYKTG5QA-1,QYKTG5QA,2026-09-28,call,Marty Freudenburg,Requirements call with Luke Fischer.
+QYKTG5QA-1,QYKTG5QA,2026-09-28,call,Marty Freudenburg,"quick call w/ luke fischer, requirements review. rushed notes."
 QYKTG5QA-2,QYKTG5QA,2026-10-10,email,Luke Fischer,We're evaluating MG Advanced against Orion Hardware; decision in about three weeks. Could you get us a loaner unit for the lab?
 QYKTG5QA-3,QYKTG5QA,2026-10-14,email,Marty Freudenburg,Loaner request submitted.
-R617R51D-1,R617R51D,2026-09-15,call,Niesha Huffines,Discovery with Noah Moreau; needs GTX Basic for a site refresh.
-R617R51D-2,R617R51D,2026-09-16,email,Niesha Huffines,Sent proposal and pricing.
+R617R51D-1,R617R51D,2026-09-15,call,Niesha Huffines,had a discovery chat with noah moreau they are looking for gtx basic for a site refresh
+R617R51D-2,R617R51D,2026-09-16,email,Niesha Huffines,sent proposal and pricing
 R617R51D-3,R617R51D,2026-09-17,email,Noah Moreau,Things are hectic here — haven't forgotten about this. Let me get back to you.
-R617R51D-4,R617R51D,2026-09-18,call,Niesha Huffines,Left VM.
-RA77E84P-1,RA77E84P,2026-09-11,call,Niesha Huffines,Discovery with Ben Sato; needs GTX Basic for a site refresh.
-RA77E84P-2,RA77E84P,2026-09-12,email,Niesha Huffines,Sent proposal and pricing.
+R617R51D-4,R617R51D,2026-09-18,call,Niesha Huffines,left vm
+RA77E84P-1,RA77E84P,2026-09-11,call,Niesha Huffines,discovery call with ben sato needs gtx basic for a site refresh
+RA77E84P-2,RA77E84P,2026-09-12,email,Niesha Huffines,sent proposal and pricing
 RA77E84P-3,RA77E84P,2026-09-13,email,Ben Sato,Things are hectic here — haven't forgotten about this. Let me get back to you.
-RA77E84P-4,RA77E84P,2026-09-27,call,Niesha Huffines,Left VM.
+RA77E84P-4,RA77E84P,2026-09-27,call,Niesha Huffines,left vm
 RGRUF328-1,RGRUF328,2026-10-13,call,Gladys Colclough,Intro with Fatima Reyes. Existing customer expanding to a new site.
 RGRUF328-2,RGRUF328,2026-10-14,email,Fatima Reyes,"It has been determined that the new site will standardise on MG Special, as formal approval has now been granted by Andre Quinn; could you please forward the necessary paperwork this week?"
+RGRUF328-3,RGRUF328,2026-10-15,email,system,Auto-reply: Fatima Reyes is no longer with Statholdings. For infrastructure enquiries please contact Andre Quinn.
 RJH0CL3Z-1,RJH0CL3Z,2026-10-10,call,Gladys Colclough,Requirements call with Victor Farouk.
-RJH0CL3Z-2,RJH0CL3Z,2026-10-11,email,Victor Farouk,"- Post-tech review update.
-- Hard requirement: native SAN fabric support.
-- MG Special lacks this feature.
-- Customer stance: ""Unless that's on your roadmap this year we can't proceed."""
+RJH0CL3Z-2,RJH0CL3Z,2026-10-11,email,Victor Farouk,"Subsequent to our technical review, it has been determined that we require native support for our SAN fabric, a capability which MG Special currently lacks. Unless this feature is scheduled for your roadmap within the current year, we will be unable to proceed."
 RLHNJZBW-1,RLHNJZBW,2026-10-06,call,Darcel Schlecht,Left VM for Kwame Castellano re: GTXPro proposal.
 RLHNJZBW-2,RLHNJZBW,2026-10-08,call,Darcel Schlecht,Left VM.
 RLHNJZBW-3,RLHNJZBW,2026-10-10,email,Kwame Castellano,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Ingrid Okafor approved it. PO should go out next week."
 RLHNJZBW-4,RLHNJZBW,2026-10-19,call,Darcel Schlecht,Left VM to confirm PO timing.
 RQJKAR7E-1,RQJKAR7E,2026-10-10,call,Darcel Schlecht,Requirements call executed with Yuki Moreau.
-RQJKAR7E-2,RQJKAR7E,2026-10-11,email,Yuki Moreau,"Post-technical review finding: native SAN fabric support is a requirement that GTXPro currently lacks. Unless this is added to the roadmap for the current year, we cannot move forward."
-RXIQFV8D-1,RXIQFV8D,2026-09-08,call,Niesha Huffines,Intro with Grace Adeyemi. Existing customer expanding to a new site.
-RXIQFV8D-2,RXIQFV8D,2026-10-13,email,Grace Adeyemi,Hey - we're standardising on MG Special for the new site! Sofia Nakamura just signed off. Can u pls send the paperwork over this week?
-S983P5KR-1,S983P5KR,2026-09-03,call,Niesha Huffines,Solid first call with Aisha Nakamura. Interested in GTX Basic for a refresh.
-S983P5KR-2,S983P5KR,2026-09-04,email,Niesha Huffines,Sent pricing and datasheet.
-S983P5KR-3,S983P5KR,2026-09-05,call,Niesha Huffines,Left VM.
+RQJKAR7E-2,RQJKAR7E,2026-10-11,email,Yuki Moreau,"post tech review: need native san fabric support, missing in gtxpro. unless on this years roadmap, no deal."
+RXIQFV8D-1,RXIQFV8D,2026-09-08,call,Niesha Huffines,intro with grace adeyemi existing customer expanding to a new site
+RXIQFV8D-2,RXIQFV8D,2026-10-13,email,Grace Adeyemi,"We have officially decided to standardise our operations on MG Special for the new site, as Sofia Nakamura has given her final sign-off. Could you please send the necessary paperwork over to us this week?"
+S983P5KR-1,S983P5KR,2026-09-03,call,Niesha Huffines,solid first call with aisha nakamura interested in gtx basic for a refresh
+S983P5KR-2,S983P5KR,2026-09-04,email,Niesha Huffines,sent pricing and datasheet
+S983P5KR-3,S983P5KR,2026-09-05,call,Niesha Huffines,left vm
 S983P5KR-4,S983P5KR,2026-09-06,call,Niesha Huffines,Left VM again. Will keep trying.
 SD8JJSKT-1,SD8JJSKT,2026-10-06,call,Darcel Schlecht,"Demo of MG Advanced with Noah Adeyemi. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
 SD8JJSKT-2,SD8JJSKT,2026-10-07,email,Darcel Schlecht,"Sent Noah Adeyemi a phased option: 60% of units this quarter, remainder in January. Same unit price."
 SD8JJSKT-3,SD8JJSKT,2026-10-08,call,Darcel Schlecht,"Noah Adeyemi took the phased structure to Kwame Ivanova. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-SD8JJSKT-4,SD8JJSKT,2026-10-09,email,Noah Adeyemi,"Order form received, routing for signature."
-SFBHZLHK-1,SFBHZLHK,2026-10-02,call,Jonathan Berthelot,"Demo'd GTXPro for Ruth Kowalski. fit looks solid. she literally said ""Honestly the number is higher than what we budgeted."""
-SFBHZLHK-2,SFBHZLHK,2026-10-03,email,Jonathan Berthelot,"Sent Ruth Kowalski phased option: 60% units this quarter, rest in Jan. Unit price stays the same."
-SFBHZLHK-3,SFBHZLHK,2026-10-08,call,Jonathan Berthelot,"Ruth Kowalski took the phased structure to Samuel Marchetti. Buyer: ""The split works for us — finance is fine with two POs."" Sending order form."
-SFBHZLHK-4,SFBHZLHK,2026-10-14,email,Ruth Kowalski,got the order form! sending it to get signed rn.
-SFCT64YG-1,SFCT64YG,2026-09-20,meeting,Niesha Huffines,"Hey everyone! Just wrapped up the technical review with Hannah Osei and her amazing team. Good news—all our requirements are fully met! As one of them happily put it, ""We're going to move on this; it just has to clear legal."""
+SD8JJSKT-4,SD8JJSKT,2026-10-09,email,Noah Adeyemi,got the order form over to signature routing now
+SFBHZLHK-1,SFBHZLHK,2026-10-02,call,Jonathan Berthelot,"Demo of GTXPro with Ruth Kowalski. Fit is good. Buyer: ""Honestly the number is higher than what we budgeted."""
+SFBHZLHK-2,SFBHZLHK,2026-10-03,email,Jonathan Berthelot,"Sent Ruth Kowalski a phased option: 60% of units this quarter, remainder in January. Same unit price."
+SFBHZLHK-3,SFBHZLHK,2026-10-08,call,Jonathan Berthelot,"Ruth Kowalski presented the phased structure to Samuel Marchetti. The buyer remarked, ""The split works for us — finance is fine with two POs."" I am currently sending the order form."
+SFBHZLHK-4,SFBHZLHK,2026-10-14,email,Ruth Kowalski,Order form received; initiating signature routing process.
+SFCT64YG-1,SFCT64YG,2026-09-20,meeting,Niesha Huffines,"Technical review with Hannah Osei's team. All requirements met. Buyer: ""We're going to move on this; it just has to clear legal."""
 SFCT64YG-2,SFCT64YG,2026-10-01,email,Hannah Osei,legal is looking at the msa right now no action needed from your end i will let you know as soon as the redlines come back
-SHETLR3T-1,SHETLR3T,2026-09-27,call,Gladys Colclough,Grace Adeyemi noted that Orion Hardware submitted a reduced quote.
-SHETLR3T-2,SHETLR3T,2026-09-30,email,Grace Adeyemi,checked both options out. picked GTX Plus Pro bc of their support. MSA is with legal now.
-SHETLR3T-3,SHETLR3T,2026-10-11,email,Grace Adeyemi,"forgot one last thing - sec team needs that firmware-signing doc for the GTX Plus Pro. can u shoot it over this week? not blocking anything, just a box to check."
+SHETLR3T-1,SHETLR3T,2026-09-27,call,Gladys Colclough,Grace Adeyemi noted Orion Hardware undercut us on price.
+SHETLR3T-2,SHETLR3T,2026-09-30,email,Grace Adeyemi,We compared both. Going with GTX Plus Pro — the support model won it. Legal has the MSA.
+SHETLR3T-3,SHETLR3T,2026-10-11,email,Grace Adeyemi,"Before I sign off, I should mention that our security team has requested the firmware-signing documentation for the GTX Plus Pro. Would you be able to forward that to us this week? While it is not a blocker, it remains a necessary compliance checkbox for us."
+SHETLR3T-4,SHETLR3T,2026-10-12,email,Grace Adeyemi,"To confirm scope: 4 units of GTX Plus Pro at list, so $27,410 total. Please quote that."
 SNGS64S7-1,SNGS64S7,2026-10-18,meeting,Darcel Schlecht,Final review with Tom Thornton and Ruth Lindqvist. No open questions.
 SNGS64S7-2,SNGS64S7,2026-10-19,email,Tom Thornton,ruth lindqvist greenlit gtxpro po comes next week
 SNGS64S7-3,SNGS64S7,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
-SS9FXCS2-1,SS9FXCS2,2026-09-15,call,Niesha Huffines,Intro with Mei Quinn. Existing customer expanding to a new site.
-SS9FXCS2-2,SS9FXCS2,2026-10-15,email,Mei Quinn,"Hey there! Great news—we've officially chosen MG Special to standardise the new site. Grace Mensah gave the final green light, so could you please shoot over the paperwork sometime this week?"
-SUXDAQNV-1,SUXDAQNV,2026-09-13,call,Jonathan Berthelot,Luke Petrov loves the product and asked for a quote.
+SS9FXCS2-1,SS9FXCS2,2026-09-15,call,Niesha Huffines,intro with mei quinn existing customer expanding to a new site
+SS9FXCS2-2,SS9FXCS2,2026-10-15,email,Mei Quinn,We've decided to standardise on MG Special for the new site. Grace Mensah signed off; can you send the paperwork this week?
+SUXDAQNV-1,SUXDAQNV,2026-09-04,call,Jonathan Berthelot,Luke Petrov expressed great enthusiasm for the product and consequently requested a formal price quotation.
 SUXDAQNV-2,SUXDAQNV,2026-09-19,email,Luke Petrov,thx for the quote! ill try to grab some time w elena farouk. tbh i dont own this budget n she has other priorities this qtr
-SUXDAQNV-3,SUXDAQNV,2026-09-30,email,Jonathan Berthelot,Checked in with Luke Petrov. No update yet on Elena Farouk's availability.
+SUXDAQNV-3,SUXDAQNV,2026-09-30,email,Jonathan Berthelot,"I followed up with Luke Petrov today. At this time, there is no update regarding the availability of Elena Farouk."
 SXV6VZVC-1,SXV6VZVC,2026-09-28,call,Darcel Schlecht,Intro with Nadia Marchetti. Existing customer expanding to a new site.
 SXV6VZVC-2,SXV6VZVC,2026-10-14,email,Nadia Marchetti,"Hey there! Good news—Ruth Sandoval gave the final green light, so we are totally going with GTX Plus Basic for the fresh site. Could you please shoot over the paperwork sometime this week?"
 SYJKN818-1,SYJKN818,2026-10-08,call,Darcel Schlecht,Conducted a GTXPro demonstration specifically for Hannah Whitfield's engineering division.
-SYJKN818-2,SYJKN818,2026-10-09,email,Hannah Whitfield,team liked it but that price is tough for this quarter's budget can we play with the structure
+SYJKN818-2,SYJKN818,2026-10-09,email,Hannah Whitfield,"The team responded favorably to the proposal. However, the current financial figure exceeds this quarter's allocation limit—can we negotiate the payment framework?"
 SYJKN818-3,SYJKN818,2026-10-15,call,Darcel Schlecht,Discussed options with Hannah Whitfield. No answer yet; she will talk to Ingrid Brennan.
 T2J83GFD-1,T2J83GFD,2026-10-14,call,Darcel Schlecht,Tom Quinn stated that Kestrel Compute submitted a lower bid.
-T2J83GFD-2,T2J83GFD,2026-10-15,email,Tom Quinn,Evaluation complete. Selected MG Special due to superior support architecture. MSA currently with Legal.
-T2J83GFD-3,T2J83GFD,2026-10-16,email,Tom Quinn,"Before concluding: the security group requests the firmware-signing documentation regarding MG Special. Please forward this during the current week. It is not an impediment, merely a compliance item."
+T2J83GFD-2,T2J83GFD,2026-10-15,email,Tom Quinn,We compared both. Going with MG Special — the support model won it. Legal has the MSA.
+T2J83GFD-3,T2J83GFD,2026-10-16,email,Tom Quinn,"One additional item prior to my signature: our security department is requesting the firmware-signing documentation for MG Special. Would you be able to forward this within the week? It is not a blocker, merely a compliance checkbox."
 TAGD6XU9-1,TAGD6XU9,2026-10-07,call,Darcel Schlecht,Intro with Ines Mensah. Existing customer expanding to a new site.
-TAGD6XU9-2,TAGD6XU9,2026-10-14,email,Ines Mensah,We have reached the decision to standardise our new site on MG Advanced. Omar Delgado has given his final approval. Could you please transmit the necessary paperwork over the course of this week?
-TLT4JJ0U-1,TLT4JJ0U,2026-09-12,call,Marty Freudenburg,I engaged in a pricing discussion with Hannah Haddad today. It is important to note that Bluewater Systems is also submitting a competing bid.
-TLT4JJ0U-2,TLT4JJ0U,2026-09-19,email,Marty Freudenburg,I have successfully transmitted the updated price estimate regarding MG Advanced.
-TLT4JJ0U-3,TLT4JJ0U,2026-10-01,email,Hannah Haddad,"I appreciate the swift response. We have selected Bluewater Systems for the current cycle. Thank you for your time, and we are open to revisiting this next year."
-TLT4JJ0U-4,TLT4JJ0U,2026-10-05,call,Marty Freudenburg,"Left VM for Hannah Haddad, want to understand what it would take to win this back."
+TAGD6XU9-2,TAGD6XU9,2026-10-14,email,Ines Mensah,"Hi there! Great news from our end—we are totally going with MG Advanced for the new site. Omar Delgado gave it the green light, so could you shoot over the paperwork sometime this week?"
+TLT4JJ0U-1,TLT4JJ0U,2026-09-12,call,Marty Freudenburg,talked pricing w/ Hannah Haddad. Bluewater Systems is also bidding on this.
+TLT4JJ0U-2,TLT4JJ0U,2026-09-19,email,Marty Freudenburg,Sent revised quote for MG Advanced.
+TLT4JJ0U-3,TLT4JJ0U,2026-10-01,email,Hannah Haddad,Thx for the fast reply! We went w/ Bluewater Systems this round. Appreciate your time—let's def touch base next year.
+TLT4JJ0U-4,TLT4JJ0U,2026-10-05,call,Marty Freudenburg,Left VM for Hannah Haddad. Need to figure out what it takes to win this back.
 TPNU79C1-1,TPNU79C1,2026-10-17,call,Darcel Schlecht,Priya Castellano verified that Bluewater Systems is additionally under evaluation. Failover performance represents their primary evaluation metric.
 TPNU79C1-2,TPNU79C1,2026-10-18,meeting,Darcel Schlecht,"Conducted a side-by-side evaluation protocol at the client's laboratory facility. MG Special demonstrated superior failover recovery metrics compared to Bluewater Systems. According to the buyer, ""That settles it for the engineering team."""
-TPNU79C1-3,TPNU79C1,2026-10-19,email,Priya Castellano,"The engineering recommendation has been delivered to Marcus Sandoval, and the decision was made in favor of MG Special. Please transmit the final quotation at your earliest convenience."
-U48PDN1F-1,U48PDN1F,2026-09-15,meeting,Gladys Colclough,"Technical review with Nadia Farouk's team. All requirements met. Buyer: ""We're going to move on this; it just has to clear legal."""
-U48PDN1F-2,U48PDN1F,2026-09-28,email,Nadia Farouk,"The Legal department is currently reviewing the MSA. You are not required to take any action at this moment, and I will follow up with you as soon as the redlines are available."
+TPNU79C1-3,TPNU79C1,2026-10-19,email,Priya Castellano,"Hey there! Just wanted to share a quick update—the engineering team gave their thumbs-up to Marcus Sandoval, and they're going with MG Special. Could you please send over the final quote?"
+U48PDN1F-1,U48PDN1F,2026-09-15,meeting,Gladys Colclough,"- Tech review alongside Nadia Farouk and group - All specs checked out - Buyer noted: ""We're going to move on this; it just has to clear legal."" - Ready for next steps"
+U48PDN1F-2,U48PDN1F,2026-09-28,email,Nadia Farouk,MSA is with legal right now. u don't need to do anything yet - ill ping u when the redlines come back
 UJSFG18F-1,UJSFG18F,2026-09-24,call,Darcel Schlecht,"Discovery session executed with Sofia Adeyemi regarding the replacement of end-of-life hardware units spanning two distinct sites. The buyer explicitly noted: ""We need this racked before the Q4 freeze."""
-UJSFG18F-2,UJSFG18F,2026-09-27,email,Sofia Adeyemi,thanks darcel schlecht sent mg advanced specs over to victor whitfield she wants one quote covering both locations pls fire over a formal proposal
+UJSFG18F-2,UJSFG18F,2026-09-27,email,Sofia Adeyemi,Thanks Darcel Schlecht. Forwarded the MG Advanced spec to Victor Whitfield — she wants a single-quote for both sites. Can you send a formal proposal?
 UJSFG18F-3,UJSFG18F,2026-10-04,meeting,Darcel Schlecht,"During our proposal review with Sofia Adeyemi and Victor Whitfield, Victor Whitfield officially authorized the budget at the list rate of $3,393. Procurement is currently generating the PO, and legal is in possession of our MSA."
-UJSFG18F-4,UJSFG18F,2026-10-15,email,Sofia Adeyemi,po is sitting with procurement expect that sig in two weeks
+UJSFG18F-4,UJSFG18F,2026-10-15,email,Sofia Adeyemi,PO is with procurement. Expect signature in the next two weeks.
 UTJGDR3K-1,UTJGDR3K,2026-09-27,call,Darcel Schlecht,Ingrid Mensah expressed high satisfaction with the platform and requested pricing details.
-UTJGDR3K-2,UTJGDR3K,2026-09-28,email,Ingrid Mensah,thanks for the quote i will try to get time with hannah abara to be honest i do not own this budget and she has other priorities this quarter
+UTJGDR3K-2,UTJGDR3K,2026-09-28,email,Ingrid Mensah,Thanks for the quote! I'll try to get time with Hannah Abara. To be honest I don't own this budget and she has other priorities this quarter.
 UTJGDR3K-3,UTJGDR3K,2026-10-09,email,Darcel Schlecht,"I followed up with Ingrid Mensah regarding Hannah Abara's availability, but there are no current updates."
 UZN5JBF3-1,UZN5JBF3,2026-10-19,call,Darcel Schlecht,Omar Thornton verified that their evaluation pool includes Bluewater Systems. Failover performance remains the primary selection metric.
 UZN5JBF3-2,UZN5JBF3,2026-10-19,meeting,Darcel Schlecht,"Conducted a side-by-side evaluation within the client laboratory environment. GTX Basic outperformed Bluewater Systems regarding failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
-UZN5JBF3-3,UZN5JBF3,2026-10-19,email,Omar Thornton,eng recommendation went to ingrid fischer for gtx basic please send the final quote
-V0V6O05H-1,V0V6O05H,2026-10-17,meeting,Darcel Schlecht,Final review with Clara Bergström and Clara Okafor. No open questions.
-V0V6O05H-2,V0V6O05H,2026-10-18,email,Clara Bergström,"GTXPro deployment is officially greenlit; Clara Okafor granted formal approval, and the purchase order is scheduled for issuance next week."
-V0V6O05H-3,V0V6O05H,2026-10-19,call,Darcel Schlecht,Confirmed PO is routing.
+UZN5JBF3-3,UZN5JBF3,2026-10-19,email,Omar Thornton,"Hey there! Just wanted to drop a quick note that the engineering team gave their green light to Ingrid Fischer, and they're going with GTX Basic. Could you please send over the final quote?"
+V0V6O05H-1,V0V6O05H,2026-09-29,meeting,Darcel Schlecht,Final review with Clara Bergström and Clara Okafor. No open questions.
+V0V6O05H-2,V0V6O05H,2026-09-30,email,Clara Bergström,gtxpro is a go clara okafor approved it po lands next week
+V0V6O05H-3,V0V6O05H,2026-10-14,call,Darcel Schlecht,Confirmed PO is routing.
 V7DHDF8V-1,V7DHDF8V,2026-09-13,call,Darcel Schlecht,Fatima Lindqvist expressed high satisfaction with the offering and explicitly requested pricing documentation.
-V7DHDF8V-2,V7DHDF8V,2026-10-02,email,Fatima Lindqvist,"Quote received. I will attempt to schedule time with Luke Osei. However, budget ownership lies elsewhere and ""she has other priorities this quarter."""
+V7DHDF8V-2,V7DHDF8V,2026-10-02,email,Fatima Lindqvist,thanks for the quote will try to get time with luke osei to be honest i dont own this budget and she has other priorities this quarter
 V7DHDF8V-3,V7DHDF8V,2026-10-17,email,Darcel Schlecht,I followed up with Fatima Lindqvist; she currently has no status update regarding Luke Osei's availability.
-V7Y78MPU-1,V7Y78MPU,2026-09-14,call,Marty Freudenburg,"Fatima Brennan has confirmed that their team is additionally assessing Kestrel Compute, noting that their primary evaluation criterion is failover performance."
-V7Y78MPU-2,V7Y78MPU,2026-10-02,meeting,Marty Freudenburg,"During the side-by-side evaluation conducted at the customer laboratory, GTX Basic outperformed Kestrel Compute specifically regarding failover recovery. The buyer stated, ""That settles it for the engineering team."""
-V7Y78MPU-3,V7Y78MPU,2026-10-16,email,Fatima Brennan,"The engineering recommendation has been submitted to Jorge Petrov, endorsing the GTX Basic solution. Please proceed with sending the final quote."
-VA2JJZXD-1,VA2JJZXD,2026-09-11,call,Jonathan Berthelot,Luke Quinn loved the product and asked for a quote.
-VA2JJZXD-2,VA2JJZXD,2026-09-20,email,Luke Quinn,Thx for the quote. Will try to grab some time w/ Noah Lindqvist. Honestly dont own this budget and she's got other priorities this qtr.
+V7Y78MPU-1,V7Y78MPU,2026-09-14,call,Marty Freudenburg,Fatima Brennan let me know they are looking at Kestrel Compute too. Failover performance is the big thing for them.
+V7Y78MPU-2,V7Y78MPU,2026-10-02,meeting,Marty Freudenburg,"lab test today side-by-side. GTX Basic crushed Kestrel Compute on failover recovery. buyer said, ""That settles it for the engineering team."""
+V7Y78MPU-3,V7Y78MPU,2026-10-16,email,Fatima Brennan,Engineering recommendation went to Jorge Petrov in favour of GTX Basic. Please send the final quote.
+VA2JJZXD-1,VA2JJZXD,2026-09-11,call,Jonathan Berthelot,Luke Quinn expressed great enthusiasm for the product and specifically requested a price quotation.
+VA2JJZXD-2,VA2JJZXD,2026-09-20,email,Luke Quinn,thanks for the quote will try to get time with noah lindqvist to be honest i dont own this budget and she has other priorities this quarter
 VA2JJZXD-3,VA2JJZXD,2026-10-02,email,Jonathan Berthelot,Checked in with Luke Quinn. No update yet on Noah Lindqvist's availability.
 VF7DWQIH-1,VF7DWQIH,2026-10-05,call,Darcel Schlecht,Priya Mensah stated that Bluewater Systems submitted a more cost-effective bid.
-VF7DWQIH-2,VF7DWQIH,2026-10-07,email,Priya Mensah,compared both gtx plus pro won because of support legal has msa
-VF7DWQIH-3,VF7DWQIH,2026-10-15,email,Priya Mensah,one more thing before signing our security team wants the firmware signing doc for gtx plus pro can you send it this week not a blocker just a checkbox
+VF7DWQIH-2,VF7DWQIH,2026-10-07,email,Priya Mensah,"Following our evaluation of both solutions, we have selected GTX Plus Pro; their support framework was the deciding factor. The MSA is currently under review by Legal."
+VF7DWQIH-3,VF7DWQIH,2026-10-15,email,Priya Mensah,"Before signing, our security architecture group has requested the firmware-signing documentation for the GTX Plus Pro; please transmit this by the end of the week. This item is non-blocking and strictly serves as a compliance verification."
 VP2CW520-1,VP2CW520,2026-09-28,meeting,Darcel Schlecht,"Great demo with Patrick Osei's team. Buyer: ""This is exactly what we need, let's do it."""
 VP2CW520-2,VP2CW520,2026-10-02,email,Darcel Schlecht,Proposal for the GTX Plus Basic tier has been transmitted.
-VP2CW520-3,VP2CW520,2026-10-04,email,Patrick Osei,Heads-up: we've been asked to pause all new vendor onboarding until the reorg settles. Nothing to do with you — I'll reach out when I can.
+VP2CW520-3,VP2CW520,2026-10-04,email,Patrick Osei,"quick update - pause all new vendor onboarding till the reorg settles down. nothing to do with your team at all, will circle back once things clear up."
 VP2CW520-4,VP2CW520,2026-10-10,call,Darcel Schlecht,"Completed follow-up with Patrick Osei; engagement remains highly favorable, and QCURRENT closure is anticipated."
-VRSTX620-1,VRSTX620,2026-10-12,call,Niesha Huffines,Hey there! Samuel Kowalski just let me know that Kestrel Compute actually came in with a lower number.
-VRSTX620-2,VRSTX620,2026-10-14,email,Samuel Kowalski,We compared both. Going with GTX Plus Basic — the support model won it. Legal has the MSA.
-VRSTX620-3,VRSTX620,2026-10-15,email,Samuel Kowalski,"Before concluding, I would like to mention that our security department has requested the firmware-signing documentation for the GTX Plus Basic. Could you please provide this within the current week? It is not a dealbreaker, simply a procedural requirement."
-VSZ4UVVN-1,VSZ4UVVN,2026-10-03,call,Jonathan Berthelot,Leah Quinn confirmed they are also evaluating Bluewater Systems. Main criterion is failover performance.
-VSZ4UVVN-2,VSZ4UVVN,2026-10-06,meeting,Jonathan Berthelot,"Lab test done side by side. GTX Plus Basic wiped the floor with Bluewater Systems on failover recovery. Buyer told me ""That settles it for the engineering team."""
+VRSTX620-1,VRSTX620,2026-10-12,call,Niesha Huffines,samuel kowalski mentioned kestrel compute came in with a lower number
+VRSTX620-2,VRSTX620,2026-10-14,email,Samuel Kowalski,Compared em both. We're picking GTX Plus Basic bc of their support model. Legal's got the MSA now.
+VRSTX620-3,VRSTX620,2026-10-15,email,Samuel Kowalski,"One more thing before signature: our security team wants the firmware-signing doc for GTX Plus Basic. Can you send it this week? Not a blocker, just a checkbox."
+VSZ4UVVN-1,VSZ4UVVN,2026-10-03,call,Jonathan Berthelot,Leah Quinn verified that her organization is currently considering Bluewater Systems as well. Their primary evaluation metric centers entirely on failover performance.
+VSZ4UVVN-2,VSZ4UVVN,2026-10-06,meeting,Jonathan Berthelot,"Side-by-side test at customer lab. GTX Plus Basic beat Bluewater Systems on failover recovery. Buyer: ""That settles it for the engineering team."""
 VSZ4UVVN-3,VSZ4UVVN,2026-10-13,email,Leah Quinn,The engineering recommendation has been submitted to Ethan Kowalski in support of the GTX Plus Basic option. Please proceed with sending the final quote.
-VYPIKMKO-1,VYPIKMKO,2026-10-14,call,Jonathan Berthelot,Intro with Sofia Kowalski. Existing customer expanding to a new site.
-VYPIKMKO-2,VYPIKMKO,2026-10-17,email,Sofia Kowalski,"Hey there! Good news - we are totally going with GTX Basic for the new site, since Samuel Mensah gave it the green light. Could you please send over the paperwork sometime this week?"
-W5P1OLUL-1,W5P1OLUL,2026-10-11,call,Jonathan Berthelot,Intro w/ Ingrid Fischer. Existing customer expanding to a new site.
-W5P1OLUL-2,W5P1OLUL,2026-10-12,email,Ingrid Fischer,"Hi there! Great news from our end—we've officially chosen GTX Basic to power the new site. Ethan Brennan gave it the green light, so whenever you get a chance, could you shoot over the paperwork sometime this week?"
-W604BPPE-1,W604BPPE,2026-09-25,call,Jonathan Berthelot,quick pricing call w Hannah Abara just now. fyi they also got a quote from Kestrel Compute.
+VYPIKMKO-1,VYPIKMKO,2026-10-14,call,Jonathan Berthelot,I conducted an introductory discussion with Sofia Kowalski regarding an expansion project for their new site as an existing customer.
+VYPIKMKO-2,VYPIKMKO,2026-10-17,email,Sofia Kowalski,"Samuel Mensah just gave the green light, we're standardising on GTX Basic for the new site. Can you shoot over the paperwork sometime this week?"
+W5P1OLUL-1,W5P1OLUL,2026-10-11,call,Jonathan Berthelot,Introduction call conducted with Ingrid Fischer regarding an existing customer expansion to a new site.
+W5P1OLUL-2,W5P1OLUL,2026-10-12,email,Ingrid Fischer,Ethan Brennan has approved the standardisation on GTX Basic for the new deployment; please transmit the requisite documentation within the current week.
+W604BPPE-1,W604BPPE,2026-09-25,call,Jonathan Berthelot,"I conducted a pricing call today with Hannah Abara. During our conversation, she mentioned that they currently possess a competing quote from Kestrel Compute."
 W604BPPE-2,W604BPPE,2026-10-04,email,Hannah Abara,"Being honest, the team is leaning toward Kestrel Compute bc their price is lower and the monitoring stack integration is already done."
 W604BPPE-3,W604BPPE,2026-10-09,call,Jonathan Berthelot,Spoke with Hannah Abara. Reiterated our roadmap. Feel we are still in it.
 W8CSV90F-1,W8CSV90F,2026-10-14,call,Darcel Schlecht,Requirements call with Raj Sato.
 W8CSV90F-2,W8CSV90F,2026-10-15,email,Raj Sato,We're evaluating GTXPro against Kestrel Compute; decision in about three weeks. Could you get us a loaner unit for the lab?
 W8CSV90F-3,W8CSV90F,2026-10-16,email,Darcel Schlecht,Loaner request submitted.
-WB974HS4-1,WB974HS4,2026-09-12,call,Niesha Huffines,"Hey everyone, I just had a wonderful discovery call with Clara Sandoval! They are looking to swap out those end-of-life units across two sites, and she totally emphasized to me, ""We need this racked before the Q4 freeze."""
-WB974HS4-2,WB974HS4,2026-09-18,email,Clara Sandoval,Thanks Niesha Huffines. Forwarded the GTX Plus Basic spec to Ben Kowalski — she wants a single-quote for both sites. Can you send a formal proposal?
-WB974HS4-3,WB974HS4,2026-09-19,meeting,Niesha Huffines,"Proposal review with Clara Sandoval and Ben Kowalski. Ben Kowalski approved budget at list ($1,096). Procurement is drafting the PO; legal has our MSA."
-WB974HS4-4,WB974HS4,2026-10-10,email,Clara Sandoval,The purchase order currently resides within procurement. Execution and signature are projected within a two-week timeframe.
-WGSS08LF-1,WGSS08LF,2026-09-12,meeting,Niesha Huffines,"Hey everyone, I just had a totally amazing demo with Ruth Delgado and her team! One of them actually told me, ""This is exactly what we need, let's do it."""
-WGSS08LF-2,WGSS08LF,2026-09-13,email,Niesha Huffines,Sent proposal for GTXPro.
-WGSS08LF-3,WGSS08LF,2026-09-17,email,Ruth Delgado,"- Heads-up
-- Pause on all new vendor onboarding
-- Waiting for reorg to settle
-- Not our issue
-- Will reach out later"
-WGSS08LF-4,WGSS08LF,2026-09-21,call,Niesha Huffines,"Hey everyone! Just caught up with Ruth Delgado, and she is still super warm about everything. I am definitely expecting us to close this one out this quarter!"
+WB974HS4-1,WB974HS4,2026-08-25,call,Niesha Huffines,discovery with clara sandoval replacing end of life units across two sites buyer said we need this racked before the q4 freeze
+WB974HS4-2,WB974HS4,2026-08-31,email,Clara Sandoval,Thanks Niesha Huffines. Forwarded the GTX Plus Basic spec to Ben Kowalski — she wants a single-quote for both sites. Can you send a formal proposal?
+WB974HS4-3,WB974HS4,2026-09-01,meeting,Niesha Huffines,"Proposal review with Clara Sandoval and Ben Kowalski. Ben Kowalski approved budget at list ($1,096). Procurement is drafting the PO; legal has our MSA."
+WB974HS4-4,WB974HS4,2026-09-22,email,Clara Sandoval,The purchase order currently resides within procurement. Execution and signature are projected within a two-week timeframe.
+WGSS08LF-1,WGSS08LF,2026-09-12,meeting,Niesha Huffines,"good demo with ruth delgados team buyer said ""this is exactly what we need let's do it"""
+WGSS08LF-2,WGSS08LF,2026-09-13,email,Niesha Huffines,sent proposal for gtxpro
+WGSS08LF-3,WGSS08LF,2026-09-17,email,Ruth Delgado,Heads-up: we've been asked to pause all new vendor onboarding until the reorg settles. Nothing to do with you — I'll reach out when I can.
+WGSS08LF-4,WGSS08LF,2026-09-21,call,Niesha Huffines,spoke with ruth delgado she remains super warm and we should close this quarter
 WJ81WITC-1,WJ81WITC,2026-10-02,call,Darcel Schlecht,Elena Castellano expressed high satisfaction with the solution and formally requested pricing documentation.
-WJ81WITC-2,WJ81WITC,2026-10-03,email,Elena Castellano,Thx for the quote! Will try to grab time with Jorge Petrov. Tbh I dont own this budget and she's got other priorities this qtr.
+WJ81WITC-2,WJ81WITC,2026-10-03,email,Elena Castellano,thanks for the quote elena here will try to connect with jorge petrov truth is i do not own this budget and she has other priorities this quarter
 WJ81WITC-3,WJ81WITC,2026-10-11,email,Darcel Schlecht,"Initiated follow-up with Elena Castellano regarding Jorge Petrov's schedule; currently, no status updates on his availability are provided."
-X46ZXX2S-1,X46ZXX2S,2026-09-27,call,Jonathan Berthelot,Talked pricing w/ Ben Nakamura. Kestrel Compute is also bidding.
-X46ZXX2S-2,X46ZXX2S,2026-09-29,email,Jonathan Berthelot,Sent revised quote for GTX Plus Basic.
-X46ZXX2S-3,X46ZXX2S,2026-10-01,email,Ben Nakamura,Appreciate the quick turnaround. We've decided to go with Kestrel Compute for this cycle. Thanks for your time — happy to revisit next year.
+WJ81WITC-4,WJ81WITC,2026-10-14,email,system,Auto-reply: Elena Castellano is no longer with Betatech. For infrastructure enquiries please contact Jorge Petrov.
+X46ZXX2S-1,X46ZXX2S,2026-09-27,call,Jonathan Berthelot,Pricing discussion with Ben Nakamura. Kestrel Compute is also bidding.
+X46ZXX2S-2,X46ZXX2S,2026-09-29,email,Jonathan Berthelot,I have successfully transmitted the updated pricing for the GTX Plus Basic to the client.
+X46ZXX2S-3,X46ZXX2S,2026-10-01,email,Ben Nakamura,- Appreciate fast response - Chose Kestrel Compute this cycle - Thanks for time -
 X46ZXX2S-4,X46ZXX2S,2026-10-03,call,Jonathan Berthelot,"Left VM for Ben Nakamura, want to understand what it would take to win this back."
 X66G66ZA-1,X66G66ZA,2026-09-19,call,Darcel Schlecht,Left VM for Ines Nakamura re: MG Special proposal.
 X66G66ZA-2,X66G66ZA,2026-10-05,call,Darcel Schlecht,Left VM.
 X66G66ZA-3,X66G66ZA,2026-10-14,email,Ines Nakamura,"Sorry Darcel Schlecht, been travelling. Yes, we're moving ahead — Tom Marchetti approved it. PO should go out next week."
 X66G66ZA-4,X66G66ZA,2026-10-19,call,Darcel Schlecht,Left VM to confirm PO timing.
-XEP9GSSY-1,XEP9GSSY,2026-08-09,call,Jonathan Berthelot,Reqs call w Jorge Ivanova.
-XEP9GSSY-2,XEP9GSSY,2026-10-12,email,Jorge Ivanova,"Hey there! We are currently looking at GTX Basic alongside Orion Hardware, and we should be making our final choice in roughly three weeks. By the way, is there any chance you could send over a loaner unit for our lab?"
+XEP9GSSY-1,XEP9GSSY,2026-08-09,call,Jonathan Berthelot,Requirements call with Jorge Ivanova.
+XEP9GSSY-2,XEP9GSSY,2026-10-12,email,Jorge Ivanova,We're evaluating GTX Basic against Orion Hardware; decision in about three weeks. Could you get us a loaner unit for the lab?
 XEP9GSSY-3,XEP9GSSY,2026-10-19,email,Jonathan Berthelot,Loaner request submitted.
-XWN6WWOD-1,XWN6WWOD,2026-08-31,meeting,Jonathan Berthelot,"Tech review w/ Mei Quinn's crew. All reqs checked. Buyer said ""We're going to move on this; it just has to clear legal."""
-XWN6WWOD-2,XWN6WWOD,2026-09-26,email,Mei Quinn,Legal is reviewing the MSA. Nothing needed from you for now — I'll come back once redlines are in.
-Y9SCLUH8-1,Y9SCLUH8,2026-10-18,call,Jonathan Berthelot,Spoke to Elena Castellano – looks like they're looking at Kestrel Compute too. Failover performance is their main thing.
-Y9SCLUH8-2,Y9SCLUH8,2026-10-19,meeting,Jonathan Berthelot,"quick update from the customer lab side-by-side test. GTX Plus Basic totally outperformed Kestrel Compute on failover recovery. buyer said: ""that settles it for the engineering team."""
+XWN6WWOD-1,XWN6WWOD,2026-08-31,meeting,Jonathan Berthelot,"I conducted a technical review with Mei Quinn's team today. All requirements have been successfully met. As the buyer stated, ""We're going to move on this; it just has to clear legal."""
+XWN6WWOD-2,XWN6WWOD,2026-09-26,email,Mei Quinn,"Legal's looking at the MSA now. Nothing for you to do rn, I'll update u when the redlines come back."
+Y9SCLUH8-1,Y9SCLUH8,2026-10-18,call,Jonathan Berthelot,"Elena Castellano confirmed that they are additionally evaluating Kestrel Compute, noting that failover performance remains their primary evaluation criterion."
+Y9SCLUH8-2,Y9SCLUH8,2026-10-19,meeting,Jonathan Berthelot,"During a side-by-side test conducted at the customer laboratory, the GTX Plus Basic successfully outperformed Kestrel Compute regarding failover recovery capabilities. The buyer stated, ""That settles it for the engineering team."""
 Y9SCLUH8-3,Y9SCLUH8,2026-10-19,email,Elena Castellano,Engineering recommendation went to Ben Thornton in favour of GTX Plus Basic. Please send the final quote.
 YQ6VELF1-1,YQ6VELF1,2026-10-15,meeting,Darcel Schlecht,Final review with Leah Mensah and Kwame Farouk. No open questions.
-YQ6VELF1-2,YQ6VELF1,2026-10-16,email,Leah Mensah,We're going ahead with GTXPro. Kwame Farouk signed off; PO should be out next week.
+YQ6VELF1-2,YQ6VELF1,2026-10-16,email,Leah Mensah,"GTXPro deployment is fully approved. Kwame Farouk provided final authorization, and the purchase order is scheduled for release next week."
 YQ6VELF1-3,YQ6VELF1,2026-10-18,call,Darcel Schlecht,Confirmed PO is routing.
-YQK2K6U5-1,YQK2K6U5,2026-10-07,call,Darcel Schlecht,"Conducted discovery session with Ruth Marchetti regarding the replacement of end-of-life units deployed across two distinct facilities. The buyer stated: ""We need this racked before the Q4 freeze."""
-YQK2K6U5-2,YQK2K6U5,2026-10-08,email,Ruth Marchetti,Thanks Darcel Schlecht. Forwarded the GTX Basic spec to Yuki Hughes — she wants a single-quote for both sites. Can you send a formal proposal?
-YQK2K6U5-3,YQK2K6U5,2026-10-09,meeting,Darcel Schlecht,"Proposal review executed with Ruth Marchetti and Yuki Hughes. Yuki Hughes sanctioned the expenditure at list ($550). Procurement is currently formulating the PO, while legal is in possession of our MSA."
-YQK2K6U5-4,YQK2K6U5,2026-10-13,email,Ruth Marchetti,Documentation is currently traversing procurement channels. Authorization is projected within a two-week window.
-YRYMSUE3-1,YRYMSUE3,2026-10-11,call,Niesha Huffines,Hey there! Just wanted to share a quick update—Ben Moreau mentioned that Bluewater Systems came in with a lower number.
+YQK2K6U5-1,YQK2K6U5,2026-09-21,call,Darcel Schlecht,"Conducted discovery session with Ruth Marchetti regarding the replacement of end-of-life units deployed across two distinct facilities. The buyer stated: ""We need this racked before the Q4 freeze."""
+YQK2K6U5-2,YQK2K6U5,2026-09-22,email,Ruth Marchetti,Thanks Darcel Schlecht. Forwarded the GTX Basic spec to Yuki Hughes — she wants a single-quote for both sites. Can you send a formal proposal?
+YQK2K6U5-3,YQK2K6U5,2026-09-23,meeting,Darcel Schlecht,"Proposal review executed with Ruth Marchetti and Yuki Hughes. Yuki Hughes sanctioned the expenditure at list ($550). Procurement is currently formulating the PO, while legal is in possession of our MSA."
+YQK2K6U5-4,YQK2K6U5,2026-09-27,email,Ruth Marchetti,Documentation is currently traversing procurement channels. Authorization is projected within a two-week window.
+YRYMSUE3-1,YRYMSUE3,2026-10-11,call,Niesha Huffines,ben moreau mentioned bluewater systems came in with a lower number
 YRYMSUE3-2,YRYMSUE3,2026-10-12,email,Ben Moreau,"Hey there! So we weighed both options, and we are going with GTX Basic because their support model totally won us over. Legal has the MSA now too."
 YRYMSUE3-3,YRYMSUE3,2026-10-13,email,Ben Moreau,"Before I sign off, just one quick thing—our security folks are asking for the firmware-signing document for GTX Basic. Any chance you could shoot that over this week? It's not a dealbreaker at all, simply something they need to check off their list."
+YRYMSUE3-4,YRYMSUE3,2026-10-14,email,Ben Moreau,"To confirm scope: we'd take 2 units of GTX Basic at list, $1,100 total."
 Z032GGRE-1,Z032GGRE,2026-09-02,call,Darcel Schlecht,"Leah Delgado validated that their evaluation scope additionally encompasses Orion Hardware, establishing failover performance as the primary architectural benchmark."
 Z032GGRE-2,Z032GGRE,2026-09-17,meeting,Darcel Schlecht,"During the laboratory side-by-side evaluation, GTXPro outperformed Orion Hardware regarding failover recovery metrics. The buyer stated, ""That settles it for the engineering team."""
 Z032GGRE-3,Z032GGRE,2026-10-11,email,Leah Delgado,Engineering recommendation went to Omar Brennan in favour of GTXPro. Please send the final quote.
-Z64MQTF2-1,Z64MQTF2,2026-09-12,call,Jonathan Berthelot,Intro with Ethan Thornton. Existing customer expanding to a new site.
-Z64MQTF2-2,Z64MQTF2,2026-10-17,email,Ethan Thornton,leah mensah gave the green light so we are standardising on gtxpro for the new site send the paperwork over this week
+Z032GGRE-4,Z032GGRE,2026-10-12,email,Leah Delgado,"To confirm scope: we'd take 2 units of GTXPro at list, $9,642 total."
+Z64MQTF2-1,Z64MQTF2,2026-09-12,call,Jonathan Berthelot,I conducted an introduction with Ethan Thornton. He is an existing customer who is currently expanding operations to a new site.
+Z64MQTF2-2,Z64MQTF2,2026-10-17,email,Ethan Thornton,Leah Mensah has officially authorized standardizing on GTXPro for the upcoming deployment; please transmit the documentation within the current week.
 ZA6AJ0N1-1,ZA6AJ0N1,2026-08-19,call,Darcel Schlecht,Introductory discussion completed with Ingrid Nakamura regarding expansion to a new site for our existing customer base.
-ZA6AJ0N1-2,ZA6AJ0N1,2026-10-15,email,Ingrid Nakamura,"- Selected GTXPro as standard for the new site
-- Raj Whitfield approved
-- Action: send paperwork this week"
-ZGSQMEQ9-1,ZGSQMEQ9,2026-10-05,call,Niesha Huffines,Left VM for Kwame Sandoval re: GTX Plus Basic proposal.
-ZGSQMEQ9-2,ZGSQMEQ9,2026-10-07,call,Niesha Huffines,Left VM.
+ZA6AJ0N1-2,ZA6AJ0N1,2026-10-15,email,Ingrid Nakamura,Raj Whitfield signed off - we're standardising on GTXPro for the new site. Can you shoot over the paperwork this wk?
+ZGSQMEQ9-1,ZGSQMEQ9,2026-10-05,call,Niesha Huffines,left vm for kwame sandoval about gtx plus basic proposal
+ZGSQMEQ9-2,ZGSQMEQ9,2026-10-07,call,Niesha Huffines,left vm
 ZGSQMEQ9-3,ZGSQMEQ9,2026-10-10,email,Kwame Sandoval,"Sorry Niesha Huffines, been travelling. Yes, we're moving ahead — Raj Abara approved it. PO should go out next week."
-ZGSQMEQ9-4,ZGSQMEQ9,2026-10-12,call,Niesha Huffines,Left VM to confirm PO timing.
-ZIFDD41D-1,ZIFDD41D,2026-09-07,meeting,Jonathan Berthelot,"Tech rev w/ Nadia Moreau's team done. Checked all reqs. Buyer said: ""We're going to move on this; it just has to clear legal."""
-ZIFDD41D-2,ZIFDD41D,2026-10-01,email,Nadia Moreau,legal is looking at the msa right now no action on your end i will update you when redlines come back
-ZT6D57ED-1,ZT6D57ED,2026-10-04,call,Gladys Colclough,Introductory session executed with Raj Hughes regarding expansion of the current deployment to a new facility for this existing client.
-ZT6D57ED-2,ZT6D57ED,2026-10-17,email,Raj Hughes,Hey - we're going with GTX Plus Pro for the new site. Ines Petrov gave the green light. can u shoot over the paperwork this week plz
+ZGSQMEQ9-4,ZGSQMEQ9,2026-10-12,call,Niesha Huffines,left vm for po timing check
+ZIFDD41D-1,ZIFDD41D,2026-09-07,meeting,Jonathan Berthelot,"I conducted a technical review alongside the team of Nadia Moreau, and I am pleased to report that all requirements have been successfully met. As the buyer stated: ""We're going to move on this; it just has to clear legal."""
+ZIFDD41D-2,ZIFDD41D,2026-10-01,email,Nadia Moreau,The MSA is currently under Legal review. No action is required on your part at this stage; I will re-engage as soon as the redlined version is available.
+ZT6D57ED-1,ZT6D57ED,2026-10-04,call,Gladys Colclough,Intro with Raj Hughes. Existing customer expanding to a new site.
+ZT6D57ED-2,ZT6D57ED,2026-10-17,email,Raj Hughes,- New site standardizing on GTX Plus Pro.- Ines Petrov gave approval.- Need paperwork sent this week.
