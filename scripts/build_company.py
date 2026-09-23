@@ -122,6 +122,20 @@ WON = [
                                 "PO should go out next week."),
              ("call", "rep", "Left VM to confirm PO timing."),
          ]),
+    dict(name="silent_then_signed", objection="timing", action="re_engage_dormant",
+         stage="Proposal", gap=(25, 40), inflated=False, steps=[
+             ("call", "rep", "Discovery with {champ}; needs {product} for a site refresh."),
+             ("email", "rep", "Sent proposal and pricing."),
+             ("email", "buyer", "Things are hectic here — haven't forgotten about this. Let me get back to you."),
+             ("call", "rep", "Left VM."),
+         ]),
+    dict(name="budget_unresolved_won", objection="budget", action="offer_phased_pricing",
+         stage="Proposal", gap=(5, 14), inflated=False, steps=[
+             ("call", "rep", "Demo of {product} for {champ}'s team."),
+             ("email", "buyer", "Team liked it. The number is a stretch for this quarter's budget though — is "
+                                "there any flexibility on structure?"),
+             ("call", "rep", "Discussed options with {champ}. No answer yet; she will talk to {econ}."),
+         ]),
     dict(name="stage_lagging", objection="none", action="confirm_procurement_timeline",
          stage="Qualification", gap=(2, 7), inflated=False, steps=[
              ("call", "rep", "Intro with {champ}. Existing customer expanding to a new site."),
@@ -182,6 +196,19 @@ LOST = [
                                 "cycle. Thanks for your time — happy to revisit next year."),
              ("call", "rep", "Left VM for {champ}, want to understand what it would take to win this back."),
          ]),
+    dict(name="verbal_yes_then_lost", objection="none", action="confirm_procurement_timeline",
+         stage="Negotiation", gap=(3, 10), inflated=False, weight=0.25, steps=[
+             ("meeting", "rep", "Final review with {champ} and {econ}. No open questions."),
+             ("email", "buyer", "We're going ahead with {product}. {econ} signed off; PO should be out next week."),
+             ("call", "rep", "Confirmed PO is routing."),
+         ]),
+    dict(name="evaluating_open_lost", objection="competitor", action="run_competitive_bakeoff",
+         stage="Proposal", gap=(4, 12), inflated=False, steps=[
+             ("call", "rep", "Requirements call with {champ}."),
+             ("email", "buyer", "We're evaluating {product} against {comp}; decision in about three weeks. "
+                                "Could you get us a loaner unit for the lab?"),
+             ("email", "rep", "Loaner request submitted."),
+         ]),
     dict(name="no_authority", objection="authority", action="multithread_to_economic_buyer",
          stage="Proposal", gap=(12, 30), inflated=True, steps=[
              ("call", "rep", "{champ} loves the product and asked for a quote."),
@@ -196,7 +223,10 @@ def pick_archetype(won: bool, age_days: int):
     """Pick a story that fits inside the deal's real age (young deals can't be 'ghosted for 60 days')."""
     pool = WON if won else LOST
     fits = [a for a in pool if a["gap"][0] + len(a["steps"]) <= age_days]
-    return rng.choice(fits or [min(pool, key=lambda a: a["gap"][0] + len(a["steps"]))])
+    if not fits:
+        return min(pool, key=lambda a: a["gap"][0] + len(a["steps"]))
+    # Pure-noise stories (nothing in the record predicts the outcome) are kept rare.
+    return rng.choices(fits, weights=[a.get("weight", 1.0) for a in fits])[0]
 
 
 def spread_dates(start: pd.Timestamp, end: pd.Timestamp, n: int) -> list[pd.Timestamp]:
@@ -234,11 +264,17 @@ def build():
         comp = rng.choice(COMPETITORS)
         list_price = price_norm[d.product.replace(" ", "").lower()]
         n_steps = len(arch["steps"])
-        # Last buyer touch must leave room for every earlier activity after the engage date.
-        gap = min(rng.randint(*arch["gap"]), max(age - n_steps, 0))
+        authors = [st[1] for st in arch["steps"]]
+        last_buyer = max((i for i, a in enumerate(authors) if a == "buyer"), default=n_steps - 1)
+        # The gap is days since the BUYER last touched the deal; rep voicemails after that
+        # don't count. Leave room for every earlier activity after the engage date.
+        gap = min(rng.randint(*arch["gap"]), max(age - (last_buyer + 1), 0))
         last_buyer_touch = DEMO_SNAPSHOT - timedelta(days=gap)
-        dates = spread_dates(engage, last_buyer_touch, len(arch["steps"]))
+        dates = spread_dates(engage, last_buyer_touch, last_buyer + 1)
         dates[-1] = last_buyer_touch
+        if last_buyer < n_steps - 1:
+            dates += spread_dates(last_buyer_touch, DEMO_SNAPSHOT, n_steps - last_buyer - 1)
+        dates = [min(d, DEMO_SNAPSHOT) for d in dates]
 
         fill = dict(champ=champ, econ=econ, comp=comp, product=d.product, rep=d.sales_agent,
                     account=d.account, price=f"${list_price:,.0f}")

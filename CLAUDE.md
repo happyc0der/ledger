@@ -11,6 +11,8 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
 - `scripts/run.py v1|v2 [--reps a,b] [--limit N]` → `runs/<version>.jsonl`;
   `scripts/run.py eval v1 v2` → `reports/`.
 - Model responses are cached under `.cache/`; delete to force re-inference.
+- UI: `.venv/bin/uvicorn ledger.app:app --port 8787` → http://localhost:8787 (reads
+  `runs/`; run `scripts/run.py eval v1 v2` first so receipts and Proof have data).
 
 ## Inference
 No paid credits. `LLM_PROVIDER=ollama` (default, local `qwen3:14b`) | `gemini` (3.5-flash-lite, metered: spend logged to `.cache/usage.json`, hard stop at `GEMINI_BUDGET_USD`, default $2) | `groq` | `xai`;

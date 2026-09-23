@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ledger-ui",
+      "runtimeExecutable": ".venv/bin/uvicorn",
+      "runtimeArgs": ["ledger.app:app", "--port", "8787", "--reload"],
+      "port": 8787
+    }
+  ]
+}

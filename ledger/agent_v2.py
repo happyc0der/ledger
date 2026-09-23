@@ -79,15 +79,15 @@ def run_deal(co: Company, oid: str, *, session: str) -> tuple[dict, list[dict]]:
     ex = _explain(state, dec, session=session, oid=oid)
     quote_ok = ex["buyer_quote"] == "" or _norm(ex["buyer_quote"]) in record
     if not quote_ok:
-        steps.append(tracing.step("check:quote:mismatch", ex["buyer_quote"], tool="verifier", status="error"))
+        steps.append(tracing.step("check:quote:mismatch", ex["buyer_quote"], tool="verifier:quote", status="error"))
         ex = _explain(state, dec, session=session, oid=oid, strict=True)
         quote_ok = ex["buyer_quote"] == "" or _norm(ex["buyer_quote"]) in record
         if not quote_ok:
             ex["buyer_quote"] = ""  # refuse to show an unverifiable quote
     steps.append(tracing.step("check:quote:match" if quote_ok else "check:quote:dropped",
-                              ex["buyer_quote"] or "(no quote)", tool="verifier"))
+                              ex["buyer_quote"] or "(no quote)", tool="verifier:quote"))
     steps.append(tracing.step("check:amount:match", f"${state['computed']['amount_usd']:,.0f} from catalogue/CRM",
-                              tool="verifier"))
+                              tool="verifier:amount"))
     row = dict(opportunity_id=oid, win_probability=dec.win_probability, amount_usd=state["computed"]["amount_usd"],
                days_since_last_buyer_touch=state["computed"]["days_since_buyer_touch"] or 0,
                objection=dec.objection, buyer_quote=ex["buyer_quote"], next_action=dec.next_action,

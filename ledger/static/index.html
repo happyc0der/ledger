@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger — pipeline review</title>
+<style>
+  :root { --bg:#0f1115; --panel:#161a21; --line:#262c36; --text:#e6e9ef; --muted:#8a93a3;
+          --good:#3ecf8e; --bad:#ff6b6b; --warn:#f7b955; --accent:#7aa2f7; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:14px/1.45 -apple-system, "Segoe UI", Inter, sans-serif; }
+  header { display:flex; gap:16px; align-items:center; padding:12px 20px; border-bottom:1px solid var(--line); background:var(--panel); position:sticky; top:0; z-index:2; }
+  header h1 { font-size:16px; margin:0; font-weight:600; }
+  header .sub { color:var(--muted); }
+  .spacer { flex:1; }
+  .toggle { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .toggle button { background:transparent; color:var(--muted); border:0; padding:6px 12px; cursor:pointer; }
+  .toggle button.on { background:var(--accent); color:#0b0d12; font-weight:600; }
+  label.chk { color:var(--muted); cursor:pointer; user-select:none; }
+  main { display:grid; grid-template-columns: 1fr 420px; gap:0; height:calc(100vh - 53px); }
+  #list { overflow:auto; }
+  #drawer { border-left:1px solid var(--line); background:var(--panel); overflow:auto; padding:16px 18px; }
+  table { width:100%; border-collapse:collapse; }
+  th, td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { color:var(--muted); font-weight:500; position:sticky; top:0; background:var(--bg); }
+  tr.row { cursor:pointer; }
+  tr.row:hover, tr.row.sel { background:#1b2130; }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .bar { display:inline-block; height:8px; border-radius:4px; background:var(--accent); vertical-align:middle; margin-right:6px; }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:12px; border:1px solid var(--line); color:var(--muted); }
+  .pill.obj-none { color:var(--good); border-color:var(--good); }
+  .pill.obj-budget, .pill.obj-competitor, .pill.obj-need { color:var(--warn); border-color:var(--warn); }
+  .pill.obj-timing, .pill.obj-authority { color:var(--bad); border-color:var(--bad); }
+  .rcpt { font-size:12px; letter-spacing:.02em; }
+  .rcpt .ok { color:var(--good); } .rcpt .no { color:var(--bad); } .rcpt .na { color:var(--muted); }
+  h2 { font-size:15px; margin:0 0 6px; } h3 { font-size:13px; color:var(--muted); margin:16px 0 6px; text-transform:uppercase; letter-spacing:.04em; }
+  .act { padding:8px 0; border-bottom:1px solid var(--line); }
+  .act .who { color:var(--muted); font-size:12px; }
+  .act.buyer .who { color:var(--accent); }
+  blockquote { margin:6px 0; padding:8px 10px; border-left:3px solid var(--accent); background:#1b2130; }
+  .kv { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; }
+  .kv div:nth-child(odd) { color:var(--muted); }
+  .cmp { width:100%; } .cmp td, .cmp th { padding:5px 8px; }
+  .outcome { border:1px dashed var(--line); padding:10px; border-radius:6px; margin-top:8px; }
+  .won { color:var(--good); } .lost { color:var(--bad); }
+  #proof { padding:16px 20px; display:none; }
+  #proof.show { display:block; }
+  .muted { color:var(--muted); }
+  .empty { padding:40px; color:var(--muted); text-align:center; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Ledger</h1>
+  <span class="sub" id="asof"></span>
+  <span class="spacer"></span>
+  <span class="muted">Agent</span>
+  <div class="toggle" id="vtoggle"></div>
+  <label class="chk"><input type="checkbox" id="reveal"> reveal outcomes</label>
+  <div class="toggle"><button id="viewList" class="on">Pipeline</button><button id="viewProof">Proof</button></div>
+</header>
+<main id="mainList">
+  <div id="list"><div class="empty">Loading…</div></div>
+  <aside id="drawer"><div class="empty">Select a deal to see its receipts.</div></aside>
+</main>
+<section id="proof"></section>
+
+<script>
+const $ = s => document.querySelector(s);
+const fmt$ = n => n == null ? '—' : '$' + Math.round(n).toLocaleString();
+const pct = x => x == null ? '—' : Math.round(x * 100) + '%';
+let state = { version: 'v2', reveal: false, sel: null, deals: [], meta: null };
+
+async function api(p) { const r = await fetch(p); if (!r.ok) throw new Error(p); return r.json(); }
+
+function receipts(d) {
+  if (d.amount_ok == null) return '<span class="rcpt na">unverified</span>';
+  const f = (ok, label) => `<span class="${ok ? 'ok' : 'no'}" title="${label} ${ok ? 'matches CRM' : 'NOT in CRM'}">${ok ? '✓' : '✗'} ${label}</span>`;
+  return `<span class="rcpt">${f(d.amount_ok, 'amount')} ${f(d.gap_ok, 'days')} ${f(d.quote_ok, 'quote')}</span>`;
+}
+
+function renderList() {
+  const rows = state.deals.map((d, i) => `
+    <tr class="row ${state.sel === d.opportunity_id ? 'sel' : ''}" data-id="${d.opportunity_id}">
+      <td class="num muted">${i + 1}</td>
+      <td><b>${d.account}</b><div class="muted">${d.product} · ${d.sales_agent}</div></td>
+      <td class="muted">${d.stage}</td>
+      <td class="num">${fmt$(d.amount_usd)}</td>
+      <td class="num"><span class="bar" style="width:${Math.round(d.win_probability * 60)}px"></span>${pct(d.win_probability)}</td>
+      <td><span class="pill obj-${d.objection}">${d.objection}</span></td>
+      <td>${(d.next_action || '').replace(/_/g, ' ')}</td>
+      <td>${receipts(d)}</td>
+    </tr>`).join('');
+  $('#list').innerHTML = `<table><thead><tr><th>#</th><th>Deal</th><th>Rep stage</th><th class="num">Amount</th>
+    <th class="num">Win prob.</th><th>Objection</th><th>Next action</th><th>Receipts</th></tr></thead><tbody>${rows}</tbody></table>`;
+  document.querySelectorAll('tr.row').forEach(tr => tr.onclick = () => select(tr.dataset.id));
+}
+
+async function select(id) {
+  state.sel = id; renderList();
+  const d = await api('/api/deal/' + id);
+  const v = d.versions[state.version] || {};
+  const acts = d.activities.map(a => `<div class="act ${a.author === d.deal.sales_agent ? '' : 'buyer'}">
+      <div class="who">${a.date} · ${a.type} · ${a.author}</div><div>${a.text}</div></div>`).join('');
+  const others = Object.entries(d.versions).map(([k, r]) => `<tr><td>${k}</td><td class="num">${pct(r.win_probability)}</td>
+      <td>${r.objection}</td><td>${(r.next_action || '').replace(/_/g, ' ')}</td><td>${receipts(r)}</td></tr>`).join('');
+  const outcome = state.reveal && d.outcome ? `<div class="outcome"><b class="${d.outcome.outcome.toLowerCase()}">${d.outcome.outcome}</b>
+      ${d.outcome.outcome === 'Won' ? 'for ' + fmt$(d.outcome.actual_close_value) : ''} on ${d.outcome.actual_close_date}
+      <div class="muted">buyer objection: ${d.outcome.objection} · right call: ${d.outcome.correct_next_action.replace(/_/g, ' ')}</div></div>` : '';
+  $('#drawer').innerHTML = `
+    <h2>${d.deal.account} <span class="muted">· ${d.deal.product}</span></h2>
+    <div class="kv"><div>Rep</div><div>${d.deal.sales_agent}</div><div>Rep-set stage</div><div>${d.deal.stage}</div>
+      <div>CRM amount</div><div>${d.deal.amount == null ? '<span class="muted">not entered</span>' : fmt$(d.deal.amount)}</div>
+      <div>Contacts</div><div>${d.contacts.map(c => `${c.name} <span class="muted">(${c.title})</span>`).join('<br>')}</div></div>
+    <h3>${state.version} says</h3>
+    <div class="kv"><div>Win prob.</div><div>${pct(v.win_probability)}</div><div>Objection</div><div>${v.objection || '—'}</div>
+      <div>Next action</div><div>${(v.next_action || '—').replace(/_/g, ' ')}</div>
+      <div>Days since buyer</div><div>${v.days_since_last_buyer_touch ?? '—'}</div></div>
+    ${v.buyer_quote ? `<blockquote>“${v.buyer_quote}”</blockquote>` : '<div class="muted" style="margin:6px 0">no buyer quote cited</div>'}
+    <div>${v.rationale || ''}</div>
+    <div style="margin-top:6px">${receipts(v)}</div>
+    ${outcome}
+    <h3>Both versions</h3>
+    <table class="cmp"><tr><th></th><th class="num">p</th><th>objection</th><th>action</th><th>receipts</th></tr>${others}</table>
+    <h3>Record (${d.activities.length})</h3>${acts}`;
+}
+
+function topBinNote(v1, v2) {
+  const top = v => v.reliability[v.reliability.length - 1];
+  const a = top(v1), b = top(v2);
+  return `v1 puts ${a.n} of ${v1.deals} deals in its top confidence bin, so its "top 20" is mostly just the largest deals. ` +
+         `When v1 says ${pct(a.stated)}, ${pct(a.actual)} close; when v2 says ${pct(b.stated)}, ${pct(b.actual)} close.`;
+}
+
+function renderProof(c) {
+  const v1 = c.v1, v2 = c.v2;
+  if (!v1 || !v2) { $('#proof').innerHTML = '<div class="empty">Run both versions and `scripts/run.py eval v1 v2` first.</div>'; return; }
+  const row = (label, k, f = x => x, better = 'high') => {
+    const a = v1[k], b = v2[k];
+    const win = better === 'high' ? (b > a) : (b < a);
+    return `<tr><td>${label}</td><td class="num">${f(a)}</td><td class="num ${win ? 'won' : ''}">${f(b)}</td></tr>`;
+  };
+  const rel = v => v.reliability.map(r => `<tr><td>${r.bin}</td><td class="num">${r.n}</td><td class="num">${pct(r.stated)}</td><td class="num">${pct(r.actual)}</td></tr>`).join('');
+  $('#proof').innerHTML = `
+    <h2>Same ${v2.deals} deals, same snapshot, scored against what actually happened</h2>
+    <table class="cmp" style="max-width:720px"><tr><th>metric</th><th class="num">v1 (naive)</th><th class="num">v2</th></tr>
+      ${row('Revenue captured in top 20', 'revenue_top20', fmt$)}
+      ${row('…as share of the best possible top 20', 'revenue_top20_pct', pct)}
+      ${row('Pipeline total error', 'pipeline_error_pct', pct, 'low')}
+      ${row('Fabricated amounts / day-gaps / quotes', 'fabrications', x => x, 'low')}
+      ${row('Objection accuracy', 'objection_acc', pct)}
+      ${row('Next-action accuracy', 'action_acc', pct)}
+      ${row('Generic "re-engage" actions', 'generic_actions', x => x, 'low')}
+      ${row('Brier score (lower = better calibrated)', 'brier', x => x.toFixed(3), 'low')}
+      ${row('Deals reported', 'deals')}
+      ${row('Duplicate deal reports', 'duplicate_deals', x => x, 'low')}
+    </table>
+    <div style="display:flex; gap:40px; margin-top:20px; flex-wrap:wrap">
+      ${['v1', 'v2'].map(k => `<div><h3>Reliability — ${k}</h3><table class="cmp"><tr><th>stated p</th><th class="num">n</th><th class="num">mean stated</th><th class="num">actually won</th></tr>${rel(c[k])}</table></div>`).join('')}
+    </div>
+    <p class="muted" style="max-width:720px">${topBinNote(v1, v2)}
+    Every v2 number and quote was checked in code against the CRM before display; the checks are the ✓ receipts in the pipeline view and the <code>check:*</code> steps in PRISM.</p>`;
+}
+
+async function loadDeals() {
+  state.deals = await api('/api/deals?version=' + state.version);
+  renderList();
+  if (state.sel) select(state.sel);
+}
+
+(async () => {
+  state.meta = await api('/api/meta');
+  $('#title').textContent = 'Ledger · ' + state.meta.company.replace(' — pipeline review brief', '');
+  $('#asof').textContent = `week of ${state.meta.as_of} · ${state.meta.n_deals} open deals · ${state.meta.reps.length} reps`;
+  $('#vtoggle').innerHTML = state.meta.versions.map(v => `<button data-v="${v}" class="${v === state.version ? 'on' : ''}">${v}</button>`).join('');
+  document.querySelectorAll('#vtoggle button').forEach(b => b.onclick = () => {
+    state.version = b.dataset.v; document.querySelectorAll('#vtoggle button').forEach(x => x.classList.toggle('on', x === b)); loadDeals();
+  });
+  $('#reveal').onchange = e => { state.reveal = e.target.checked; if (state.sel) select(state.sel); };
+  $('#viewList').onclick = () => { $('#mainList').style.display = 'grid'; $('#proof').classList.remove('show'); $('#viewList').classList.add('on'); $('#viewProof').classList.remove('on'); };
+  $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); };
+  await loadDeals();
+})();
+</script>
+</body>
+</html>

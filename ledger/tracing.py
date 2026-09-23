@@ -45,7 +45,9 @@ def trajectory(*, version: str, session_id: str, steps: list[dict], model: str,
 
 def step(label: str, output: str, *, tool: str | None = None, input_summary: str = "",
          status: str = "success") -> dict:
-    s = {"step_type": "tool_call" if tool else "reasoning", "label": label,
+    # PRISM's Task Completion rule (CORR-001) looks for a step_type of final_answer.
+    kind = "tool_call" if tool else ("final_answer" if label == "final_answer" else "reasoning")
+    s = {"step_type": kind, "label": label,
          "output_summary": output[:2000], "status": status}
     if tool:
         s["tool_name"] = tool

@@ -92,7 +92,8 @@ def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str
     u = r.usage
     tin, tout = getattr(u, "prompt_tokens", 0) or 0, getattr(u, "completion_tokens", 0) or 0
     _spend(p, tin, tout)
-    return r.choices[0].message.content or "", tin, tout
+    msg = r.choices[0].message if r.choices else None
+    return (getattr(msg, "content", None) or ""), tin, tout  # empty/blocked reply → ""
 
 
 def chat(messages: list[dict], *, schema: dict | None = None, version: str, session_id: str,
