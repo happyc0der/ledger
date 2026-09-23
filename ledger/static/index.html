@@ -146,7 +146,7 @@ function renderIssues(scores) {
   const names = scores.map(s => s.name);
   const row = (label, f) => `<tr><td>${label}</td>${scores.map(s => `<td class="num">${f(s)}</td>`).join('')}</tr>`;
   const types = Object.keys(scores[0].per_type);
-  $('#issuesProof').innerHTML = `<h2 style="margin-top:24px">What's wrong in the pipeline: CRM rules vs Ledger</h2>
+  $('#issuesProof').innerHTML = `<h2 style="margin-top:24px">What's wrong in the pipeline: CRM rules · a model asked to "find the issues" · Ledger</h2>
     <table class="cmp" style="max-width:720px"><tr><th></th>${names.map(n => `<th class="num">${n}</th>`).join('')}</tr>
       ${row('findings', s => s.findings)}
       ${row('syntactic (S1–S8) recall', s => pct(s.syntactic.recall))}

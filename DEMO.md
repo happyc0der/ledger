@@ -21,8 +21,9 @@ contact left, per the auto-reply on the other deal." "A rules engine can't do th
 in a hurry won't."
 
 **1:35 — Prove it (40s).** Proof tab: 235 deals, 18 planted anomaly types, outcomes hidden.
-Rules: 0% semantic. Ledger: 93% recall, 99% precision, **one clean deal falsely flagged out
-of 86**. "That last number is the one a RevOps team cares about — an agent that cries wolf
+Rules: 0% semantic. The same model just *asked* to find issues: 32% recall, and it cries
+wolf on 17% of clean deals. Ledger: 93% recall, 99% precision, **one clean deal falsely
+flagged out of 86**. "That last number is the one a RevOps team cares about — an agent that cries wolf
 gets muted in a week." Then the older table: revenue in the top-20 53% → 71%, fabrications 68
 → 0, Brier — same 228 deals, real outcomes.
 
@@ -40,8 +41,9 @@ nice UI. Ledger shows them — and tells you what doesn't add up."
 ## If asked
 - *Is the data real?* Deals, values, dates, outcomes: yes (public Maven CRM dataset). Notes
   and anomalies: synthetic, planted with labels, disclosed in the README.
-- *Why not just a better prompt?* KC-Bench: agents asked to "notice conflicts" miss explicit
-  ones. Ours doesn't notice — it reads into a schema and code compares. The fixes are
+- *Why not just a better prompt?* We measured it: the same model asked to "find the issues"
+  gets 32% recall and flags 17% of clean deals (KC-Bench's result, reproduced). Ledger's model
+  only reads into a schema; code compares. The fixes are
   architectural: what the model is allowed to decide.
 - *Did you tune to the labels?* No prompt or model change after scoring. Two comparison bugs
   fixed; three true-but-unlabelled situations added to the labels, all disclosed.

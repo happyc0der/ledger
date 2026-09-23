@@ -76,6 +76,8 @@ def main():
         from ledger.agent_v1 import run_rep
     elif a.version == "v3":
         from ledger.agent_v3 import run_rep
+    elif a.version == "naive":
+        from ledger.agent_naive_issues import run_rep
     else:
         from ledger.agent_v2 import run_rep
 

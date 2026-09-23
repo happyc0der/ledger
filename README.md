@@ -107,12 +107,18 @@ you just ask them to look. So Ledger doesn't ask the model to notice — it asks
 
 ### Results on 235 deals with 18 planted anomaly types (149 deals affected, 86 clean)
 
-| | CRM rules | Ledger v3 |
-|---|---|---|
-| Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 99% |
-| **Semantic (M1–M10) recall** | **0%** | **93%** |
-| Semantic precision | — | 99% |
-| Clean deals falsely flagged | 0 / 86 | **1 / 86** |
+| | CRM rules | naive agent¹ | Ledger v3 |
+|---|---|---|---|
+| Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 38% | 99% |
+| **Semantic (M1–M10) recall** | **0%** | 32% | **93%** |
+| Semantic precision | — | 62% | 99% |
+| Clean deals falsely flagged | 0 / 86 | 15 / 86 (17%) | **1 / 86** |
+
+¹ The same model (Gemini Flash-Lite), handed 25 deals at a time with the same taxonomy and
+asked to list every issue with a quote. It found 0 of 8 cross-deal contact departures and 1
+of 43 expired promises, and invented issues on 17% of clean deals — the KC-Bench result,
+reproduced. Ledger uses the same model; the difference is that it only *reads*, and code
+does the comparing.
 
 Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 · expired promise 100/91 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer 100/100 · arithmetic 100/100. Full table: `reports/issues.md`; every finding in the UI shows
 the CRM value, the buyer's sentence and the recommended action.

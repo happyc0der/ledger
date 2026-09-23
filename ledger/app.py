@@ -111,11 +111,12 @@ def issues():
     from .rules import Issue, run_rules
     ids = list(CO.deals.opportunity_id)
     scores = [score_issues.score(run_rules(CO), ids, "rules")]
-    p = RUNS_DIR / "v3.jsonl"
-    if p.exists():
-        rows = [json.loads(l) for l in p.read_text().splitlines()]
-        iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
-        scores.append(score_issues.score(iss, ids, "ledger (v3)"))
+    for ver, name in (("naive", "naive agent"), ("v3", "Ledger")):
+        p = RUNS_DIR / f"{ver}.jsonl"
+        if p.exists():
+            rows = [json.loads(l) for l in p.read_text().splitlines()]
+            iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
+            scores.append(score_issues.score(iss, ids, name))
     return _clean(scores)
 
 
