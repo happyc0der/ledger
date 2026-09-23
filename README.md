@@ -86,24 +86,58 @@ version, deal and role in metadata. Every v2 deal is a trajectory: `crm_query` �
 the missing $66K and the invented day-gaps are visible; the v2 trajectory for the same deal
 shows the check steps that stop them. Wiring lives in `ledger/tracing.py`.
 
+## Ledger v3: catching what doesn't add up
+
+A determinism check is table stakes; a rules engine on CRM fields finds past close dates
+and blank amounts, and Clari or Gong will sell you that. A revenue agent earns its keep when
+the record is *syntactically fine and semantically wrong*: stage says Negotiation, the buyer
+said "budget frozen"; the primary contact left the company; "PO next week" was three weeks
+ago; the buyer chose a competitor and the deal is still open; a $27K deal in Proposal has no
+economic buyer. KC-Bench (2026) shows LLM agents miss exactly these explicit conflicts when
+you just ask them to look. So Ledger doesn't ask the model to notice — it asks it to *read*:
+
+1. **Claim ledger (model).** Buyer-stated facts in a fixed schema — budget status, decision
+   timeline, economic buyer, champion status, competitor status, units and totals discussed,
+   commitment, last promise — each with a verbatim quote. Unknown = null, never inferred.
+2. **Verifier (code).** A claim without a verbatim buyer or system quote is nulled; dates come
+   from the activity that contains the quote, not from the model.
+3. **Consistency (code).** Ledger vs CRM fields, slot by slot, plus a cross-deal pass per
+   account (a contact reported gone on one deal, still primary on another).
+4. **Judgement (decision model).** Win probability, objection, next action.
+
+### Results on 235 deals with 18 planted anomaly types (149 deals affected, 86 clean)
+
+| | CRM rules | Ledger v3 |
+|---|---|---|
+| Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 99% |
+| **Semantic (M1–M10) recall** | **0%** | **91%** |
+| Semantic precision | — | 99% |
+| Clean deals falsely flagged | 0 / 86 | **1 / 86** |
+
+Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 ·
+expired promise 100/78 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie
+deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer
+100/100 · arithmetic 100/100. Full table: `reports/issues.md`; every finding in the UI shows
+the CRM value, the buyer's sentence and the recommended action.
+
+**What was adjusted after the first scoring, and what wasn't.** No prompt or model setting
+was changed after seeing results. Two comparison bugs were fixed (name matching against
+paraphrased first names; a timeline check double-firing on deals already flagged for a past
+close date). Three label gaps were closed: contacts who say "I don't own this budget" in a
+late stage, a buyer's "I'll ping you when redlines are back" left unanswered for 20+ days,
+and "we've paused all vendor onboarding" against a close date weeks away — all true by the
+taxonomy's definitions, all verified by reading the evidence, all previously counted as false
+positives. The remaining misses are mostly expired promises the model did not record as a
+promise ("let me get back to you").
+
 ## The auditor: finding failures is the agent's job too
 
-Reading traces by hand doesn't scale, and it's how we found the first round of problems. So
-`ledger/audit.py` is a third agent. It never sees ground truth. It reads what an operator
-could read in production — PRISM's guardrail flags and trajectory rule results, the agents'
-own output, the CRM — and produces findings with evidence, a source attribution (data /
-agent / guardrail / instrumentation) and a fix. Every check is deterministic; the run is
-itself a PRISM trajectory.
-
-```bash
-.venv/bin/python scripts/run.py audit --hours 24        # reports/audit.md
-```
-
-On the contaminated notes it reports 8 high findings, including 35 invented phone numbers and
-PRISM's PII flags traced back to *the data the agent was given*; on the clean data it finds the
-`GTXPro` mismatch ($313K), v1's 65 wrong day-gaps and −18% pipeline total, two invented quotes,
-a "Q4 looks like a driver's licence" guardrail false positive, and a calibration smell in v2
-(58% of deals rated ≥0.85) — the fallback decision model's weakness that Jev is meant to fix.
+`ledger/audit.py` is the operations-side counterpart: it reads PRISM guardrail flags and rule
+results and the agents' own outputs, and writes findings with evidence and attribution (data /
+agent / guardrail / instrumentation). It is deterministic and never sees ground truth. It found
+the invented phone numbers a paraphrase step had put into the notes — PRISM's PII guardrail
+flagged them; the auditor traced them to the data — and the calibration smell in v2's fallback
+decision model. `scripts/run.py audit --hours 24` → `reports/audit.md`.
 
 ## What is real and what is not
 
@@ -126,10 +160,12 @@ a "Q4 looks like a driver's licence" guardrail false positive, and a calibration
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env            # PRISM keys; optional GEMINI / GROQ / TYPESAFE keys
-.venv/bin/python scripts/build_company.py      # regenerate data/company/ (deterministic)
+./scripts/make_data.sh                         # build -> paraphrase -> plant anomalies (deterministic)
 .venv/bin/python scripts/run.py v1             # LLM_PROVIDER=ollama (default) | gemini | groq
 .venv/bin/python scripts/run.py v2
+.venv/bin/python scripts/run.py v3             # Ledger: rules + claim ledger + consistency + judgement
 .venv/bin/python scripts/run.py eval v1 v2     # reports/v1_v2.md + runs/*_verdicts.csv
+.venv/bin/python scripts/run.py issues v3      # rules vs Ledger on planted anomalies -> reports/issues.md
 .venv/bin/uvicorn ledger.app:app --port 8787   # http://localhost:8787
 ```
 
@@ -143,6 +179,11 @@ metered providers at `GEMINI_BUDGET_USD`.
 data/company/        the demo company (ground_truth.csv is hidden from agents)
 ledger/agent_v1.py   naive agent, kept for the comparison
 ledger/agent_v2.py   one deal per context, code facts, typed decisions, verified quotes
+ledger/agent_v3.py   Ledger: rules + claim ledger + consistency + judgement
+ledger/rules.py      the CRM-rules baseline (fields only)
+ledger/claims.py     claim ledger extraction + verifier
+ledger/consistency.py ledger-vs-CRM comparison, cross-deal checks
+ledger/score_issues.py per-type precision/recall vs planted anomalies
 ledger/decide.py     Jev / fallback decision layer, one interface
 ledger/evaluate.py   metrics, per-deal verdicts (the definition of "fabrication")
 ledger/tracing.py    PRISM traces and trajectories

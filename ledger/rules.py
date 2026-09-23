@@ -51,8 +51,9 @@ def run_rules(co: Company, deals: pd.DataFrame | None = None) -> list[Issue]:
                              f"created={r.created_date.date()}, stage={r.stage}", action="Qualify out or advance."))
         sibs = [x for x in by_key.get((r.account, getattr(r, "product")), []) if x != oid]
         if sibs:
-            older = deals[deals.opportunity_id.isin(sibs)].created_date.min()
-            if 0 < (r.created_date - older).days <= 10 and len(acts) <= 1 and r.stage in {"Prospecting", "Qualification"}:
+            earlier = deals[deals.opportunity_id.isin(sibs) & (deals.created_date < r.created_date)].created_date
+            older = earlier.max() if len(earlier) else None  # nearest earlier sibling
+            if older is not None and (r.created_date - older).days <= 10 and len(acts) <= 1 and r.stage in {"Prospecting", "Qualification"}:
                 out.append(Issue(oid, "S6_duplicate_deal", f"same account+product as {sibs[0]}, created within days", f"siblings={sibs}",
                                  action="Merge or close the duplicate."))
         if len(acts) and acts.date.min() < r.created_date:

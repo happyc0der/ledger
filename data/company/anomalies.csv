@@ -201,3 +201,38 @@ S983P5KR,S3_dormant,no activity for 43 days
 VA2JJZXD,S4_amount_blank_late,amount blank past Qualification
 4N2KE2DP,S3_dormant,no activity for 48 days
 P0BMLVDP,S3_dormant,no activity for 74 days
+06AIY3IS,M3_expired_promise,"buyer's last promise/callback is 26d old, nothing since"
+0TR3RU8A,M3_expired_promise,"buyer's last promise/callback is 15d old, nothing since"
+1Y9KPBXY,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+48INT6OA,M3_expired_promise,"buyer's last promise/callback is 23d old, nothing since"
+4ICL09BD,M3_expired_promise,"buyer's last promise/callback is 15d old, nothing since"
+4UN65HWV,M3_expired_promise,"buyer's last promise/callback is 32d old, nothing since"
+99L2TNR5,M3_expired_promise,"buyer's last promise/callback is 20d old, nothing since"
+9WUD1Q5D,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+A3OROHUS,M3_expired_promise,"buyer's last promise/callback is 27d old, nothing since"
+BNYWSG6W,M3_expired_promise,"buyer's last promise/callback is 23d old, nothing since"
+C7NW3JB2,M3_expired_promise,"buyer's last promise/callback is 23d old, nothing since"
+H6TY7RBJ,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+HBIQF55L,M3_expired_promise,"buyer's last promise/callback is 22d old, nothing since"
+HUCB9WIQ,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+INAEAAI9,M3_expired_promise,"buyer's last promise/callback is 34d old, nothing since"
+KMGXUADZ,M3_expired_promise,"buyer's last promise/callback is 32d old, nothing since"
+LKMZWCKQ,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+M26BSX5S,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+MHPI0ZW1,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+ODIX25WY,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+OES8ZX7B,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+P9VFKNR0,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+QMUBRAT2,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+R617R51D,M3_expired_promise,"buyer's last promise/callback is 32d old, nothing since"
+RA77E84P,M3_expired_promise,"buyer's last promise/callback is 36d old, nothing since"
+SFCT64YG,M3_expired_promise,"buyer's last promise/callback is 18d old, nothing since"
+SUXDAQNV,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+U48PDN1F,M3_expired_promise,"buyer's last promise/callback is 21d old, nothing since"
+UTJGDR3K,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+V7DHDF8V,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+VA2JJZXD,M2_contact_contradiction,primary contact says they don't own the budget/decision; stage is late
+VP2CW520,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+WGSS08LF,M4_timeline_contradiction,expected_close within weeks; buyer paused vendor onboarding indefinitely
+XWN6WWOD,M3_expired_promise,"buyer's last promise/callback is 23d old, nothing since"
+ZIFDD41D,M3_expired_promise,"buyer's last promise/callback is 18d old, nothing since"

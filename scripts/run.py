@@ -29,6 +29,7 @@ def main():
     ap.add_argument("--hours", type=int, default=24, help="audit: how far back to read PRISM")
     ap.add_argument("--no-prism", action="store_true", help="audit: skip PRISM reads")
     ap.add_argument("--label", default="audit", help="audit: report name under reports/")
+    ap.add_argument("--recompute", action="store_true", help="issues: rebuild v3 issues from stored ledgers (no model calls)")
     a = ap.parse_args()
     co = load_company()
 
@@ -50,6 +51,21 @@ def main():
             p = RUNS_DIR / f"{ver}.jsonl"
             if p.exists():
                 rows = [json.loads(l) for l in p.read_text().splitlines()]
+                if a.recompute:
+                    from dataclasses import asdict
+                    from ledger.consistency import compare, cross_deal
+                    by = {r["opportunity_id"]: r for r in rows}
+                    rb = {}
+                    for i in run_rules(co):
+                        rb.setdefault(i.opportunity_id, []).append(asdict(i))
+                    ledgers = {}
+                    for r in rows:
+                        lg = {**r["ledger"], "quotes": r["ledger_quotes"]}
+                        ledgers[r["opportunity_id"]] = lg
+                        r["issues"] = rb.get(r["opportunity_id"], []) + [asdict(x) for x in compare(co, r["opportunity_id"], lg)]
+                    for x in cross_deal(co, ledgers):
+                        by[x.opportunity_id]["issues"].append(asdict(x))
+                    p.write_text("\n".join(json.dumps(r, default=str) for r in rows) + "\n")
                 iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
                 scores.append(score_issues.score(iss, ids, ver))
         md = score_issues.table(scores)

@@ -74,7 +74,7 @@ def main():
     df = pd.read_csv(orig)
     out, kept = [], 0
     for i, r in enumerate(df.itertuples()):
-        voice = VOICES[hash(r.author) % len(VOICES)]
+        voice = VOICES[sum(map(ord, str(r.author))) % len(VOICES)]  # deterministic across processes (str hash is salted)
         system = (f"Rewrite this CRM {r.type} note in the voice of its author ({r.author}), style: {voice}. "
                   "Keep every fact, name, number, product, competitor and the meaning exactly; keep any "
                   "quoted buyer sentence as a quote (you may reword it slightly). Change sentence structure "

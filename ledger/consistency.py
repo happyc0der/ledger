@@ -55,7 +55,7 @@ def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
         add("M2_contact_contradiction", f"primary contact {d.primary_contact} has left; still primary", "champion_status")
     crm_econ = co.contacts[(co.contacts.opportunity_id == oid) & (co.contacts.role == "economic_buyer")]
     named = ledger.get("economic_buyer")
-    if named and len(crm_econ) and _last(named) != _last(crm_econ.iloc[0]["name"]):
+    if named and len(crm_econ) and not _same_person(named, crm_econ.iloc[0]["name"]):
         add("M2_contact_contradiction", f"CRM economic buyer is {crm_econ.iloc[0]['name']}; buyer names {named}", "economic_buyer")
     if ledger.get("champion_status") == "no_authority" and late:
         add("M2_contact_contradiction", f"primary contact says they don't own the decision; stage is {d.stage}", "champion_status")
@@ -66,10 +66,14 @@ def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
         add("M3_expired_promise", f"buyer promised '{ledger['last_buyer_promise'][:60]}' {(SNAPSHOT - pdate).days}d ago; nothing since", "last_buyer_promise")
     # M4 timeline
     ddate = dt(ledger.get("decision_date"))
-    if ddate is not None and pd.notna(d.expected_close) and d.expected_close < ddate - timedelta(days=2):
+    close_future = pd.notna(d.expected_close) and d.expected_close >= SNAPSHOT  # a past close date is S1, not M4
+    if ddate is not None and close_future and d.expected_close < ddate - timedelta(days=2):
         add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} is before the buyer's decision date {ddate.date()}", "decision_date")
-    if ledger.get("budget_status") == "frozen" and pd.notna(d.expected_close) and d.expected_close < SNAPSHOT + timedelta(days=75):
-        add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but budget is frozen until next fiscal year", "budget_status")
+    if close_future and d.expected_close < SNAPSHOT + timedelta(days=75):
+        if ledger.get("budget_status") == "frozen":
+            add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer said budget is frozen", "budget_status")
+        elif ledger.get("commitment") == "paused":
+            add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer paused with no date", "commitment")
     # M5 scope / M10 arithmetic
     units, total = ledger.get("units_discussed"), ledger.get("total_stated_usd")
     try:
@@ -99,6 +103,13 @@ def _last(name: str) -> str:
     return str(name).strip().split()[-1].lower() if name else ""
 
 
+def _same_person(a: str, b: str) -> bool:
+    """Paraphrased notes shorten names ('Samuel' for 'Samuel Osei'): match on any shared name token."""
+    ta = {t.lower() for t in str(a or "").replace(",", " ").split() if len(t) > 1}
+    tb = {t.lower() for t in str(b or "").replace(",", " ").split() if len(t) > 1}
+    return bool(ta & tb)
+
+
 def cross_deal(co: Company, ledgers: dict[str, dict]) -> list[Issue]:
     """M7: a contact reported gone on one deal is still primary on another deal at the same account."""
     out = []
@@ -106,9 +117,9 @@ def cross_deal(co: Company, ledgers: dict[str, dict]) -> list[Issue]:
     for oid, lg in ledgers.items():
         if lg.get("champion_status") == "left_company":
             d = co.deal(oid)
-            gone.setdefault((d.account, _last(d.primary_contact)), (oid, _q(lg, "champion_status")))
+            gone.setdefault((d.account, str(d.primary_contact).strip().lower()), (oid, _q(lg, "champion_status")))
     for r in co.deals.itertuples():
-        key = (r.account, _last(r.primary_contact))
+        key = (r.account, str(r.primary_contact).strip().lower())
         if key in gone and gone[key][0] != r.opportunity_id and ledgers.get(r.opportunity_id, {}).get("champion_status") != "left_company":
             src, quote = gone[key]
             out.append(Issue(r.opportunity_id, "M7_cross_deal_contact", f"primary contact {r.primary_contact} left {r.account} per auto-reply on deal {src}",

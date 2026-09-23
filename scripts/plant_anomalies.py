@@ -66,6 +66,10 @@ def main():
             label(oid, "M6_zombie", "buyer chose a competitor; deal still open")
         if a in ("looked_healthy", "budget_frozen", "competitor_leaning"):
             label(oid, "M8_happy_ears", "rep note positive after buyer declined/paused")
+        if a == "no_authority" and row.stage in LATE:
+            label(oid, "M2_contact_contradiction", "primary contact says they don't own the budget/decision; stage is late")
+        if a == "looked_healthy":
+            label(oid, "M4_timeline_contradiction", "expected_close within weeks; buyer paused vendor onboarding indefinitely")
 
     # ---- injected: M3 expired promise (buyer promised PO/signature, then silence > 14d) -----
     promise = [oid for oid, a in arch.items() if a in ("clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging")]
@@ -217,6 +221,16 @@ def main():
             label(r.opportunity_id, "S3_dormant", f"no activity for {(SNAPSHOT - da.date.max()).days} days")
         if r.stage in LATE and (pd.isna(r.amount) or r.amount == "") and (r.opportunity_id, "S4_amount_blank_late") not in have:
             label(r.opportunity_id, "S4_amount_blank_late", "amount blank past Qualification")
+
+    # ---- derived M3: a buyer promise/callback older than 14 days with no buyer message since -----
+    promise_arch = {"clean_run", "noisy_rep", "verbal_yes_then_lost", "price_resolved", "stage_lagging", "quiet_late_stage", "silent_then_signed"}
+    have = {(l["opportunity_id"], l["type"]) for l in labels}
+    for r in deals.itertuples():
+        if arch.get(r.opportunity_id) in promise_arch and (r.opportunity_id, "M3_expired_promise") not in have:
+            da = deal_acts(r.opportunity_id)
+            b = da[(da.author != r.sales_agent) & (da.author != "system")]
+            if len(b) and (SNAPSHOT - b.date.max()).days > 14:
+                label(r.opportunity_id, "M3_expired_promise", f"buyer's last promise/callback is {(SNAPSHOT - b.date.max()).days}d old, nothing since")
 
     # ---- write ---------------------------------------------------------------------------
     deals.sort_values("opportunity_id").to_csv(D / "deals.csv", index=False, date_format="%Y-%m-%d")
