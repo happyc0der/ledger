@@ -86,6 +86,25 @@ version, deal and role in metadata. Every v2 deal is a trajectory: `crm_query` �
 the missing $66K and the invented day-gaps are visible; the v2 trajectory for the same deal
 shows the check steps that stop them. Wiring lives in `ledger/tracing.py`.
 
+## The auditor: finding failures is the agent's job too
+
+Reading traces by hand doesn't scale, and it's how we found the first round of problems. So
+`ledger/audit.py` is a third agent. It never sees ground truth. It reads what an operator
+could read in production — PRISM's guardrail flags and trajectory rule results, the agents'
+own output, the CRM — and produces findings with evidence, a source attribution (data /
+agent / guardrail / instrumentation) and a fix. Every check is deterministic; the run is
+itself a PRISM trajectory.
+
+```bash
+.venv/bin/python scripts/run.py audit --hours 24        # reports/audit.md
+```
+
+On the contaminated notes it reports 8 high findings, including 35 invented phone numbers and
+PRISM's PII flags traced back to *the data the agent was given*; on the clean data it finds the
+`GTXPro` mismatch ($313K), v1's 65 wrong day-gaps and −18% pipeline total, two invented quotes,
+a "Q4 looks like a driver's licence" guardrail false positive, and a calibration smell in v2
+(58% of deals rated ≥0.85) — the fallback decision model's weakness that Jev is meant to fix.
+
 ## What is real and what is not
 
 - **Real:** the deals, accounts, products, reps, dates, values and outcomes come from the

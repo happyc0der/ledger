@@ -9,7 +9,12 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
   the real one; `ledger/decide.py` typed decisions (Jev, else local-model fallback);
   `ledger/tools.py` deterministic facts; `ledger/evaluate.py` metrics and verdicts.
 - `scripts/run.py v1|v2 [--reps a,b] [--limit N]` → `runs/<version>.jsonl`;
-  `scripts/run.py eval v1 v2` → `reports/`.
+  `scripts/run.py eval v1 v2` → `reports/` (uses ground truth: demo/proof only).
+- `scripts/run.py audit [--hours N] [--activities path] [--label name]` → `reports/<label>.md`:
+  `ledger/audit.py` finds failures WITHOUT ground truth — PRISM guardrail flags traced back to
+  data vs agent output, PRISM trajectory rule fails, stated-vs-computed numbers, quote
+  existence, catalogue mismatches, data hygiene, calibration smells. When something goes
+  wrong, extend the auditor with a check rather than fixing the symptom by hand.
 - Model responses are cached under `.cache/`; delete to force re-inference.
 - UI: `.venv/bin/uvicorn ledger.app:app --port 8787` → http://localhost:8787 (reads
   `runs/`; run `scripts/run.py eval v1 v2` first so receipts and Proof have data).

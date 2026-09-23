@@ -25,11 +25,20 @@ def main():
     ap.add_argument("more", nargs="*")
     ap.add_argument("--reps", default=None, help="comma-separated rep names")
     ap.add_argument("--limit", type=int, default=None, help="deals per rep")
+    ap.add_argument("--activities", default=None, help="audit: alternative activities.csv to inspect")
+    ap.add_argument("--hours", type=int, default=24, help="audit: how far back to read PRISM")
+    ap.add_argument("--no-prism", action="store_true", help="audit: skip PRISM reads")
+    ap.add_argument("--label", default="audit", help="audit: report name under reports/")
     a = ap.parse_args()
     co = load_company()
 
     if a.version == "eval":
         print(evaluate.report(co, a.more))
+        return
+    if a.version == "audit":
+        from ledger import audit
+        fs = audit.run(co, a.more or ("v1", "v2"), activities_path=a.activities, hours=a.hours, prism=not a.no_prism)
+        print(audit.report(fs, label=a.label))
         return
 
     if a.version == "v1":
