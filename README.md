@@ -180,6 +180,31 @@ No paid inference is required: the default provider is a local Ollama model. The
 comparison above cost about $0.30 on Gemini Flash-Lite; a spend guard in `ledger/llm.py` stops
 metered providers at `GEMINI_BUDGET_USD`.
 
+## Week after week
+
+Ledger is built to be run every Monday, not once:
+
+- **History.** Every run is stored (`runs/<dataset>/ledger.db`); the UI shows what is *new
+  since last review*, *recurring* (with first-seen date), *resolved*, close-date pushes and
+  win-probability deltas. Unchanged records reuse last week's claim ledger, so a weekly run
+  costs cents.
+- **Lifecycle.** Each finding has a stable identity; a manager can acknowledge, mute or
+  resolve it, and muted findings stop counting against the forecast.
+- **Draft CRM updates, human-approved.** Findings become concrete edits (move the close date
+  to the buyer's stated decision date; close-lost with the competitor as reason; replace the
+  departed primary contact; a task for the rep). Nothing is written to the CRM: approved
+  drafts export as an import file in the CRM's own column names (`scripts/run.py export-approved hubspot`).
+- **Forecast.** Commit and best case are built only from deals with no open semantic issue,
+  and the strip says whether the probabilities behind them are calibrated.
+- **Digests.** `scripts/run.py digest` writes a Monday note per rep and one for the manager:
+  new issues with the buyer's sentence and the action, promises past due, pushes, resolved.
+- **Reviews.** ✓/✗ on any finding records a verdict; the Proof tab shows observed precision
+  per type with 95% bounds, and the auditor flags a check the manager keeps rejecting.
+- **Checks run.** Every deal shows which checks passed, failed or were skipped and why —
+  "why wasn't this flagged" is answered, not guessed.
+- **Privacy.** Emails and phone numbers are tokenised before any prompt and restored only
+  in verified quotes.
+
 ## Bring your own pipeline
 
 ```bash
@@ -192,11 +217,18 @@ LEDGER_DATA=data/acme .venv/bin/uvicorn ledger.app:app --port 8787
 
 `ledger/ingest.py` maps HubSpot and Salesforce export columns, stage codes and buying roles
 onto Ledger's canonical files; `--mapping overrides.json` handles custom fields. Closed deals
-are dropped. Missing inputs degrade honestly: no product catalogue means no scope/arithmetic
-checks; no contacts file means the champion is the deal's primary contact and every late-stage
-deal is flagged for a missing economic buyer until one is logged. `ingest_report.json` says
-which columns were used. Verified by round-tripping the demo data through a HubSpot-shaped
-export (`data/acme_test`).
+go to `history.csv` and, with 30+ of them, produce `profile.json` — the company's own win rate
+and cycle length replace the defaults. Custom stages are kept (with `stage_raw`), not dropped.
+**Who said it** is resolved per activity from the strongest evidence available — email
+direction, from-address domain, auto-reply patterns, then author name — and *unknown is never
+buyer*; ingest refuses an export where nothing can be attributed to a buyer, because Ledger
+would find nothing and say nothing. Missing inputs degrade honestly: no product catalogue means
+no scope/arithmetic checks; no contacts file means the champion is the deal's primary contact.
+`ingest_report.json` says which columns were used, the attribution counts and any unmapped stage.
+
+For a first look: `scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv
+--activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv
+--products data/company/products.csv` runs an 8-deal export end to end in under a minute.
 
 ## Layout
 

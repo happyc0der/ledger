@@ -1,0 +1,9 @@
+Record ID,Deal Name,Associated Company,Product,Deal owner,Deal Stage,Amount,Create Date,Close Date,Associated Contact,Last Activity Date,Next step
+2001,Northwind - GTX Basic,Northwind,GTX Basic,Alex Kim,contractsent,"$5,500.00",2026-08-12,2026-11-20,Dana Whitfield,2026-10-14,Confirm PO timing
+2002,Contoso - GTX Pro,Contoso,GTX Pro,Alex Kim,decisionmakerboughtin,"$14,463.00",2026-09-02,2026-10-30,Ravi Nair,2026-10-10,
+2003,Fabrikam - MG Advanced,Fabrikam,MG Advanced,Alex Kim,contractsent,"$3,393.00",2026-07-28,2026-10-05,Mei Tanaka,2026-09-18,Send proposal
+2004,Fabrikam - GTX Basic,Fabrikam,GTX Basic,Alex Kim,qualifiedtobuy,"$550.00",2026-10-01,2026-12-15,Mei Tanaka,2026-10-12,Schedule demo
+2005,Tailspin - GTX Plus Pro,Tailspin,GTX Plus Pro,Jordan Lee,decisionmakerboughtin,"$5,482.00",2026-08-20,2026-11-10,Omar Haddad,2026-10-16,Check in with champion
+2006,Woodgrove - MG Special,Woodgrove,MG Special,Jordan Lee,contractsent,"$55.00",2026-09-10,2026-10-28,Priya Sen,2026-10-15,Follow up
+2007,Litware - GTX Pro,Litware,GTX Pro,Jordan Lee,presentationscheduled,"$4,821.00",2026-09-25,2026-12-01,Sam Okoro,2026-10-17,Send datasheet
+2008,Adatum - GTX Plus Basic,Adatum,GTX Plus Basic,Jordan Lee,decisionmakerboughtin,"",2026-09-05,2026-11-05,Lena Fischer,2026-10-11,

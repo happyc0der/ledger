@@ -72,8 +72,8 @@ def check_data_hygiene(co: Company, activities: pd.DataFrame) -> list[Finding]:
                                [f"{r.activity_id}: {re.search(pat, r.text, re.I).group(0)!r} in “{r.text[:70]}…”" for r in hits.itertuples()],
                                "Content was added by a generation/paraphrase step; validate that rewrites add no facts, "
                                "and redact before the agent sees it."))
-    known = set(co.contacts.name) | set(co.deals.sales_agent) | set(co.team.manager) | set(co.deals.account)
-    known_tokens = {w for n in known for w in n.split()} | set(w for p in co.products["product"] for w in p.split())
+    known = {str(x) for x in (set(co.contacts.name) | set(co.deals.sales_agent) | set(co.team.manager) | set(co.deals.account)) if isinstance(x, str)}
+    known_tokens = {w for n in known for w in n.split()} | {w for p in co.products["product"] if isinstance(p, str) for w in p.split()}
     mentions, deals_per = Counter(), defaultdict(set)
     for r in activities.itertuples():
         for m in re.finditer(r"\b([A-Z][a-z]+) ([A-Z][a-z]+)\b", r.text):

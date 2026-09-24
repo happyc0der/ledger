@@ -8,7 +8,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import threading
 import time
 
 import httpx
@@ -56,16 +58,37 @@ _DEFAULT_PRICE = {"gemini": (0.30, 2.50), "xai": (0.20, 0.50), "groq": (0.0, 0.0
 _USAGE = CACHE_DIR.parent / "usage.json"
 
 
+_USAGE_LOCK = threading.Lock()
+
+
+def _read_usage() -> dict:
+    """Tolerant of a concurrent writer: fall back to the last good copy, never to zero."""
+    for path in (_USAGE, _USAGE.with_suffix(".bak")):
+        try:
+            if path.exists():
+                return json.loads(path.read_text())
+        except json.JSONDecodeError:
+            continue
+    return {}
+
+
 def _spend(p: Provider, tin: int, tout: int) -> None:
-    import os
     pin, pout = _DEFAULT_PRICE.get(p.name, (0.0, 0.0))
     pin = float(os.getenv(f"{p.name.upper()}_PRICE_IN", pin))
     pout = float(os.getenv(f"{p.name.upper()}_PRICE_OUT", pout))
-    u = json.loads(_USAGE.read_text()) if _USAGE.exists() else {}
-    row = u.setdefault(p.name, {"tokens_in": 0, "tokens_out": 0, "usd": 0.0, "calls": 0})
-    row["tokens_in"] += tin; row["tokens_out"] += tout; row["calls"] += 1
-    row["usd"] += tin / 1e6 * pin + tout / 1e6 * pout
-    _USAGE.write_text(json.dumps(u, indent=1))
+    with _USAGE_LOCK:
+        u = _read_usage()
+        row = u.setdefault(p.name, {"tokens_in": 0, "tokens_out": 0, "usd": 0.0, "calls": 0})
+        row["tokens_in"] += tin; row["tokens_out"] += tout; row["calls"] += 1
+        row["usd"] += tin / 1e6 * pin + tout / 1e6 * pout
+        tmp = _USAGE.with_suffix(f".{os.getpid()}.tmp")
+        tmp.write_text(json.dumps(u, indent=1))
+        if _USAGE.exists():
+            try:
+                _USAGE.replace(_USAGE.with_suffix(".bak"))
+            except OSError:
+                pass
+        os.replace(tmp, _USAGE)  # atomic: readers see the old or the new file, never a partial one
     budget = float(os.getenv(f"{p.name.upper()}_BUDGET_USD", 2.0))
     if row["usd"] > budget:
         raise RuntimeError(f"{p.name} spend ${row['usd']:.2f} exceeds budget ${budget:.2f}; "

@@ -7,3 +7,5 @@ reports/
 data/acme_test/
 runs/
 data/company_w2/
+data/live/
+runs/live/

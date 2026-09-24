@@ -65,5 +65,5 @@ def step(label: str, output: str, *, tool: str | None = None, input_summary: str
     if tool:
         s["tool_name"] = tool
     if input_summary:
-        s["input_summary"] = input_summary[:2000]
+        s["input_summary"] = str(input_summary)[:2000]
     return s
