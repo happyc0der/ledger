@@ -50,22 +50,22 @@ v2 changes the architecture, not the prompt:
   dropped; every check is a `check:*` step in the PRISM trajectory and a ✓/✗ receipt in the UI.
 - **"Disqualify" is a valid answer.**
 
-## Results — same 228 deals, same snapshot, scored against real outcomes
+## Results — same 235 deals, same snapshot, scored against real outcomes
 
-| metric | v1 (naive) | v2 |
+| metric | v1 (naive) | v3 (Ledger) |
 |---|---|---|
-| Revenue captured in the agent's top 20 (of $113.8K possible) | $59.7K (53%) | **$80.7K (71%)** |
-| Pipeline total error | −18% | **0%** |
-| Fabricated amounts / day-gaps / quotes | 1 / 65 / 2 | **0 / 0 / 0** |
-| Objection accuracy | 79% | **96%** |
-| Next-action accuracy | 86% | **99%** |
-| Generic "re-engage" actions | 25 | 17 |
-| Brier score (lower = better calibrated) | 0.149 | **0.127** |
-| Rep-inflated lost deals flagged at risk | 45/48 | **48/48** |
+| Revenue captured in the agent's top 20 (of $113.8K possible) | $68.7K (60%) | **$87.6K (77%)** |
+| Pipeline total error | −5% | **0%** |
+| Fabricated amounts / day-gaps / quotes | 97 | **0** |
+| Objection accuracy | 82% | **94%** |
+| Next-action accuracy | 87% | **92%** |
+| Generic "re-engage" actions | 33 | 22 |
+| Brier score (lower = better calibrated) | 0.140 | **0.127** |
 
-Reliability, v2: its top confidence bin closes at about the rate it states; its bottom bin closes at zero (see the Proof tab for the live table).
+Full table (v1, v2, v3): `reports/v1_v2_v3.md`. v2 and v3 share the decision layer, so their
+prioritisation numbers are the same; v3 adds the claim ledger and the consistency checks below.
 
-**Read the zero honestly.** v2's amounts and day-gaps come from code, so those fabrication
+**Read the zero honestly.** v3's amounts and day-gaps come from code, so those fabrication
 counts are zero by construction — the receipts make that visible, they don't make it
 impressive. The quote count is the real one: the model still writes the quote, and in 228
 deals it never cited a sentence that wasn't in the record (zero retries, zero drops); on 96
@@ -110,7 +110,7 @@ you just ask them to look. So Ledger doesn't ask the model to notice — it asks
 | | CRM rules | naive agent¹ | Ledger v3 |
 |---|---|---|---|
 | Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 38% | 99% |
-| **Semantic (M1–M10) recall** | **0%** | 32% | **93%** |
+| **Semantic (M1–M10) recall** | **0%** | 32% | **92%** |
 | Semantic precision | — | 62% | 100% |
 | Clean deals falsely flagged | 0 / 86 | 15 / 86 (17%) | **0 / 86** |
 
@@ -132,7 +132,9 @@ late stage, a buyer's "I'll ping you when redlines are back" or "I'll try to get
 her" left unanswered for 14+ days, and "we've paused all vendor onboarding" against a close
 date weeks away — all true by the taxonomy's definitions, all verified by reading the
 evidence, all previously counted as false positives. Closing them also added cases the
-model misses, which is why recall is 93% and not higher.
+model misses, which is why recall is 92% and not higher. A fourth comparison fix followed the
+clean re-run: an economic buyer recorded as "finance" — a department — must not be compared to a
+person.
 
 Every failure found during the build, its PRISM evidence, attribution and fix is in
 [FINDINGS.md](FINDINGS.md).

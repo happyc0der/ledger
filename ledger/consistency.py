@@ -67,7 +67,7 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
     if ledger.get("champion_status") == "left_company":
         add("M2_contact_contradiction", f"primary contact {d.primary_contact} has left; still primary", "champion_status")
     crm_econ = co.contacts[(co.contacts.opportunity_id == oid) & (co.contacts.role == "economic_buyer")]
-    named = ledger.get("economic_buyer")
+    named = ledger.get("economic_buyer") if _is_person(ledger.get("economic_buyer")) else None  # "finance" is a department, not a person
     if named and len(crm_econ) and not _same_person(named, crm_econ.iloc[0]["name"]):
         add("M2_contact_contradiction", f"CRM economic buyer is {crm_econ.iloc[0]['name']}; buyer names {named}", "economic_buyer")
     if ledger.get("champion_status") == "no_authority" and late:
@@ -153,6 +153,21 @@ def checks_for(co: Company, oid: str, ledger: dict, issues: list[Issue], as_of: 
 
 def _last(name: str) -> str:
     return str(name).strip().split()[-1].lower() if name else ""
+
+
+GENERIC_PARTIES = {"finance", "procurement", "legal", "leadership", "management", "the board", "board", "exec", "execs", "executive team",
+                   "team", "engineering", "it", "security", "purchasing", "cfo", "cio", "cto", "ceo", "vp", "director", "committee", "steerco"}
+
+
+def _is_person(name) -> bool:
+    """A named economic buyer must look like a person: not a department, title or 'the team'."""
+    if not name or not isinstance(name, str):
+        return False
+    n = name.strip().lower().replace("the ", "")
+    if n in GENERIC_PARTIES:
+        return False
+    toks = [t for t in re.split(r"[\s,]+", name.strip()) if t]
+    return len(toks) >= 2 or (len(toks) == 1 and toks[0][:1].isupper() and n not in GENERIC_PARTIES)
 
 
 def _same_person(a: str, b: str) -> bool:

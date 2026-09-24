@@ -18,6 +18,9 @@ runs these checks automatically.
 | 10 | Auditor: `calibration_smell` — 58% of v2 deals rated ≥ 0.85 | **agent** — fallback decision model (Gemini structured output) is overconfident | open: Jev (calibrated decision model) when access is granted; until then the UI must show bands, not points (plan §2.3) | — |
 | 11 | Auditor's own PRISM scorecard failed `CORR-004`, `EFF-001`, `ROB-001` | **instrumentation** — findings logged as `error` steps with repeated tool names | plan step first, one step per check, `error` only for high findings | scorecard passes, 94.4 |
 
+| 12 | Eval (re-run on the clean layout): one clean deal flagged `M2` — "CRM economic buyer is Tom Whitfield; buyer names finance" | **comparison** — the model recorded `economic_buyer: "finance"` (a department) and the name check treated it as a different person | economic buyer must look like a person before it is compared (`consistency._is_person`) | 1/86 → 0/86 |
+| 13 | Live run on the HubSpot template crashed twice: integer deal ids from CSV, then a half-written `.cache/usage.json` under concurrent writers | **instrumentation** | ids read as strings; spend ledger uses a lock + atomic replace + backup | live run: 8 deals in 12 s |
+
 Not fixed on purpose: the "Q4" guardrail false positive (it's PRISM's pattern, and a keyword
 guardrail crying wolf is a fair thing to show); the 19 `verbal_yes_then_lost` deals both
 agents rate ~0.93 (nothing in the record predicts them; that is what honest calibration

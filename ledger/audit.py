@@ -177,10 +177,12 @@ def check_output(co: Company, version: str, partial: bool = False) -> list[Findi
             record = " ".join(_norm(t) for t in acts.text)
             for i in (r.issues if isinstance(r.issues, list) else []):
                 ev = str(i.get("evidence") or "")
-                if not ev or "=" in ev or ev.startswith("siblings") or ev.startswith("stage="):
-                    continue  # field-based evidence
+                if not ev or i.get("source") == "rules" or "=" in ev or ev.startswith("siblings") or ev.startswith("stage="):
+                    continue  # rules cite field values, not quotes
                 total += 1
-                if _norm(ev) not in record:
+                src = (i.get("extra") or {}).get("source_deal")  # cross-deal issues quote the sibling deal's record
+                haystack = record if not src else record + " " + " ".join(_norm(t) for t in co.activities_for(src).text)
+                if _norm(ev) not in haystack:
                     bad.append(f"{r.opportunity_id} {i['type']}: “{ev[:60]}”")
         if total:
             sev = "high" if len(bad) / total > 0.05 else ("low" if bad else "info")

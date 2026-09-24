@@ -86,7 +86,7 @@ def main():
             p = RUNS_DIR / f"{ver}.jsonl"
             if p.exists():
                 rows = evaluate.load_rows(ver)
-                if a.recompute:
+                if a.recompute and all("ledger" in r for r in rows):  # only versions that carry a claim ledger
                     from dataclasses import asdict
                     from ledger.consistency import compare, cross_deal
                     by = {r["opportunity_id"]: r for r in rows}

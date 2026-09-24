@@ -72,3 +72,12 @@ def test_c_grade_evidence_lowers_severity(one_deal):
     lg = {"competitor_status": "chose_competitor", "competitor_name": "Kestrel", "quotes": {"competitor_status": "we went with Kestrel"},
           "grades": {"competitor_status": "C"}}
     assert all(i.severity == "low" for i in compare(co, "D1", lg, as_of=AS_OF) if i.type == "M6_zombie")
+
+
+def test_department_is_not_an_economic_buyer(one_deal):
+    from ledger.consistency import _is_person
+    assert not _is_person("finance") and not _is_person("the board") and _is_person("Tom Whitfield") and _is_person("Priya")
+    co = co_with(one_deal, [("D1-1", "D1", "2026-10-01", "email", "Priya Okafor", "finance is fine with two POs")],
+                 contacts=[{"opportunity_id": "D1", "name": "Tom Whitfield", "title": "CIO", "role": "economic_buyer"}])
+    lg = {"economic_buyer": "finance", "quotes": {"economic_buyer": "finance is fine with two POs"}, "grades": {}}
+    assert "M2_contact_contradiction" not in types(compare(co, "D1", lg, as_of=AS_OF))
