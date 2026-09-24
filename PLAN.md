@@ -201,3 +201,26 @@ Cost: extraction ≈ 2k tokens/deal → ~$0.15 per full run on flash-lite.
 Sources: KC-Bench arXiv 2609.03588; fullstackgtm CRM audit checklist (27 checks); crono.one
 pipeline hygiene (four-field weekly audit); Gong deal warnings (engagement, single-thread,
 stalled, pricing); AskElephant/vonlabs on combining signals before escalating.
+
+---
+
+# Jev 1.13 plan (2026-09-24)
+
+Pricing: $0.042 / M input tokens, output free (docs; confirm no per-request minimum). Access:
+direct TypeSafe key (OpenRouter's jev-1.13 page is a placeholder — not in their model list).
+
+Measured on our records: decision request ≈ 290 tokens of deal state + 360 of questions.
+Per full 235-deal run: decisions $0.0063; + typed-slot second reader $0.0145. All hackathon
+prep ≈ $0.60; $2 ≈ 138 full runs. Production 2,000 deals weekly, both layers: $0.12/week.
+
+1. **Decision layer** (already wired in `decide._jev`): win prob (Noul), objection + next
+   action (Choice). Proof = Brier + reliability vs real outcomes, against the fallback the
+   auditor flags as overconfident. Forecast strip flips from "⚠ uncalibrated" to "✓".
+   Steps: key in `.env` → `run.py v3` (ledgers reused) → `eval v1 v2 v3` → README/DEMO
+   numbers → FINDINGS row 10 closed. Add `jev` to the spend ledger with `TYPESAFE_BUDGET_USD`.
+2. **Second reader** (`ledger/jev_reader.py`): typed ledger slots (budget, champion,
+   competitor, commitment, rep tone) as Choice with probabilities from the raw record; per-slot
+   agreement with the LLM ledger → confidence on findings; disagreement → auditor finding.
+   `run.py agree --jev`. Quotes stay with the LLM (Jev does not generate text).
+3. **Live-demo latency**: decisions in <1 s; extraction on Gemini remains the floor.
+Not planned: Jev pre-screening to skip extraction (ledger reuse already covers unchanged records).
