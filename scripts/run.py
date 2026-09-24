@@ -125,6 +125,13 @@ def main():
     run_id = store.record_run(rows, as_of=SNAPSHOT, version=a.version, provider=os.getenv("LLM_PROVIDER", "ollama"),
                               decide_backend=backend, deals=co.deals)
     print(f"wrote {n} rows -> {out}  (run {run_id} in {store.DB_PATH})")
+    # the auditor runs after every agent run: PRISM flags/rules + stated-vs-computed + evidence validity
+    if not a.no_prism or True:
+        from ledger import audit
+        fs = audit.run(co, (a.version,), hours=2, prism=os.getenv("PRISM_DISABLED") != "1", partial=bool(a.reps or a.limit))
+        audit.report(fs, label=f"audit_{a.version}")
+        hi = [f for f in fs if f.severity == "high"]
+        print(f"audit: {len(fs)} findings, {len(hi)} high -> reports/audit_{a.version}.md" + ("".join(f"\n  ! {f.title}" for f in hi[:5])))
 
 
 if __name__ == "__main__":

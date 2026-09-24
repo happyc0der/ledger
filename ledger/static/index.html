@@ -158,6 +158,8 @@ async function select(id) {
     <div>${v.rationale || ''}</div>
     <div style="margin-top:6px">${receipts(v)}</div>
     ${outcome}
+    ${v.checks ? `<h3>Checks run</h3><div class="muted" style="margin-bottom:6px">${v.checks.filter(c => c.status === 'pass').length} pass · ${v.checks.filter(c => c.status === 'fail').length} flagged · ${v.checks.filter(c => c.status === 'skipped').length} skipped
+      <details><summary style="cursor:pointer">why not flagged</summary>${v.checks.filter(c => c.status !== 'fail').map(c => `<div>${c.type.split('_')[0]} <span class="pill">${c.status}</span> ${c.reason}</div>`).join('')}</details></div>` : ''}
     ${(v.issues && v.issues.length) ? `<h3>What doesn't add up (${v.issues.length})</h3>` + v.issues.map(i => {
         const rec = ((v.history || {}).recurring || []).find(r => r.key === i.key);
         const isNew = ((v.history || {}).new_issues || []).includes(i.key);

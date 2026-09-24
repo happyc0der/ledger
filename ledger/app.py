@@ -142,7 +142,8 @@ def digest_view(rep: str | None = None, version: str = "v3"):
     hist = history.summary(rid) if rid else {}
     backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm")
     fc = forecast.rollup(rows, backend=backend, states=store.issue_states())
-    as_of = str(SNAPSHOT.date())
+    runs_df = store.runs(version)
+    as_of = str(runs_df.as_of.iloc[-1]) if len(runs_df) else str(SNAPSHOT.date())
     rows = digest.enrich(rows, CO.deals)
     md = digest.rep_digest(rep, rows, hist, fc, as_of) if rep else digest.manager_digest(rows, hist, fc, as_of, CO.reps())
     return {"markdown": md}

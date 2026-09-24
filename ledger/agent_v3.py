@@ -13,11 +13,12 @@ from dataclasses import asdict
 
 from . import store, tracing
 from .agent_v2 import deal_state, explain_verified
+from .consistency import checks_for as semantic_checks
 from .consistency import compare, cross_deal
 from .claims import extract
 from .data import Company
 from .decide import decide
-from .rules import Issue, run_rules
+from .rules import Issue, checks_for as rule_checks, run_rules
 from .tools import pipeline_total
 
 
@@ -48,10 +49,14 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
         for slot in ledger["dropped"]:
             steps.append(tracing.step("check:claim:dropped", f"{slot}: no verbatim buyer quote", tool="verifier:claims", status="error"))
         issues = compare(co, oid, ledger)
-        for i in issues:
-            steps.append(tracing.step(f"check:{i.type}:fail", f"{i.detail} | “{i.evidence[:120]}”", tool="consistency"))
-        if not issues:
-            steps.append(tracing.step("check:consistency:pass", "ledger agrees with CRM", tool="consistency"))
+        checks = rule_checks(co, oid, rules_by.get(oid, [])) + semantic_checks(co, oid, ledger, issues)
+        for c in checks:
+            if c.status == "fail":
+                i = next(x for x in issues + rules_by.get(oid, []) if x.type == c.type)
+                steps.append(tracing.step(f"check:{c.type}:fail", f"{i.detail} | “{i.evidence[:120]}”", tool="consistency" if c.type.startswith("M") else "rules"))
+        n_pass = sum(1 for c in checks if c.status == "pass"); n_skip = sum(1 for c in checks if c.status == "skipped")
+        steps.append(tracing.step("check:summary", f"{n_pass} pass · {len(checks) - n_pass - n_skip} fail · {n_skip} skipped: "
+                                  + "; ".join(f"{c.type.split('_')[0]} {c.status} ({c.reason})" for c in checks if c.status != "fail"), tool="checks"))
         dec = decide(state, version="v3", session_id=session)
         steps.append(tracing.step("decide", json.dumps({"win_probability": round(dec.win_probability, 3), "objection": dec.objection,
                                                         "next_action": dec.next_action}), tool=dec.backend))
@@ -62,11 +67,12 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                    objection=dec.objection, buyer_quote=ex.get("buyer_quote", ""), next_action=dec.next_action,
                    rationale=ex.get("rationale", ""), decision_backend=dec.backend, quote_verified=quote_ok,
                    ledger={k: v for k, v in ledger.items() if k != "quotes"}, ledger_quotes=ledger["quotes"], record_hash=record_hash, ledger_reused=reused,
-                   issues=[asdict(i) for i in rules_by.get(oid, []) + issues], version="v3", rep=rep,
+                   issues=[asdict(i) for i in rules_by.get(oid, []) + issues], checks=[asdict(c) for c in checks], version="v3", rep=rep,
                    pipeline_total_usd=total, batch=0)
         steps.append(tracing.step("final_answer", json.dumps({"issues": [i["type"] for i in row["issues"]], "p": row["win_probability"]})))
-        tracing.trajectory(version="v3", session_id=session, steps=steps, model="v3",
-                           final_status="error" if any(i.type.startswith("M") for i in issues) else "success")
+        row["prism_trajectory_id"] = tracing.trajectory(version="v3", session_id=session, steps=steps, model="v3",
+                                                        final_status="error" if any(i.type.startswith("M") for i in issues) else "success")
+        row["prism_trace_ids"] = tracing.drain_trace_ids()
         rows.append(row)
     # cross-deal checks need the whole rep's (ideally the whole team's) ledgers — done again team-wide in run.py
     for i in cross_deal(co, ledgers):

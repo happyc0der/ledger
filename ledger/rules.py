@@ -21,6 +21,15 @@ STALLED = SETTINGS.stalled_multiplier * MEDIAN_CYCLE_DAYS
 
 
 @dataclass
+class Check:
+    """One check's outcome for one deal — pass / fail / skipped — with a one-line reason."""
+    opportunity_id: str
+    type: str
+    status: str
+    reason: str = ""
+
+
+@dataclass
 class Issue:
     opportunity_id: str
     type: str
@@ -78,3 +87,34 @@ def run_rules(co: Company, deals: pd.DataFrame | None = None, as_of: pd.Timestam
             out.append(Issue(oid, "S8_last_activity_field_wrong", f"last_activity_date {r.last_activity_date.date()} but newest activity {acts.date.max().date()}",
                              f"field={r.last_activity_date.date()}, newest={acts.date.max().date()}", severity="low", action="Resync the field."))
     return [i for i in out if i.type not in off]
+
+
+RULE_TYPES = ["S1_past_close_date", "S2_no_next_step", "S3_dormant", "S4_amount_blank_late", "S5_stalled_early_stage",
+              "S6_duplicate_deal", "S7_activity_before_creation", "S8_last_activity_field_wrong"]
+
+
+def checks_for(co: Company, oid: str, issues: list[Issue], as_of: pd.Timestamp = SNAPSHOT) -> list[Check]:
+    """Pass/fail/skipped for every rule on one deal (fail = an issue of that type exists)."""
+    d = co.deal(oid); acts = co.activities_for(oid)
+    failed = {i.type for i in issues if i.opportunity_id == oid}
+    off = set(SETTINGS.disabled_checks)
+    why = {
+        "S1_past_close_date": ("skipped", "no close date") if pd.isna(d.expected_close) else ("pass", f"close date {d.expected_close.date()} is ahead"),
+        "S2_no_next_step": ("skipped", f"stage {d.stage} is early") if d.stage not in LATE | {"Discovery"} else ("pass", "next step recorded"),
+        "S3_dormant": ("skipped", "no activity") if not len(acts) else ("pass", f"last activity {(as_of - acts.date.max()).days}d ago"),
+        "S4_amount_blank_late": ("skipped", f"stage {d.stage} is early") if d.stage not in LATE else ("pass", "amount entered"),
+        "S5_stalled_early_stage": ("skipped", f"stage {d.stage} is not early") if d.stage not in {"Prospecting", "Qualification"} else ("pass", f"{(as_of - d.created_date).days}d old, limit {int(STALLED)}"),
+        "S6_duplicate_deal": ("pass", "no sibling deal created within days"),
+        "S7_activity_before_creation": ("skipped", "no activity") if not len(acts) else ("pass", "activities after creation"),
+        "S8_last_activity_field_wrong": ("skipped", "no activity or field") if not len(acts) or pd.isna(d.last_activity_date) else ("pass", "field matches newest activity"),
+    }
+    out = []
+    for t in RULE_TYPES:
+        if t in off:
+            out.append(Check(oid, t, "skipped", "disabled in settings"))
+        elif t in failed:
+            out.append(Check(oid, t, "fail", next(i.detail for i in issues if i.opportunity_id == oid and i.type == t)))
+        else:
+            st, reason = why[t]
+            out.append(Check(oid, t, st, reason))
+    return out

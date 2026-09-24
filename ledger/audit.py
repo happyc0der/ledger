@@ -114,14 +114,14 @@ def check_catalogue(co: Company) -> list[Finding]:
 
 
 # ----------------------------------------------------------------------------- agent output
-def check_output(co: Company, version: str) -> list[Finding]:
+def check_output(co: Company, version: str, partial: bool = False) -> list[Finding]:
     p = RUNS_DIR / f"{version}.jsonl"
     if not p.exists():
         return [Finding("output", "info", "agent", f"No run found for {version}")]
     rows = pd.DataFrame([json.loads(l) for l in p.read_text().splitlines() if l.strip()])
     out, ids = [], set(co.deals.opportunity_id)
     dup, phantom = rows.opportunity_id.duplicated().sum(), (~rows.opportunity_id.isin(ids)).sum()
-    missing = ids - set(rows.opportunity_id)
+    missing = set() if partial else ids - set(rows.opportunity_id)  # a --reps/--limit run is partial by design
     if dup or phantom or missing:
         out.append(Finding("output_integrity", "high", "agent", f"{version}: {dup} duplicate, {phantom} phantom and {len(missing)} missing deals",
                            int(dup + phantom + len(missing)), [f"missing e.g. {sorted(missing)[:5]}"] if missing else [],
@@ -169,6 +169,23 @@ def check_output(co: Company, version: str) -> list[Finding]:
                            "Probabilities that don't discriminate make the ranking 'biggest deal first'. Use a calibrated decision model."))
     if quote_empty:
         out.append(Finding("coverage", "info", "agent", f"{version}: {quote_empty}/{len(rows)} deals cite no buyer quote", quote_empty, [], "Expected for 'no objection' deals; watch that it isn't the model avoiding risk."))
+    # evidence validity: every issue's evidence must exist verbatim in the deal's record (field evidence excepted)
+    if "issues" in rows:
+        bad, total = [], 0
+        for r in rows.itertuples():
+            acts = co.activities_for(r.opportunity_id)
+            record = " ".join(_norm(t) for t in acts.text)
+            for i in (r.issues if isinstance(r.issues, list) else []):
+                ev = str(i.get("evidence") or "")
+                if not ev or "=" in ev or ev.startswith("siblings") or ev.startswith("stage="):
+                    continue  # field-based evidence
+                total += 1
+                if _norm(ev) not in record:
+                    bad.append(f"{r.opportunity_id} {i['type']}: “{ev[:60]}”")
+        if total:
+            sev = "high" if len(bad) / total > 0.05 else ("low" if bad else "info")
+            out.append(Finding("evidence_validity", sev, "agent", f"{version}: {len(bad)}/{total} issue quotes are not verbatim in the record", len(bad), bad[:6],
+                               "Verify quotes against the record before showing them; drop unverifiable ones."))
     return out
 
 
@@ -242,11 +259,12 @@ def check_prism_rules(hours: int, sample: int = 60) -> list[Finding]:
 
 
 # ----------------------------------------------------------------------------- run
-def run(co: Company, versions=("v1", "v2"), activities_path: str | None = None, hours: int = 24, prism: bool = True) -> list[Finding]:
+def run(co: Company, versions=("v1", "v2"), activities_path: str | None = None, hours: int = 24, prism: bool = True,
+        partial: bool = False) -> list[Finding]:
     acts = pd.read_csv(activities_path) if activities_path else co.activities
     findings = check_data_hygiene(co, acts) + check_catalogue(co)
     for v in versions:
-        findings += check_output(co, v)
+        findings += check_output(co, v, partial=partial)
     if prism:
         findings += check_prism_guardrails(co, acts, hours) + check_prism_rules(hours)
     order = {"high": 0, "medium": 1, "low": 2, "info": 3}
@@ -272,7 +290,9 @@ def report(findings: list[Finding], label: str = "audit") -> str:
     steps = [tracing.step("plan", "checks: " + ", ".join(by_check))]
     for check, fs in by_check.items():
         steps.append(tracing.step(f"check:{check}", "\n".join(f"[{f.severity}/{f.source}] {f.title}" for f in fs), tool=f"audit:{check}",
-                                  input_summary=f"{len(fs)} findings"))
+                                  input_summary=f"{len(fs)} findings", status="error" if any(f.severity == "high" for f in fs) else "success"))
+        if any(f.severity == "high" for f in fs):
+            steps.append(tracing.step("recovery", "; ".join(f.fix for f in fs if f.severity == "high")[:1500]))
     steps.append(tracing.step("final_answer", f"{len(findings)} findings, {n.get('high', 0)} high → reports/{label}.md"))
     tracing.trajectory(version="audit", session_id=f"audit-{datetime.now():%Y%m%d-%H%M}", steps=steps, model="deterministic",
                        final_status="error" if n.get("high") else "success")

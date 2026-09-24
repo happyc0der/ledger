@@ -9,7 +9,7 @@ import pandas as pd
 
 from .config import SETTINGS, SNAPSHOT
 from .data import Company
-from .rules import LATE, Issue
+from .rules import LATE, Check, Issue
 from .tools import deal_amount, list_price, normalize_product
 
 ACTIONS = {
@@ -114,6 +114,41 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
                          _q(ledger, "economic_buyer") if named else f"stage={d.stage}, contacts={list(co.contacts[co.contacts.opportunity_id == oid].role)}",
                          action=ACTIONS["M9_missing_economic_buyer"], source="ledger"))
     return [i for i in out if i.type not in SETTINGS.disabled_checks]
+
+
+SEMANTIC_TYPES = list(ACTIONS)
+
+
+def checks_for(co: Company, oid: str, ledger: dict, issues: list[Issue], as_of: pd.Timestamp = SNAPSHOT) -> list[Check]:
+    """Why each semantic check did or didn't fire on this deal."""
+    d = co.deal(oid)
+    late = d.stage in LATE
+    failed = {i.type for i in issues if i.opportunity_id == oid}
+    lg = ledger
+    has = lambda k: lg.get(k) not in (None, "", "unknown", "none_mentioned", "none", "n/a")  # noqa: E731
+    lp = list_price(co.products, d["product"])
+    why = {
+        "M1_stage_vs_buyer": ("skipped", f"stage {d.stage} is early") if not late else (("pass", "buyer said nothing that contradicts the stage") if not any(has(k) for k in ("budget_status", "commitment", "competitor_status")) else ("pass", "buyer signals consistent with the stage")),
+        "M2_contact_contradiction": ("pass", "no evidence the contact left or lacks authority; economic buyer matches or isn't named"),
+        "M3_expired_promise": ("skipped", "buyer made no promise") if not has("last_buyer_promise") else ("pass", f"promise is {(as_of - pd.Timestamp(lg['last_buyer_promise_date'])).days if lg.get('last_buyer_promise_date') else '?'}d old, limit {SETTINGS.promise_days}"),
+        "M4_timeline_contradiction": ("skipped", "buyer gave no decision date or freeze") if not (has("decision_date") or lg.get("budget_status") == "frozen" or lg.get("commitment") == "paused") else ("pass", "close date is consistent with the buyer's timeline"),
+        "M5_scope_vs_amount": ("skipped", "no unit price known") if lp is None else (("skipped", "buyer didn't discuss units") if not has("units_discussed") else ("pass", "amount matches the scope discussed")),
+        "M6_zombie": ("skipped", "no competitor mentioned") if not has("competitor_status") else ("pass", "buyer has not chosen a competitor"),
+        "M7_cross_deal_contact": ("pass", "no sibling deal reports this contact gone"),
+        "M8_happy_ears": ("skipped", "no rep note after the buyer's last message") if lg.get("rep_sentiment_after_last_buyer_message") in (None, "n/a") else ("pass", "rep tone matches the buyer's"),
+        "M9_missing_economic_buyer": ("skipped", f"stage {d.stage} is early") if not late else ("pass", "economic buyer on record"),
+        "M10_arithmetic": ("skipped", "buyer stated no total") if not (has("units_discussed") and has("total_stated_usd")) else ("pass", "buyer's arithmetic checks out"),
+    }
+    out = []
+    for t in SEMANTIC_TYPES:
+        if t in SETTINGS.disabled_checks:
+            out.append(Check(oid, t, "skipped", "disabled in settings"))
+        elif t in failed:
+            out.append(Check(oid, t, "fail", next(i.detail for i in issues if i.opportunity_id == oid and i.type == t)))
+        else:
+            st, reason = why[t]
+            out.append(Check(oid, t, st, reason))
+    return out
 
 
 def _last(name: str) -> str:

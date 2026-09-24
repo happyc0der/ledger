@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import os
 import atexit
+import uuid
 from functools import lru_cache
 
 from prismtrace import PRISMtrace
@@ -22,25 +23,37 @@ def client() -> PRISMtrace | None:
     return c
 
 
+LAST_TRACE_IDS: list[str] = []  # trace ids minted since the caller last drained them (per deal)
+
+
 def trace_llm(*, version: str, model: str, messages: list[dict], output: str, latency_ms: int,
-              tokens_in: int, tokens_out: int, session_id: str, metadata: dict | None = None) -> None:
+              tokens_in: int, tokens_out: int, session_id: str, metadata: dict | None = None) -> str | None:
     c = client()
     if c is None:
-        return
+        return None
+    tid = str(uuid.uuid4())
     c.trace_llm(model=model, input_messages=messages, output=output, latency_ms=latency_ms,
-                token_count_input=tokens_in, token_count_output=tokens_out,
+                token_count_input=tokens_in, token_count_output=tokens_out, trace_id=tid,
                 agent_id="ledger", agent_name=f"ledger-{version}", session_id=session_id,
                 metadata={"version": version, **(metadata or {})})
+    LAST_TRACE_IDS.append(tid)
+    return tid
+
+
+def drain_trace_ids() -> list[str]:
+    ids, LAST_TRACE_IDS[:] = list(LAST_TRACE_IDS), []
+    return ids
 
 
 def trajectory(*, version: str, session_id: str, steps: list[dict], model: str,
-               final_status: str = "success") -> None:
-    """Ordered steps of one run. Verifier verdicts appear here as steps named check:*."""
+               final_status: str = "success") -> str | None:
+    """Ordered steps of one run. Verifier verdicts appear here as steps named check:*. Returns PRISM's id."""
     c = client()
     if c is None:
-        return
-    c.submit_trajectory(steps, agent_id="ledger", agent_name=f"ledger-{version}",
-                        conversation_id=session_id, model=model, final_status=final_status)
+        return None
+    r = c.submit_trajectory(steps, agent_id="ledger", agent_name=f"ledger-{version}",
+                            conversation_id=session_id, model=model, final_status=final_status)
+    return (r or {}).get("id")
 
 
 def step(label: str, output: str, *, tool: str | None = None, input_summary: str = "",
