@@ -1,0 +1,4 @@
+Engagement ID,Associated Deal,Activity date,Activity type,Activity assigned to,Body,Email direction,From address
+1,101,2026-10-05,EMAIL,Rep One,PO should go out next week.,INCOMING_EMAIL,priya@acme.com
+2,101,2026-10-06,CALL,Rep One,Left VM,,
+3,102,2026-10-01,EMAIL,Rep One,We are evaluating you against Kestrel.,INCOMING_EMAIL,omar@beta.com

@@ -12,7 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env")
 
 COMPANY_DIR = Path(os.getenv("LEDGER_DATA", ROOT / "data" / "company"))  # any ingested dataset
-RUNS_DIR = ROOT / "runs"
+DATASET = COMPANY_DIR.name
+RUNS_DIR = ROOT / "runs" / DATASET   # runs/<dataset>/<version>.jsonl = latest; runs/<dataset>/<as_of>/<version>/ = history
+DB_PATH = RUNS_DIR / "ledger.db"
+
+
+def run_dir(as_of, version: str) -> Path:
+    return RUNS_DIR / str(pd.Timestamp(as_of).date()) / version
 CACHE_DIR = ROOT / ".cache" / "llm"
 SNAPSHOT = pd.Timestamp(os.getenv("LEDGER_AS_OF", "2026-10-19"))  # "today" for the review
 BASE_WIN_RATE = 0.63

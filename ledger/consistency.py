@@ -30,14 +30,27 @@ def _q(ledger: dict, slot: str) -> str:
     return ledger.get("quotes", {}).get(slot, "")
 
 
-def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
+def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT) -> list[Issue]:
     d = co.deal(oid)
     out: list[Issue] = []
     late = d.stage in LATE
     dt = lambda s: pd.Timestamp(s) if s else None  # noqa: E731
 
     def add(t, detail, slot, **extra):
-        out.append(Issue(oid, t, detail, _q(ledger, slot), action=ACTIONS[t], source="ledger", extra=extra))
+        grade = (ledger.get("grades") or {}).get(slot, "B")
+        sev = "low" if grade == "C" else "medium"
+        out.append(Issue(oid, t, detail, _q(ledger, slot), severity=sev, action=ACTIONS[t], source="ledger",
+                         extra={**extra, "evidence_grade": grade}))
+
+    # "Leaning toward MG Special" is leaning toward US: a named competitor that is one of our own
+    # products is not a competitor (comparison fix, disclosed in README).
+    ours = {normalize_product(p) for p in co.products["product"]}
+    if ledger.get("competitor_status") in ("leaning_competitor", "chose_competitor"):
+        named = normalize_product(str(ledger.get("competitor_name") or ""))
+        quote = normalize_product(_q(ledger, "competitor_status"))
+        names_in_quote = {p for p in ours if p and p in quote}
+        if named in ours or (not named and names_in_quote):
+            ledger = {**ledger, "competitor_status": "chose_us" if ledger["competitor_status"] == "chose_competitor" else "evaluating"}
 
     # M1 stage vs buyer / M6 zombie
     if ledger.get("competitor_status") == "chose_competitor":
@@ -61,15 +74,15 @@ def compare(co: Company, oid: str, ledger: dict) -> list[Issue]:
         add("M2_contact_contradiction", f"primary contact says they don't own the decision; stage is {d.stage}", "champion_status")
     # M3 expired promise
     pdate = dt(ledger.get("last_buyer_promise_date"))
-    if ledger.get("last_buyer_promise") and pdate is not None and (SNAPSHOT - pdate).days > 14 \
+    if ledger.get("last_buyer_promise") and pdate is not None and (as_of - pdate).days > 14 \
             and ledger.get("commitment") not in ("declined", "paused"):  # a declined/paused buyer owes nothing
-        add("M3_expired_promise", f"buyer promised '{ledger['last_buyer_promise'][:60]}' {(SNAPSHOT - pdate).days}d ago; nothing since", "last_buyer_promise")
+        add("M3_expired_promise", f"buyer promised '{ledger['last_buyer_promise'][:60]}' {(as_of - pdate).days}d ago; nothing since", "last_buyer_promise")
     # M4 timeline
     ddate = dt(ledger.get("decision_date"))
-    close_future = pd.notna(d.expected_close) and d.expected_close >= SNAPSHOT  # a past close date is S1, not M4
+    close_future = pd.notna(d.expected_close) and d.expected_close >= as_of  # a past close date is S1, not M4
     if ddate is not None and close_future and d.expected_close < ddate - timedelta(days=2):
         add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} is before the buyer's decision date {ddate.date()}", "decision_date")
-    if close_future and d.expected_close < SNAPSHOT + timedelta(days=75):
+    if close_future and d.expected_close < as_of + timedelta(days=75):
         if ledger.get("budget_status") == "frozen":
             add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer said budget is frozen", "budget_status")
         elif ledger.get("commitment") == "paused":

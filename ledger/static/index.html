@@ -64,6 +64,11 @@
   <label class="chk"><input type="checkbox" id="reveal"> reveal outcomes</label>
   <div class="toggle"><button id="viewList" class="on">Pipeline</button><button id="viewProof">Proof</button></div>
 </header>
+<div id="chips" style="padding:8px 20px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center">
+  <span class="muted">Show</span>
+  <div class="toggle" id="filter"><button data-f="all" class="on">All</button><button data-f="new">New since last review</button><button data-f="recurring">Recurring</button><button data-f="resolved">Resolved this week</button><button data-f="pushed">Close date pushed</button></div>
+  <span class="muted" id="histnote"></span>
+</div>
 <main id="mainList">
   <div id="list"><div class="empty">Loading…</div></div>
   <aside id="drawer"><div class="empty">Select a deal to see its receipts.</div></aside>
@@ -74,7 +79,7 @@
 const $ = s => document.querySelector(s);
 const fmt$ = n => n == null ? '—' : '$' + Math.round(n).toLocaleString();
 const pct = x => x == null ? '—' : Math.round(x * 100) + '%';
-let state = { version: 'v2', reveal: false, sel: null, deals: [], meta: null };
+let state = { version: 'v3', reveal: false, sel: null, deals: [], meta: null, filter: 'all' };
 
 async function api(p) { const r = await fetch(p); if (!r.ok) throw new Error(p); return r.json(); }
 
@@ -84,8 +89,29 @@ function receipts(d) {
   return `<span class="rcpt">${f(d.amount_ok, 'amount')} ${f(d.gap_ok, 'days')} ${f(d.quote_ok, 'quote')}</span>`;
 }
 
+function visible(d) {
+  const h = d.history || {};
+  if (state.filter === 'new') return (h.new_issues || []).length > 0;
+  if (state.filter === 'recurring') return (h.recurring || []).length > 0;
+  if (state.filter === 'resolved') return (h.resolved_issues || []).length > 0;
+  if (state.filter === 'pushed') return (h.close_date_pushes || 0) > 0;
+  return true;
+}
+function delta(d) {
+  const h = d.history || {}; const bits = [];
+  if (h.close_date_pushes) bits.push(`<span title="close date pushed ${h.close_date_pushes}×">⏩${h.close_date_pushes}</span>`);
+  if (h.stage_change) bits.push(`<span title="${h.stage_change}">stage</span>`);
+  if (h.p_delta) bits.push(`<span title="win prob. change">${h.p_delta > 0 ? '▲' : '▼'}${Math.abs(Math.round(h.p_delta * 100))}</span>`);
+  if ((h.new_issues || []).length) bits.push(`<span class="iss" title="new issues">+${h.new_issues.length}</span>`);
+  if ((h.resolved_issues || []).length) bits.push(`<span class="pill obj-none" title="resolved">−${h.resolved_issues.length}</span>`);
+  return bits.join(' ') || '<span class="muted">—</span>';
+}
+
 function renderList() {
-  const rows = state.deals.map((d, i) => `
+  const shown = state.deals.filter(visible);
+  const anyHist = state.deals.some(d => d.history && d.history.first_run === false);
+  $('#histnote').textContent = anyHist ? '' : 'first run for this dataset — nothing to compare with yet';
+  const rows = shown.map((d, i) => `
     <tr class="row ${state.sel === d.opportunity_id ? 'sel' : ''}" data-id="${d.opportunity_id}">
       <td class="num muted">${i + 1}</td>
       <td><b>${d.account}</b><div class="muted">${d.product} · ${d.sales_agent}</div></td>
@@ -96,9 +122,10 @@ function renderList() {
       <td>${(d.next_action || '').replace(/_/g, ' ')}</td>
       <td>${receipts(d)}</td>
       <td>${(d.issue_types || []).map(t => `<span class="iss ${t[0] === 'S' ? 's' : ''}" title="${t}">${t.split('_')[0]}</span>`).join('') || '<span class="muted">—</span>'}</td>
+      <td>${delta(d)}</td>
     </tr>`).join('');
   $('#list').innerHTML = `<table><thead><tr><th>#</th><th>Deal</th><th>Rep stage</th><th class="num">Amount</th>
-    <th class="num">Win prob.</th><th>Objection</th><th>Next action</th><th>Receipts</th><th>Issues</th></tr></thead><tbody>${rows}</tbody></table>`;
+    <th class="num">Win prob.</th><th>Objection</th><th>Next action</th><th>Receipts</th><th>Issues</th><th>Δ since last review</th></tr></thead><tbody>${rows}</tbody></table>`;
   document.querySelectorAll('tr.row').forEach(tr => tr.onclick = () => select(tr.dataset.id));
 }
 
@@ -126,12 +153,23 @@ async function select(id) {
     <div>${v.rationale || ''}</div>
     <div style="margin-top:6px">${receipts(v)}</div>
     ${outcome}
-    ${(v.issues && v.issues.length) ? `<h3>What doesn't add up (${v.issues.length})</h3>` + v.issues.map(i => `<div class="issue ${i.type[0] === 'S' ? 's' : ''}">
-        <div class="t">${i.type.replace(/_/g, ' ')}</div><div>${i.detail}</div>
-        ${i.evidence ? `<div class="muted">“${i.evidence}”</div>` : ''}<div class="a">→ ${i.action || ''}</div></div>`).join('') : ''}
+    ${(v.issues && v.issues.length) ? `<h3>What doesn't add up (${v.issues.length})</h3>` + v.issues.map(i => {
+        const rec = ((v.history || {}).recurring || []).find(r => r.key === i.key);
+        const isNew = ((v.history || {}).new_issues || []).includes(i.key);
+        const meta = rec ? `recurring · first seen ${rec.first_seen} (${rec.weeks} wk)` : (isNew && !(v.history || {}).first_run ? 'new this week' : '');
+        const st = i.state && i.state !== 'new' ? `<span class="pill">${i.state}${i.state_who ? ' · ' + i.state_who : ''}</span>` : '';
+        return `<div class="issue ${i.type[0] === 'S' ? 's' : ''}" data-key="${i.key || ''}" style="${i.state === 'muted' ? 'opacity:.5' : ''}">
+        <div class="t">${i.type.replace(/_/g, ' ')} <span class="muted" style="font-weight:400">${meta}</span> ${st}</div><div>${i.detail}</div>
+        ${i.evidence ? `<div class="muted">“${i.evidence}”</div>` : ''}<div class="a">→ ${i.action || ''}</div>
+        ${i.key ? `<div style="margin-top:4px">${['acknowledged', 'muted', 'resolved'].map(s => `<button class="st" data-key="${i.key}" data-s="${s}" style="font-size:11px;padding:2px 8px;margin-right:4px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;cursor:pointer">${s === 'acknowledged' ? 'acknowledge' : s === 'muted' ? 'mute' : 'resolved'}</button>`).join('')}</div>` : ''}</div>`;
+      }).join('') : ''}
     <h3>Both versions</h3>
     <table class="cmp"><tr><th></th><th class="num">p</th><th>objection</th><th>action</th><th>receipts</th></tr>${others}</table>
     <h3>Record (${d.activities.length})</h3>${acts}`;
+  document.querySelectorAll('#drawer button.st').forEach(b => b.onclick = async () => {
+    await fetch(`/api/issue/${b.dataset.key}/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: b.dataset.s }) });
+    await loadDeals();
+  });
 }
 
 function topBinNote(v1, v2) {
@@ -160,8 +198,8 @@ function renderIssues(scores) {
 }
 
 function renderProof(c) {
-  const v1 = c.v1, v2 = c.v2;
-  if (!v1 || !v2) { $('#proof').innerHTML = '<div class="empty">Run both versions and `scripts/run.py eval v1 v2` first.</div>'; return; }
+  const v1 = c.v1, v2 = c.v3 || c.v2;
+  if (!v1 || !v2) { $('#proof').innerHTML = '<div class="muted" style="margin:8px 0 16px">No outcome ground truth for this dataset — the outcome comparison is only available on the benchmark data.</div><div id="issuesProof"></div>'; return; }
   const row = (label, k, f = x => x, better = 'high') => {
     const a = v1[k], b = v2[k];
     const win = better === 'high' ? (b > a) : (b < a);
@@ -182,6 +220,7 @@ function renderProof(c) {
       ${row('Deals reported', 'deals')}
       ${row('Duplicate deal reports', 'duplicate_deals', x => x, 'low')}
     </table>
+    <div class="muted">v2 column shows ${c.v3 ? 'v3 (Ledger)' : 'v2'}.</div>
     <div id="issuesProof"></div>
     <div style="display:flex; gap:40px; margin-top:20px; flex-wrap:wrap">
       ${['v1', 'v2'].map(k => `<div><h3>Reliability — ${k}</h3><table class="cmp"><tr><th>stated p</th><th class="num">n</th><th class="num">mean stated</th><th class="num">actually won</th></tr>${rel(c[k])}</table></div>`).join('')}
@@ -201,10 +240,13 @@ async function loadDeals() {
   $('#title').textContent = 'Ledger · ' + state.meta.company.replace(' — pipeline review brief', '');
   $('#asof').textContent = `week of ${state.meta.as_of} · ${state.meta.n_deals} open deals · ${state.meta.reps.length} reps`;
   $('#vtoggle').innerHTML = state.meta.versions.map(v => `<button data-v="${v}" class="${v === state.version ? 'on' : ''}">${v}</button>`).join('');
+  if (!state.meta.versions.includes(state.version)) state.version = state.meta.versions[state.meta.versions.length - 1];
+  document.querySelectorAll('#vtoggle button').forEach(b => b.classList.toggle('on', b.dataset.v === state.version));
   document.querySelectorAll('#vtoggle button').forEach(b => b.onclick = () => {
     state.version = b.dataset.v; document.querySelectorAll('#vtoggle button').forEach(x => x.classList.toggle('on', x === b)); loadDeals();
   });
   $('#reveal').onchange = e => { state.reveal = e.target.checked; if (state.sel) select(state.sel); };
+  document.querySelectorAll('#filter button').forEach(b => b.onclick = () => { state.filter = b.dataset.f; document.querySelectorAll('#filter button').forEach(x => x.classList.toggle('on', x === b)); renderList(); });
   $('#viewList').onclick = () => { $('#mainList').style.display = 'grid'; $('#proof').classList.remove('show'); $('#viewList').classList.add('on'); $('#viewProof').classList.remove('on'); };
   $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); renderIssues(await api('/api/issues')); };
   await loadDeals();

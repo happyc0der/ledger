@@ -34,7 +34,10 @@ def pipeline_total(products: pd.DataFrame, deals: pd.DataFrame) -> float:
 
 def days_since_buyer_touch(activities: pd.DataFrame, rep: str, snapshot: pd.Timestamp = SNAPSHOT) -> int | None:
     """Days since the BUYER last did something. Rep voicemails and system auto-replies don't count."""
-    buyer = activities[(activities.author != rep) & (activities.author != "system")]
+    if "speaker" in activities.columns:
+        buyer = activities[activities.speaker == "buyer"]
+    else:
+        buyer = activities[(activities.author != rep) & (activities.author != "system")]
     if buyer.empty:
         return None
     return int((snapshot - buyer.date.max()).days)

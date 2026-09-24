@@ -1,0 +1,24 @@
+# Findings log — observe → discover → fix → prove
+
+Every failure found during the build, what showed it, where it came from, the fix, and the
+number after. PRISM ids are from project `98b924d6…`; the auditor (`ledger/audit.py`) now
+runs these checks automatically.
+
+| # | What PRISM / the eval showed | Attribution | Fix | Re-proof |
+|---|---|---|---|---|
+| 1 | v1 traces: pipeline total $324K vs $575K computed; PRISM trace inputs show `GTXPro` priced as unknown | **data** — the public dataset spells one product two ways; v1 let the model do the join | v2/v3 normalise product names in code (`tools.normalize_product`) | pipeline error −44% → 0% |
+| 2 | Eval: 143/216 wrong day-gaps in v1 | **agent** — model did date arithmetic and counted rep voicemails as buyer contact | `tools.days_since_buyer_touch` (buyer-authored only), computed in code | 0 wrong gaps in v2/v3 |
+| 3 | Eval: 56 duplicate and 12 missing deals in v1 output | **agent** — 30 deals in one context | one deal per context (v2/v3) | 0 duplicates / 0 missing |
+| 4 | PRISM guardrail `PII/PHI Detection` flagged v1 traces `35c3e334…`, `2a6b8387…` (phone `555-123-4567`, an email); trace `d9aecb6e…` **blocked** by `Prompt Injection Detection` on the word "bypass" | **data** — our local-model paraphrase step had *invented* contact details, "my sister", "switching from Salesforce"; the injection block was a keyword false positive | two-way fact validation in `scripts/paraphrase.py` (nothing may be added), paraphrase moved to Gemini — commit `eb5452f`; auditor traces every flag back to data vs output | flags on new traces: 0 (3 remaining are "Q4" ↔ driver's-licence pattern, a guardrail false positive) |
+| 5 | PRISM trajectory rule `CORR-001 Task Completion` failed on every v2 run ("No final answer step found"); `EFF-001` flagged redundant `verifier` calls | **instrumentation** — our last step had `step_type=reasoning`; two checks shared a tool name | `tracing.step` maps `final_answer`; `verifier:quote` / `verifier:amount` — commit `eb5452f` | trajectory scorecards pass; overall 94 |
+| 6 | Eval: v2 `noisy_rep` objection accuracy 52% | **data** — generator anchored "days since buyer touch" on the last *activity*, so rep voicemails pushed the buyer's email weeks back | anchor on the last buyer-authored activity — commit `77ad680`/`1b24ecf` | 52% → 88%, no prompt change |
+| 7 | Eval: 19% of clean deals flagged on the first v3 scoring | mostly **labels** — "I don't own this budget" in Proposal, "I'll ping you when redlines are back" 20 days ago, "paused all vendor onboarding" vs a close date weeks away: true by the taxonomy, unlabelled; plus **comparison** bugs: last-name-only matching (`Jorge Hughes` ≈ `Raj Hughes`), M4 double-firing on S1 deals | labels derived by rule for all deals (`scripts/relabel.py`); full-name matching; M4 skips past close dates — commit `1b24ecf` | 19% → 1% |
+| 8 | Eval: M3 recall 78% | **comparison** — expired-promise check excluded `commitment=none` although the model had recorded the promise | condition fixed — commit `40bf082` | 78% → 91% (100% before the label set grew) |
+| 9 | Eval: the last clean-deal false alarm, `0W6S0ODT` "leaning toward MG Special" | **comparison** — MG Special is *our* product; `competitor_name` had been dropped by the verifier so the product check had nothing to compare | check the competitor quote for our own product names (`consistency.compare`) | 1/86 → 0/86 |
+| 10 | Auditor: `calibration_smell` — 58% of v2 deals rated ≥ 0.85 | **agent** — fallback decision model (Gemini structured output) is overconfident | open: Jev (calibrated decision model) when access is granted; until then the UI must show bands, not points (plan §2.3) | — |
+| 11 | Auditor's own PRISM scorecard failed `CORR-004`, `EFF-001`, `ROB-001` | **instrumentation** — findings logged as `error` steps with repeated tool names | plan step first, one step per check, `error` only for high findings | scorecard passes, 94.4 |
+
+Not fixed on purpose: the "Q4" guardrail false positive (it's PRISM's pattern, and a keyword
+guardrail crying wolf is a fair thing to show); the 19 `verbal_yes_then_lost` deals both
+agents rate ~0.93 (nothing in the record predicts them; that is what honest calibration
+looks like).

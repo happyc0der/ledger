@@ -55,16 +55,18 @@ SCHEMA = {
 def _record(co: Company, oid: str) -> tuple[dict, list[dict]]:
     d = co.deal(oid)
     acts = co.activities_for(oid)
-    rows = [{"n": i + 1, "date": str(a.date.date()), "type": a.type, "author": a.author,
-             "role": "rep" if a.author == d.sales_agent else ("system" if a.author == "system" else "buyer"), "text": a.text}
-            for i, a in enumerate(acts.itertuples())]
+    rows = []
+    for i, a in enumerate(acts.itertuples()):
+        role = getattr(a, "speaker", None) or ("rep" if a.author == d.sales_agent else ("system" if a.author == "system" else "buyer"))
+        rows.append({"n": i + 1, "date": str(a.date.date()), "type": a.type, "author": a.author, "role": role,
+                     "basis": getattr(a, "speaker_basis", "legacy"), "text": a.text})
     return d, rows
 
 
 def extract(co: Company, oid: str, *, version: str, session: str) -> dict:
     d, rows = _record(co, oid)
     system = (
-        f"Today is {SNAPSHOT.date()}. You are filling a claim ledger for one sales opportunity from its activity "
+        "You are filling a claim ledger for one sales opportunity from its activity "
         "record. Only the BUYER's own words (author role 'buyer', including buyer sentences quoted inside rep notes "
         "as Buyer: \"...\") and SYSTEM messages (auto-replies) count as evidence. The rep's opinions do not. "
         "For every non-null slot, put a VERBATIM sentence from the record in quotes[slot]. If the buyer never "
@@ -99,23 +101,42 @@ def _find_row(rows: list[dict], quote: str) -> dict | None:
     return None
 
 
+GRADE = {"direction": "A", "from-domain": "A", "auto-reply": "A", "author-contact": "B", "legacy": "B"}
+
+
+def _admissible(row: dict, quote: str) -> str | None:
+    """Evidence grade for a quote found in this row, or None if the row can't carry buyer evidence.
+    A: buyer/system row by direction or address; B: buyer row by author name; C: quoted inside a rep note."""
+    if row["role"] in ("buyer", "system"):
+        return GRADE.get(row.get("basis", "legacy"), "B")
+    from .attribution import segments
+    q = _norm(quote)
+    for kind, span in segments(row["text"]):
+        if q and q in _norm(span):
+            return "C"
+    return None
+
+
 def verify(ledger: dict, rows: list[dict]) -> dict:
     """A claim without a verbatim buyer/system quote is reset to null; dates are taken from the
     activity that contains the quote, not from the model. Returns ledger + 'dropped' list."""
     dropped = []
     quotes = ledger.get("quotes") or {}
-    kept = {}
+    kept, grades = {}, {}
     for slot in SLOTS:
         if slot == "_hints" or slot in NO_QUOTE_NEEDED or ledger.get(slot) in NULLISH:
             continue
         q = quotes.get(slot) or quotes.get(PARENT.get(slot, ""), "")
         row = _find_row(rows, q) if q else None
-        if row is None or row["role"] == "rep" and "buyer" not in row["text"].lower():
+        grade = _admissible(row, q) if row is not None else None
+        if grade is None:
             dropped.append(slot)
             ledger[slot] = None
         else:
             kept[slot] = q
+            grades[slot] = grade
     ledger["quotes"] = kept
+    ledger["grades"] = grades
     # dates come from the record, never from the model
     if ledger.get("last_buyer_promise"):
         row = _find_row(rows, kept.get("last_buyer_promise", ""))

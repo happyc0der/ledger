@@ -12,8 +12,9 @@ ap.add_argument("--preset", default="hubspot", choices=["hubspot", "salesforce",
 ap.add_argument("--deals", required=True); ap.add_argument("--activities"); ap.add_argument("--contacts")
 ap.add_argument("--products"); ap.add_argument("--team"); ap.add_argument("--mapping", help="JSON file with column overrides")
 ap.add_argument("--out", required=True); ap.add_argument("--company", default="Your company")
+ap.add_argument("--allow-no-buyer", action="store_true", help="proceed even if no activity can be attributed to a buyer (rules only)")
 a = ap.parse_args()
 rep = ingest(a.preset, Path(a.out), deals=Path(a.deals), activities=Path(a.activities) if a.activities else None,
              contacts=Path(a.contacts) if a.contacts else None, products=Path(a.products) if a.products else None,
-             team=Path(a.team) if a.team else None, mapping=json.load(open(a.mapping)) if a.mapping else None, company=a.company)
+             team=Path(a.team) if a.team else None, mapping=json.load(open(a.mapping)) if a.mapping else None, company=a.company, allow_no_buyer=a.allow_no_buyer)
 print(json.dumps(rep, indent=1, default=str))

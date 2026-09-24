@@ -22,9 +22,13 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9 ]", "", str(s).lower().replace("’", "'")).strip()
 
 
+def load_rows(version: str) -> list[dict]:
+    """Rows of runs/<dataset>/<version>.jsonl, tolerant of blank lines."""
+    return [json.loads(l) for l in (RUNS_DIR / f"{version}.jsonl").read_text().splitlines() if l.strip()]
+
+
 def load_results(version: str) -> pd.DataFrame:
-    rows = [json.loads(l) for l in (RUNS_DIR / f"{version}.jsonl").read_text().splitlines()]
-    return pd.DataFrame(rows)
+    return pd.DataFrame(load_rows(version))
 
 
 def verdicts(co: Company, res: pd.DataFrame) -> pd.DataFrame:

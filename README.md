@@ -111,8 +111,8 @@ you just ask them to look. So Ledger doesn't ask the model to notice — it asks
 |---|---|---|---|
 | Syntactic (S1–S8: past close date, no next step, dormant, blank amount, stalled, duplicate, impossible dates, wrong last-activity) recall | 99% | 38% | 99% |
 | **Semantic (M1–M10) recall** | **0%** | 32% | **93%** |
-| Semantic precision | — | 62% | 99% |
-| Clean deals falsely flagged | 0 / 86 | 15 / 86 (17%) | **1 / 86** |
+| Semantic precision | — | 62% | 100% |
+| Clean deals falsely flagged | 0 / 86 | 15 / 86 (17%) | **0 / 86** |
 
 ¹ The same model (Gemini Flash-Lite), handed 25 deals at a time with the same taxonomy and
 asked to list every issue with a quote. It found 0 of 8 cross-deal contact departures and 1
@@ -124,14 +124,18 @@ Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradict
 the CRM value, the buyer's sentence and the recommended action.
 
 **What was adjusted after the first scoring, and what wasn't.** No prompt or model setting
-was changed after seeing results. Two comparison bugs were fixed (name matching against
+was changed after seeing results. Three comparison bugs were fixed (name matching against
 paraphrased first names; a timeline check double-firing on deals already flagged for a past
-close date). Three label gaps were closed: contacts who say "I don't own this budget" in a
+close date; a buyer "leaning toward MG Special" — our own product — counted as leaning to a
+competitor, which was the single remaining false alarm). Three label gaps were closed: contacts who say "I don't own this budget" in a
 late stage, a buyer's "I'll ping you when redlines are back" or "I'll try to get time with
 her" left unanswered for 14+ days, and "we've paused all vendor onboarding" against a close
 date weeks away — all true by the taxonomy's definitions, all verified by reading the
 evidence, all previously counted as false positives. Closing them also added cases the
 model misses, which is why recall is 93% and not higher.
+
+Every failure found during the build, its PRISM evidence, attribution and fix is in
+[FINDINGS.md](FINDINGS.md).
 
 ## The auditor: finding failures is the agent's job too
 

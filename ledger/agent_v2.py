@@ -65,17 +65,11 @@ def _explain(state: dict, decision, *, session: str, oid: str, strict: bool = Fa
     return parsed or {"buyer_quote": "", "rationale": ""}
 
 
-def run_deal(co: Company, oid: str, *, session: str) -> tuple[dict, list[dict]]:
-    state = deal_state(co, oid)
-    steps = [tracing.step("crm_query", f"{len(state['activities'])} activities, {len(state['contacts'])} contacts",
-                          tool="crm", input_summary=oid),
-             tracing.step("compute", json.dumps(state["computed"]), tool="calc")]
-    dec = decide(state, version="v2", session_id=session)
-    steps.append(tracing.step("decide", json.dumps({"win_probability": round(dec.win_probability, 3),
-                                                    "objection": dec.objection, "next_action": dec.next_action,
-                                                    "objection_probs": dec.objection_probs}),
-                              tool=dec.backend, input_summary="deal state"))
+def explain_verified(state: dict, dec, *, session: str, oid: str) -> tuple[dict, bool, list[dict]]:
+    """Explain, then verify the cited quote against the record; retry once, else drop it.
+    Returns (explanation, quote_ok, trajectory steps to append)."""
     record = " ".join(_norm(a["text"]) for a in state["activities"])
+    steps = []
     ex = _explain(state, dec, session=session, oid=oid)
     quote_ok = ex["buyer_quote"] == "" or _norm(ex["buyer_quote"]) in record
     if not quote_ok:
@@ -86,6 +80,21 @@ def run_deal(co: Company, oid: str, *, session: str) -> tuple[dict, list[dict]]:
             ex["buyer_quote"] = ""  # refuse to show an unverifiable quote
     steps.append(tracing.step("check:quote:match" if quote_ok else "check:quote:dropped",
                               ex["buyer_quote"] or "(no quote)", tool="verifier:quote"))
+    return ex, quote_ok, steps
+
+
+def run_deal(co: Company, oid: str, *, session: str) -> tuple[dict, list[dict]]:
+    state = deal_state(co, oid)
+    steps = [tracing.step("crm_query", f"{len(state['activities'])} activities, {len(state['contacts'])} contacts",
+                          tool="crm", input_summary=oid),
+             tracing.step("compute", json.dumps(state["computed"]), tool="calc")]
+    dec = decide(state, version="v2", session_id=session)
+    steps.append(tracing.step("decide", json.dumps({"win_probability": round(dec.win_probability, 3),
+                                                    "objection": dec.objection, "next_action": dec.next_action,
+                                                    "objection_probs": dec.objection_probs}),
+                              tool=dec.backend, input_summary="deal state"))
+    ex, quote_ok, qsteps = explain_verified(state, dec, session=session, oid=oid)
+    steps += qsteps
     steps.append(tracing.step("check:amount:match", f"${state['computed']['amount_usd']:,.0f} from catalogue/CRM",
                               tool="verifier:amount"))
     row = dict(opportunity_id=oid, win_probability=dec.win_probability, amount_usd=state["computed"]["amount_usd"],

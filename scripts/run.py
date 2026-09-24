@@ -14,8 +14,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from ledger import evaluate  # noqa: E402
-from ledger.config import RUNS_DIR  # noqa: E402
+import os  # noqa: E402
+
+from ledger import evaluate, store  # noqa: E402
+from ledger.config import RUNS_DIR, SNAPSHOT, run_dir  # noqa: E402
 from ledger.data import load_company  # noqa: E402
 
 
@@ -50,7 +52,7 @@ def main():
         for ver in a.more or ["v3"]:
             p = RUNS_DIR / f"{ver}.jsonl"
             if p.exists():
-                rows = [json.loads(l) for l in p.read_text().splitlines()]
+                rows = evaluate.load_rows(ver)
                 if a.recompute:
                     from dataclasses import asdict
                     from ledger.consistency import compare, cross_deal
@@ -65,7 +67,7 @@ def main():
                         r["issues"] = rb.get(r["opportunity_id"], []) + [asdict(x) for x in compare(co, r["opportunity_id"], lg)]
                     for x in cross_deal(co, ledgers):
                         by[x.opportunity_id]["issues"].append(asdict(x))
-                    p.write_text("\n".join(json.dumps(r, default=str) for r in rows) + "\n")
+                    p.write_text("".join(json.dumps(r, default=str) + "\n" for r in rows))
                 iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
                 scores.append(score_issues.score(iss, ids, ver))
         md = score_issues.table(scores)
@@ -82,7 +84,7 @@ def main():
         from ledger.agent_v2 import run_rep
 
     reps = a.reps.split(",") if a.reps else co.reps()
-    RUNS_DIR.mkdir(exist_ok=True)
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
     out = RUNS_DIR / f"{a.version}.jsonl"
     out.write_text("")
     n = 0
@@ -90,14 +92,22 @@ def main():
         t0 = time.time()
         r = run_rep(co, rep, limit=a.limit)
         with out.open("a") as f:
-            f.write("\n".join(json.dumps(x) for x in r) + "\n")
+            for x in r:
+                f.write(json.dumps(x, default=str) + "\n")
         n += len(r)
         print(f"{rep}: {len(r)} deals in {time.time() - t0:.0f}s", flush=True)
     if a.version == "v3":  # cross-deal checks across the whole team, then rewrite
         from ledger.agent_v3 import team_cross_deal
-        rows = team_cross_deal(co, [json.loads(l) for l in out.read_text().splitlines()])
-        out.write_text("\n".join(json.dumps(r, default=str) for r in rows) + "\n")
-    print(f"wrote {n} rows -> {out}")
+        rows = team_cross_deal(co, evaluate.load_rows(a.version))
+        out.write_text("".join(json.dumps(r, default=str) + "\n" for r in rows))
+    rows = evaluate.load_rows(a.version)
+    # per-dataset, per-review-date copy + the store (history, lifecycle, proposals)
+    rd = run_dir(SNAPSHOT, a.version); rd.mkdir(parents=True, exist_ok=True)
+    (rd / f"{a.version}.jsonl").write_text(out.read_text())
+    backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "")
+    run_id = store.record_run(rows, as_of=SNAPSHOT, version=a.version, provider=os.getenv("LLM_PROVIDER", "ollama"),
+                              decide_backend=backend, deals=co.deals)
+    print(f"wrote {n} rows -> {out}  (run {run_id} in {store.DB_PATH})")
 
 
 if __name__ == "__main__":

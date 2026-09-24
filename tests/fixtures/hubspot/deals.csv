@@ -1,0 +1,4 @@
+Record ID,Deal Name,Associated Company,Product,Deal owner,Deal Stage,Amount,Create Date,Close Date,Associated Contact,Last Activity Date,Next step
+101,Acme - GTX Basic,Acme,GTX Basic,Rep One,contractsent,"$550.00",2026-08-01,2026-11-15,Priya Okafor,2026-10-10,Send proposal
+102,Beta - GTX Basic,Beta,GTX Basic,Rep One,Technical Validation,"$550.00",2026-09-01,2026-12-01,Omar Reyes,2026-10-01,
+103,Old - GTX Basic,Old,GTX Basic,Rep One,closedwon,"$550.00",2026-01-01,2026-03-01,Someone,2026-03-01,

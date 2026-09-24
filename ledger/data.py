@@ -35,8 +35,9 @@ class Company:
 
 
 def load_company() -> Company:
+    from .attribution import annotate
     d = COMPANY_DIR
-    return Company(
+    co = Company(
         brief=(d / "company.md").read_text(),
         deals=pd.read_csv(d / "deals.csv", parse_dates=["created_date", "expected_close", "last_activity_date"]),
         activities=pd.read_csv(d / "activities.csv", parse_dates=["date"]),
@@ -45,6 +46,8 @@ def load_company() -> Company:
         team=pd.read_csv(d / "team.csv"),
         accounts=pd.read_csv(d / "accounts.csv") if (d / "accounts.csv").exists() else pd.DataFrame(columns=["account"]),
     )
+    co.activities = annotate(co.activities, co.deals, co.contacts, co.team)
+    return co
 
 
 def load_truth() -> pd.DataFrame:

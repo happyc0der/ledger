@@ -14,9 +14,23 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 
-from . import evaluate
-from .config import RUNS_DIR, SNAPSHOT
+import os
+
+from fastapi import Body
+
+from . import evaluate, history, store
+from .config import COMPANY_DIR, RUNS_DIR, SNAPSHOT
 from .data import load_company, load_truth
+
+UI_VERSIONS = ("v1", "v2", "v3")  # naive is a benchmark row, not a manager-facing agent
+
+
+def _versions() -> list[str]:
+    return [v for v in UI_VERSIONS if (RUNS_DIR / f"{v}.jsonl").exists()]
+
+
+def _has_truth() -> bool:
+    return (COMPANY_DIR / "ground_truth.csv").exists()
 
 app = FastAPI(title="Ledger")
 STATIC = Path(__file__).parent / "static"
@@ -35,11 +49,22 @@ def _clean(o):
     return o
 
 
-def _rows(version: str) -> pd.DataFrame:
+def _latest(version: str) -> tuple[list[dict] | None, str | None]:
+    """Rows of the latest stored run for this version, else the legacy jsonl."""
+    rid = store.latest_run_id(version)
+    if rid:
+        return store.rows_for(rid), rid
     p = RUNS_DIR / f"{version}.jsonl"
-    if not p.exists():
+    if p.exists():
+        return evaluate.load_rows(version), None
+    return None, None
+
+
+def _rows(version: str) -> pd.DataFrame:
+    rows, _ = _latest(version)
+    if rows is None:
         raise HTTPException(404, f"no run for {version}")
-    r = evaluate.load_results(version).drop_duplicates("opportunity_id")
+    r = pd.DataFrame(rows).drop_duplicates("opportunity_id")
     vp = RUNS_DIR / f"{version}_verdicts.csv"
     if vp.exists():
         v = pd.read_csv(vp)[["opportunity_id", "amount_ok", "gap_ok", "quote_ok", "fabrications"]]
@@ -60,23 +85,51 @@ def index():
 def meta():
     return {"as_of": str(SNAPSHOT.date()), "company": CO.brief.split("\n")[0].lstrip("# "),
             "reps": CO.reps(), "n_deals": len(CO.deals),
-            "versions": [v for v in ("v1", "v2") if (RUNS_DIR / f"{v}.jsonl").exists()]}
+            "versions": _versions(), "has_truth": _has_truth()}
 
 
 @app.get("/api/deals")
-def deals(version: str = "v2"):
+def deals(version: str = "v3", show_muted: int = 0):
     r = _rows(version)
+    _, rid = _latest(version)
+    hist = history.summary(rid) if rid else {}
+    states = store.issue_states()
     cols = ["opportunity_id", "account", "product", "sales_agent", "stage", "amount_usd", "win_probability",
             "ev", "objection", "next_action", "buyer_quote", "rationale", "days_since_last_buyer_touch",
             "amount_ok", "gap_ok", "quote_ok", "fabrications", "primary_contact", "issues"]
     recs = _clean(r[[c for c in cols if c in r]].to_dict("records"))
     for rec in recs:
         iss = rec.get("issues") if isinstance(rec.get("issues"), list) else []
+        for i in iss:
+            st = states.get(i.get("key", ""), {})
+            i["state"] = st.get("status", "new")
+        if not show_muted:
+            iss = [i for i in iss if i["state"] != "muted"]
         rec["issue_types"] = [i["type"] for i in iss]
         rec["n_semantic"] = sum(1 for i in iss if i["type"].startswith("M"))
         rec["n_rules"] = sum(1 for i in iss if i["type"].startswith("S"))
+        h = hist.get(rec["opportunity_id"], {})
+        rec["history"] = {k: h.get(k) for k in ("new_issues", "resolved_issues", "recurring", "stage_change", "close_date_pushes",
+                                                 "amount_change", "p_delta", "promise_age_days", "first_run")}
         rec.pop("issues", None)
     return recs
+
+
+@app.post("/api/issue/{key}/state")
+def issue_state(key: str, body: dict = Body(...)):
+    status = body.get("status", "acknowledged")
+    if status not in ("new", "acknowledged", "muted", "resolved"):
+        raise HTTPException(400, "status must be new|acknowledged|muted|resolved")
+    store.set_issue_state(key, status, who=body.get("who") or os.getenv("LEDGER_USER", "manager"), note=body.get("note", ""))
+    return {"key": key, "status": status}
+
+
+@app.get("/api/history")
+def history_view(version: str = "v3"):
+    _, rid = _latest(version)
+    if not rid:
+        return {}
+    return _clean({"run_id": rid, "previous_run": store.previous_run_id(rid), "deals": history.summary(rid)})
 
 
 @app.get("/api/deal/{oid}")
@@ -89,14 +142,20 @@ def deal(oid: str):
            "activities": _clean(acts.to_dict("records")),
            "contacts": _clean(CO.contacts[CO.contacts.opportunity_id == oid].to_dict("records")),
            "versions": {}}
-    for v in ("v1", "v2"):
-        if (RUNS_DIR / f"{v}.jsonl").exists():
-            r = _rows(v)
-            m = r[r.opportunity_id == oid]
-            if len(m):
-                out["versions"][v] = _clean(m.iloc[0].to_dict())
-    t = load_truth()
-    if oid in t.index:
+    states = store.issue_states()
+    for v in _versions():
+        r = _rows(v)
+        m = r[r.opportunity_id == oid]
+        if len(m):
+            row = _clean(m.iloc[0].to_dict())
+            for i in (row.get("issues") or []) if isinstance(row.get("issues"), list) else []:
+                st = states.get(i.get("key", ""), {})
+                i["state"], i["state_who"], i["state_at"] = st.get("status", "new"), st.get("who"), st.get("at")
+            _, rid = _latest(v)
+            row["history"] = history.summary(rid).get(oid) if rid else None
+            out["versions"][v] = row
+    t = load_truth() if _has_truth() else None
+    if t is not None and oid in t.index:
         tr = t.loc[oid]
         out["outcome"] = _clean({"outcome": tr.outcome, "actual_close_value": tr.actual_close_value,
                                  "actual_close_date": tr.actual_close_date, "objection": tr.objection,
@@ -109,12 +168,14 @@ def issues():
     """Rules vs agent findings, scored against planted anomalies (demo/proof only)."""
     from . import score_issues
     from .rules import Issue, run_rules
+    if not (COMPANY_DIR / "anomalies.csv").exists():
+        return []
     ids = list(CO.deals.opportunity_id)
     scores = [score_issues.score(run_rules(CO), ids, "rules")]
     for ver, name in (("naive", "naive agent"), ("v3", "Ledger")):
         p = RUNS_DIR / f"{ver}.jsonl"
         if p.exists():
-            rows = [json.loads(l) for l in p.read_text().splitlines()]
+            rows = evaluate.load_rows(ver)
             iss = [Issue(**{k: v for k, v in i.items() if k in Issue.__dataclass_fields__}) for r in rows for i in r.get("issues", [])]
             scores.append(score_issues.score(iss, ids, name))
     return _clean(scores)
@@ -123,7 +184,9 @@ def issues():
 @app.get("/api/compare")
 def compare():
     out = {}
-    for v in ("v1", "v2"):
+    if not _has_truth():
+        return out
+    for v in _versions():
         if (RUNS_DIR / f"{v}.jsonl").exists():
             s, _ = evaluate.summarize(CO, v)
             s["reliability"] = [{"bin": str(k), **val} for k, val in s["reliability"].items()]

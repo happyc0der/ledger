@@ -28,8 +28,7 @@ from .data import Company
 from .tools import days_since_buyer_touch, deal_amount, normalize_product, pipeline_total
 
 PII = {"email": r"[\w.+-]+@[\w-]+\.\w+", "phone": r"\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b",
-       "clock time": r"\b\d{1,2}:\d{2}\s?(?:am|pm)?\b", "relative": r"\b(?:sister|brother|wife|husband|mother|father)\b",
-       "other vendor/tool": r"\b(?:salesforce|hubspot|linkedin|zoom|slack)\b"}
+       "clock time": r"\b\d{1,2}:\d{2}\s?(?:am|pm)?\b", "relative": r"\b(?:sister|brother|wife|husband|mother|father)\b"}
 GENERIC_ACTIONS = {"re_engage_dormant"}
 
 
@@ -56,6 +55,15 @@ def _norm(s: str) -> str:
 # ----------------------------------------------------------------------------- data
 def check_data_hygiene(co: Company, activities: pd.DataFrame) -> list[Finding]:
     out = []
+    if "speaker" in activities.columns and len(activities):
+        vc = activities.speaker.value_counts()
+        unk = vc.get("unknown", 0) / len(activities)
+        if vc.get("buyer", 0) == 0:
+            out.append(Finding("attribution", "high", "data", "No activity is attributable to a buyer — every claim will be dropped and the agent will find nothing",
+                               len(activities), [f"speakers: {vc.to_dict()}"], "Export email direction / from-address columns, or a contacts file with names."))
+        elif unk > 0.3:
+            out.append(Finding("attribution", "medium", "data", f"{unk:.0%} of activities have no attributable speaker", int(vc.get("unknown", 0)),
+                               [f"speakers: {vc.to_dict()}"], "Those rows cannot carry buyer evidence; add direction or contact data."))
     for name, pat in PII.items():
         hits = activities[activities.text.str.contains(pat, case=False, regex=True, na=False)]
         if len(hits):
@@ -110,7 +118,7 @@ def check_output(co: Company, version: str) -> list[Finding]:
     p = RUNS_DIR / f"{version}.jsonl"
     if not p.exists():
         return [Finding("output", "info", "agent", f"No run found for {version}")]
-    rows = pd.DataFrame([json.loads(l) for l in p.read_text().splitlines()])
+    rows = pd.DataFrame([json.loads(l) for l in p.read_text().splitlines() if l.strip()])
     out, ids = [], set(co.deals.opportunity_id)
     dup, phantom = rows.opportunity_id.duplicated().sum(), (~rows.opportunity_id.isin(ids)).sum()
     missing = ids - set(rows.opportunity_id)
