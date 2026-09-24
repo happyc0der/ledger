@@ -18,7 +18,7 @@ import os
 
 from fastapi import Body
 
-from . import evaluate, history, store
+from . import digest, evaluate, forecast, history, proposals, store
 from .config import COMPANY_DIR, RUNS_DIR, SETTINGS, SNAPSHOT
 from .data import load_company, load_truth
 
@@ -123,6 +123,46 @@ def issue_state(key: str, body: dict = Body(...)):
         raise HTTPException(400, "status must be new|acknowledged|muted|resolved")
     store.set_issue_state(key, status, who=body.get("who") or os.getenv("LEDGER_USER", "manager"), note=body.get("note", ""))
     return {"key": key, "status": status}
+
+
+@app.get("/api/forecast")
+def forecast_view(version: str = "v3"):
+    rows, rid = _latest(version)
+    if rows is None:
+        return {}
+    backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm")
+    return _clean(forecast.rollup(rows, backend=backend, states=store.issue_states()))
+
+
+@app.get("/api/digest")
+def digest_view(rep: str | None = None, version: str = "v3"):
+    rows, rid = _latest(version)
+    if rows is None:
+        return {"markdown": ""}
+    hist = history.summary(rid) if rid else {}
+    backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm")
+    fc = forecast.rollup(rows, backend=backend, states=store.issue_states())
+    as_of = str(SNAPSHOT.date())
+    rows = digest.enrich(rows, CO.deals)
+    md = digest.rep_digest(rep, rows, hist, fc, as_of) if rep else digest.manager_digest(rows, hist, fc, as_of, CO.reps())
+    return {"markdown": md}
+
+
+@app.get("/api/proposals")
+def proposals_view(opportunity_id: str | None = None, status: str | None = None, version: str = "v3"):
+    rows, _ = _latest(version)
+    if rows is not None:
+        proposals.draft_for_run(CO, rows)  # idempotent: drafts only for findings without one
+    return proposals.list_proposals(opportunity_id, status)
+
+
+@app.post("/api/proposal/{pid}")
+def proposal_state(pid: str, body: dict = Body(...)):
+    status = body.get("status", "approved")
+    if status not in ("draft", "approved", "rejected"):
+        raise HTTPException(400, "status must be draft|approved|rejected")
+    proposals.set_status(pid, status, who=body.get("who") or os.getenv("LEDGER_USER", "manager"))
+    return {"id": pid, "status": status}
 
 
 @app.get("/api/history")

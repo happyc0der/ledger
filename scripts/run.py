@@ -38,6 +38,23 @@ def main():
     if a.version == "eval":
         print(evaluate.report(co, a.more))
         return
+    if a.version == "digest":  # reports/<dataset>/<as_of>/digest_<name>.md for every rep + the manager
+        from ledger import digest, forecast, history
+        rows = digest.enrich(evaluate.load_rows("v3"), co.deals); rid = store.latest_run_id("v3")
+        hist = history.summary(rid) if rid else {}
+        fc = forecast.rollup(rows, backend=next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm"), states=store.issue_states())
+        outd = Path("reports") / store.DATASET / str(SNAPSHOT.date())
+        outd.mkdir(parents=True, exist_ok=True)
+        for rep in co.reps():
+            (outd / f"digest_{rep.replace(' ', '_')}.md").write_text(digest.rep_digest(rep, rows, hist, fc, str(SNAPSHOT.date())))
+        (outd / "digest_manager.md").write_text(digest.manager_digest(rows, hist, fc, str(SNAPSHOT.date()), co.reps()))
+        print(f"wrote {len(co.reps()) + 1} digests -> {outd}"); print((outd / "digest_manager.md").read_text()[:1200])
+        return
+    if a.version == "export-approved":
+        from ledger import proposals
+        preset = (a.more or ["hubspot"])[0]
+        outp = Path("reports") / store.DATASET / f"approved_updates_{preset}.csv"; outp.parent.mkdir(parents=True, exist_ok=True)
+        df = proposals.export_approved(preset, outp); print(f"{len(df)} approved updates -> {outp}"); return
     if a.version == "audit":
         from ledger import audit
         fs = audit.run(co, a.more or ("v1", "v2"), activities_path=a.activities, hours=a.hours, prism=not a.no_prism)

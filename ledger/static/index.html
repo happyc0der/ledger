@@ -68,7 +68,11 @@
   <span class="muted">Show</span>
   <div class="toggle" id="filter"><button data-f="all" class="on">All</button><button data-f="new">New since last review</button><button data-f="recurring">Recurring</button><button data-f="resolved">Resolved this week</button><button data-f="pushed">Close date pushed</button></div>
   <span class="muted" id="histnote"></span>
+  <span class="spacer"></span>
+  <span id="fc" class="muted"></span>
+  <a href="#" id="digestLink" class="muted" style="margin-left:12px">digest ↗</a>
 </div>
+<pre id="digest" style="display:none; padding:16px 20px; white-space:pre-wrap; font:13px/1.5 ui-monospace, monospace; border-bottom:1px solid var(--line)"></pre>
 <main id="mainList">
   <div id="list"><div class="empty">Loading…</div></div>
   <aside id="drawer"><div class="empty">Select a deal to see its receipts.</div></aside>
@@ -132,6 +136,7 @@ function renderList() {
 async function select(id) {
   state.sel = id; renderList();
   const d = await api('/api/deal/' + id);
+  let props = []; try { props = await api('/api/proposals?opportunity_id=' + id); } catch (e) {}
   const v = d.versions[state.version] || {};
   const acts = d.activities.map(a => `<div class="act ${a.author === d.deal.sales_agent ? '' : 'buyer'}">
       <div class="who">${a.date} · ${a.type} · ${a.author}</div><div>${a.text}</div></div>`).join('');
@@ -163,9 +168,17 @@ async function select(id) {
         ${i.evidence ? `<div class="muted">“${i.evidence}”</div>` : ''}<div class="a">→ ${i.action || ''}</div>
         ${i.key ? `<div style="margin-top:4px">${['acknowledged', 'muted', 'resolved'].map(s => `<button class="st" data-key="${i.key}" data-s="${s}" style="font-size:11px;padding:2px 8px;margin-right:4px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;cursor:pointer">${s === 'acknowledged' ? 'acknowledge' : s === 'muted' ? 'mute' : 'resolved'}</button>`).join('')}</div>` : ''}</div>`;
       }).join('') : ''}
+    ${props.length ? `<h3>Draft CRM updates (${props.length})</h3>` + props.map(p => `<div class="issue s" style="border-left-color:var(--accent)">
+        <div class="t">${p.kind.replace(/_/g, ' ')} · ${p.field}</div><div><span class="muted">${p.from_value || '—'}</span> → <b>${p.to_value}</b></div>
+        <div class="muted">${p.rationale}</div>
+        <div style="margin-top:4px">${p.status === 'draft' ? ['approved', 'rejected'].map(st => `<button class="pr" data-id="${p.id}" data-s="${st}" style="font-size:11px;padding:2px 8px;margin-right:4px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;cursor:pointer">${st === 'approved' ? 'approve' : 'reject'}</button>`).join('') : `<span class="pill">${p.status}${p.who ? ' · ' + p.who : ''}</span>`}</div></div>`).join('') : ''}
     <h3>Both versions</h3>
     <table class="cmp"><tr><th></th><th class="num">p</th><th>objection</th><th>action</th><th>receipts</th></tr>${others}</table>
     <h3>Record (${d.activities.length})</h3>${acts}`;
+  document.querySelectorAll('#drawer button.pr').forEach(b => b.onclick = async () => {
+    await fetch(`/api/proposal/${b.dataset.id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: b.dataset.s }) });
+    select(state.sel);
+  });
   document.querySelectorAll('#drawer button.st').forEach(b => b.onclick = async () => {
     await fetch(`/api/issue/${b.dataset.key}/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: b.dataset.s }) });
     await loadDeals();
@@ -233,6 +246,10 @@ async function loadDeals() {
   state.deals = await api('/api/deals?version=' + state.version);
   renderList();
   if (state.sel) select(state.sel);
+  try {
+    const f = await api('/api/forecast?version=' + state.version);
+    if (f.team) $('#fc').innerHTML = `pipeline ${fmt$(f.team.pipeline)} · weighted ${fmt$(f.team.weighted)} · <b>commit ${fmt$(f.team.commit)}</b> · best case ${fmt$(f.team.best_case)} <span title="${f.calibration}">${f.calibration.startsWith('calibrated') ? '✓' : '⚠ uncalibrated'}</span> · ${f.excluded.length} excluded`;
+  } catch (e) { $('#fc').textContent = ''; }
 }
 
 (async () => {
@@ -247,6 +264,8 @@ async function loadDeals() {
     state.version = b.dataset.v; document.querySelectorAll('#vtoggle button').forEach(x => x.classList.toggle('on', x === b)); loadDeals();
   });
   $('#reveal').onchange = e => { state.reveal = e.target.checked; if (state.sel) select(state.sel); };
+  $('#digestLink').onclick = async e => { e.preventDefault(); const el = $('#digest'); if (el.style.display === 'block') { el.style.display = 'none'; return; }
+    el.textContent = (await api('/api/digest?version=' + state.version)).markdown; el.style.display = 'block'; };
   document.querySelectorAll('#filter button').forEach(b => b.onclick = () => { state.filter = b.dataset.f; document.querySelectorAll('#filter button').forEach(x => x.classList.toggle('on', x === b)); renderList(); });
   $('#viewList').onclick = () => { $('#mainList').style.display = 'grid'; $('#proof').classList.remove('show'); $('#viewList').classList.add('on'); $('#viewProof').classList.remove('on'); };
   $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); renderIssues(await api('/api/issues')); };
