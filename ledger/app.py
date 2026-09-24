@@ -19,7 +19,7 @@ import os
 from fastapi import Body
 
 from . import evaluate, history, store
-from .config import COMPANY_DIR, RUNS_DIR, SNAPSHOT
+from .config import COMPANY_DIR, RUNS_DIR, SETTINGS, SNAPSHOT
 from .data import load_company, load_truth
 
 UI_VERSIONS = ("v1", "v2", "v3")  # naive is a benchmark row, not a manager-facing agent
@@ -85,7 +85,8 @@ def index():
 def meta():
     return {"as_of": str(SNAPSHOT.date()), "company": CO.brief.split("\n")[0].lstrip("# "),
             "reps": CO.reps(), "n_deals": len(CO.deals),
-            "versions": _versions(), "has_truth": _has_truth()}
+            "versions": _versions(), "has_truth": _has_truth(),
+            "settings": {k: v for k, v in SETTINGS.__dict__.items() if k != "source"}, "settings_source": SETTINGS.source or {}}
 
 
 @app.get("/api/deals")

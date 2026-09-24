@@ -7,7 +7,7 @@ from datetime import timedelta
 
 import pandas as pd
 
-from .config import SNAPSHOT
+from .config import SETTINGS, SNAPSHOT
 from .data import Company
 from .rules import LATE, Issue
 from .tools import deal_amount, list_price, normalize_product
@@ -74,7 +74,7 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
         add("M2_contact_contradiction", f"primary contact says they don't own the decision; stage is {d.stage}", "champion_status")
     # M3 expired promise
     pdate = dt(ledger.get("last_buyer_promise_date"))
-    if ledger.get("last_buyer_promise") and pdate is not None and (as_of - pdate).days > 14 \
+    if ledger.get("last_buyer_promise") and pdate is not None and (as_of - pdate).days > SETTINGS.promise_days \
             and ledger.get("commitment") not in ("declined", "paused"):  # a declined/paused buyer owes nothing
         add("M3_expired_promise", f"buyer promised '{ledger['last_buyer_promise'][:60]}' {(as_of - pdate).days}d ago; nothing since", "last_buyer_promise")
     # M4 timeline
@@ -82,7 +82,7 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
     close_future = pd.notna(d.expected_close) and d.expected_close >= as_of  # a past close date is S1, not M4
     if ddate is not None and close_future and d.expected_close < ddate - timedelta(days=2):
         add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} is before the buyer's decision date {ddate.date()}", "decision_date")
-    if close_future and d.expected_close < as_of + timedelta(days=75):
+    if close_future and d.expected_close < as_of + timedelta(days=SETTINGS.frozen_window_days):
         if ledger.get("budget_status") == "frozen":
             add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer said budget is frozen", "budget_status")
         elif ledger.get("commitment") == "paused":
@@ -109,11 +109,11 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
             or ledger.get("competitor_status") in ("leaning_competitor", "chose_competitor")):
         add("M8_happy_ears", "rep stayed positive after the buyer paused, declined or leaned away", "commitment" if ledger.get("commitment") in ("declined", "paused") else ("budget_status" if ledger.get("budget_status") == "frozen" else "competitor_status"))
     # M9 missing economic buyer
-    if late and not len(crm_econ):
+    if late and not len(crm_econ) and "M9_missing_economic_buyer" not in SETTINGS.disabled_checks:
         out.append(Issue(oid, "M9_missing_economic_buyer", "late stage, no economic buyer in CRM" + (f"; buyer names {named}" if named else ""),
                          _q(ledger, "economic_buyer") if named else f"stage={d.stage}, contacts={list(co.contacts[co.contacts.opportunity_id == oid].role)}",
                          action=ACTIONS["M9_missing_economic_buyer"], source="ledger"))
-    return out
+    return [i for i in out if i.type not in SETTINGS.disabled_checks]
 
 
 def _last(name: str) -> str:

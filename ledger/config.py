@@ -21,9 +21,47 @@ def run_dir(as_of, version: str) -> Path:
     return RUNS_DIR / str(pd.Timestamp(as_of).date()) / version
 CACHE_DIR = ROOT / ".cache" / "llm"
 SNAPSHOT = pd.Timestamp(os.getenv("LEDGER_AS_OF", "2026-10-19"))  # "today" for the review
-BASE_WIN_RATE = 0.63
 
 OBJECTIONS = ["none", "budget", "competitor", "timing", "authority", "need"]
+
+
+@dataclass
+class Settings:
+    """Per-company knobs. Defaults are the demo company's; a real dataset overrides them with
+    data/<name>/ledger.json (RevOps-owned) and, for the historical ones, data/<name>/profile.json
+    (learned by ingest from closed deals)."""
+    promise_days: int = 14          # buyer promise older than this with no reply = expired
+    dormant_days: int = 30          # no activity at all
+    frozen_window_days: int = 75    # close date inside this window contradicts "budget frozen / paused"
+    median_cycle_days: int = 57     # stalled = 2x this in an early stage
+    stalled_multiplier: float = 2.0
+    base_win_rate: float = 0.63
+    late_stages: tuple = ("Proposal", "Negotiation")
+    commit_p: float = 0.7           # forecast bands
+    best_case_p: float = 0.4
+    disabled_checks: tuple = ()
+    source: dict | None = None      # where each learned value came from
+
+    @classmethod
+    def load(cls, data_dir: Path) -> "Settings":
+        import json
+        vals, src = {}, {}
+        prof = data_dir / "profile.json"
+        if prof.exists():
+            pj = json.loads(prof.read_text())
+            for k in ("base_win_rate", "median_cycle_days", "dormant_days"):
+                if k in pj:
+                    vals[k] = pj[k]; src[k] = f"learned from {pj.get('n_closed', '?')} closed deals"
+        cfg = data_dir / "ledger.json"
+        if cfg.exists():
+            for k, v in json.loads(cfg.read_text()).items():
+                if k in cls.__dataclass_fields__:
+                    vals[k] = tuple(v) if isinstance(v, list) else v; src[k] = "ledger.json"
+        return cls(**vals, source=src)
+
+
+SETTINGS = Settings.load(COMPANY_DIR)
+BASE_WIN_RATE = SETTINGS.base_win_rate
 ACTIONS = [
     "confirm_procurement_timeline",
     "send_roi_business_case",

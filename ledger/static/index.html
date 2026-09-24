@@ -238,7 +238,8 @@ async function loadDeals() {
 (async () => {
   state.meta = await api('/api/meta');
   $('#title').textContent = 'Ledger · ' + state.meta.company.replace(' — pipeline review brief', '');
-  $('#asof').textContent = `week of ${state.meta.as_of} · ${state.meta.n_deals} open deals · ${state.meta.reps.length} reps`;
+  const src = state.meta.settings_source || {}; const learned = Object.values(src).find(v => String(v).startsWith('learned'));
+  $('#asof').textContent = `week of ${state.meta.as_of} · ${state.meta.n_deals} open deals · ${state.meta.reps.length} reps · thresholds ${learned ? learned : 'defaults (no closed-deal history)'}`;
   $('#vtoggle').innerHTML = state.meta.versions.map(v => `<button data-v="${v}" class="${v === state.version ? 'on' : ''}">${v}</button>`).join('');
   if (!state.meta.versions.includes(state.version)) state.version = state.meta.versions[state.meta.versions.length - 1];
   document.querySelectorAll('#vtoggle button').forEach(b => b.classList.toggle('on', b.dataset.v === state.version));

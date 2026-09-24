@@ -11,11 +11,13 @@ from dataclasses import dataclass, field
 
 import pandas as pd
 
-from .config import SNAPSHOT
+from .config import SETTINGS, SNAPSHOT
 from .data import Company
 
-LATE = {"Proposal", "Negotiation"}
-MEDIAN_CYCLE_DAYS = 57
+LATE = set(SETTINGS.late_stages)
+MEDIAN_CYCLE_DAYS = SETTINGS.median_cycle_days
+DORMANT_DAYS = SETTINGS.dormant_days
+STALLED = SETTINGS.stalled_multiplier * MEDIAN_CYCLE_DAYS
 
 
 @dataclass
@@ -43,6 +45,7 @@ def run_rules(co: Company, deals: pd.DataFrame | None = None, as_of: pd.Timestam
     """Field-only checks as of a given review date (defaults to the configured snapshot)."""
     deals = co.deals if deals is None else deals
     out: list[Issue] = []
+    off = set(SETTINGS.disabled_checks)
     by_key = deals.groupby(["account", "product"]).opportunity_id.apply(list)
     for r in deals.itertuples():
         oid = r.opportunity_id
@@ -53,12 +56,12 @@ def run_rules(co: Company, deals: pd.DataFrame | None = None, as_of: pd.Timestam
         if r.stage in LATE | {"Discovery"} and (pd.isna(r.next_step) or str(r.next_step).strip() == ""):
             out.append(Issue(oid, "S2_no_next_step", "no next step recorded past Qualification", f"stage={r.stage}, next_step=''",
                              action="Record a dated next step."))
-        if len(acts) and (as_of - acts.date.max()).days > 30:
+        if len(acts) and (as_of - acts.date.max()).days > DORMANT_DAYS:
             out.append(Issue(oid, "S3_dormant", f"no activity for {(as_of - acts.date.max()).days} days", f"last activity {acts.date.max().date()}",
                              action="Re-engage or close."))
         if r.stage in LATE and (pd.isna(r.amount) or str(r.amount).strip() == ""):
             out.append(Issue(oid, "S4_amount_blank_late", "amount blank past Qualification", f"stage={r.stage}, amount=''", action="Enter the amount."))
-        if r.stage in {"Prospecting", "Qualification"} and (as_of - r.created_date).days > 2 * MEDIAN_CYCLE_DAYS:
+        if r.stage in {"Prospecting", "Qualification"} and (as_of - r.created_date).days > STALLED:
             out.append(Issue(oid, "S5_stalled_early_stage", f"{(as_of - r.created_date).days} days in {r.stage} (median cycle {MEDIAN_CYCLE_DAYS}d)",
                              f"created={r.created_date.date()}, stage={r.stage}", action="Qualify out or advance."))
         sibs = [x for x in by_key.get((r.account, getattr(r, "product")), []) if x != oid]
@@ -74,4 +77,4 @@ def run_rules(co: Company, deals: pd.DataFrame | None = None, as_of: pd.Timestam
         if len(acts) and pd.notna(r.last_activity_date) and (acts.date.max() - r.last_activity_date).days > 3:
             out.append(Issue(oid, "S8_last_activity_field_wrong", f"last_activity_date {r.last_activity_date.date()} but newest activity {acts.date.max().date()}",
                              f"field={r.last_activity_date.date()}, newest={acts.date.max().date()}", severity="low", action="Resync the field."))
-    return out
+    return [i for i in out if i.type not in off]
