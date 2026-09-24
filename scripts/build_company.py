@@ -318,6 +318,20 @@ def build():
     products.to_csv(OUT / "products.csv", index=False)
     accounts[accounts.account.isin(open_deals.account)].to_csv(OUT / "accounts.csv", index=False)
 
+    # History the company actually has: every closed deal in the source data (all teams), which
+    # ingest would also produce for a real export → learned thresholds instead of defaults.
+    closed = pipe[pipe.deal_stage.isin(["Won", "Lost"])].copy()
+    closed["created_date"] = (closed.engage_date + SHIFT).dt.date
+    closed["expected_close"] = (closed.close_date + SHIFT).dt.date
+    closed["outcome"] = closed.deal_stage
+    closed[["opportunity_id", "account", "product", "sales_agent", "outcome", "created_date", "expected_close", "close_value"]].to_csv(OUT / "history.csv", index=False)
+    won = closed[closed.outcome == "Won"]
+    cyc = (won.close_date - won.engage_date).dt.days.dropna()
+    import json as _json
+    (OUT / "profile.json").write_text(_json.dumps({"n_closed": int(len(closed)), "source": "learned",
+                                                   "base_win_rate": round(float((closed.outcome == "Won").mean()), 3),
+                                                   "median_cycle_days": int(cyc.median())}, indent=1))
+
     tdf = pd.DataFrame(truth)
     (OUT / "company.md").write_text(f"""# {COMPANY} — pipeline review brief
 

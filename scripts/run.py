@@ -71,6 +71,16 @@ def main():
         md = ["# Extraction agreement (same model, uncached re-run, n=%d)" % len(sample), "", "| slot | agreement |", "|---|---|"] + \
              [f"| {k} | {v[0] / max(v[1], 1):.0%}{' ⚠' if v[0] / max(v[1], 1) < 0.7 else ''} |" for k, v in agree.items()]
         Path("reports").mkdir(exist_ok=True); Path("reports/agreement.md").write_text("\n".join(md)); print("\n".join(md)); return
+    if a.version == "prism-publish":  # reports into PRISM's knowledge base under the ledger agent
+        from ledger import tracing
+        c = tracing.client()
+        if c is None:
+            print("PRISM not configured"); return
+        for f in ("FINDINGS.md", "reports/issues.md", "reports/v1_v2_v3.md", "reports/audit_v3.md"):
+            if Path(f).exists():
+                r = c.kb_upload(Path(f).name, Path(f).read_text(), agent_id="ledger", description=f"Ledger {f}", content_type="text/markdown")
+                print(f, "->", (r or {}).get("id") or r)
+        return
     if a.version == "audit":
         from ledger import audit
         fs = audit.run(co, a.more or ("v1", "v2"), activities_path=a.activities, hours=a.hours, prism=not a.no_prism)

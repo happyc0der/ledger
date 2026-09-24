@@ -245,6 +245,25 @@ def check_reviews() -> list[Finding]:
     return out
 
 
+def check_drift(version: str) -> list[Finding]:
+    """Issue counts per type vs the previous stored run: a jump usually means data or code changed, not deals."""
+    from . import store
+    rid = store.latest_run_id(version)
+    prev = store.previous_run_id(rid) if rid else None
+    if not prev:
+        return []
+    cur, old = store.issues(rid).type.value_counts(), store.issues(prev).type.value_counts()
+    ev = []
+    for t in sorted(set(cur.index) | set(old.index)):
+        a, b = int(old.get(t, 0)), int(cur.get(t, 0))
+        if abs(b - a) >= 5 and abs(b - a) / max(a, 1) >= 0.5:
+            ev.append(f"{t}: {a} → {b}")
+    if not ev:
+        return []
+    return [Finding("drift", "medium", "agent", f"{version}: issue counts moved sharply since the previous run ({len(ev)} types)", len(ev), ev,
+                    "Expected after a data refresh or a rule change; otherwise inspect the extraction.")]
+
+
 def check_prism_rules(hours: int, sample: int = 60) -> list[Finding]:
     lst = _prism_get("trajectories", limit=500)
     if not lst:
@@ -277,7 +296,7 @@ def run(co: Company, versions=("v1", "v2"), activities_path: str | None = None, 
     acts = pd.read_csv(activities_path) if activities_path else co.activities
     findings = check_data_hygiene(co, acts) + check_catalogue(co) + check_reviews()
     for v in versions:
-        findings += check_output(co, v, partial=partial)
+        findings += check_output(co, v, partial=partial) + (check_drift(v) if not partial else [])
     if prism:
         findings += check_prism_guardrails(co, acts, hours) + check_prism_rules(hours)
     order = {"high": 0, "medium": 1, "low": 2, "info": 3}

@@ -206,6 +206,11 @@ Ledger is built to be run every Monday, not once:
   "why wasn't this flagged" is answered, not guessed.
 - **Privacy.** Emails and phone numbers are tokenised before any prompt and restored only
   in verified quotes.
+- **Thresholds are the company's, not ours.** Win rate and cycle length come from the
+  company's own closed deals (`profile.json`; for the demo company, 6,711 of them); everything
+  else is in `ledger.json`. The UI header says where each number came from.
+- **Extraction stability.** `scripts/run.py agree` re-extracts a sample uncached and reports
+  per-slot agreement (84–100% on a 25-deal sample; `reports/agreement.md`).
 
 ## Bring your own pipeline
 
