@@ -55,6 +55,22 @@ def main():
         preset = (a.more or ["hubspot"])[0]
         outp = Path("reports") / store.DATASET / f"approved_updates_{preset}.csv"; outp.parent.mkdir(parents=True, exist_ok=True)
         df = proposals.export_approved(preset, outp); print(f"{len(df)} approved updates -> {outp}"); return
+    if a.version == "agree":  # extraction agreement without labels: re-extract a sample uncached and compare slots
+        import random
+        from ledger import claims
+        rows = evaluate.load_rows("v3"); random.Random(1).shuffle(rows)
+        sample = rows[: a.limit or 40]
+        slots = [k for k in claims.SLOTS if k != "_hints"]
+        agree = {k: [0, 0] for k in slots}
+        for r in sample:
+            base = r["ledger"]
+            again = claims.extract_uncached(co, r["opportunity_id"], version="agree", session="agree")
+            for k in slots:
+                agree[k][1] += 1
+                agree[k][0] += int((base.get(k) in (None, "unknown", "none_mentioned", "none", "n/a")) == (again.get(k) in (None, "unknown", "none_mentioned", "none", "n/a")) and (str(base.get(k)).lower() == str(again.get(k)).lower()))
+        md = ["# Extraction agreement (same model, uncached re-run, n=%d)" % len(sample), "", "| slot | agreement |", "|---|---|"] + \
+             [f"| {k} | {v[0] / max(v[1], 1):.0%}{' ⚠' if v[0] / max(v[1], 1) < 0.7 else ''} |" for k, v in agree.items()]
+        Path("reports").mkdir(exist_ok=True); Path("reports/agreement.md").write_text("\n".join(md)); print("\n".join(md)); return
     if a.version == "audit":
         from ledger import audit
         fs = audit.run(co, a.more or ("v1", "v2"), activities_path=a.activities, hours=a.hours, prism=not a.no_prism)

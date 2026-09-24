@@ -70,6 +70,7 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                    issues=[asdict(i) for i in rules_by.get(oid, []) + issues], checks=[asdict(c) for c in checks], version="v3", rep=rep,
                    pipeline_total_usd=total, batch=0)
         steps.append(tracing.step("final_answer", json.dumps({"issues": [i["type"] for i in row["issues"]], "p": row["win_probability"]})))
+        row.pop("_redactor", None)
         row["prism_trajectory_id"] = tracing.trajectory(version="v3", session_id=session, steps=steps, model="v3",
                                                         final_status="error" if any(i.type.startswith("M") for i in issues) else "success")
         row["prism_trace_ids"] = tracing.drain_trace_ids()

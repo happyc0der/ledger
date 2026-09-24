@@ -136,6 +136,7 @@ def _llm(state: dict, *, version: str, session_id: str) -> Decision:
 
 
 def decide(state: dict, *, version: str, session_id: str) -> Decision:
+    state = {k: v for k, v in state.items() if not k.startswith("_")}
     b = backend_name()
     cp = _cache_path(state, b)
     if cp.exists():

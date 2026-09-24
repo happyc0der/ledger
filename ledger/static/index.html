@@ -168,6 +168,7 @@ async function select(id) {
         return `<div class="issue ${i.type[0] === 'S' ? 's' : ''}" data-key="${i.key || ''}" style="${i.state === 'muted' ? 'opacity:.5' : ''}">
         <div class="t">${i.type.replace(/_/g, ' ')} <span class="muted" style="font-weight:400">${meta}</span> ${st}</div><div>${i.detail}</div>
         ${i.evidence ? `<div class="muted">“${i.evidence}”</div>` : ''}<div class="a">→ ${i.action || ''}</div>
+        <div style="margin-top:4px;float:right">${['correct', 'incorrect'].map(v => `<button class="rv" data-oid="${d.opportunity_id}" data-type="${i.type}" data-v="${v}" title="review this finding" style="font-size:11px;padding:2px 8px;margin-left:4px;background:transparent;color:${v === 'correct' ? 'var(--good)' : 'var(--bad)'};border:1px solid var(--line);border-radius:4px;cursor:pointer">${v === 'correct' ? '✓ correct' : '✗ wrong'}</button>`).join('')}</div>
         ${i.key ? `<div style="margin-top:4px">${['acknowledged', 'muted', 'resolved'].map(s => `<button class="st" data-key="${i.key}" data-s="${s}" style="font-size:11px;padding:2px 8px;margin-right:4px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;cursor:pointer">${s === 'acknowledged' ? 'acknowledge' : s === 'muted' ? 'mute' : 'resolved'}</button>`).join('')}</div>` : ''}</div>`;
       }).join('') : ''}
     ${props.length ? `<h3>Draft CRM updates (${props.length})</h3>` + props.map(p => `<div class="issue s" style="border-left-color:var(--accent)">
@@ -177,6 +178,10 @@ async function select(id) {
     <h3>Both versions</h3>
     <table class="cmp"><tr><th></th><th class="num">p</th><th>objection</th><th>action</th><th>receipts</th></tr>${others}</table>
     <h3>Record (${d.activities.length})</h3>${acts}`;
+  document.querySelectorAll('#drawer button.rv').forEach(b => b.onclick = async () => {
+    await fetch('/api/review', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ opportunity_id: b.dataset.oid, type: b.dataset.type, verdict: b.dataset.v }) });
+    b.textContent = 'recorded'; b.disabled = true;
+  });
   document.querySelectorAll('#drawer button.pr').forEach(b => b.onclick = async () => {
     await fetch(`/api/proposal/${b.dataset.id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: b.dataset.s }) });
     select(state.sel);
@@ -194,7 +199,16 @@ function topBinNote(v1, v2) {
          `When v1 says ${pct(a.stated)}, ${pct(a.actual)} close; when v2 says ${pct(b.stated)}, ${pct(b.actual)} close.`;
 }
 
+async function renderPrecision() {
+  const prec = await api('/api/precision');
+  const types = Object.keys(prec);
+  if (!types.length) return '';
+  return `<h3>Observed precision from reviews</h3><table class="cmp" style="max-width:520px"><tr><th>type</th><th class="num">reviewed</th><th class="num">precision</th><th class="num">95% range</th></tr>
+    ${types.map(t => `<tr><td>${t}</td><td class="num">${prec[t].reviewed}</td><td class="num">${pct(prec[t].precision)}</td><td class="num">${pct(prec[t].lo)}–${pct(prec[t].hi)}</td></tr>`).join('')}</table>`;
+}
+
 function renderIssues(scores) {
+  renderPrecision().then(html => { if (html) $('#issuesProof').insertAdjacentHTML('beforeend', html); });
   if (!scores.length) return;
   const names = scores.map(s => s.name);
   const row = (label, f) => `<tr><td>${label}</td>${scores.map(s => `<td class="num">${f(s)}</td>`).join('')}</tr>`;

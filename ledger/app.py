@@ -166,6 +166,23 @@ def proposal_state(pid: str, body: dict = Body(...)):
     return {"id": pid, "status": status}
 
 
+@app.post("/api/review")
+def review(body: dict = Body(...)):
+    from . import score_issues
+    try:
+        row = score_issues.add_review(body["opportunity_id"], body["type"], body.get("verdict", "correct"),
+                                      reviewer=body.get("reviewer") or os.getenv("LEDGER_USER", "manager"), note=body.get("note", ""))
+    except (AssertionError, KeyError) as e:
+        raise HTTPException(400, str(e))
+    return row
+
+
+@app.get("/api/precision")
+def precision():
+    from . import score_issues
+    return score_issues.observed_precision()
+
+
 @app.get("/api/history")
 def history_view(version: str = "v3"):
     _, rid = _latest(version)

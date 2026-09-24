@@ -31,9 +31,12 @@ def _norm(s: str) -> str:
 
 
 def deal_state(co: Company, oid: str) -> dict:
+    """What the decision/explain models see. PII is tokenised; the redactor rides along (not serialised)."""
+    from .redact import Redactor
     d = co.deal(oid)
     acts = co.activities_for(oid)
     contacts = co.contacts[co.contacts.opportunity_id == oid]
+    red = Redactor()
     return {
         "as_of": str(SNAPSHOT.date()),
         "deal": {"opportunity_id": oid, "account": d.account, "product": d["product"],
@@ -43,8 +46,10 @@ def deal_state(co: Company, oid: str) -> dict:
                      "days_since_buyer_touch": days_since_buyer_touch(acts, d.sales_agent),
                      "days_since_any_activity": days_since_any_activity(acts)},
         "contacts": [{"name": c.name, "title": c.title, "role": c.role} for c in contacts.itertuples()],
-        "activities": [{"date": str(a.date.date()), "type": a.type, "author": a.author, "text": a.text}
+        "activities": [{"date": str(a.date.date()), "type": a.type, "author": a.author, "text": red.redact(a.text),
+                        "speaker": getattr(a, "speaker", None)}
                        for a in acts.itertuples()],
+        "_redactor": red,
     }
 
 
@@ -56,7 +61,7 @@ def _explain(state: dict, decision, *, session: str, oid: str, strict: bool = Fa
               "Return rationale: one sentence, cite only facts in the record."
               + (" Your previous quote was not found verbatim in the record. Copy exactly, character for "
                  "character, or return an empty string." if strict else ""))
-    user = json.dumps({"record": state, "decision": {"win_probability": round(decision.win_probability, 2),
+    user = json.dumps({"record": {k: v for k, v in state.items() if not k.startswith("_")}, "decision": {"win_probability": round(decision.win_probability, 2),
                                                      "objection": decision.objection,
                                                      "next_action": decision.next_action}}, default=str)
     _, parsed = llm.chat([{"role": "system", "content": system}, {"role": "user", "content": user}],
@@ -80,6 +85,9 @@ def explain_verified(state: dict, dec, *, session: str, oid: str) -> tuple[dict,
             ex["buyer_quote"] = ""  # refuse to show an unverifiable quote
     steps.append(tracing.step("check:quote:match" if quote_ok else "check:quote:dropped",
                               ex["buyer_quote"] or "(no quote)", tool="verifier:quote"))
+    red = state.get("_redactor")
+    if red is not None and red.map:  # verified against the redacted record; shown with real values
+        ex = {**ex, "buyer_quote": red.inflate(ex.get("buyer_quote", "")), "rationale": red.inflate(ex.get("rationale", ""))}
     return ex, quote_ok, steps
 
 

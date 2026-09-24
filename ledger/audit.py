@@ -232,6 +232,17 @@ def check_prism_guardrails(co: Company, activities: pd.DataFrame, hours: int) ->
     return out
 
 
+def check_reviews() -> list[Finding]:
+    """Manager reviews are the only ground truth on customer data: flag types the manager keeps rejecting."""
+    from .score_issues import observed_precision
+    out = []
+    for t, r in observed_precision().items():
+        if r["reviewed"] >= 10 and r["hi"] < 0.7:
+            out.append(Finding("reviews", "high", "agent", f"{t}: observed precision {r['precision']:.0%} on {r['reviewed']} reviews (95% ≤ {r['hi']:.0%})",
+                               r["reviewed"], [], "Disable this check for this company (ledger.json disabled_checks) or fix its comparison rule."))
+    return out
+
+
 def check_prism_rules(hours: int, sample: int = 60) -> list[Finding]:
     lst = _prism_get("trajectories", limit=500)
     if not lst:
@@ -262,7 +273,7 @@ def check_prism_rules(hours: int, sample: int = 60) -> list[Finding]:
 def run(co: Company, versions=("v1", "v2"), activities_path: str | None = None, hours: int = 24, prism: bool = True,
         partial: bool = False) -> list[Finding]:
     acts = pd.read_csv(activities_path) if activities_path else co.activities
-    findings = check_data_hygiene(co, acts) + check_catalogue(co)
+    findings = check_data_hygiene(co, acts) + check_catalogue(co) + check_reviews()
     for v in versions:
         findings += check_output(co, v, partial=partial)
     if prism:

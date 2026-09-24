@@ -53,13 +53,17 @@ SCHEMA = {
 
 
 def _record(co: Company, oid: str) -> tuple[dict, list[dict]]:
+    """The deal and its activities as the model sees them: PII tokenised, roles resolved."""
+    from .redact import Redactor
     d = co.deal(oid)
     acts = co.activities_for(oid)
+    red = Redactor()
     rows = []
     for i, a in enumerate(acts.itertuples()):
         role = getattr(a, "speaker", None) or ("rep" if a.author == d.sales_agent else ("system" if a.author == "system" else "buyer"))
         rows.append({"n": i + 1, "date": str(a.date.date()), "type": a.type, "author": a.author, "role": role,
-                     "basis": getattr(a, "speaker_basis", "legacy"), "text": a.text})
+                     "basis": getattr(a, "speaker_basis", "legacy"), "text": red.redact(a.text)})
+    d = d.copy(); d["_redactor"] = red
     return d, rows
 
 
@@ -79,7 +83,28 @@ def extract(co: Company, oid: str, *, version: str, session: str) -> dict:
                          version=version, session_id=session, metadata={"deal_id": oid, "role": "claim-ledger"})
     ledger = {k: (parsed or {}).get(k) for k in SLOTS if k != "_hints"}
     ledger["quotes"] = (parsed or {}).get("quotes") or {}
-    return verify(ledger, rows)
+    ledger = verify(ledger, rows)  # verified against the redacted record the model saw
+    red = d.get("_redactor")
+    if red is not None and red.map:  # then shown with the real values
+        ledger["quotes"] = {k: red.inflate(v) for k, v in ledger["quotes"].items()}
+        for k in ("economic_buyer", "last_buyer_promise", "decision_timeline"):
+            if isinstance(ledger.get(k), str):
+                ledger[k] = red.inflate(ledger[k])
+    return ledger
+
+
+def extract_uncached(co: Company, oid: str, *, version: str, session: str) -> dict:
+    """Same extraction, cache bypassed — for agreement measurement."""
+    import ledger.llm as _llm
+    orig = _llm.chat
+    def nocache(*a, **k):
+        k["use_cache"] = False
+        return orig(*a, **k)
+    _llm.chat = nocache
+    try:
+        return extract(co, oid, version=version, session=session)
+    finally:
+        _llm.chat = orig
 
 
 def _norm(s: str) -> str:

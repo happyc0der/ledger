@@ -32,3 +32,10 @@ def test_decision_date_must_be_near_its_quote():
     lg = {"decision_timeline": "next week", "decision_date": "2027-06-01", "quotes": {"decision_timeline": "PO should go out next week."}}
     v = verify(lg, ROWS)
     assert v["decision_date"] is None
+
+
+def test_redactor_roundtrip():
+    from ledger.redact import Redactor
+    r = Redactor()
+    t = r.redact("Call 555-123-4567 or hannah@whitfieldco.com; PO next week.")
+    assert "555-123-4567" not in t and "@" not in t and r.inflate(t).startswith("Call 555-123-4567 or hannah@")

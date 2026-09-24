@@ -5,7 +5,9 @@ false-positive rate on clean deals — the number a manager feels as "noise".
 """
 from __future__ import annotations
 
+import json
 from collections import defaultdict
+from datetime import datetime, timezone
 
 import pandas as pd
 
@@ -18,8 +20,49 @@ TYPES = ["S1_past_close_date", "S2_no_next_step", "S3_dormant", "S4_amount_blank
          "M5_scope_vs_amount", "M6_zombie", "M7_cross_deal_contact", "M8_happy_ears", "M9_missing_economic_buyer", "M10_arithmetic"]
 
 
-def load_labels() -> pd.DataFrame:
+def load_labels(source: str = "planted") -> pd.DataFrame:
+    """planted: data/<name>/anomalies.csv (benchmark). reviews: data/<name>/reviews.jsonl — a manager's
+    ✓/✗ on shown findings (the only ground truth a real customer has)."""
+    if source == "reviews":
+        p = COMPANY_DIR / "reviews.jsonl"
+        if not p.exists():
+            return pd.DataFrame(columns=["opportunity_id", "type", "verdict", "reviewer", "ts", "note"])
+        return pd.DataFrame([json.loads(l) for l in p.read_text().splitlines() if l.strip()])
     return pd.read_csv(COMPANY_DIR / "anomalies.csv")
+
+
+def add_review(opportunity_id: str, type_: str, verdict: str, reviewer: str = "", note: str = "") -> dict:
+    assert verdict in ("correct", "incorrect", "unsure")
+    row = dict(opportunity_id=opportunity_id, type=type_, verdict=verdict, reviewer=reviewer,
+               ts=datetime.now(timezone.utc).isoformat(timespec="seconds"), note=note)
+    with (COMPANY_DIR / "reviews.jsonl").open("a") as f:
+        f.write(json.dumps(row) + "\n")
+    return row
+
+
+def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    if n == 0:
+        return (0.0, 1.0)
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / d
+    return (max(0.0, c - h), min(1.0, c + h))
+
+
+def observed_precision() -> dict:
+    """Per-type precision from reviews (latest verdict per deal+type wins), with 95% Wilson bounds."""
+    r = load_labels("reviews")
+    if r.empty:
+        return {}
+    r = r.sort_values("ts").drop_duplicates(["opportunity_id", "type"], keep="last")
+    r = r[r.verdict != "unsure"]
+    out = {}
+    for t, g in r.groupby("type"):
+        k, n = int((g.verdict == "correct").sum()), len(g)
+        lo, hi = wilson(k, n)
+        out[t] = dict(correct=k, reviewed=n, precision=k / n, lo=lo, hi=hi)
+    return out
 
 
 def score(issues: list[Issue], all_deals: list[str], name: str) -> dict:
