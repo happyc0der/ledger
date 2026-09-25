@@ -12,6 +12,15 @@ The point of the project is not the agent. It is the proof: the same 228 deals w
 through a naive first version and a verified second version, and both were scored against
 what actually happened to those deals.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Pipeline tab with the Dontechi · GTXPro deal open](docs/screenshots/pipeline.png) | ![The four findings on that deal and the draft CRM updates](docs/screenshots/findings.png) |
+| Pipeline tab: the ranked list with ✓ receipts and issue chips, and Dontechi · GTXPro open — p=25%, the buyer's quote, 18 checks run. | The same deal's four findings, each with the CRM value, the buyer's sentence and the action, plus draft CRM updates for a human to approve. |
+| ![Proof tab](docs/screenshots/proof.png) | |
+| Proof tab: v1 vs Ledger on the same 235 deals against real outcomes, and CRM rules vs a naive agent vs Ledger on the planted anomalies. | |
+
 ## The failure nobody planted
 
 We built v1 the way most teams build their first agent: one model call per rep, every deal
