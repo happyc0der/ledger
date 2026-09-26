@@ -221,6 +221,36 @@ Ledger is built to be run every Monday, not once:
 - **Extraction stability.** `scripts/run.py agree` re-extracts a sample uncached and reports
   per-slot agreement (84–100% on a 25-deal sample; `reports/agreement.md`).
 
+## Status and what's still missing
+
+**Working today:** everything above — ingest, claim ledger, consistency checks, rules
+baseline, judgement, history/lifecycle, proposals, forecast, digests, reviews, auditor, UI,
+tests (`pytest`), and the live run on a HubSpot-shaped CSV.
+
+**Not yet integrated: Jev (TypeSafe AI, System One model).** The judgement layer — win
+probability, objection, next action — currently runs on a *fallback*: structured output from
+the same language model that reads the notes. It works, but its probabilities are not
+calibrated: the auditor flags that 54% of deals are rated ≥ 0.85, and the forecast strip
+shows "⚠ uncalibrated" for that reason. Jev is a decision model that returns calibrated
+probabilities for typed questions (yes/no, choice, score) instead of generating text, and it
+is the intended judgement layer. Access is on TypeSafe's waitlist.
+
+What changes when the key arrives (`TYPESAFE_API_KEY` in `.env`; `ledger/decide.py` already
+has the Jev backend and switches automatically):
+1. Re-run v3 (ledgers are reused, so only judgements recompute) and re-evaluate: Brier score
+   and reliability against the 235 real outcomes, Jev vs the fallback. If the 80% bin closes
+   at ~80%, the forecast becomes defensible and the strip flips to "✓ calibrated".
+2. Add a second reader for the typed ledger slots (budget, champion, competitor, commitment,
+   rep tone) so per-slot confidence comes from two different models agreeing, not one model
+   re-run.
+3. Cost is negligible: $0.042 per million input tokens, output free — about $0.015 for a full
+   235-deal run, ~$6/year for a 2,000-deal company run weekly. Details and steps: PLAN.md,
+   "Jev 1.13 plan".
+
+**Also open:** a run on a real customer export (the only test that matters), the PRISM alert
+on guardrail flags (dashboard), chunking for very long records, and `scripts/day.sh`
+rehearsal for a from-scratch build day.
+
 ## Bring your own pipeline
 
 ```bash
