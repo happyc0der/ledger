@@ -162,11 +162,15 @@ def check_output(co: Company, version: str, partial: bool = False) -> list[Findi
                            "Force a choice from a specific action menu; make 'disqualify' a first-class answer."))
     p_ = rows.win_probability.astype(float)
     top = (p_ >= 0.85).mean()
-    if top > 0.5 or p_.round(2).nunique() <= 5:
+    if p_.round(2).nunique() <= 5 or top > 0.8:
         out.append(Finding("calibration_smell", "medium", "agent",
-                           f"{version}: {top:.0%} of deals rated ≥0.85 (historical win rate {BASE_WIN_RATE:.0%}); {p_.round(2).nunique()} distinct probabilities",
+                           f"{version}: probabilities barely discriminate — {p_.round(2).nunique()} distinct values, {top:.0%} of deals ≥0.85",
                            int(top * len(rows)), [f"mean stated p {p_.mean():.2f}"],
-                           "Probabilities that don't discriminate make the ranking 'biggest deal first'. Use a calibrated decision model."))
+                           "A ranking on undifferentiated probabilities is 'biggest deal first'. Measure calibration on outcomes (ledger/calibrate.py) before trusting it."))
+    elif top > 0.5:
+        out.append(Finding("calibration_smell", "info", "agent",
+                           f"{version}: {top:.0%} of deals rated ≥0.85 (base rate {BASE_WIN_RATE:.0%}) — not judged here; calibration is measured on outcomes",
+                           int(top * len(rows)), [], "See the forecast strip: held-out Brier on this company's outcomes."))
     if quote_empty:
         out.append(Finding("coverage", "info", "agent", f"{version}: {quote_empty}/{len(rows)} deals cite no buyer quote", quote_empty, [], "Expected for 'no objection' deals; watch that it isn't the model avoiding risk."))
     # evidence validity: every issue's evidence must exist verbatim in the deal's record (field evidence excepted)

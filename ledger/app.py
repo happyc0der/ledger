@@ -18,7 +18,7 @@ import os
 
 from fastapi import Body
 
-from . import digest, evaluate, forecast, history, proposals, store
+from . import calibrate, digest, evaluate, forecast, history, proposals, store
 from .config import COMPANY_DIR, RUNS_DIR, SETTINGS, SNAPSHOT
 from .data import load_company, load_truth
 
@@ -125,13 +125,33 @@ def issue_state(key: str, body: dict = Body(...)):
     return {"key": key, "status": status}
 
 
+def _calibrator(version: str):
+    """Predictions made while deals were open, joined to outcomes known later. On the benchmark the
+    outcomes are the hidden ground truth; on a customer dataset they arrive as deals close."""
+    try:
+        rid = store.latest_run_id(version)
+        if not rid:
+            return None
+        snaps = pd.concat([store.snapshots(r) for r in store.runs(version).run_id], ignore_index=True)
+        if _has_truth():
+            outcomes = load_truth().reset_index()[["opportunity_id", "outcome"]]
+        elif (COMPANY_DIR / "history.csv").exists():
+            outcomes = pd.read_csv(COMPANY_DIR / "history.csv", dtype={"opportunity_id": str})[["opportunity_id", "outcome"]]
+        else:
+            return None
+        p, y = calibrate.pairs_from_history(snaps, outcomes)
+        return calibrate.fit(p, y)
+    except Exception:
+        return None
+
+
 @app.get("/api/forecast")
 def forecast_view(version: str = "v3"):
     rows, rid = _latest(version)
     if rows is None:
         return {}
     backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm")
-    return _clean(forecast.rollup(rows, backend=backend, states=store.issue_states()))
+    return _clean(forecast.rollup(rows, backend=backend, states=store.issue_states(), calibrator=_calibrator(version)))
 
 
 @app.get("/api/digest")
@@ -141,7 +161,7 @@ def digest_view(rep: str | None = None, version: str = "v3"):
         return {"markdown": ""}
     hist = history.summary(rid) if rid else {}
     backend = next((r.get("decision_backend") for r in rows if r.get("decision_backend")), "llm")
-    fc = forecast.rollup(rows, backend=backend, states=store.issue_states())
+    fc = forecast.rollup(rows, backend=backend, states=store.issue_states(), calibrator=_calibrator(version))
     runs_df = store.runs(version)
     as_of = str(runs_df.as_of.iloc[-1]) if len(runs_df) else str(SNAPSHOT.date())
     rows = digest.enrich(rows, CO.deals)

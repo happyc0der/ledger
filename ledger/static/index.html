@@ -264,7 +264,7 @@ async function loadDeals() {
   if (state.sel) select(state.sel);
   try {
     const f = await api('/api/forecast?version=' + state.version);
-    if (f.team) $('#fc').innerHTML = `pipeline ${fmt$(f.team.pipeline)} · weighted ${fmt$(f.team.weighted)} · <b>commit ${fmt$(f.team.commit)}</b> · best case ${fmt$(f.team.best_case)} <span title="${f.calibration}">${f.calibration.startsWith('calibrated') ? '✓' : '⚠ uncalibrated'}</span> · ${f.excluded.length} excluded`;
+    if (f.team) $('#fc').innerHTML = `pipeline ${fmt$(f.team.pipeline)} · weighted ${fmt$(f.team.weighted)} · <b>commit ${fmt$(f.team.commit)}</b> · best case ${fmt$(f.team.best_case)} <span title="${f.calibration}">${f.calibrator ? '✓ calibrated' : (f.calibration.startsWith('calibrated') ? '✓' : '⚠ unmeasured')}</span> · ${f.excluded.length} excluded`;
   } catch (e) { $('#fc').textContent = ''; }
 }
 

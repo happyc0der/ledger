@@ -229,11 +229,14 @@ tests (`pytest`), and the live run on a HubSpot-shaped CSV.
 
 **Not yet integrated: Jev (TypeSafe AI, System One model).** The judgement layer — win
 probability, objection, next action — currently runs on a *fallback*: structured output from
-the same language model that reads the notes. It works, but its probabilities are not
-calibrated: the auditor flags that 54% of deals are rated ≥ 0.85, and the forecast strip
-shows "⚠ uncalibrated" for that reason. Jev is a decision model that returns calibrated
-probabilities for typed questions (yes/no, choice, score) instead of generating text, and it
-is the intended judgement layer. Access is on TypeSafe's waitlist.
+the same language model that reads the notes. Measured on the 235 real outcomes it is better
+than expected — Brier 0.128 against 0.237 for guessing the base rate, and its top bin (stated
+0.88) closes at 0.86 — but its low bins are off, and it is one model doing two jobs. Ledger
+now **self-calibrates** from the company's own outcomes (`ledger/calibrate.py`: isotonic
+regression on predictions made while deals were open, scored with a held-out Brier — 0.117
+here; the forecast strip shows the number). Jev is a decision model that returns calibrated
+probabilities for typed questions instead of generating text; it is the intended judgement
+layer and the comparison we want to publish. Access is on TypeSafe's waitlist.
 
 What changes when the key arrives (`TYPESAFE_API_KEY` in `.env`; `ledger/decide.py` already
 has the Jev backend and switches automatically):

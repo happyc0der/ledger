@@ -11,7 +11,7 @@ def test_commit_excludes_open_semantic_issues():
     flagged = dict(ROW, opportunity_id="D2", issues=[{"key": "k", "type": "M6_zombie"}])
     f = rollup([clean, flagged], backend="llm")
     assert f["team"]["commit"] == 1000 and f["team"]["best_case"] == 1000  # zombie excluded from both
-    assert f["excluded"][0]["opportunity_id"] == "D2" and "uncalibrated" in f["calibration"]
+    assert f["excluded"][0]["opportunity_id"] == "D2" and "not measured" in f["calibration"]
 
 
 def test_muted_issue_no_longer_excludes():
