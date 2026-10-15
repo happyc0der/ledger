@@ -224,3 +224,18 @@ prep ≈ $0.60; $2 ≈ 138 full runs. Production 2,000 deals weekly, both layers
    `run.py agree --jev`. Quotes stay with the LLM (Jev does not generate text).
 3. **Live-demo latency**: decisions in <1 s; extraction on Gemini remains the floor.
 Not planned: Jev pre-screening to skip extraction (ledger reuse already covers unchanged records).
+
+
+---
+
+# Repositioning (2026-10-14)
+
+The Luma event became **AI × Fintech "Money Talks 2"** (same registration, Oct 17, Columbia
+Startup Lab, 422 going; tracks Money Intelligence / Money Operations / Trust & Risk; PRISM
+loop unchanged). Ledger is positioned for **Money Operations**: revenue forecast integrity for
+finance teams — commit/best case built only from deals that don't contradict their own
+record, excluded dollars itemised with the buyer's words, draft CRM corrections a human
+approves, Monday digests. No code change; README/DEMO copy updated. Jev: no key as of today.
+Last three days: Oct 14 reposition + ask hosts for rules/Discord · Oct 15 rehearse day.sh on a
+fresh PRISM project, screenshots, backup video, live dry-run, fix GitHub billing · Oct 16 freeze
+numbers, two timed run-throughs, pack.

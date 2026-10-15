@@ -1,16 +1,22 @@
-# Ledger — the pipeline review that shows its receipts
+# Ledger — the revenue forecast with receipts
 
-*AI × GTM Hackathon (Block Convey) · Revenue Intelligence track*
+*AI × Fintech Hackathon "Money Talks 2" (Block Convey, Oct 17 2026) · Money Operations track*
 
-A sales manager asks: **"What should my team work on this week?"** Ledger reads the CRM
-snapshot and every call note, email and meeting, and answers with a ranked list. For each
-deal: a calibrated win probability, the buyer's real objection quoted from the record, and
-one specific next action. Every number and quote is checked in code against the CRM before
-the manager sees it, and every run is traced in PRISM.
+Every month a finance team signs off a revenue forecast built from a CRM that reps fill in
+optimistically: stages that contradict what the buyer actually wrote, close dates that
+already passed, deals the buyer lost weeks ago but nobody closed, contacts who left the
+company. The forecast inherits all of it. Ledger reads every deal's record — calls, emails,
+meetings — into a claim ledger of what the *buyer* said, with verbatim quotes, compares it in
+code against the CRM fields, and produces: a commit and best-case number built only from
+deals that don't contradict their own record, the specific issues behind every excluded
+dollar, draft CRM corrections a human approves, and a Monday digest per rep and manager.
+Every number and quote is checked in code before anyone sees it, and every run is traced in
+PRISM so the failures are found by the pipeline, not by the CFO.
 
-The point of the project is not the agent. It is the proof: the same 228 deals were run
-through a naive first version and a verified second version, and both were scored against
-what actually happened to those deals.
+The point of the project is not the agent. It is the proof: the same deals were run through
+a naive first version, a CRM-rules baseline and the verified version, and all were scored
+against what actually happened to those deals — because a forecast number is only worth
+what its receipts are worth.
 
 ## Screenshots
 

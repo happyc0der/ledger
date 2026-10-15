@@ -4,10 +4,10 @@ Setup before walking up: UI on :8787 (benchmark data, v3 selected, Proof tab pre
 a second UI on :8788 pointed at `data/live`, PRISM dashboard open on Traces filtered to
 `ledger-v1`, terminal with the live command pasted, backup video one tab away.
 
-**0:00 — The problem (20s).** "Every Monday a sales manager reviews ~200 deals in 30 minutes
-using stages the reps set. CRM alerts see fields. Reps are optimistic. We built a revenue
-agent whose job is to notice when a deal doesn't make sense — and to show a receipt for
-every claim."
+**0:00 — The problem (20s).** "Every month a finance team signs a revenue forecast built from
+a CRM that reps fill in optimistically. The CRM's own alerts only see fields. We built Ledger:
+it reads what the *buyer* actually said on every deal, finds where the record and the CRM
+disagree, and produces a commit number where every dollar has a receipt."
 
 **0:20 — What your CRM already tells you (20s).** Proof tab, second table. *CRM rules*:
 99% of the field problems — past close dates, blank amounts, dormant deals. Point at the
@@ -26,8 +26,9 @@ passed and why.
 85%, "PO next week" — and Ledger: *primary contact left Dontechi, per the auto-reply on
 P9VFKNR0*. "A rules engine can't do that. A rep in a hurry won't."
 
-**1:40 — Prove it (35s).** Proof tab, first table: 235 deals, 18 planted anomaly types,
-outcomes hidden. Rules 0% semantic. The *same model* just asked to find issues: 32% recall,
+**1:40 — Prove it (35s).** Point at the forecast strip first: "commit $X, best case $Y,
+N deals excluded — and *why* each one is excluded is one click away." Then the Proof tab,
+first table: 235 deals, 18 planted anomaly types, outcomes hidden. Rules 0% semantic. The *same model* just asked to find issues: 32% recall,
 17% of clean deals falsely flagged. Ledger: 92% recall, 99% precision, **0 clean deals
 flagged**. "That last number is the one a RevOps team feels — an agent that cries wolf gets
 muted in a week." Then the outcome table: revenue in the top-20 60% → 77%, fabrications
@@ -43,8 +44,8 @@ can edit. ~12 seconds. :8788 — Fabrikam: contact left + 31-day-old "PO next we
 the sibling deal still listing her; Northwind: leaning to Kestrel while the rep says "still
 in it". Toggle a proposal: *replace primary contact → Tom Brandt* — approve — export.
 
-**2:55 — Close (5s).** "If a pipeline review can't show its receipts, it's a guess with a
-nice UI. Ledger shows them — every Monday."
+**2:55 — Close (5s).** "A forecast without receipts is a guess with a nice spreadsheet.
+Ledger gives finance the receipts — every Monday, and before the CFO signs."
 
 ## If asked
 - *Is the data real?* Deals, values, dates, outcomes: yes (public Maven CRM dataset). Notes
