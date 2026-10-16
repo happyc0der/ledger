@@ -31,8 +31,9 @@ Stage bookmarks
         PRISM runs      https://prism.blockconvey.com/trajectories
   2:35  live export     http://localhost:8788/?deal=2003
         digest          http://localhost:8787/?digest=1
-  live run (pick one; the untouched template is cached for all three -> instant):
-    Mac, offline:   LLM_PROVIDER=ollama PRISM_DISABLED=1 .venv/bin/python scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv --activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv --products data/company/products.csv --as-of 2026-10-19
-    msi GPU (awake, Tailscale):  prefix the same command with OLLAMA_URL=http://msi:11434 OLLAMA_MODEL=gemma4:12b
-    Gemini (only with a billing-free key in .env):  LLM_PROVIDER=gemini ...  (a dead key falls back to the Mac automatically)
+  live run (the untouched template is cached on every path -> instant):
+    default (free-tier Gemini key in .env; 429/5xx fall back to the Mac automatically):
+      LLM_PROVIDER=gemini .venv/bin/python scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv --activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv --products data/company/products.csv --as-of 2026-10-19
+    no network:  same command with LLM_PROVIDER=ollama PRISM_DISABLED=1   (Mac qwen3:14b, 8 deals ~2 min cold)
+    GPU:         prefix with OLLAMA_URL=http://msi:11434 OLLAMA_MODEL=gemma4:12b LLM_PROVIDER=ollama   (msi awake on Tailscale, ~1 min cold)
 URLS
