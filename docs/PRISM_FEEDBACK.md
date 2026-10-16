@@ -41,8 +41,9 @@ what would have helped. Trace ids refer to project `98b924d6…`.
 9. Trace *list* returns `metadata: {}` while trace *detail* has the full metadata; older trace
    details lack `agent_name` at the top level (it's inside metadata). Clients end up with
    fallbacks for both.
-10. No deep-link URL scheme for a trace or trajectory id in SDK/API responses, so my UI stores
-    ids but can't link to the dashboard.
+10. No deep-link URL in SDK/API responses. The dashboard does have one (`/traces/{trace_id}`,
+    found by clicking), so this is a documentation/response-field gap: return `url` with the
+    trace and trajectory ids and clients can link straight to them. (Ledger now links to it.)
 11. A DNS blip during a run produced SDK warnings (`/api/traces failed: nodename nor servname
     provided`) and those traces were silently lost — no retry, no local queue.
 12. `EFF-001 No Redundant Tool Calls` keys on tool *name* only; repeated verifier calls with
@@ -111,3 +112,16 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     as quoted evidence (or honouring the `check:*` label) would fix it; (b) the deterministic
     overall (96) and the judged overall (84) are shown in the same `overall_score` field at
     different times, so a dashboard number can change under you without saying why.
+25. **An agent's display name follows the last trace.** I sent a few latency probes with
+    `agent_id="ledger"` and `agent_name="ledger-probe"`; the dashboard's Agent Fleet now lists
+    my whole agent as "ledger-probe" and Recent Activity shows "ledger-v1 · latency probe".
+    The SDK docstring says the id is the identity and the name a label, which is right — but
+    the label should be set once (or per id), not overwritten by whatever the newest trace says.
+26. **A trace page says "No step spans recorded. Configure your SDK to capture tool calls and
+    handoffs" even when the same session has trajectories with 6–9 steps each.** Traces and
+    trajectories (Agent Runs) live in separate worlds in the UI: the trace page doesn't link to
+    the run it belongs to, and the run doesn't list its traces. Joining them on `session_id`
+    (or letting the client pass `trajectory_id` on a trace) would turn two lists into one story.
+27. Dashboard deep links exist (`/traces/{id}`) — found by clicking; worth returning in the API
+    so clients can link (see #10). Also useful: `/traces?agent=&status=flagged&range=30d` as a
+    shareable URL — today the filters reset on navigation.

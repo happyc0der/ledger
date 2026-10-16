@@ -158,6 +158,7 @@ async function select(id) {
     <div>${v.rationale || ''}</div>
     <div style="margin-top:6px">${receipts(v)}</div>
     ${outcome}
+    ${v.prism_trace_ids && v.prism_trace_ids.length ? `<div class="muted" style="margin:6px 0">PRISM: ${v.prism_trace_ids.slice(0, 3).map((t, i) => `<a href="https://prism.blockconvey.com/traces/${t}" target="_blank" style="color:var(--accent)">trace ${i + 1}</a>`).join(' · ')}${v.prism_trajectory_id ? ` · trajectory <code>${String(v.prism_trajectory_id).slice(0, 8)}</code>` : ''}</div>` : ''}
     ${v.checks ? `<h3>Checks run</h3><div class="muted" style="margin-bottom:6px">${v.checks.filter(c => c.status === 'pass').length} pass · ${v.checks.filter(c => c.status === 'fail').length} flagged · ${v.checks.filter(c => c.status === 'skipped').length} skipped
       <details><summary style="cursor:pointer">why not flagged</summary>${v.checks.filter(c => c.status !== 'fail').map(c => `<div>${c.type.split('_')[0]} <span class="pill">${c.status}</span> ${c.reason}</div>`).join('')}</details></div>` : ''}
     ${(v.issues && v.issues.length) ? `<h3>What doesn't add up (${v.issues.length})</h3>` + v.issues.map(i => {
