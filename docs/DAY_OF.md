@@ -1,11 +1,11 @@
 # Day-of checklist — Saturday Oct 17
 
 **Before leaving**
-- Laptop charged; phone hotspot tested; Ollama running on the Mac (`ollama serve`), `qwen3:14b` warm.
-- `./scripts/demo_up.sh` → all four lines OK (8787, 8788, PRISM live_connected, Ollama).
+- Laptop charged; phone hotspot tested; Ollama running on the Mac (`ollama serve`); `qwen3:14b` is pulled and the template run is cached (Oct 16), so the live demo works with no network at all.
+- `./scripts/demo_up.sh` → 8787, 8788, PRISM live_connected, Ollama mac OK. Ollama msi OK is a bonus (GPU: the 8-deal template cold in 60 s vs 122 s on the Mac, measured Oct 16) and needs the laptop awake on Tailscale.
 - Browser tabs in order: proof · deal P9VFKNR0 · sibling OEBJXZN6 · naive v1 · PRISM traces (Flagged, 30 days) · PRISM runs · live 8788 deal 2003 · digest. Backup video open in a player.
 - PRISM dashboard logged in (in the browser you'll present from).
-- `.env`: a billing-free Gemini key if you made one; otherwise the live run falls back to local Ollama (cached for the untouched template → instant; an edited CSV → ~8–40 s per deal).
+- `.env`: a billing-free Gemini key if you made one; otherwise run the live command with `LLM_PROVIDER=ollama` (printed by demo_up.sh). Untouched template → under 1 s from cache on every path; an edited 8-deal CSV → about 1 min on msi, 2 min on the Mac.
 
 **At the venue**
 - Ask for the rules (pre-built code) and the Discord; if a from-scratch rebuild is required, follow docs/REBUILD.md and `scripts/day.sh` with a fresh PRISM project.
