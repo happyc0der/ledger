@@ -1,0 +1,16 @@
+# Day-of checklist — Saturday Oct 17
+
+**Before leaving**
+- Laptop charged; phone hotspot tested; Ollama running on the Mac (`ollama serve`), `qwen3:14b` warm.
+- `./scripts/demo_up.sh` → all four lines OK (8787, 8788, PRISM live_connected, Ollama).
+- Browser tabs in order: proof · deal P9VFKNR0 · sibling OEBJXZN6 · naive v1 · PRISM traces (Flagged, 30 days) · PRISM runs · live 8788 deal 2003 · digest. Backup video open in a player.
+- PRISM dashboard logged in (in the browser you'll present from).
+- `.env`: a billing-free Gemini key if you made one; otherwise the live run falls back to local Ollama (cached for the untouched template → instant; an edited CSV → ~8–40 s per deal).
+
+**At the venue**
+- Ask for the rules (pre-built code) and the Discord; if a from-scratch rebuild is required, follow docs/REBUILD.md and `scripts/day.sh` with a fresh PRISM project.
+- If PRISM is slow, the SDK's timeouts can stall a run: set `PRISM_DISABLED=1` for any live run and show the existing traces instead.
+
+**Submission** — docs/SUBMISSION.md is paste-ready; repo https://github.com/happyc0der/ledger (make public before submitting if judges need to open it).
+
+**Answers to have ready** — synthetic notes (disclosed; naive agent reads the same notes and gets 32%); planted labels vs real outcomes; "did you tune to the labels" (no prompt changes after scoring; FINDINGS.md lists every comparison fix); Jev not integrated (waitlist; `decide.py` switches on the key); cost (~$0.35/run on Gemini, free locally).

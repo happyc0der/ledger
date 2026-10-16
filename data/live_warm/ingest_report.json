@@ -1,0 +1,49 @@
+{
+ "deals": {
+  "rows": 8,
+  "dropped_closed": 0,
+  "kept_unmapped_stage": {},
+  "mapping_hint": null,
+  "columns": {
+   "opportunity_id": "Record ID",
+   "account": "Associated Company",
+   "product": "Product",
+   "sales_agent": "Deal owner",
+   "stage": "Deal Stage",
+   "amount": "Amount",
+   "created_date": "Create Date",
+   "expected_close": "Close Date",
+   "primary_contact": "Associated Contact",
+   "last_activity_date": "Last Activity Date",
+   "next_step": "Next step"
+  }
+ },
+ "activities": {
+  "rows": 14,
+  "columns": {
+   "activity_id": "Engagement ID",
+   "opportunity_id": "Associated Deal",
+   "date": "Activity date",
+   "type": "Activity type",
+   "author": "Activity assigned to",
+   "text": "Body",
+   "direction": "Email direction",
+   "from_addr": "From address",
+   "to_addr": null
+  }
+ },
+ "attribution": {
+  "buyer": 8,
+  "rep": 6
+ },
+ "contacts": {
+  "rows": 10,
+  "columns": {
+   "opportunity_id": "Associated Deal",
+   "name": "Name",
+   "title": "Job Title",
+   "role": "Buying Role",
+   "email": "Email"
+  }
+ }
+}

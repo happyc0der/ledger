@@ -1,4 +1,4 @@
-# Ledger — pipeline review agent (AI × GTM Hackathon, Revenue Intelligence)
+# Ledger — the revenue forecast with receipts (AI × Fintech "Money Talks 2", Money Operations)
 
 See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.venv/`.
 
@@ -19,7 +19,10 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
   then `LEDGER_DATA=data/<name> LEDGER_AS_OF=YYYY-MM-DD scripts/run.py v3`. Presets live in
   `ledger/ingest.py` (column candidates, stage map, buying-role map); missing files degrade
   (no catalogue → no scope/arithmetic checks; no contacts → champion from primary_contact).
-- Model responses are cached under `.cache/`; delete to force re-inference.
+- Model responses are cached under `.cache/`; delete to force re-inference. A metered provider that
+  fails (401/402/403/429/network) falls over to `LLM_FALLBACK` (default `ollama`) mid-run.
+- Stage: `./scripts/demo_up.sh` (both UIs, PRISM check, bookmark URLs); DEMO.md has the script;
+  docs/SUBMISSION.md the write-up; docs/DAY_OF.md the morning checklist.
 - UI: `.venv/bin/uvicorn ledger.app:app --port 8787` → http://localhost:8787 (reads
   `runs/`; run `scripts/run.py eval v1 v2` first so receipts and Proof have data).
 

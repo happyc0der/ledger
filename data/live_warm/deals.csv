@@ -1,0 +1,9 @@
+opportunity_id,account,product,sales_agent,stage,amount,created_date,expected_close,primary_contact,last_activity_date,next_step,stage_raw
+2001,Northwind,GTX Basic,Alex Kim,Negotiation,5500.0,2026-08-12,2026-11-20,Dana Whitfield,2026-10-14,Confirm PO timing,contractsent
+2002,Contoso,GTX Pro,Alex Kim,Proposal,14463.0,2026-09-02,2026-10-30,Ravi Nair,2026-10-10,,decisionmakerboughtin
+2003,Fabrikam,MG Advanced,Alex Kim,Negotiation,3393.0,2026-07-28,2026-10-05,Mei Tanaka,2026-09-18,Send proposal,contractsent
+2004,Fabrikam,GTX Basic,Alex Kim,Qualification,550.0,2026-10-01,2026-12-15,Mei Tanaka,2026-10-12,Schedule demo,qualifiedtobuy
+2005,Tailspin,GTX Plus Pro,Jordan Lee,Proposal,5482.0,2026-08-20,2026-11-10,Omar Haddad,2026-10-16,Check in with champion,decisionmakerboughtin
+2006,Woodgrove,MG Special,Jordan Lee,Negotiation,55.0,2026-09-10,2026-10-28,Priya Sen,2026-10-15,Follow up,contractsent
+2007,Litware,GTX Pro,Jordan Lee,Discovery,4821.0,2026-09-25,2026-12-01,Sam Okoro,2026-10-17,Send datasheet,presentationscheduled
+2008,Adatum,GTX Plus Basic,Jordan Lee,Proposal,,2026-09-05,2026-11-05,Lena Fischer,2026-10-11,,decisionmakerboughtin
