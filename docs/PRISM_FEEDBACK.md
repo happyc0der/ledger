@@ -85,3 +85,29 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     For a benchmark I want "run evaluator X over these 235 trajectories" and a table.
 21. The trajectory list is newest-first with no `since`/`before` filter I could find; walking
     history means paging through everything.
+22. **Annotations written through the API can't be read back through the API.** `POST
+    /api/annotations` returns 201 with an id, but `GET /api/traces/{id}` shows no annotation,
+    `GET /api/annotations?…&trace_id=` returns the pending *queue* (ignores the filter), and
+    `status=all` lists only annotations on traces that had been flagged for review. I wrote 231
+    verdicts and can verify none of them from the API. If they appear in the dashboard, fine —
+    but an eval loop needs to read its own verdicts back (per type, over time).
+23. **Ingest under sustained load stalled my pipeline.** In isolation a trace POST takes
+    ~1.8 s regardless of payload size (1 KB, 8 KB, 20 KB all the same), so size isn't the
+    issue. But during a 150-deal run that sends 3–4 requests/second, the SDK's 10 s timeout
+    fired on most calls (`/api/traces failed: The read operation timed out`), and because the
+    SDK blocks on each send, the run slowed to a crawl (0 deals finished in 25 minutes) and
+    the timed-out traces were lost. I had to re-run with tracing off. Two fixes, either would
+    do: a client-side queue with backoff (fire-and-forget `trace_llm`), or an async ingest
+    endpoint that acknowledges immediately. Today, heavy users will turn tracing off exactly
+    when it matters most.
+24. **The LLM judge is on for the trial and it's good** — a fresh trajectory got
+    `plan_quality / goal_alignment / tool_use_quality / reasoning_quality / safety` scores with
+    one-line evidence each in ~20 s, plus an `unsupported_claims` list that caught something
+    real: my `decide` step states a probability with no derivation. I'll add the decision
+    model's basis to that step. Two notes: (a) the judge read the verbatim buyer quote inside
+    my `check:M3_expired_promise:fail` step as a *current* claim and called it a contradiction
+    ("promised PO 21 days ago… yet claims 'PO should go out next week'") — evidence quoted as
+    evidence shouldn't be judged as the agent's own assertion; a convention for marking a span
+    as quoted evidence (or honouring the `check:*` label) would fix it; (b) the deterministic
+    overall (96) and the judged overall (84) are shown in the same `overall_score` field at
+    different times, so a dashboard number can change under you without saying why.
