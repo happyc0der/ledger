@@ -156,6 +156,20 @@ def check_output(co: Company, version: str, partial: bool = False) -> list[Findi
         if abs(stated - true) / true > 0.02:
             out.append(Finding("stated_vs_computed", "high", "agent", f"{version}: stated pipeline ${stated:,.0f} vs computed ${true:,.0f} ({(stated - true) / true:+.0%})", 1,
                                [], "Sum amounts in code; the gap usually equals the deals whose product name failed the catalogue lookup."))
+    # a check that fires on most deals is measuring the data's shape, not the deals
+    if "issues" in rows and len(rows) >= 20:
+        from collections import Counter as _C
+        per_type = _C(i["type"] for iss in rows.issues if isinstance(iss, list) for i in {x["type"]: x for x in iss}.values())
+        for t, n in per_type.items():
+            if n / len(rows) >= 0.7:
+                out.append(Finding("saturated_check", "medium", "data", f"{version}: {t} fires on {n}/{len(rows)} deals ({n / len(rows):.0%})", n,
+                                   [f"a check that flags almost everything carries no information for this dataset"],
+                                   f"Check whether the data can satisfy it (e.g. M9 needs economic-buyer contacts; S2 needs next_step to be used); if not, disable it in ledger.json disabled_checks."))
+    if "objection" in rows and len(rows) >= 20:
+        top = rows.objection.value_counts(normalize=True)
+        if top.iloc[0] >= 0.8 and top.index[0] != "none":
+            out.append(Finding("degenerate_classifier", "medium", "agent", f"{version}: objection is '{top.index[0]}' on {top.iloc[0]:.0%} of deals", int(top.iloc[0] * len(rows)), [],
+                               "The decision model is not discriminating on this data; treat its objection/action outputs as untrusted until measured against reviews or outcomes."))
     generic = rows.next_action.isin(GENERIC_ACTIONS).mean()
     if generic > 0.15:
         out.append(Finding("specificity", "medium", "agent", f"{version}: {generic:.0%} of next actions are the generic re-engage", int(generic * len(rows)), [],

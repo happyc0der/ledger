@@ -197,6 +197,30 @@ No paid inference is required: the default provider is a local Ollama model. The
 comparison above cost about $0.30 on Gemini Flash-Lite; a spend guard in `ledger/llm.py` stops
 metered providers at `GEMINI_BUDGET_USD`.
 
+## On data we did not write: 150 SaaS sales conversations with real outcomes
+
+The benchmark above uses notes we generated. To see what Ledger does on records that are
+not ours, `scripts/adapt_saas.py` turns the public `DeepMostInnovations/saas-sales-conversations`
+dataset (multi-turn buyer/rep conversations over sms, chat, email and calls; personas; a real
+converted/not-converted label) into a Ledger dataset: 150 open deals, 550 closed deals as
+history. No anomalies are planted, so only outcomes and hand review can score it.
+
+What held: **0 fabrications**, pipeline total exact, 56 model claims dropped by the verifier
+because no quote supported them, and the agent's top-20 captured **85%** of the closable
+revenue. The semantic findings read right on inspection — *"I still need to convince my
+boss"* → contact lacks authority; *"feels like a lot to commit to right now"* against a
+Proposal stage; *"I need to think it over"* 25 days ago and nothing since → expired promise —
+and 8 of the 10 inspected flagged deals went on to lose.
+
+What did not hold, and the auditor caught both without being told: the fallback **judgement
+layer does not transfer**. Its win probabilities bunch in 0.2–0.6 (Brier 0.226 against a 50%
+base rate — barely better than guessing) and its objection classifier collapsed to "budget"
+on 95% of deals (`degenerate_classifier` finding). And `M9_missing_economic_buyer` fired on
+79% of deals because this CRM holds one contact per deal (`saturated_check` finding — the
+fix is a setting, not a model). This is the measured case for a calibrated decision model
+(Jev) or outcome-based calibration before anyone trusts the probabilities on a new company;
+the reading and verifying layers carried over, the judging layer did not.
+
 ## Week after week
 
 Ledger is built to be run every Monday, not once:

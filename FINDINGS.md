@@ -21,6 +21,9 @@ runs these checks automatically.
 | 12 | Eval (re-run on the clean layout): one clean deal flagged `M2` — "CRM economic buyer is Tom Whitfield; buyer names finance" | **comparison** — the model recorded `economic_buyer: "finance"` (a department) and the name check treated it as a different person | economic buyer must look like a person before it is compared (`consistency._is_person`) | 1/86 → 0/86 |
 | 13 | Live run on the HubSpot template crashed twice: integer deal ids from CSV, then a half-written `.cache/usage.json` under concurrent writers | **instrumentation** | ids read as strings; spend ledger uses a lock + atomic replace + backup | live run: 8 deals in 12 s |
 
+| 14 | Run on an independent dataset (150 SaaS conversations, real outcomes): `M9_missing_economic_buyer` on 118/150 deals; objection = "budget" on 142/150; Brier 0.226 vs 0.25 base rate | **data shape** (one contact per deal) and **agent** (fallback judgement doesn't transfer) | auditor rules `saturated_check` (a check firing on ≥70% of deals) and `degenerate_classifier` (one objection ≥80%); README states the negative result; Jev/outcome calibration remains the fix | auditor now reports both automatically |
+| 15 | PRISM LLM judge (Growth trial): "Probability score 0.4 has no derivation shown" | **instrumentation** — the `decide` step logged a number without its basis | decide step now records buyer signals, buyer-touch gap, base rate and the objection distribution | judge's unsupported-claims list empty on re-run (to verify) |
+
 Not fixed on purpose: the "Q4" guardrail false positive (it's PRISM's pattern, and a keyword
 guardrail crying wolf is a fair thing to show); the 19 `verbal_yes_then_lost` deals both
 agents rate ~0.93 (nothing in the record predicts them; that is what honest calibration
