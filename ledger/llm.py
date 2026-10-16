@@ -131,7 +131,16 @@ def chat(messages: list[dict], *, schema: dict | None = None, version: str, sess
         text, tin, tout, ms, cached = hit["text"], hit["tin"], hit["tout"], hit["ms"], True
     else:
         t0 = time.time()
-        text, tin, tout = _ollama(p, messages, schema, num_ctx) if p.name == "ollama" else _openai(p, messages, schema)
+        try:
+            text, tin, tout = _ollama(p, messages, schema, num_ctx) if p.name == "ollama" else _openai(p, messages, schema)
+        except Exception as e:  # a dead key, exhausted credits or a rate limit must not stop a run: fall over to the fallback provider
+            fb = os.getenv("LLM_FALLBACK", "ollama")
+            status = getattr(e, "status_code", None)
+            if p.name == fb or status not in (401, 402, 403, 429, None) and not isinstance(e, (httpx.HTTPError,)):
+                raise
+            print(f"llm: {p.name}/{p.model} failed ({type(e).__name__} {status or ''}); falling back to {fb}", flush=True)
+            p = get_provider(fb)
+            text, tin, tout = _ollama(p, messages, schema, num_ctx) if p.name == "ollama" else _openai(p, messages, schema)
         ms, cached = int((time.time() - t0) * 1000), False
         cache.write_text(json.dumps({"text": text, "tin": tin, "tout": tout, "ms": ms}))
     tracing.trace_llm(version=version, model=f"{p.name}/{p.model}", messages=messages, output=text,

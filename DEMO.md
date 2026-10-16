@@ -1,5 +1,11 @@
 # Demo script — 3 minutes
 
+**Setup:** `./scripts/demo_up.sh` — starts both UIs, checks PRISM, prints the bookmarks below.
+Stage URLs: proof `localhost:8787/?view=proof` · the deal `?deal=P9VFKNR0` · sibling
+`?deal=OEBJXZN6` · naive on the same deal `?version=v1&deal=P9VFKNR0` · digest `?digest=1` ·
+live export `localhost:8788/?deal=2003` · PRISM `prism.blockconvey.com/traces` (Flagged, 30 days)
+and `/trajectories`. Backup video: `docs/video/ledger_demo_backup.mp4`.
+
 Setup before walking up: UI on :8787 (benchmark data, v3 selected, Proof tab pre-loaded once),
 a second UI on :8788 pointed at `data/live`, PRISM dashboard open on Traces filtered to
 `ledger-v1`, terminal with the live command pasted, backup video one tab away.

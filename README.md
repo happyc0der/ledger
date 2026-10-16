@@ -263,6 +263,9 @@ Ledger is built to be run every Monday, not once:
 - **Extraction stability.** `scripts/run.py agree` re-extracts a sample uncached and reports
   per-slot agreement (84–100% on a 25-deal sample; `reports/agreement.md`).
 
+<p align="center"><img src="docs/screenshots/01_pipeline_v3.png" width="820" alt="Ledger: ranked pipeline with receipts, a deal's four findings each with the buyer's sentence"><br>
+<img src="docs/screenshots/prism_10_v3_run_timeline_checks.jpg" width="400" alt="PRISM: a Ledger run as a timeline of check steps"> <img src="docs/screenshots/prism_03_trace_pii_flag.jpg" width="400" alt="PRISM: the v1 trace with the PII guardrail flag that exposed our data bug"></p>
+
 ## How it works
 
 [docs/SYSTEM_DESIGN.md](docs/SYSTEM_DESIGN.md) — components, data model, a run step by step,
