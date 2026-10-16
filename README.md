@@ -227,6 +227,12 @@ Ledger is built to be run every Monday, not once:
 - **Extraction stability.** `scripts/run.py agree` re-extracts a sample uncached and reports
   per-slot agreement (84–100% on a 25-deal sample; `reports/agreement.md`).
 
+## How it works
+
+[docs/SYSTEM_DESIGN.md](docs/SYSTEM_DESIGN.md) — components, data model, a run step by step,
+interfaces, failure handling, observability and evaluation, written for someone who has not
+read the code. [docs/architecture.svg](docs/architecture.svg) is the one-picture version.
+
 ## Status and what's still missing
 
 **Working today:** everything above — ingest, claim ledger, consistency checks, rules
