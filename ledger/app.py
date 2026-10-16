@@ -66,9 +66,13 @@ def _rows(version: str) -> pd.DataFrame:
         raise HTTPException(404, f"no run for {version}")
     r = pd.DataFrame(rows).drop_duplicates("opportunity_id")
     vp = RUNS_DIR / f"{version}_verdicts.csv"
-    if vp.exists():
+    if vp.exists():  # benchmark: receipts checked against ground truth by the evaluator
         v = pd.read_csv(vp)[["opportunity_id", "amount_ok", "gap_ok", "quote_ok", "fabrications"]]
         r = r.merge(v, on="opportunity_id", how="left")
+    elif "quote_verified" in r:  # customer data: amounts/gaps are computed in code; the quote carries its own verification
+        r["amount_ok"], r["gap_ok"] = True, True
+        r["quote_ok"] = r.quote_verified.fillna(True).astype(bool)
+        r["fabrications"] = (~r.quote_ok).astype(int)
     d = CO.deals[["opportunity_id", "account", "product", "sales_agent", "stage", "amount",
                   "primary_contact", "last_activity_date", "expected_close"]]
     r = r.merge(d, on="opportunity_id", how="left", suffixes=("", "_crm"))

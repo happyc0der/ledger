@@ -269,6 +269,9 @@ async function loadDeals() {
 }
 
 (async () => {
+  const q = new URLSearchParams(location.search);
+  if (q.get('version')) state.version = q.get('version');
+  if (q.get('reveal')) state.reveal = true;
   state.meta = await api('/api/meta');
   $('#title').textContent = 'Ledger · ' + state.meta.company.replace(' — pipeline review brief', '');
   const src = state.meta.settings_source || {}; const learned = Object.values(src).find(v => String(v).startsWith('learned'));
@@ -285,7 +288,11 @@ async function loadDeals() {
   document.querySelectorAll('#filter button').forEach(b => b.onclick = () => { state.filter = b.dataset.f; document.querySelectorAll('#filter button').forEach(x => x.classList.toggle('on', x === b)); renderList(); });
   $('#viewList').onclick = () => { $('#mainList').style.display = 'grid'; $('#proof').classList.remove('show'); $('#viewList').classList.add('on'); $('#viewProof').classList.remove('on'); };
   $('#viewProof').onclick = async () => { $('#mainList').style.display = 'none'; $('#proof').classList.add('show'); $('#viewProof').classList.add('on'); $('#viewList').classList.remove('on'); renderProof(await api('/api/compare')); renderIssues(await api('/api/issues')); };
+  if (state.reveal) $('#reveal').checked = true;
   await loadDeals();
+  if (q.get('deal')) await select(q.get('deal'));
+  if (q.get('view') === 'proof') $('#viewProof').click();
+  if (q.get('digest')) $('#digestLink').click();
 })();
 </script>
 </body>
