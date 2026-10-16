@@ -58,8 +58,13 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
         steps.append(tracing.step("check:summary", f"{n_pass} pass · {len(checks) - n_pass - n_skip} fail · {n_skip} skipped: "
                                   + "; ".join(f"{c.type.split('_')[0]} {c.status} ({c.reason})" for c in checks if c.status != "fail"), tool="checks"))
         dec = decide(state, version="v3", session_id=session)
-        steps.append(tracing.step("decide", json.dumps({"win_probability": round(dec.win_probability, 3), "objection": dec.objection,
-                                                        "next_action": dec.next_action}), tool=dec.backend))
+        basis = {"win_probability": round(dec.win_probability, 3), "objection": dec.objection, "next_action": dec.next_action,
+                 "backend": dec.backend, "derived_from": {"buyer_signals": {k: ledger.get(k) for k in ("budget_status", "commitment", "competitor_status", "champion_status") if ledger.get(k)},
+                                                           "days_since_buyer_touch": state["computed"]["days_since_buyer_touch"],
+                                                           "base_win_rate": round(float(__import__("ledger.config", fromlist=["BASE_WIN_RATE"]).BASE_WIN_RATE), 2),
+                                                           "objection_probs": {k: round(v, 2) for k, v in dec.objection_probs.items() if v >= 0.05}}}
+        steps.append(tracing.step("decide", json.dumps(basis, default=str), tool=dec.backend,
+                                  input_summary="claim ledger + computed facts + base rate"))
         ex, quote_ok, qsteps = explain_verified(state, dec, session=session, oid=oid)
         steps += qsteps
         row = dict(opportunity_id=oid, win_probability=dec.win_probability, amount_usd=state["computed"]["amount_usd"],

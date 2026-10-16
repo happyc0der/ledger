@@ -97,7 +97,7 @@ def _spend(p: Provider, tin: int, tout: int) -> None:
 
 def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str, int, int]:
     from openai import OpenAI
-    client = OpenAI(base_url=p.base_url, api_key=p.api_key)
+    client = OpenAI(base_url=p.base_url, api_key=p.api_key, timeout=60.0, max_retries=2)  # never hang a run on one call
     kwargs = {}
     if schema:
         # Strict schema where the provider supports it (Gemini, Groq); json_object otherwise.
