@@ -20,7 +20,7 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
   `ledger/ingest.py` (column candidates, stage map, buying-role map); missing files degrade
   (no catalogue → no scope/arithmetic checks; no contacts → champion from primary_contact).
 - Model responses are cached under `.cache/`; delete to force re-inference. A metered provider that
-  fails (401/402/403/429/network) falls over to `LLM_FALLBACK` (default `ollama`) mid-run.
+  fails (401/402/403/429, any 5xx, network) falls over to `LLM_FALLBACK` (default `ollama`) mid-run; our own 4xx (400/404/413) still surfaces.
 - Stage: `./scripts/demo_up.sh` (both UIs, PRISM check, bookmark URLs); DEMO.md has the script;
   docs/SUBMISSION.md the write-up; docs/DAY_OF.md the morning checklist.
 - UI: `.venv/bin/uvicorn ledger.app:app --port 8787` → http://localhost:8787 (reads

@@ -136,7 +136,10 @@ def chat(messages: list[dict], *, schema: dict | None = None, version: str, sess
         except Exception as e:  # a dead key, exhausted credits or a rate limit must not stop a run: fall over to the fallback provider
             fb = os.getenv("LLM_FALLBACK", "ollama")
             status = getattr(e, "status_code", None)
-            if p.name == fb or status not in (401, 402, 403, 429, None) and not isinstance(e, (httpx.HTTPError,)):
+            # Fall over on auth/credit/rate-limit, any 5xx (overloaded model), and transport errors.
+            # A 4xx we caused (400 bad request, 404 model name, 413 too long) must surface instead.
+            recoverable = status in (401, 402, 403, 429) or status is None or status >= 500 or isinstance(e, httpx.HTTPError)
+            if p.name == fb or not recoverable:
                 raise
             print(f"llm: {p.name}/{p.model} failed ({type(e).__name__} {status or ''}); falling back to {fb}", flush=True)
             p = get_provider(fb)
