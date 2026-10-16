@@ -73,3 +73,15 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     "PRISM has done nothing".
 18. `/api/remediation` returns an empty list with no hint that a Root Cause run must happen
     first (and the Root Cause endpoint isn't discoverable from the API — dashboard only?).
+19. **Annotations write-back works and is exactly what the "prove it" loop needs** — but the
+    request fields aren't documented anywhere I could find: required `trace_id`, `verdict`;
+    optional `quality_score`, `notes`, `reviewer_email`. My first attempt used `score`,
+    `note`, `reviewer` and the API accepted the request while silently dropping them. A 422
+    on unknown fields (or a schema in the docs) would have saved a round trip. Also:
+    annotations attach to *traces*; my unit of work is a *trajectory* (one deal). I annotate
+    the deal's first trace as a proxy — a trajectory-level annotation would be the natural fit.
+20. **Evaluators can be created (`POST /api/evaluators` wants `name`, …) but I found no way
+    to run one on existing traces from the API**; presumably they apply to new traces only.
+    For a benchmark I want "run evaluator X over these 235 trajectories" and a table.
+21. The trajectory list is newest-first with no `since`/`before` filter I could find; walking
+    history means paging through everything.

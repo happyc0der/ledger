@@ -71,6 +71,33 @@ def main():
         md = ["# Extraction agreement (same model, uncached re-run, n=%d)" % len(sample), "", "| slot | agreement |", "|---|---|"] + \
              [f"| {k} | {v[0] / max(v[1], 1):.0%}{' ⚠' if v[0] / max(v[1], 1) < 0.7 else ''} |" for k, v in agree.items()]
         Path("reports").mkdir(exist_ok=True); Path("reports/agreement.md").write_text("\n".join(md)); print("\n".join(md)); return
+    if a.version == "prism-annotate":  # write per-deal verdicts back onto PRISM traces (needs Annotations tier)
+        from ledger import tracing
+        from ledger.score_issues import load_labels
+        ver = (a.more or ["v3"])[0]
+        rows = evaluate.load_rows(ver)
+        from ledger.config import COMPANY_DIR
+        lab = load_labels() if (COMPANY_DIR / "anomalies.csv").exists() else None
+        truth = {(r.opportunity_id, r.type) for r in lab.itertuples()} if lab is not None else None
+        n_ok = n = 0
+        for r in rows:
+            tids = r.get("prism_trace_ids") or []
+            if not tids:
+                continue
+            found = {i["type"] for i in r.get("issues", [])}
+            if truth is not None:  # benchmark: verdict against planted labels
+                planted = {t for (o, t) in truth if o == r["opportunity_id"]}
+                tp, fp, fn = found & planted, found - planted, planted - found
+                verdict = "pass" if not fp and not fn else "fail"
+                score = 100 * len(tp) / max(len(found | planted), 1) if (found | planted) else 100
+                notes = f"issues {sorted(found)} | planted {sorted(planted)}" + (f" | false alarms {sorted(fp)}" if fp else "") + (f" | missed {sorted(fn)}" if fn else "")
+            else:  # customer data: verdict = did every shown quote verify
+                verdict = "pass" if r.get("quote_verified", True) and not r.get("ledger", {}).get("dropped") else "fail"
+                score = None
+                notes = f"issues {sorted(found)} | dropped claims {r.get('ledger', {}).get('dropped')}"
+            res = tracing.annotate(tids[0], verdict, quality_score=score, notes=notes)
+            n += 1; n_ok += bool(res and "id" in res)
+        print(f"annotated {n_ok}/{n} deals' traces in PRISM ({ver})"); return
     if a.version == "prism-publish":  # reports into PRISM's knowledge base under the ledger agent
         from ledger import tracing
         c = tracing.client()

@@ -56,6 +56,24 @@ def trajectory(*, version: str, session_id: str, steps: list[dict], model: str,
     return (r or {}).get("id")
 
 
+def annotate(trace_id: str, verdict: str, *, quality_score: float | None = None, notes: str = "",
+             reviewer: str = "ledger-auditor") -> dict | None:
+    """Write a verdict back onto a PRISM trace (Growth tier: Annotations). verdict ∈ pass | fail."""
+    import httpx
+    host, key, pid = os.getenv("PRISM_HOST"), os.getenv("PRISM_API_KEY"), os.getenv("PRISM_PROJECT_ID")
+    if not (host and key and pid) or os.getenv("PRISM_DISABLED") == "1":
+        return None
+    body = {"project_id": pid, "trace_id": trace_id, "verdict": verdict, "notes": notes[:2000], "reviewer_email": reviewer}
+    if quality_score is not None:
+        body["quality_score"] = float(quality_score)
+    try:
+        r = httpx.post(f"{host}/api/annotations", params={"project_id": pid}, json=body,
+                       headers={"X-PRISMtrace-Key": key}, timeout=20)
+        return r.json() if r.status_code < 300 else {"error": r.status_code, "detail": r.text[:200]}
+    except httpx.HTTPError as e:
+        return {"error": str(e)[:200]}
+
+
 def step(label: str, output: str, *, tool: str | None = None, input_summary: str = "",
          status: str = "success") -> dict:
     # PRISM's Task Completion rule (CORR-001) looks for a step_type of final_answer.
