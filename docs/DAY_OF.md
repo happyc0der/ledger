@@ -5,7 +5,7 @@
 - `./scripts/demo_up.sh` → 8787, 8788, PRISM live_connected, Ollama mac OK. Ollama msi OK is a bonus (GPU: the 8-deal template cold in 60 s vs 122 s on the Mac, measured Oct 16) and needs the laptop awake on Tailscale.
 - Browser tabs in order: proof · deal P9VFKNR0 · sibling OEBJXZN6 · naive v1 · PRISM traces (Flagged, 30 days) · PRISM runs · live 8788 deal 2003 · digest. Backup video open in a player.
 - PRISM dashboard logged in (in the browser you'll present from).
-- `.env` holds a free-tier Gemini key (new project, no billing; verified Oct 16) with the estimated-spend cap at $20 — the key cannot bill anything. Stage default is `LLM_PROVIDER=gemini`; a 429 from the free tier or a 5xx falls over to the Mac mid-run. Untouched template → under 1 s from cache on every path; an edited 8-deal CSV → seconds on Gemini, about 1 min on msi, 2 min on the Mac.
+- `.env` holds a free-tier Gemini key (new project, no billing; verified Oct 16) with the estimated-spend cap at $20 — the key cannot bill anything. Stage default is `LLM_PROVIDER=gemini`; a 429 from the free tier or a 5xx falls over to the Mac mid-run. Untouched template → under 1 s from cache on every path; an edited 8-deal CSV → about 1.5 min on the free-tier Gemini key (measured Oct 16: 16 calls, median 4 s, one 39 s outlier, no fallback), 1 min on msi, 2 min on the Mac.
 
 **At the venue**
 - Ask for the rules (pre-built code) and the Discord; if a from-scratch rebuild is required, follow docs/REBUILD.md and `scripts/day.sh` with a fresh PRISM project.
