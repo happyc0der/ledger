@@ -227,9 +227,11 @@ filled slots and 1.8 verified quotes per deal against 3.0 and 2.3 for Gemini Fla
 unsupported claims dropped at 2.5× the rate (≈1 per deal vs ≈0.4), and produced **zero**
 buyer-words findings where Gemini found ten. The verifier guarantees that nothing false is
 shown; it cannot manufacture recall. So "runs on a free local model" is true for the
-pipeline and false for the result quality — which is why the benchmark table reports the
-model used, and the planted-anomaly benchmark is being re-run on the local model to put a
-recall number on the gap.
+pipeline and the number has to be stated per model. On the planted-anomaly benchmark itself,
+the same 235 deals on `gemma4:12b` (free, on a consumer GPU) score **82% semantic recall /
+91% precision / 1 of 86 clean deals flagged** against Gemini Flash-Lite's 92% / 100% / 0 —
+syntactic recall identical (99%), fabrications still 0, revenue in the top-20 73% vs 77%.
+The architecture carries most of the result; the reading model sets the ceiling.
 
 ## Week after week
 
