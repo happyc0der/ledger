@@ -221,6 +221,16 @@ fix is a setting, not a model). This is the measured case for a calibrated decis
 (Jev) or outcome-based calibration before anyone trusts the probabilities on a new company;
 the reading and verifying layers carried over, the judging layer did not.
 
+**The reading model matters, and the verifier shows exactly how.** A second batch (60 deals,
+six companies) run on a local 12B model (`gemma4:12b` on a GPU box, free) extracted 2.0
+filled slots and 1.8 verified quotes per deal against 3.0 and 2.3 for Gemini Flash-Lite, had
+unsupported claims dropped at 2.5× the rate (≈1 per deal vs ≈0.4), and produced **zero**
+buyer-words findings where Gemini found ten. The verifier guarantees that nothing false is
+shown; it cannot manufacture recall. So "runs on a free local model" is true for the
+pipeline and false for the result quality — which is why the benchmark table reports the
+model used, and the planted-anomaly benchmark is being re-run on the local model to put a
+recall number on the gap.
+
 ## Week after week
 
 Ledger is built to be run every Monday, not once:

@@ -24,6 +24,8 @@ runs these checks automatically.
 | 14 | Run on an independent dataset (150 SaaS conversations, real outcomes): `M9_missing_economic_buyer` on 118/150 deals; objection = "budget" on 142/150; Brier 0.226 vs 0.25 base rate | **data shape** (one contact per deal) and **agent** (fallback judgement doesn't transfer) | auditor rules `saturated_check` (a check firing on ≥70% of deals) and `degenerate_classifier` (one objection ≥80%); README states the negative result; Jev/outcome calibration remains the fix | auditor now reports both automatically |
 | 15 | PRISM LLM judge (Growth trial): "Probability score 0.4 has no derivation shown" | **instrumentation** — the `decide` step logged a number without its basis | decide step now records buyer signals, buyer-touch gap, base rate and the objection distribution | judge's unsupported-claims list empty on re-run (to verify) |
 
+| 16 | Multi-company SaaS batch on a local 12B model: 0 buyer-words findings (Gemini: 10 on comparable data); 2.0 slots and 1.8 verified quotes per deal vs 3.0 / 2.3; dropped claims ≈1/deal vs ≈0.4 | **model capability** — the reading layer, not the architecture; the verifier removes false claims but cannot add recall | documented in README; benchmark re-run on the local model queued to measure recall against planted labels; Jev would not change this (it judges, it doesn't read) | pending |
+
 Not fixed on purpose: the "Q4" guardrail false positive (it's PRISM's pattern, and a keyword
 guardrail crying wolf is a fair thing to show); the 19 `verbal_yes_then_lost` deals both
 agents rate ~0.93 (nothing in the record predicts them; that is what honest calibration
