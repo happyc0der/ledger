@@ -86,7 +86,9 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     For a benchmark I want "run evaluator X over these 235 trajectories" and a table.
 21. The trajectory list is newest-first with no `since`/`before` filter I could find; walking
     history means paging through everything.
-22. **Annotations written through the API can't be read back through the API.** `POST
+22. **Annotations written through the API can't be read back — through the API or the UI.** The
+    Annotation queue page shows "32 pending review", all of them the satisfaction-0 flags from
+    #16, and none of the 231 verdicts I wrote via `POST /api/annotations`. `POST
     /api/annotations` returns 201 with an id, but `GET /api/traces/{id}` shows no annotation,
     `GET /api/annotations?…&trace_id=` returns the pending *queue* (ignores the filter), and
     `status=all` lists only annotations on traces that had been flagged for review. I wrote 231
@@ -125,3 +127,11 @@ what would have helped. Trace ids refer to project `98b924d6…`.
 27. Dashboard deep links exist (`/traces/{id}`) — found by clicking; worth returning in the API
     so clients can link (see #10). Also useful: `/traces?agent=&status=flagged&range=30d` as a
     shareable URL — today the filters reset on navigation.
+28. **"Errors: 393" on the Agent Runs page counts my runs with `final_status=error`, which I
+    set deliberately when a deal has an open finding.** That's the only status besides success,
+    so a run that *found something* and a run that *crashed* look the same in the KPI tile. A
+    third status — `flagged` / `attention` — would keep "errors" meaning errors.
+29. The Evaluation tab is excellent (judge model shown — claude-haiku-4-5 — scores per
+    dimension with rule counts, 723 ms). Two asks: let me filter runs by evaluation outcome
+    (e.g. correctness < 90) and export the per-run scorecards as CSV; today the only
+    aggregate is the KPI strip.

@@ -267,7 +267,11 @@ Ledger is built to be run every Monday, not once:
 
 [docs/SYSTEM_DESIGN.md](docs/SYSTEM_DESIGN.md) — components, data model, a run step by step,
 interfaces, failure handling, observability and evaluation, written for someone who has not
-read the code. [docs/architecture.svg](docs/architecture.svg) is the one-picture version.
+read the code. [docs/architecture.svg](docs/architecture.svg) is the one-picture version. Screenshots of the UI
+and of PRISM (traces with the PII flags, agent runs with `check:*` steps, the judge's
+evaluation, the auditor's run) are in `docs/screenshots/`; a 90-second captioned backup
+video is `docs/video/ledger_demo_backup.mp4`. Feedback for the PRISM team, with evidence, is in
+[docs/PRISM_FEEDBACK.md](docs/PRISM_FEEDBACK.md).
 
 ## Status and what's still missing
 
