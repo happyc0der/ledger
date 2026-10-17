@@ -27,7 +27,9 @@ See PLAN.md for product, architecture, eval and schedule. Python 3.14 venv at `.
   `runs/`; run `scripts/run.py eval v1 v2` first so receipts and Proof have data).
 
 ## Inference
-No paid credits. `LLM_PROVIDER=ollama` (default, local `qwen3:14b`) | `gemini` (3.5-flash-lite, metered: spend logged to `.cache/usage.json`, hard stop at `GEMINI_BUDGET_USD`, default $2) | `groq` | `xai`;
+Event (Oct 17–18): `LLM_PROVIDER=nicrron` is required by the organisers — OpenAI-compatible gateway, model `NICRRON_MODEL`
+(default `anthropic/claude-sonnet-5-5`), per-model prices in `ledger/llm.py`, cap `NICRRON_BUDGET_USD` (default $200; credits expire 2026-10-18 18:00 ET).
+Otherwise `LLM_PROVIDER=ollama` (default, local `qwen3:14b`) | `gemini` (3.5-flash-lite, free-tier key; spend logged to `.cache/usage.json`, hard stop at `GEMINI_BUDGET_USD`) | `groq` | `xai`;
 keys in `.env` (never commit). `DECIDE_BACKEND=jev|llm` overrides auto-detection.
 
 ## PRISM tracing
