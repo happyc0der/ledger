@@ -22,7 +22,10 @@
    Five of six documented failures involve hallucinated deal IDs, buyer quotes, and metrics absent from source data" — top
    action: **"add guardrails to prevent deal fabrication"**. That is the v3 design, in PRISM's words.
    Root Cause: https://prism.blockconvey.com/root-cause — cluster `a986c666…` *failures in ledger-v1* (7 runs on Oct 17 incl. the clean Sonnet run, rising, cause: tool — the post-hoc `check:*:mismatch` steps) beside the
-   `ledger-v3` cluster whose last failure is Oct 16 14:45 UTC — nothing after the fix. After today's run: the `ledger-v1` cluster (unsupported answers:
+   `ledger-v3` cluster whose last failure is Oct 16 14:45 UTC — nothing after the fix; both carry a human-verified cause
+   (code / prompt) recorded via the review endpoint. Repo connected (Connectors → Code repository): PRISM localised four
+   small clusters to candidate files (`ledger/agent_v1.py`, `ledger/claims.py`, `ledger/decide.py`) and suspect commits; the
+   big trajectory-only clusters are not localised by design (feedback #42) — say so if asked. After today's run: the `ledger-v1` cluster (unsupported answers:
    fabricated quotes / amounts / day gaps caught by the post-hoc checks) and `ledger-v3` on the same deals no longer failing
    (finding 18 in FINDINGS.md explains why the v3 cluster existed before). Re-run clustering after the runs:
    `POST $PRISM_HOST/api/intelligence/clusters/analyze` (5 credits).

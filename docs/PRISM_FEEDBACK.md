@@ -213,3 +213,11 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     singleton clusters (candidate prompt files + a suspect commit), so the connection works
     for the engine; it is the API surface that disagrees. Either let the project key read the
     repo record, or say in the error that this endpoint needs a user session.
+42. **Localisation skips trajectory-only clusters.** With the repo connected, Root Cause
+    localised four singleton clusters to candidate prompt files (`ledger/agent_v1.py`,
+    `ledger/claims.py`, `ledger/decide.py`, even `DEMO.md`) and a suspect commit — useful — but
+    the clusters that matter (470 ledger-v3 runs, 7 ledger-v1 runs) stay `not_attempted`
+    because their members are trajectories, not traces ("no replayable trace ids; capped at
+    tentative"). Trajectory steps carry `tool_name` and `input_summary`; a step's tool name is
+    a better localisation key than a code search for "prompt". Also: the RCA summary card says
+    "Refresh the summary once ANTHROPIC_API_KEY is configured" to a hosted-product user.
