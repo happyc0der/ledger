@@ -81,3 +81,15 @@ def test_department_is_not_an_economic_buyer(one_deal):
                  contacts=[{"opportunity_id": "D1", "name": "Tom Whitfield", "title": "CIO", "role": "economic_buyer"}])
     lg = {"economic_buyer": "finance", "quotes": {"economic_buyer": "finance is fine with two POs"}, "grades": {}}
     assert "M2_contact_contradiction" not in types(compare(co, "D1", lg, as_of=AS_OF))
+
+
+def test_paused_claim_needs_pause_language(one_deal):
+    from conftest import make_company
+    from ledger.consistency import compare
+    acts = [("A1", "D1", "2026-10-10", "email", "Priya Okafor", "We won't move forward unless it's on this year's roadmap."),
+            ("A2", "D1", "2026-10-11", "email", "Priya Okafor", "Everything is on hold until the reorg settles.")]
+    co = make_company([one_deal], acts, contacts=[("D1", "Priya Okafor", "CFO", "economic_buyer")])
+    conditional = {"commitment": "paused", "quotes": {"commitment": "We won't move forward unless it's on this year's roadmap."}, "grades": {}, "dropped": []}
+    paused = {"commitment": "paused", "quotes": {"commitment": "Everything is on hold until the reorg settles."}, "grades": {}, "dropped": []}
+    assert not [i for i in compare(co, "D1", conditional) if i.type == "M4_timeline_contradiction"]
+    assert [i for i in compare(co, "D1", paused) if i.type == "M4_timeline_contradiction"]

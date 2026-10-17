@@ -30,6 +30,19 @@ def _q(ledger: dict, slot: str) -> str:
     return ledger.get("quotes", {}).get(slot, "")
 
 
+_PAUSE_WORDS = ("pause", "paused", "pausing", "hold", "holding", "suspend", "freez", "frozen", "stop", "wait",
+                "until", "not now", "later", "defer", "postpone", "revisit", "push", "shelv", "park", "halt", "moratorium")
+
+
+def _paused(ledger: dict) -> bool:
+    """A `paused` commitment counts only if its own quote reads like a pause. A conditional objection
+    ("unless it's on this year's roadmap") is a condition, not a pause — one model's label must not become a finding."""
+    if ledger.get("commitment") != "paused":
+        return False
+    q = _q(ledger, "commitment").lower()
+    return (not q) or any(w in q for w in _PAUSE_WORDS)
+
+
 def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT) -> list[Issue]:
     d = co.deal(oid)
     out: list[Issue] = []
@@ -85,7 +98,7 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
     if close_future and d.expected_close < as_of + timedelta(days=SETTINGS.frozen_window_days):
         if ledger.get("budget_status") == "frozen":
             add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer said budget is frozen", "budget_status")
-        elif ledger.get("commitment") == "paused":
+        elif _paused(ledger):
             add("M4_timeline_contradiction", f"expected_close {d.expected_close.date()} but the buyer paused with no date", "commitment")
     # M5 scope / M10 arithmetic
     units, total = ledger.get("units_discussed"), ledger.get("total_stated_usd")
@@ -104,10 +117,11 @@ def compare(co: Company, oid: str, ledger: dict, as_of: pd.Timestamp = SNAPSHOT)
     elif units and units > 1 and abs(deal_amount(co.products, d) - units * lp) > 1:
         add("M5_scope_vs_amount", f"buyer scope {units} units (${units * lp:,.0f}); CRM amount ${deal_amount(co.products, d):,.0f}", "units_discussed")
     # M8 happy ears
+    stalled = ledger.get("commitment") == "declined" or _paused(ledger)
     if ledger.get("rep_sentiment_after_last_buyer_message") == "positive" and (
-            ledger.get("commitment") in ("declined", "paused") or ledger.get("budget_status") == "frozen"
+            stalled or ledger.get("budget_status") == "frozen"
             or ledger.get("competitor_status") in ("leaning_competitor", "chose_competitor")):
-        add("M8_happy_ears", "rep stayed positive after the buyer paused, declined or leaned away", "commitment" if ledger.get("commitment") in ("declined", "paused") else ("budget_status" if ledger.get("budget_status") == "frozen" else "competitor_status"))
+        add("M8_happy_ears", "rep stayed positive after the buyer paused, declined or leaned away", "commitment" if stalled else ("budget_status" if ledger.get("budget_status") == "frozen" else "competitor_status"))
     # M9 missing economic buyer
     if late and not len(crm_econ) and "M9_missing_economic_buyer" not in SETTINGS.disabled_checks:
         out.append(Issue(oid, "M9_missing_economic_buyer", "late stage, no economic buyer in CRM" + (f"; buyer names {named}" if named else ""),
@@ -131,7 +145,7 @@ def checks_for(co: Company, oid: str, ledger: dict, issues: list[Issue], as_of: 
         "M1_stage_vs_buyer": ("skipped", f"stage {d.stage} is early") if not late else (("pass", "buyer said nothing that contradicts the stage") if not any(has(k) for k in ("budget_status", "commitment", "competitor_status")) else ("pass", "buyer signals consistent with the stage")),
         "M2_contact_contradiction": ("pass", "no evidence the contact left or lacks authority; economic buyer matches or isn't named"),
         "M3_expired_promise": ("skipped", "buyer made no promise") if not has("last_buyer_promise") else ("pass", f"promise is {(as_of - pd.Timestamp(lg['last_buyer_promise_date'])).days if lg.get('last_buyer_promise_date') else '?'}d old, limit {SETTINGS.promise_days}"),
-        "M4_timeline_contradiction": ("skipped", "buyer gave no decision date or freeze") if not (has("decision_date") or lg.get("budget_status") == "frozen" or lg.get("commitment") == "paused") else ("pass", "close date is consistent with the buyer's timeline"),
+        "M4_timeline_contradiction": ("skipped", "buyer gave no decision date or freeze") if not (has("decision_date") or lg.get("budget_status") == "frozen" or lg.get("commitment") == "paused") else (("pass", "the 'paused' claim's quote reads as a condition, not a pause") if lg.get("commitment") == "paused" and not _paused(lg) and not has("decision_date") and lg.get("budget_status") != "frozen" else ("pass", "close date is consistent with the buyer's timeline")),
         "M5_scope_vs_amount": ("skipped", "no unit price known") if lp is None else (("skipped", "buyer didn't discuss units") if not has("units_discussed") else ("pass", "amount matches the scope discussed")),
         "M6_zombie": ("skipped", "no competitor mentioned") if not has("competitor_status") else ("pass", "buyer has not chosen a competitor"),
         "M7_cross_deal_contact": ("pass", "no sibling deal reports this contact gone"),
