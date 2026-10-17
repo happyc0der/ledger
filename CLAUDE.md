@@ -39,6 +39,9 @@ Every model call and every agent run must be traced to PRISM. Wire new code thro
   `version`, `session_id` (one per version+rep, e.g. `v2-Darcel_Schlecht`) and metadata;
 - each agent run submits `tracing.trajectory(...)` with ordered `tracing.step(...)`
   entries; verifier verdicts are steps named `check:<what>:<match|mismatch|dropped>`;
+  a step's `status` is whether that step ran (a verifier that drops a claim is `success`), and
+  `final_status` is whether the run's final answer stands (`error` = unverified claims, as in v1,
+  or an exception). Never use `error` to mean "this deal has findings" — PRISM clusters it as a failure;
 - agent identity is `agent_id="ledger"`, `agent_name="ledger-<version>"`.
 Set `PRISM_DISABLED=1` while iterating (free tier: 100 analyses/day, 100 credits).
 Verify with `.venv/bin/python scripts/prism_smoke.py` then

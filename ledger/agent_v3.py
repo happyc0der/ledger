@@ -47,7 +47,7 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
             steps.append(tracing.step("claim_ledger", json.dumps({k: v for k, v in ledger.items() if k not in ("quotes", "dropped") and v}), tool="llm:extract"))
         ledgers[oid] = ledger
         for slot in ledger["dropped"]:
-            steps.append(tracing.step("check:claim:dropped", f"{slot}: no verbatim buyer quote", tool="verifier:claims", status="error"))
+            steps.append(tracing.step("check:claim:dropped", f"dropped {slot}: no verbatim buyer quote", tool="verifier:claims"))
         issues = compare(co, oid, ledger)
         checks = rule_checks(co, oid, rules_by.get(oid, [])) + semantic_checks(co, oid, ledger, issues)
         for c in checks:
@@ -76,8 +76,9 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                    pipeline_total_usd=total, batch=0)
         steps.append(tracing.step("final_answer", json.dumps({"issues": [i["type"] for i in row["issues"]], "p": row["win_probability"]})))
         row.pop("_redactor", None)
-        row["prism_trajectory_id"] = tracing.trajectory(version="v3", session_id=session, steps=steps, model="v3",
-                                                        final_status="error" if any(i.type.startswith("M") for i in issues) else "success")
+        # final_status describes the run, not the deal: a scored deal with open findings is a successful run
+        # (the findings are in the final_answer). PRISM's Task Completion rule had clustered 470 of these as failures.
+        row["prism_trajectory_id"] = tracing.trajectory(version="v3", session_id=session, steps=steps, model="v3", final_status="success")
         row["prism_trace_ids"] = tracing.drain_trace_ids()
         rows.append(row)
     # cross-deal checks need the whole rep's (ideally the whole team's) ledgers — done again team-wide in run.py

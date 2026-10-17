@@ -9,9 +9,12 @@ from __future__ import annotations
 
 import json
 
+import re
+
 from . import llm, tracing
 from .config import ACTIONS, OBJECTIONS, SNAPSHOT
 from .data import Company
+from .tools import days_since_buyer_touch, deal_amount
 
 BATCH = 30
 
@@ -94,6 +97,46 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
         for row in parsed.get("deals", []):
             row.update(version="v1", rep=rep, pipeline_total_usd=total, batch=i // BATCH)
             results.append(row)
+    # Observability only: the same CRM-only checks Ledger applies to itself, run over v1's answer after
+    # the fact. v1's output is not changed; PRISM just gets to see which of its claims the record supports.
+    checks = verify_rows(co, results)
+    steps += checks
     tracing.trajectory(version="v1", session_id=session, steps=steps + [
-        tracing.step("final_answer", json.dumps(results)[:2000])], model="v1")
+        tracing.step("final_answer", json.dumps(results)[:2000])], model="v1",
+        final_status="error" if any(c["status"] == "error" for c in checks) else "success")
     return results
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9 ]", "", str(s).lower().replace("\u2019", "'")).strip()
+
+
+def verify_rows(co: Company, rows: list[dict]) -> list[dict]:
+    """check:* steps for a naive answer: amount vs catalogue/CRM, day gap vs buyer-authored activity,
+    buyer quote present verbatim in the record. A failed check is an `error` step; nothing is corrected."""
+    out, n_fail = [], 0
+    for r in rows:
+        oid = str(r.get("opportunity_id", ""))
+        if oid not in set(co.deals.opportunity_id):
+            out.append(tracing.step("check:deal:unknown", f"{oid}: not in the CRM", tool="verifier:crm", status="error")); n_fail += 1
+            continue
+        d = co.deal(oid); acts = co.activities_for(oid)
+        true_amt = deal_amount(co.products, d)
+        try:
+            amt_ok = abs(float(r.get("amount_usd")) - true_amt) < 1
+        except (TypeError, ValueError):
+            amt_ok = False
+        if not amt_ok:
+            out.append(tracing.step("check:amount:mismatch", f"{oid}: stated ${r.get('amount_usd')} vs ${true_amt:,.0f} in catalogue/CRM", tool="verifier:amount", status="error")); n_fail += 1
+        true_gap = days_since_buyer_touch(acts, d.sales_agent)
+        try:
+            gap_ok = true_gap is None or int(r.get("days_since_last_buyer_touch")) == true_gap
+        except (TypeError, ValueError):
+            gap_ok = False
+        if not gap_ok:
+            out.append(tracing.step("check:gap:mismatch", f"{oid}: stated {r.get('days_since_last_buyer_touch')}d vs {true_gap}d since a buyer-authored activity", tool="verifier:gap", status="error")); n_fail += 1
+        q = _norm(r.get("buyer_quote", "") or "")
+        if q and q not in " ".join(_norm(a) for a in acts.text):
+            out.append(tracing.step("check:quote:mismatch", f"{oid}: quote not in the record: \u201c{str(r.get('buyer_quote'))[:120]}\u201d", tool="verifier:quote", status="error")); n_fail += 1
+    out.append(tracing.step("check:summary", f"{len(rows)} deals · {n_fail} claims not supported by the record", tool="checks"))
+    return out
