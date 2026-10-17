@@ -157,8 +157,11 @@ the receipts — every Monday, and before the CFO signs."
 - **Real CRMs?** HubSpot and Salesforce exports. Who said what comes from email direction and
   addresses. Ingest refuses an export where nothing is attributable to a buyer. Thresholds
   are learned from the company's closed deals.
-- **Cost?** About $6 for 235 deals on Claude Sonnet through Nicrron; cents a week after that
-  because unchanged records reuse their ledger. Free on a local model.
+- **Cost?** About $6 and 18 minutes for 235 deals on Claude Sonnet through Nicrron; cents a week
+  after that because unchanged records reuse their ledger. Free on a laptop: the same 235 deals on
+  a 12B open model on an RTX 3080 Ti took 45 minutes, found 80% of the planted problems with zero
+  false alarms and zero invented numbers, and captured 82% of the top-20 revenue. Nothing in the
+  verification layer depends on a paid model.
 - **So PRISM found bugs in your agent?** In how it reported itself, yes: 470 runs clustered as
   failures because of our status semantics; two trajectory rules our auditor caught the same
   way. The findings it showed the manager were already verified. The real output bug today —
@@ -179,5 +182,6 @@ the receipts — every Monday, and before the CFO signs."
 | revenue in the top 20 | 64% | 71% |
 | objection heard correctly | 68% | 95% |
 | September, cheaper model: found / false alarms / invented | 32% / 17% / 97 | 92% / 0 / 0 |
+| free 12B model on a laptop GPU: found / false alarms / invented / time | | 80% / 0 / 0 / 45 min |
 | PRISM rules passing on Ledger runs | | 17 of 17 |
 | findings fixed and re-proved today | | 26 in FINDINGS.md |
