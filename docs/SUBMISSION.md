@@ -20,7 +20,7 @@ rules: 0% of semantic problems. The same model asked to "find the issues": 72% r
 86 clean deals falsely flagged, 6 fabricated numbers. Ledger: 94% recall, 99% precision,
 **0 of 86** clean deals flagged, **0** fabrications; revenue in the top-20 64% → 71%;
 objection accuracy 68% → 95%. September run on Gemini Flash-Lite: naive 32% / 17% false
-alarms / 97 fabrications → Ledger 92% / 100% / 0, top-20 60% → 77%. On a free 12B model on a laptop GPU (Oct 17, 45 min, $0): 80% / 95% / 0 of 86, top-20 82%. On 150 independent SaaS conversations with real outcomes: verification
+alarms / 97 fabrications → Ledger 92% / 100% / 0, top-20 60% → 77%. On a free 12B model on a laptop GPU (Oct 17, 45 min, $0): 80% / 95% / 0 of 86, top-20 82%; on a MacBook's 14B model (83 min): 37% / 94% / 0 of 86 — the floor holds, the recall does not. On 150 independent SaaS conversations with real outcomes: verification
 transfers (0 fabrications, 85% of closable revenue), the fallback judgement does not — the
 auditor caught it.
 

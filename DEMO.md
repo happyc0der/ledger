@@ -160,8 +160,9 @@ the receipts — every Monday, and before the CFO signs."
 - **Cost?** About $6 and 18 minutes for 235 deals on Claude Sonnet through Nicrron; cents a week
   after that because unchanged records reuse their ledger. Free on a laptop: the same 235 deals on
   a 12B open model on an RTX 3080 Ti took 45 minutes, found 80% of the planted problems with zero
-  false alarms and zero invented numbers, and captured 82% of the top-20 revenue. Nothing in the
-  verification layer depends on a paid model.
+  false alarms and zero invented numbers, and captured 82% of the top-20 revenue. On a MacBook
+  with a 14B model, 83 minutes, only 37% found — but still zero false alarms and zero invented
+  numbers. The floor does not depend on the model; the recall does.
 - **So PRISM found bugs in your agent?** In how it reported itself, yes: 470 runs clustered as
   failures because of our status semantics; two trajectory rules our auditor caught the same
   way. The findings it showed the manager were already verified. The real output bug today —
@@ -183,5 +184,6 @@ the receipts — every Monday, and before the CFO signs."
 | objection heard correctly | 68% | 95% |
 | September, cheaper model: found / false alarms / invented | 32% / 17% / 97 | 92% / 0 / 0 |
 | free 12B model on a laptop GPU: found / false alarms / invented / time | | 80% / 0 / 0 / 45 min |
+| 14B model on a MacBook: found / false alarms / invented / time | | 37% / 0 / 0 / 83 min |
 | PRISM rules passing on Ledger runs | | 17 of 17 |
 | findings fixed and re-proved today | | 26 in FINDINGS.md |
