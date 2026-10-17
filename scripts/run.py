@@ -157,6 +157,18 @@ def main():
     reps = a.reps.split(",") if a.reps else co.reps()
     RUNS_DIR.mkdir(parents=True, exist_ok=True)
     out = RUNS_DIR / f"{a.version}.jsonl"
+    lock = RUNS_DIR / f"{a.version}.lock"  # two processes writing one run file interleave rows (finding 22)
+    if lock.exists():
+        pid = lock.read_text().strip()
+        try:
+            os.kill(int(pid), 0); alive = True
+        except (ValueError, ProcessLookupError, PermissionError):
+            alive = False
+        if alive:
+            sys.exit(f"{out} is being written by pid {pid}; stop it or remove {lock}")
+    lock.write_text(str(os.getpid()))
+    import atexit
+    atexit.register(lambda: lock.unlink(missing_ok=True))
     out.write_text("")
     n = 0
 

@@ -144,18 +144,43 @@ def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str
                                      "json_schema": {"name": "out", "schema": schema, "strict": True}}
         messages = [{"role": "system", "content": "Respond with JSON matching this schema exactly:\n"
                      + json.dumps(schema)}] + messages
+    # Gateways cut a non-streamed request at ~30 s ("upstream timeout", 502); a long answer must stream.
+    stream = os.getenv("LLM_STREAM", "1" if p.name == "nicrron" else "0") == "1"
     try:
-        r = client.chat.completions.create(model=p.model, messages=messages, temperature=0, **kwargs)
+        r = _complete(client, p, messages, kwargs, stream)
     except Exception as e:  # provider rejects json_schema → plain JSON mode
         if not schema or "json_schema" not in str(e) and "response_format" not in str(e):
             raise
         kwargs["response_format"] = {"type": "json_object"}
-        r = client.chat.completions.create(model=p.model, messages=messages, temperature=0, **kwargs)
-    u = r.usage
-    tin, tout = getattr(u, "prompt_tokens", 0) or 0, getattr(u, "completion_tokens", 0) or 0
+        r = _complete(client, p, messages, kwargs, stream)
+    text, tin, tout = r
     _spend(p, tin, tout)
-    msg = r.choices[0].message if r.choices else None
-    return (getattr(msg, "content", None) or ""), tin, tout  # empty/blocked reply → ""
+    return text, tin, tout  # empty/blocked reply → ""
+
+
+def _complete(client, p: Provider, messages: list[dict], kwargs: dict, stream: bool) -> tuple[str, int, int]:
+    if not stream:
+        r = client.chat.completions.create(model=p.model, messages=messages, temperature=0, **kwargs)
+        u = r.usage
+        tin, tout = getattr(u, "prompt_tokens", 0) or 0, getattr(u, "completion_tokens", 0) or 0
+        msg = r.choices[0].message if r.choices else None
+        return (getattr(msg, "content", None) or ""), tin, tout
+    parts, tin, tout = [], 0, 0
+    with client.chat.completions.create(model=p.model, messages=messages, temperature=0, stream=True,
+                                        stream_options={"include_usage": True}, **kwargs) as s:
+        for chunk in s:
+            if getattr(chunk, "usage", None):
+                tin = getattr(chunk.usage, "prompt_tokens", 0) or tin
+                tout = getattr(chunk.usage, "completion_tokens", 0) or tout
+            for c in chunk.choices or []:
+                d = getattr(c.delta, "content", None)
+                if d:
+                    parts.append(d)
+    text = "".join(parts)
+    if not tout:  # gateway sent no usage frame: estimate so the spend meter never under-counts to zero
+        tin = tin or sum(len(m.get("content", "")) for m in messages) // 4
+        tout = len(text) // 4
+    return text, tin, tout
 
 
 LAST_USED = threading.local()  # .value = "provider/model" that produced the last answer in this thread
