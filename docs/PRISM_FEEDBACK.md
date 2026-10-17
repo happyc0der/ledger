@@ -205,3 +205,11 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     not in any cluster after a run started at 14:25; the run reported "no new failures" for
     them. Either the window excludes the newest runs or assignment is asynchronous; a
     `pending_assignment` count on the run summary would tell.
+41. **The API key cannot see the repo the dashboard connected.** After installing the GitHub
+    App and selecting `happyc0der/ledger` (Connectors → Code repository shows *Connected · base:
+    master · auth: GitHub App · LLM consent recorded*), `POST /api/intelligence/clusters/reverify-main`
+    with the project API key still answers "No connected GitHub repo with credentials for this
+    project", and `GET /api/repos` wants a user bearer token. Localisation did run on four
+    singleton clusters (candidate prompt files + a suspect commit), so the connection works
+    for the engine; it is the API surface that disagrees. Either let the project key read the
+    repo record, or say in the error that this endpoint needs a user session.
