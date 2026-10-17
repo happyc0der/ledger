@@ -16,7 +16,12 @@
    09:29 ET**: *model call stalled* — latency 25,942 ms vs 20,000 on a naive-agent batch call (trace `5c55f46f…`), and
    *trace failures per hour* 6/5 at 09:29:40 (the empty replies of finding 20). Both sit under "Requires attention"
    on the Alerts page; screenshot docs/screenshots/prism_15_alert_fired.jpg.
-3. Root Cause: https://prism.blockconvey.com/root-cause — after today's run: the `ledger-v1` cluster (unsupported answers:
+3. Root Cause / Agent Intelligence. After per-trace analysis of the 52 naive-agent traces (52 credits), PRISM's own
+   narrative (docs/prism_intelligence_narrative.json, generated Oct 17 13:40 UTC) reads: **"Agent fabricates deal data on
+   pipeline reviews, undermining sales forecasting reliability"** — "the agent resolves only 1 of 15 such requests fully.
+   Five of six documented failures involve hallucinated deal IDs, buyer quotes, and metrics absent from source data" — top
+   action: **"add guardrails to prevent deal fabrication"**. That is the v3 design, in PRISM's words.
+   Root Cause: https://prism.blockconvey.com/root-cause — after today's run: the `ledger-v1` cluster (unsupported answers:
    fabricated quotes / amounts / day gaps caught by the post-hoc checks) and `ledger-v3` on the same deals no longer failing
    (finding 18 in FINDINGS.md explains why the v3 cluster existed before). Re-run clustering after the runs:
    `POST $PRISM_HOST/api/intelligence/clusters/analyze` (5 credits).
