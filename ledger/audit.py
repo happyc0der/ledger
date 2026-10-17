@@ -340,10 +340,10 @@ def report(findings: list[Finding], label: str = "audit") -> str:
     steps = [tracing.step("plan", "checks: " + ", ".join(by_check))]
     for check, fs in by_check.items():
         steps.append(tracing.step(f"check:{check}", "\n".join(f"[{f.severity}/{f.source}] {f.title}" for f in fs), tool=f"audit:{check}",
-                                  input_summary=f"{len(fs)} findings", status="error" if any(f.severity == "high" for f in fs) else "success"))
+                                  input_summary=f"{len(fs)} findings"))  # a check that found something ran fine; severity is in the output
         if any(f.severity == "high" for f in fs):
             steps.append(tracing.step("recovery", "; ".join(f.fix for f in fs if f.severity == "high")[:1500]))
     steps.append(tracing.step("final_answer", f"{len(findings)} findings, {n.get('high', 0)} high → reports/{label}.md"))
     tracing.trajectory(version="audit", session_id=f"audit-{datetime.now():%Y%m%d-%H%M}", steps=steps, model="deterministic",
-                       final_status="error" if n.get("high") else "success")
+                       final_status="success")  # the audit completed; its findings travel in final_answer (same rule as finding 18)
     return "\n".join(md)

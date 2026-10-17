@@ -38,6 +38,7 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
     catalogue = "\n".join(f"- {r.product}: ${r.sales_price:,.0f}" for r in co.products.itertuples())
     contacts = co.contacts[co.contacts.opportunity_id.isin(deals.opportunity_id)]
     found: dict[str, list] = {oid: [] for oid in deals.opportunity_id}
+    steps = []
     for i in range(0, len(deals), BATCH):
         batch = deals.iloc[i:i + BATCH]
         cts = "\n".join(f"- {c.opportunity_id}: {c.name} ({c.title}, {c.role})" for c in contacts[contacts.opportunity_id.isin(batch.opportunity_id)].itertuples())
@@ -46,13 +47,15 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                   "For each issue give the opportunity_id, the type, a one-line detail and a verbatim evidence sentence from the record "
                   "(or the field values). Be thorough but do not invent issues.")
         user = f"Rep: {rep}\n\nContacts in CRM:\n{cts}\n\n{_render_deals(co, batch)}"
-        _, parsed = llm.chat([{"role": "system", "content": system}, {"role": "user", "content": user}], schema=SCHEMA,
-                             version="naive", session_id=session, metadata={"rep": rep, "batch": i // BATCH, "role": "naive-issues"})
+        text, parsed = llm.chat([{"role": "system", "content": system}, {"role": "user", "content": user}], schema=SCHEMA,
+                                version="naive", session_id=session, metadata={"rep": rep, "batch": i // BATCH, "role": "naive-issues"})
+        steps.append(tracing.step(f"list issues batch {i // BATCH}", text[:2000], tool=f"llm:batch{i // BATCH}",
+                                  input_summary=f"{len(batch)} deals in one context, 18 issue types"))
         for it in (parsed or {}).get("issues", []):
             if it.get("opportunity_id") in found and it.get("type") in TYPES:
                 found[it["opportunity_id"]].append({**it, "action": "", "severity": "medium", "source": "naive"})
     rows = [dict(opportunity_id=oid, issues=iss, version="naive", rep=rep, win_probability=0.5, amount_usd=0, rank=0,
                  days_since_last_buyer_touch=0, objection="none", buyer_quote="", next_action="", rationale="", pipeline_total_usd=0, batch=0)
             for oid, iss in found.items()]
-    tracing.trajectory(version="naive", session_id=session, steps=[tracing.step("final_answer", f"{sum(len(v) for v in found.values())} issues")], model="naive")
+    tracing.trajectory(version="naive", session_id=session, steps=steps + [tracing.step("final_answer", f"{sum(len(v) for v in found.values())} issues")], model="naive")
     return rows
