@@ -99,7 +99,9 @@ HTTP (`ledger/app.py`): `GET /api/meta`, `/api/deals?version=&show_muted=`, `/ap
 `/api/compare`, `/api/precision`; `POST /api/issue/{key}/state`, `/api/proposal/{id}`, `/api/review`.
 
 Environment: `LEDGER_DATA` (dataset dir), `LEDGER_AS_OF` (review date), `LLM_PROVIDER`
-(ollama | gemini | groq | xai), `DECIDE_BACKEND` (jev | llm), `PRISM_*`, `*_BUDGET_USD`.
+(nicrron | ollama | gemini | groq | xai; `NICRRON_MODEL` picks the routed model), `DECIDE_BACKEND`
+(jev | llm), `PRISM_*`, `PRISM_SESSION_TAG` (keeps one day's sessions apart), `*_BUDGET_USD`,
+`LLM_MAX_TOKENS`, `LLM_TIMEOUT`, `LLM_STREAM`, `<PROVIDER>_RPM`.
 
 ## 6. Failure handling and limits
 
@@ -110,20 +112,29 @@ Environment: `LEDGER_DATA` (dataset dir), `LEDGER_AS_OF` (review date), `LLM_PRO
   `check:quote:dropped`. The naive baseline exists precisely to show what happens without this.
 - **Nothing attributable to a buyer**: ingest stops with an explanation rather than running
   and finding nothing.
-- **Spend**: every metered call is logged; a provider stops at its budget.
+- **Spend and gateways**: every metered call is logged; a provider stops at its budget; a
+  client-side limiter stays under a gateway's requests-per-minute cap; long answers stream so a
+  30 s upstream timeout cannot cut them; an empty reply is never cached; a fallback answer is
+  cached under the fallback's key and a fallback decision is never cached.
 - **Concurrency**: the spend ledger uses a lock and atomic replace; per-deal work is
   independent, so the live path runs reps in a thread pool.
 - **Known limits**: one product per deal; English; records over ~24k characters are not yet
   chunked; the fallback decision model is calibrated only once a company has outcome history;
-  Jev not yet integrated (waitlist).
+  the commit rule excludes every open finding although only some finding types predict loss
+  (FINDINGS.md #27); Jev not yet integrated (waitlist).
 
 ## 7. Observability
 
 Every model call is a PRISM trace (agent `ledger-<version>`, one session per rep, metadata
-`deal_id`, `role`). Every deal is a trajectory: `crm_query → rules → claim_ledger[:cached] →
-check:<type>:fail… → check:summary → decide → check:quote:* → final_answer`, `final_status =
-error` when a semantic issue is open. The auditor runs after every agent run, is itself a
-trajectory (`ledger-audit`), and writes FINDINGS.md rows when something is fixed.
+`deal_id`, `role`, `provider`). Every deal is a trajectory: `plan → crm_query → rules →
+claim_ledger[:cached] → verification → check:claim:dropped… → check:<type>:fail… → assessment →
+check:summary → decide → check:quote:* → final_answer`. Three rules learned on event day
+(FINDINGS.md #18, #19, #24): a step's `status` says whether the step ran, `final_status` says
+whether the run's final answer stands (`error` only for an unverified answer, as the naive agent
+produces, or an exception), every check carries its own tool name, and reasoning steps state the
+plan and the assessment. On those terms Ledger's runs pass PRISM's 17 trajectory rules and the
+naive agent's runs fail them for the right reasons. The auditor runs after every agent run, is
+itself a trajectory (`ledger-audit`), and writes FINDINGS.md rows when something is fixed.
 
 ## 8. Evaluation
 

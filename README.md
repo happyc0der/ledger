@@ -18,6 +18,29 @@ a naive first version, a CRM-rules baseline and the verified version, and all we
 against what actually happened to those deals — because a forecast number is only worth
 what its receipts are worth.
 
+## Start here
+
+- **What it is:** a CRM export in, a forecast with receipts out — per deal a win probability, the
+  buyer's objection and next action, and every contradiction between the record and the CRM with
+  the buyer's verbatim sentence; per team commit / best case with every excluded dollar explained;
+  draft CRM corrections a human approves; Monday digests. [How it works](docs/SYSTEM_DESIGN.md).
+- **Event-day result (Oct 17, 235 real deals, every model call through Nicrron / Claude Sonnet 5.5):**
+  the same model asked to "find the issues" finds 72% of the planted problems, falsely flags 10 of
+  86 clean deals and invents 6 numbers; Ledger finds 94%, flags 0, invents 0. Details and the
+  three-model comparison are in [Results](#results--same-235-deals-same-snapshot-scored-against-real-outcomes).
+- **The three PRISM proofs (Money Operations):** [Sessions → Steps](docs/screenshots/prism_14_session_steps.jpg)
+  (a 12-step run per deal) · [an alert firing on a real run](docs/screenshots/prism_15_alert_fired.jpg)
+  (model call stalled > 20 s) · [Root Cause](docs/screenshots/prism_17_root_cause.jpg) and
+  [PRISM's own narrative](docs/screenshots/prism_16_agent_intelligence.jpg) on the naive agent:
+  *"Agent fabricates deal data on pipeline reviews … add guardrails to prevent deal fabrication."*
+- **The loop, logged:** 27 failures found through PRISM, the auditor or scoring, each with evidence,
+  attribution, fix and re-proof — [FINDINGS.md](FINDINGS.md). 42 items of product feedback for the
+  PRISM team — [docs/PRISM_FEEDBACK.md](docs/PRISM_FEEDBACK.md). Gateway lessons — [docs/NICRRON_NOTES.md](docs/NICRRON_NOTES.md).
+- **Run it:** [Run it](#run-it) below; demo script [DEMO.md](DEMO.md); submission text
+  [docs/SUBMISSION.md](docs/SUBMISSION.md); backup video `docs/video/ledger_demo_backup.mp4`.
+- **What is real:** deals, values, dates and outcomes are public CRM data; the notes are synthetic
+  and the anomalies planted, disclosed in [What is real and what is not](#what-is-real-and-what-is-not).
+
 ## Screenshots
 
 | | |
@@ -358,9 +381,15 @@ has the Jev backend and switches automatically):
    235-deal run, ~$6/year for a 2,000-deal company run weekly. Details and steps: PLAN.md,
    "Jev 1.13 plan".
 
-**Also open:** a run on a real customer export (the only test that matters), the PRISM alert
-on guardrail flags (dashboard), chunking for very long records, and `scripts/day.sh`
-rehearsal for a from-scratch build day.
+**Done on event day:** every model call through Nicrron with a client-side rate limiter and
+streaming; three PRISM alert rules scoped to the agent (stalled call, guardrail block, empty
+reply), one fired on a real run; Root Cause clusters with human-verified causes; the naive
+agent's fabrications visible in PRISM as failed check steps; the commit rule measured against
+outcomes (#27).
+
+**Also open:** a run on a real customer export (the only test that matters), learning the commit
+exclusion set from a company's closed deals (#27), chunking for very long records, and the
+forecast's judgement layer (Jev, above).
 
 ## Bring your own pipeline
 
@@ -390,17 +419,25 @@ For a first look: `scripts/live.py --preset hubspot --deals data/templates/hubsp
 ## Layout
 
 ```
-data/company/        the demo company (ground_truth.csv is hidden from agents)
-ledger/agent_v1.py   naive agent, kept for the comparison
-ledger/agent_v2.py   one deal per context, code facts, typed decisions, verified quotes
-ledger/agent_v3.py   Ledger: rules + claim ledger + consistency + judgement
-ledger/rules.py      the CRM-rules baseline (fields only)
-ledger/claims.py     claim ledger extraction + verifier
-ledger/consistency.py ledger-vs-CRM comparison, cross-deal checks
-ledger/score_issues.py per-type precision/recall vs planted anomalies
-ledger/decide.py     Jev / fallback decision layer, one interface
-ledger/evaluate.py   metrics, per-deal verdicts (the definition of "fabrication")
-ledger/tracing.py    PRISM traces and trajectories
-ledger/app.py        FastAPI + one-page UI
-scripts/             build_company, paraphrase, run, prism_smoke
+data/company/            the demo company (ground_truth.csv is hidden from agents); company_nicrron/, company_opus/,
+                         company_mac/, company_msi/ are copies for the per-model runs (ignored); live/ the HubSpot template run
+data/templates/          the 8-deal HubSpot-shaped CSVs a judge can edit
+ledger/ingest.py         HubSpot / Salesforce presets → canonical CSVs, learned thresholds, attribution report
+ledger/attribution.py    who said what: direction → from-domain → auto-reply → author → unknown (never buyer by default)
+ledger/rules.py          the CRM-rules baseline (fields only, S1–S8)
+ledger/claims.py         claim ledger extraction + verifier (verbatim quotes, evidence grades, PII tokens)
+ledger/consistency.py    ledger-vs-CRM comparison (M1–M10), cross-deal, checks with reasons
+ledger/decide.py         judgement: Jev when a key exists, else structured output; cache keyed by model
+ledger/calibrate.py      isotonic self-calibration from outcomes
+ledger/agent_v3.py       Ledger: rules → ledger → verify → compare → judge → PRISM run with check:* steps
+ledger/agent_v1.py       naive agent (one context, no tools) with post-hoc CRM checks recorded for PRISM
+ledger/agent_naive_issues.py  the "list the issues" agent for the planted-anomaly table
+ledger/store.py history.py proposals.py forecast.py digest.py   runs, diffs, lifecycle, draft corrections, roll-up, digests
+ledger/audit.py          the auditor: PRISM flags/rules + outputs + data → attributed findings
+ledger/llm.py tracing.py providers (ollama | nicrron | gemini | groq | xai), cache, spend guard, rate limiter; PRISM traces/runs
+ledger/evaluate.py score_issues.py   outcomes metrics (the definition of "fabrication"); per-type precision/recall
+ledger/app.py static/    FastAPI + one-page UI
+scripts/run.py           v1|v3|naive|eval|issues|audit|digest|export-approved|prism-publish ; live.py ; ingest.py ; demo_up.sh ; make_video.py
+docs/                    SYSTEM_DESIGN, SUBMISSION, DEMO (root), DAY_OF, NICRRON_NOTES, PRISM_FEEDBACK, spec/, screenshots/, video/
+tests/                   45 tests, no model calls
 ```
