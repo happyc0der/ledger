@@ -26,6 +26,12 @@ def client() -> PRISMtrace | None:
 LAST_TRACE_IDS: list[str] = []  # trace ids minted since the caller last drained them (per deal)
 
 
+def _session(session_id: str) -> str:
+    """PRISM groups traces by session id; a tag keeps one day's runs (e.g. a new provider) apart from older ones."""
+    tag = os.getenv("PRISM_SESSION_TAG", "").strip()
+    return f"{session_id}-{tag}" if tag else session_id
+
+
 def trace_llm(*, version: str, model: str, messages: list[dict], output: str, latency_ms: int,
               tokens_in: int, tokens_out: int, session_id: str, metadata: dict | None = None) -> str | None:
     c = client()
@@ -34,8 +40,8 @@ def trace_llm(*, version: str, model: str, messages: list[dict], output: str, la
     tid = str(uuid.uuid4())
     c.trace_llm(model=model, input_messages=messages, output=output, latency_ms=latency_ms,
                 token_count_input=tokens_in, token_count_output=tokens_out, trace_id=tid,
-                agent_id="ledger", agent_name=f"ledger-{version}", session_id=session_id,
-                metadata={"version": version, **(metadata or {})})
+                agent_id="ledger", agent_name=f"ledger-{version}", session_id=_session(session_id),
+                metadata={"version": version, "provider": os.getenv("LLM_PROVIDER", "ollama"), **(metadata or {})})
     LAST_TRACE_IDS.append(tid)
     return tid
 
@@ -52,7 +58,7 @@ def trajectory(*, version: str, session_id: str, steps: list[dict], model: str,
     if c is None:
         return None
     r = c.submit_trajectory(steps, agent_id="ledger", agent_name=f"ledger-{version}",
-                            conversation_id=session_id, model=model, final_status=final_status)
+                            conversation_id=_session(session_id), model=model, final_status=final_status)
     return (r or {}).get("id")
 
 
