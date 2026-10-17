@@ -135,3 +135,59 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     dimension with rule counts, 723 ms). Two asks: let me filter runs by evaluation outcome
     (e.g. correctness < 90) and export the per-run scorecards as CSV; today the only
     aggregate is the KPI strip.
+
+### Event day (Oct 17, Growth trial, Money Talks 2 resource pack in hand)
+
+30. **Root Cause does nothing until someone presses "Analyze now".** A project with 3,983
+    traces and ~900 trajectories had zero clusters and zero per-trace analyses on the morning of
+    the event; the API confirmed it (`/api/intelligence` → `analyzed_traces: 0`,
+    `/api/intelligence/clusters` → `total: 0`). One `POST /api/intelligence/clusters/analyze`
+    (5 credits) produced six clusters in ~50 s from trajectories alone. The dashboard copy then
+    says "Only 0 of 3,983 traces (0%) have per-trace analysis, which clusters are built from" —
+    but the clusters it just built came from trajectory rules, not per-trace analysis, so the
+    sentence contradicts the screen. Suggest: schedule a clustering run automatically once a
+    project crosses N trajectories (free when nothing changes, as you already do), and say
+    which of the two sources each cluster came from.
+31. **The backfill endpoint wants the internal row `id`, not the SDK `trace_id`.**
+    `POST /api/backfill/trace-analyses/quote` with the 52 `trace_id`s I minted returned
+    `candidates: 0` (no error, no hint); the same call with the `id` field from
+    `/api/sessions/{id}` returned `candidates: 52`. Every other endpoint I used accepts the
+    `trace_id`. Accept both, or reject unknown ids loudly.
+32. **Trajectory rules have undocumented status semantics, and they cluster.** I sent
+    `final_status=error` to mean "this deal has an open finding" (see #28) and marked the
+    verifier's dropped-claim step `error` because a claim failed the check. Root Cause's
+    first run turned that into a *rising, high-severity* cluster of 470 "failures in
+    ledger-v3" with cause `tool` (`failed_tool_call, unsupported_answer`, judge 100%
+    self-consistent). The judge was consistent and wrong because the inputs were mislabelled;
+    nothing in the SDK or docs says what CORR-001 / ROB-001 read. A one-line table —
+    rule → fields it reads → what counts as failure — would have saved the morning. (Fix on my
+    side: FINDINGS.md #18.)
+33. **CORR-002 "Reasoning Presence" and CORR-004 "Logical Step Sequence" fail 100% of a
+    deterministic pipeline's runs** ("tool call as first step", "repeated tool_call more than
+    5 times consecutively", "reasoning steps 0/13"). My auditor flagged it automatically from
+    `/api/trajectories/{id}/evaluation`. A rules-then-model pipeline legitimately starts with
+    a tool and runs many tools back to back; these rules encode a ReAct chatbot. Either let a
+    project pick a rule profile ("pipeline agent" vs "conversational agent") or weight these
+    rules down when the run has `check:*` steps and a `final_answer`. I'm adding reasoning
+    steps that describe the plan and the assessment, which is honest, but I'm doing it for the
+    rule, not for the user.
+34. **Alert metrics are a closed list that only the 400 error reveals.** The resource pack
+    says "set an alert on failed tool call, cost, latency"; the API's `known_metrics` are
+    `compliance_score, error_rate, evaluation_failed, guardrail_blocks, latency,
+    satisfaction_score, trace_failures_per_hour, traces_per_hour` — no cost, no failed tool
+    call, and the list is nowhere in the docs. Rules scoped to `agent_id` work and the
+    create/list/fired endpoints are clean; please publish the metric list and add
+    `cost_usd` and `step_errors` (an `error` step inside a trajectory).
+35. **Sessions → Steps is the best page for a pipeline agent, and it shows one run per
+    session.** A session of 230 traces (one rep, 47 deals, ~5 calls each) has `agent_run_id`
+    = the last trajectory. The Steps tab is exactly what the Money Operations proof asks for,
+    but a reviewer can't pick which deal's run to look at from the session. A run picker (or
+    a `session_id` filter on Agent Runs that lists all of them) would close the loop with #26.
+36. **Judge framing on the session page.** The header reads "Session · Resolved · 1.1s" and
+    the card is "Compliance Score Trend — Risk & Compliance"; "Industry: —". For an internal
+    pipeline-review agent none of those words apply; the trace-level judge likewise opens with
+    "Transcript contains no customer service conversation" (#16). The scoring itself is fine;
+    the vocabulary around it tells a non-chatbot user they are in the wrong product.
+37. **Pricing clarity is good**: `/api/backfill/trace-analyses/quote` and the readiness
+    endpoint say the exact credits before anything runs, and the Root Cause page states
+    "a run that changes no cluster is free". That is how metered analysis should behave.
