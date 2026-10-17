@@ -45,10 +45,10 @@ what its receipts are worth.
 
 | | |
 |---|---|
-| ![Pipeline tab with the Dontechi · GTXPro deal open](docs/screenshots/pipeline.png) | ![The four findings on that deal and the draft CRM updates](docs/screenshots/findings.png) |
-| Pipeline tab: the ranked list with ✓ receipts and issue chips, and Dontechi · GTXPro open — p=25%, the buyer's quote, 18 checks run. | The same deal's four findings, each with the CRM value, the buyer's sentence and the action, plus draft CRM updates for a human to approve. |
+| ![Pipeline tab with the Dontechi · GTXPro deal open](docs/screenshots/pipeline.png) | ![Warephase · GTXPro: the buyer's arithmetic caught](docs/screenshots/findings.png) |
+| Pipeline tab (event run, Claude Sonnet 5.5 via Nicrron): the ranked list with ✓ receipts and issue chips, and Dontechi · GTXPro open — p=10%, four findings with the buyer's sentences, 18 checks run. | Warephase · GTXPro: the buyer wrote "2 units at list, so $14,463"; Ledger's finding says 2 × $4,821 is $9,642, with the quote, the action and a draft CRM correction for a human to approve. |
 | ![Proof tab](docs/screenshots/proof.png) | |
-| Proof tab: v1 vs Ledger on the same 235 deals against real outcomes, and CRM rules vs a naive agent vs Ledger on the planted anomalies. | |
+| Proof tab, event run: the naive agent vs Ledger on the same 235 deals against real outcomes, and CRM rules vs the naive "find the issues" agent vs Ledger on the planted anomalies (72% / 10 of 86 / 6 invented against 94% / 0 / 0). | |
 
 ## The failure nobody planted
 
