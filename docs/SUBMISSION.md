@@ -29,9 +29,10 @@ auditor caught it.
 run — crm · rules · claim ledger · verifier · consistency checks · decision · quote verifier ·
 final answer — `prism.blockconvey.com/sessions/v3-Niesha_Huffines-sonnet`. (2) *Alert*: rules scoped to
 the ledger agent — "model call stalled > 20 s" and "prompt blocked by a guardrail" — the first
-fired on a real run on Oct 17 09:29 (25.9 s call). (3) *Root Cause*: the naive agent's runs
-cluster as failures (fabricated quotes, amounts and day gaps, recorded as `check:*:mismatch`
-steps); Ledger v3 on the same inputs passes 17/17 trajectory rules; PRISM's own Agent
+fired on a real run on Oct 17 09:29 (25.9 s call). (3) *Root Cause*: the failure is the naive agent — its runs on
+the same 235 deals cluster as failures with a cause (unsupported answers: fabricated quotes,
+amounts and day gaps, recorded as `check:*:mismatch` steps; 8 traces analysed, then Analyze
+now); the fix is Ledger — same inputs, same model, 17/17 trajectory rules pass; PRISM's own Agent
 Intelligence narrative on the naive agent reads "Agent fabricates deal data on pipeline
 reviews … add guardrails to prevent deal fabrication" — which is the v3 design.
 

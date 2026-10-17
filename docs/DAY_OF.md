@@ -16,7 +16,12 @@
    09:29 ET**: *model call stalled* — latency 25,942 ms vs 20,000 on a naive-agent batch call (trace `5c55f46f…`), and
    *trace failures per hour* 6/5 at 09:29:40 (the empty replies of finding 20). Both sit under "Requires attention"
    on the Alerts page; screenshot docs/screenshots/prism_15_alert_fired.jpg.
-3. Root Cause / Agent Intelligence. After per-trace analysis of the 52 naive-agent traces (52 credits), PRISM's own
+3. Root Cause / Agent Intelligence. **Lead with the naive agent as the failure and Ledger as the fix** — same 235
+   inputs, same model: cluster `a986c666…` *failures in ledger-v1* (7 runs on Oct 17, cause: unsupported answers,
+   no recovery; human-verified “prompt”) vs ledger-v3 runs on the same deals passing 17/17 rules. The recipe's
+   per-trace step was done on 8 of this morning's naive traces (Analyse selected) before Analyze now. The
+   instrumentation story (finding 18) is the aside, not the proof: say it as “PRISM also caught us mislabelling
+   our runs; we fixed the reporting”. After per-trace analysis of the 52 naive-agent traces (52 credits), PRISM's own
    narrative (docs/prism_intelligence_narrative.json, generated Oct 17 13:40 UTC) reads: **"Agent fabricates deal data on
    pipeline reviews, undermining sales forecasting reliability"** — "the agent resolves only 1 of 15 such requests fully.
    Five of six documented failures involve hallucinated deal IDs, buyer quotes, and metrics absent from source data" — top

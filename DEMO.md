@@ -92,10 +92,12 @@ the one you can defend line by line: every dollar in or out has a receipt."
 
 **CLICK** tab E.
 
-**SAY** "This morning PRISM showed us our agent was misreporting itself. It clustered 470 of
-our runs as failures, because we sent 'error' to mean 'this deal needs attention'. We fixed how
-we instrument, re-ran the same 235 deals, and they pass 17 of 17 rules. Our auditor, reading
-PRISM back, caught two more rules the same way. Finding 18 in our log, 26 findings in all."
+**SAY** "The failure: the naive agent. Every one of its runs this morning fails PRISM's rules —
+unsupported answers, errors it never recovers from — and Root Cause groups them into one cluster
+with a cause. The fix: Ledger, the verification layer, on the same 235 deals. Same inputs, same
+model, 17 of 17 rules pass, zero invented numbers. PRISM also caught something in us: it had
+clustered 470 of our own runs as failures because we reported findings as errors. We fixed the
+reporting; that is finding 18, and it is why I trust the 17 of 17 now."
 
 **CLICK** tab F.
 
