@@ -107,9 +107,10 @@ Ledger design, in their words."
 
 **CLICK** tab G, then tab H.
 
-**SAY** "The alert that matters: a model call that stalls past 20 seconds. It fired on a real
-run at 9:29 this morning. And every deal is a visible run — plan, read, rules, verify, compare,
-decide, verify the quote, answer."
+**SAY** "The alert that would have caught this morning's failure: a model call that returns
+nothing, so a deal gets scored on field rules only. It fired at 12:55 on a real run where the
+gateway cut the answer off. The stalled-call alert fired at 9:29. And every deal is a visible run
+— plan, read, rules, verify, compare, decide, verify the quote, answer."
 
 **SEE** E: the cluster list. F: the headline sentence. G: the fired alert under *Requires
 attention*. H: the 12 steps.

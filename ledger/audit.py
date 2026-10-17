@@ -121,7 +121,7 @@ def check_output(co: Company, version: str, partial: bool = False) -> list[Findi
     rows = pd.DataFrame([json.loads(l) for l in p.read_text().splitlines() if l.strip()])
     out, ids = [], set(co.deals.opportunity_id)
     if len(rows) == 0 or "opportunity_id" not in rows:  # the run produced nothing: that is the finding
-        return [Finding("high", "agent", "output_integrity", f"{version}: the run produced no rows at all",
+        return [Finding("output_integrity", "high", "agent", f"{version}: the run produced no rows at all", 1,
                         ["every model reply was empty or unparsable"], "Check the provider (empty replies, output cap, timeouts); the alert rule 'a model call returned nothing' fires on this.")]
     dup, phantom = rows.opportunity_id.duplicated().sum(), (~rows.opportunity_id.isin(ids)).sum()
     missing = set() if partial else ids - set(rows.opportunity_id)  # a --reps/--limit run is partial by design

@@ -15,7 +15,10 @@
    *prompt blocked by a guardrail*; plus the older *trace failures per hour* rule. **Fired on a real run on Oct 17,
    09:29 ET**: *model call stalled* — latency 25,942 ms vs 20,000 on a naive-agent batch call (trace `5c55f46f…`), and
    *trace failures per hour* 6/5 at 09:29:40 (the empty replies of finding 20). Both sit under "Requires attention"
-   on the Alerts page; screenshot docs/screenshots/prism_15_alert_fired.jpg.
+   on the Alerts page; screenshot docs/screenshots/prism_15_alert_fired.jpg. **The alert that would have caught it**, in
+   the judges' words (“a failed tool call that leaves the run with no answer counts toward error rate”): *a model call
+   returned nothing* fired at 12:55 ET on a run that reproduced finding 20 on purpose (trace `ae49e831…`, 4,096-token
+   cap, empty answer, the deal scored on field rules only). Show that one first.
 3. Root Cause / Agent Intelligence. **Lead with the naive agent as the failure and Ledger as the fix** — same 235
    inputs, same model: cluster `a986c666…` *failures in ledger-v1* (7 runs on Oct 17, cause: unsupported answers,
    no recovery; human-verified “prompt”) vs ledger-v3 runs on the same deals passing 17/17 rules. The recipe's

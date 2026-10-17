@@ -221,3 +221,8 @@ what would have helped. Trace ids refer to project `98b924d6…`.
     tentative"). Trajectory steps carry `tool_name` and `input_summary`; a step's tool name is
     a better localisation key than a code search for "prompt". Also: the RCA summary card says
     "Refresh the summary once ANTHROPIC_API_KEY is configured" to a hosted-product user.
+43. **A cached replay re-fires the latency alert.** Our client re-sends a trace for a cache hit
+    with the *original* call's latency and `cached: true` in metadata; PRISM's latency rule fired
+    on it (59,590 ms) although no model was called. Honour a `cached` flag, or let a rule exclude
+    traces by metadata. Also: the gateway reported `token_count_output: 4096` for a reply whose
+    content was empty — the alert on `error_rate` caught it, the token count would not have.
