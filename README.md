@@ -92,6 +92,19 @@ pipeline, found through PRISM. Both versions rate
 the genuinely unforeseeable losses (buyer said "PO next week", then vanished) above 90% —
 correctly, because nothing in the record predicts them. Full table: `reports/v1_v2.md`.
 
+**Read the commit number honestly.** Commit = probability ≥ 0.7 *and* no open finding. The
+second half is a policy, not a prediction, and on this benchmark it does not improve accuracy:
+with the rule, 84 deals and $264K of which 87% closed; without it, 139 deals and $404K of which
+87% closed; the 55 deals the findings excluded closed at 86%. The CRM's own stage-based commit
+closed at 64%. The accuracy lives in the probabilities; the exclusion buys defensibility (every
+excluded dollar has a receipt) at the price of $120K that closed. The reason is visible in the
+per-type outcomes: the findings that predict loss — stage vs buyer, timeline contradiction,
+zombie, happy ears, duplicate (0% win rate) — already pull a deal below 0.7, so what the rule
+removes above 0.7 is hygiene (expired promise 63%, missing economic buyer 45%, arithmetic 100%).
+We left the rule alone before the demo rather than tune it on the same outcomes; the planned fix
+is to learn which finding types a company's own closed deals say are loss-predictive, as the
+thresholds already are. FINDINGS.md #27.
+
 ### Event day: the same pipeline through Nicrron (Claude Sonnet 5.5)
 
 Money Talks 2 requires model calls through the Nicrron gateway, so on 2026-10-17 the whole

@@ -83,7 +83,8 @@ find none of the semantic ones — zero. The *same model* just asked to 'find th
 72% and raises false alarms on 10 clean deals out of 86, and invents 6 numbers. Ledger: 94%,
 zero false alarms, zero invented numbers. In September on a cheaper model the naive agent was
 at 32% with 17% false alarms. A better model helped it. It still invents. The zero is
-structural — the model only reads, code does the comparing."
+structural — the model only reads, code does the comparing. And the commit number at the top is
+the one you can defend line by line: every dollar in or out has a receipt."
 
 **SEE** the two tables; the 0 / 86 and the 0 fabrications in green.
 
@@ -140,6 +141,12 @@ the receipts — every Monday, and before the CFO signs."
 - **Did you tune it to the labels?** No prompt or model change after scoring. We fixed five
   bugs in the comparison code and closed four label gaps; every one is listed in the README
   and FINDINGS.md with the before and after.
+- **Isn't commit right by definition, since it just drops flagged deals?** Half right, and we
+  measured it: with the exclusion rule 87% of committed dollars closed; without it, also 87%;
+  the CRM's own stage-based commit, 64%. The accuracy is in the probabilities. The exclusion buys
+  a number you can defend line by line, and on this data it cost $120K that closed, because the
+  findings that predict loss already pull a deal below 70%. It is written up as finding 27 and
+  the next step is to learn which findings predict loss from the company's own closed deals.
 - **Would you ship this?** The findings tomorrow. The forecast number after a quarter of
   outcomes, or with a real decision model. The win probability today is the reading model
   asked a second question; it ranks well on our data and did not transfer to the independent
