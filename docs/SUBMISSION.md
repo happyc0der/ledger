@@ -50,7 +50,7 @@ synthetic, planted with labels, disclosed. Second dataset: public SaaS conversat
 outcome labels. Every adjustment made after a measurement is listed in FINDINGS.md.
 
 **Links.** Repo: https://github.com/happyc0der/ledger · System design: docs/SYSTEM_DESIGN.md ·
-Demo script: DEMO.md · Video: docs/video/ledger_demo_backup.mp4 · Live run: `scripts/live.py`
+Demo script: DEMO.md · Video: docs/video/ledger_demo_backup.mp4 · Scored tables: docs/reports/ · Findings log: FINDINGS.md · Live run: `scripts/live.py`
 on `data/templates/` (edit the CSV, ~12 s).
 
 **Not yet.** Jev (TypeSafe) as the judgement layer — waitlisted; `decide.py` switches on the key.
