@@ -54,8 +54,17 @@ def backend_name() -> str:
     return "jev" if os.getenv("TYPESAFE_API_KEY") else "llm"
 
 
+def _model_tag(backend: str) -> str:
+    """The decision depends on who decided: Jev, or a specific provider/model behind the LLM fallback."""
+    if backend != "llm":
+        return backend
+    from .config import provider
+    p = provider()
+    return f"{p.name}/{p.model}"
+
+
 def _cache_path(state: dict, backend: str):
-    h = hashlib.sha256(json.dumps([backend, state], sort_keys=True).encode()).hexdigest()[:24]
+    h = hashlib.sha256(json.dumps([backend, _model_tag(backend), state], sort_keys=True).encode()).hexdigest()[:24]
     d = CACHE_DIR.parent / "decide"
     d.mkdir(parents=True, exist_ok=True)
     return d / f"{h}.json"
@@ -142,5 +151,7 @@ def decide(state: dict, *, version: str, session_id: str) -> Decision:
     if cp.exists():
         return Decision(**json.loads(cp.read_text()))
     d = _jev(state) if b == "jev" else _llm(state, version=version, session_id=session_id)
+    if b == "llm" and getattr(llm.LAST_USED, "value", None) not in (None, _model_tag(b)):
+        return d  # answered by the fallback provider: usable now, never remembered as this model's decision
     cp.write_text(json.dumps(asdict(d)))
     return d

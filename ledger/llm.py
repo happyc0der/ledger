@@ -158,6 +158,9 @@ def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str
     return (getattr(msg, "content", None) or ""), tin, tout  # empty/blocked reply → ""
 
 
+LAST_USED = threading.local()  # .value = "provider/model" that produced the last answer in this thread
+
+
 def chat(messages: list[dict], *, schema: dict | None = None, version: str, session_id: str,
          metadata: dict | None = None, provider: Provider | None = None, num_ctx: int = 32768,
          use_cache: bool = True) -> tuple[str, dict | None]:
@@ -187,6 +190,7 @@ def chat(messages: list[dict], *, schema: dict | None = None, version: str, sess
         ms, cached = int((time.time() - t0) * 1000), False
         if text.strip():  # an empty reply (blocked, truncated, provider hiccup) must not be remembered as the answer
             cache.write_text(json.dumps({"text": text, "tin": tin, "tout": tout, "ms": ms}))
+    LAST_USED.value = f"{p.name}/{p.model}"
     tracing.trace_llm(version=version, model=f"{p.name}/{p.model}", messages=messages, output=text,
                       latency_ms=ms, tokens_in=tin, tokens_out=tout, session_id=session_id,
                       metadata={**(metadata or {}), "cached": cached})
