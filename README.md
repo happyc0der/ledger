@@ -92,6 +92,36 @@ pipeline, found through PRISM. Both versions rate
 the genuinely unforeseeable losses (buyer said "PO next week", then vanished) above 90% —
 correctly, because nothing in the record predicts them. Full table: `reports/v1_v2.md`.
 
+### Event day: the same pipeline through Nicrron (Claude Sonnet 5.5)
+
+Money Talks 2 requires model calls through the Nicrron gateway, so on 2026-10-17 the whole
+benchmark was re-run on `anthropic/claude-sonnet-5-5` with no prompt changes (`LLM_PROVIDER=nicrron`,
+dataset copy `data/company_nicrron`, PRISM sessions tagged `-sonnet`). Same 235 deals, same
+snapshot, scored the same way:
+
+| metric | Ledger v3 on Gemini Flash-Lite (Sep) | Ledger v3 on Claude Sonnet 5.5 (Oct 17) |
+|---|---|---|
+| Revenue captured in the top 20 (of $113.8K) | $87.6K (77%) | $80.7K (71%) |
+| Pipeline total error | 0% | 0% |
+| Fabricated amounts / day-gaps / quotes | 0 | 0 |
+| Objection accuracy | 94% | 95% |
+| Next-action accuracy | 92% | 94% |
+| Brier score | 0.127 | 0.127 |
+| Semantic (M1–M10) recall / precision | 92% / 100% | 94% / 99% |
+| Clean deals falsely flagged | 0 / 86 | 0 / 86 |
+| Cost of the run (gateway meter) | ~$0.30 | ~$6 |
+
+The verification layer transfers unchanged: zero fabrications and zero pipeline error on both
+models by construction, and the reading layer finds slightly more on Sonnet. One more
+comparison fix was disclosed on the day (FINDINGS.md #23): Sonnet labels a conditional
+objection — "won't move forward unless it's on this year's roadmap" — as `commitment=paused`,
+which the timeline check had trusted blindly; a `paused` claim now has to be supported by pause
+language in its own quote (5 false alarms → 0, recall unchanged, Gemini run unchanged). The
+naive-agent rows for Sonnet are in `reports/issues_sonnet.md` once that run completes.
+PRISM's trajectory rules pass 17/17 on these runs (they failed two rules before the day's
+instrumentation fixes, #18–#19), and the day's gateway lessons are in
+[docs/NICRRON_NOTES.md](docs/NICRRON_NOTES.md).
+
 ## How PRISM is used
 
 Every model call is a trace (`ledger-v1` / `ledger-v2`, one session per rep) with the
@@ -149,7 +179,8 @@ date weeks away — all true by the taxonomy's definitions, all verified by read
 evidence, all previously counted as false positives. Closing them also added cases the
 model misses, which is why recall is 92% and not higher. A fourth comparison fix followed the
 clean re-run: an economic buyer recorded as "finance" — a department — must not be compared to a
-person.
+person. A fifth came from running a second model on the day: a `paused` commitment only counts when its quote
+reads like a pause (FINDINGS.md #23).
 
 Every failure found during the build, its PRISM evidence, attribution and fix is in
 [FINDINGS.md](FINDINGS.md).
