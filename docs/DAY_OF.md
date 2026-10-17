@@ -2,7 +2,7 @@
 
 **Before leaving**
 - Laptop charged; phone hotspot tested; Ollama running on the Mac (`ollama serve`); `qwen3:14b` is pulled and the template run is cached (Oct 16), so the live demo works with no network at all.
-- `./scripts/demo_up.sh` → 8787, 8788, PRISM live_connected, Ollama mac OK. Ollama msi OK is a bonus (GPU: the 8-deal template cold in 60 s vs 122 s on the Mac, measured Oct 16) and needs the laptop awake on Tailscale.
+- `./scripts/demo_up.sh` → **8787 = the event run (Sonnet 5.5 via Nicrron)**, 8788 = live, 8789 = the September Gemini run; PRISM live_connected; Nicrron balance line; Ollama mac OK. Ollama msi OK is a bonus (GPU: the 8-deal template cold in 60 s vs 122 s on the Mac, measured Oct 16) and needs the laptop awake on Tailscale.
 - Browser tabs in order: proof · deal P9VFKNR0 · sibling OEBJXZN6 · naive v1 · PRISM traces (Flagged, 30 days) · PRISM runs · live 8788 deal 2003 · digest. Backup video open in a player.
 - PRISM dashboard logged in (in the browser you'll present from).
 - `.env` holds a free-tier Gemini key (new project, no billing; verified Oct 16) with the estimated-spend cap at $20 — the key cannot bill anything. Stage default is `LLM_PROVIDER=gemini`; a 429 from the free tier or a 5xx falls over to the Mac mid-run. Untouched template → under 1 s from cache on every path; an edited 8-deal CSV → about 1.5 min on the free-tier Gemini key (measured Oct 16: 16 calls, median 4 s, one 39 s outlier, no fallback), 1 min on msi, 2 min on the Mac.
@@ -21,7 +21,8 @@
    pipeline reviews, undermining sales forecasting reliability"** — "the agent resolves only 1 of 15 such requests fully.
    Five of six documented failures involve hallucinated deal IDs, buyer quotes, and metrics absent from source data" — top
    action: **"add guardrails to prevent deal fabrication"**. That is the v3 design, in PRISM's words.
-   Root Cause: https://prism.blockconvey.com/root-cause — after today's run: the `ledger-v1` cluster (unsupported answers:
+   Root Cause: https://prism.blockconvey.com/root-cause — cluster `a986c666…` *failures in ledger-v1* (5 runs, Oct 17, rising, cause: prompt) beside the
+   `ledger-v3` cluster whose last failure is Oct 16 14:45 UTC — nothing after the fix. After today's run: the `ledger-v1` cluster (unsupported answers:
    fabricated quotes / amounts / day gaps caught by the post-hoc checks) and `ledger-v3` on the same deals no longer failing
    (finding 18 in FINDINGS.md explains why the v3 cluster existed before). Re-run clustering after the runs:
    `POST $PRISM_HOST/api/intelligence/clusters/analyze` (5 credits).

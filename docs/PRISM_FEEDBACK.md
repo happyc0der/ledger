@@ -191,3 +191,17 @@ what would have helped. Trace ids refer to project `98b924d6…`.
 37. **Pricing clarity is good**: `/api/backfill/trace-analyses/quote` and the readiness
     endpoint say the exact credits before anything runs, and the Root Cause page states
     "a run that changes no cluster is free". That is how metered analysis should behave.
+38. **Alert rules fire once, then go quiet.** The latency rule fired at 13:29 on a 25.9 s call;
+    the next three hours produced dozens of traces at 60–200 s (streamed naive-agent batches)
+    and no further firing, and `/api/alerts/fired` still lists one. If there is a cooldown or a
+    one-per-pattern rule, say so on the rule; otherwise a reviewer concludes the problem
+    stopped.
+39. **Per-trace judge coverage ran out silently.** Every trace from the day's 1,500+ calls has
+    `evaluation: null`; the morning's traces were scored. Nothing in the API or the dashboard
+    said a daily cap was reached — the Intelligence page just offers "Analyze for 4,600
+    credits". A `quota` field on `/api/intelligence` (scored today / cap) would make the
+    cliff visible.
+40. **Clustering lags evaluation.** Five trajectories evaluated at 14:00 (rules failing) were
+    not in any cluster after a run started at 14:25; the run reported "no new failures" for
+    them. Either the window excludes the newest runs or assignment is asynchronous; a
+    `pending_assignment` count on the run summary would tell.

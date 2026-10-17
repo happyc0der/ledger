@@ -3,14 +3,15 @@
 cd "$(dirname "$0")/.."
 set -a; . ./.env; set +a
 pkill -f "uvicorn ledger.app" 2>/dev/null; sleep 1
-mkdir -p runs/company runs/live
-nohup .venv/bin/uvicorn ledger.app:app --port 8787 > runs/company/ui.log 2>&1 &
+mkdir -p runs/company runs/live runs/company_nicrron
+# :8787 = the event run (Claude Sonnet 5.5 through Nicrron, as the organisers require); :8789 = the September Gemini run
+LEDGER_DATA=data/company_nicrron nohup .venv/bin/uvicorn ledger.app:app --port 8787 > runs/company_nicrron/ui.log 2>&1 &
 LEDGER_DATA=data/live nohup .venv/bin/uvicorn ledger.app:app --port 8788 > runs/live/ui.log 2>&1 &
-if [ -d data/company_nicrron ]; then mkdir -p runs/company_nicrron; LEDGER_DATA=data/company_nicrron nohup .venv/bin/uvicorn ledger.app:app --port 8789 > runs/company_nicrron/ui.log 2>&1 & fi
+nohup .venv/bin/uvicorn ledger.app:app --port 8789 > runs/company/ui.log 2>&1 &
 sleep 3
-printf "benchmark UI  %s\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8787/api/meta)"
-printf "live UI       %s\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8788/api/meta)"
-[ -d data/company_nicrron ] && printf "nicrron UI    %s  (http://localhost:8789, Sonnet 5.5 benchmark)\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8789/api/meta)"
+printf "stage UI      %s  (http://localhost:8787, Sonnet 5.5 via Nicrron)\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8787/api/meta)"
+printf "live UI       %s  (http://localhost:8788)\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8788/api/meta)"
+printf "gemini UI     %s  (http://localhost:8789, September run)\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8789/api/meta)"
 printf "PRISM         %s\n" "$(curl -sS -m 15 "$PRISM_HOST/api/setup-doctor?project_id=$PRISM_PROJECT_ID" -H "X-PRISMtrace-Key: $PRISM_API_KEY" | .venv/bin/python -c 'import json,sys; d=json.load(sys.stdin); print(d.get("overall"), "live_connected", d.get("live_connected"))' 2>/dev/null || echo unreachable)"
 ollama_check() {  # label, base url, model -> OK | NO MODEL | down
   tags=$(curl -s -m 5 "$2/api/tags" 2>/dev/null) || tags=""
