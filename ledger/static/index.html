@@ -238,7 +238,7 @@ function renderProof(c) {
   const rel = v => v.reliability.map(r => `<tr><td>${r.bin}</td><td class="num">${r.n}</td><td class="num">${pct(r.stated)}</td><td class="num">${pct(r.actual)}</td></tr>`).join('');
   $('#proof').innerHTML = `
     <h2>Same ${v2.deals} deals, same snapshot, scored against what actually happened</h2>
-    <table class="cmp" style="max-width:720px"><tr><th>metric</th><th class="num">v1 (naive)</th><th class="num">v2</th></tr>
+    <table class="cmp" style="max-width:720px"><tr><th>metric</th><th class="num">v1 (naive)</th><th class="num">${c.v3 ? 'v3 (Ledger)' : 'v2'}</th></tr>
       ${row('Revenue captured in top 20', 'revenue_top20', fmt$)}
       ${row('…as share of the best possible top 20', 'revenue_top20_pct', pct)}
       ${row('Pipeline total error', 'pipeline_error_pct', pct, 'low')}
@@ -253,7 +253,7 @@ function renderProof(c) {
     <div class="muted">v2 column shows ${c.v3 ? 'v3 (Ledger)' : 'v2'}.</div>
     <div id="issuesProof"></div>
     <div style="display:flex; gap:40px; margin-top:20px; flex-wrap:wrap">
-      ${['v1', 'v2'].map(k => `<div><h3>Reliability — ${k}</h3><table class="cmp"><tr><th>stated p</th><th class="num">n</th><th class="num">mean stated</th><th class="num">actually won</th></tr>${rel(c[k])}</table></div>`).join('')}
+      ${[['v1', v1], [c.v3 ? 'v3 (Ledger)' : 'v2', v2]].map(([k, v]) => `<div><h3>Reliability — ${k}</h3><table class="cmp"><tr><th>stated p</th><th class="num">n</th><th class="num">mean stated</th><th class="num">actually won</th></tr>${rel(v)}</table></div>`).join('')}
     </div>
     <p class="muted" style="max-width:720px">${topBinNote(v1, v2)}
     Every v2 number and quote was checked in code against the CRM before display; the checks are the ✓ receipts in the pipeline view and the <code>check:*</code> steps in PRISM.</p>`;
