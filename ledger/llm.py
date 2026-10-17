@@ -106,9 +106,32 @@ def _spend(p: Provider, tin: int, tout: int) -> None:
                            f"raise {p.name.upper()}_BUDGET_USD to continue")
 
 
+_RATE_RPM = {"nicrron": 55}  # gateway limit is 60/min per key; stay under it across threads
+_RATE_LOCK = threading.Lock()
+_RATE_STAMPS: dict[str, list[float]] = {}
+
+
+def _throttle(p: Provider) -> None:
+    rpm = int(os.getenv(f"{p.name.upper()}_RPM", _RATE_RPM.get(p.name, 0)))
+    if rpm <= 0:
+        return
+    while True:
+        with _RATE_LOCK:
+            now = time.time()
+            stamps = [s for s in _RATE_STAMPS.get(p.name, []) if now - s < 60]
+            if len(stamps) < rpm:
+                stamps.append(now); _RATE_STAMPS[p.name] = stamps
+                return
+            wait = 60 - (now - stamps[0]) + 0.05
+            _RATE_STAMPS[p.name] = stamps
+        time.sleep(max(wait, 0.05))
+
+
 def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str, int, int]:
     from openai import OpenAI
-    client = OpenAI(base_url=p.base_url, api_key=p.api_key, timeout=60.0, max_retries=2)  # never hang a run on one call
+    timeout = float(os.getenv("LLM_TIMEOUT", "180" if p.name == "nicrron" else "60"))  # never hang a run on one call
+    client = OpenAI(base_url=p.base_url, api_key=p.api_key, timeout=timeout, max_retries=2)
+    _throttle(p)
     kwargs = {}
     # Gateways default to a small output cap (Nicrron: 4,096 tokens) and return *empty* content when a
     # structured answer is cut off; a 30-deal naive-agent batch needs more. Explicit cap, overridable.
@@ -159,6 +182,7 @@ def chat(messages: list[dict], *, schema: dict | None = None, version: str, sess
                 raise
             print(f"llm: {p.name}/{p.model} failed ({type(e).__name__} {status or ''}); falling back to {fb}", flush=True)
             p = get_provider(fb)
+            cache = CACHE_DIR / f"{_key(p, messages, schema)}.json"  # the fallback's answer is the fallback's, not the primary's
             text, tin, tout = _ollama(p, messages, schema, num_ctx) if p.name == "ollama" else _openai(p, messages, schema)
         ms, cached = int((time.time() - t0) * 1000), False
         if text.strip():  # an empty reply (blocked, truncated, provider hiccup) must not be remembered as the answer

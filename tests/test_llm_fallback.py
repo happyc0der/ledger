@@ -59,3 +59,33 @@ def test_nicrron_provider_and_price(monkeypatch, tmp_path):
     llm._spend(p, 1_000_000, 100_000)  # $2 in + $1 out at the Sonnet 5.5 rate
     u = json.loads((tmp_path / "usage.json").read_text())["nicrron"]
     assert abs(u["usd"] - 3.0) < 1e-6 and u["calls"] == 1
+
+
+def test_fallback_answer_is_not_cached_under_primary_key(monkeypatch, tmp_path):
+    gem = _wire(monkeypatch, tmp_path, _Dead("credits depleted"))
+    msgs = [{"role": "user", "content": "hi"}]
+    llm.chat(msgs, schema={"type": "object"}, version="t", session_id="t", provider=gem, use_cache=True)
+    primary = tmp_path / f"{llm._key(gem, msgs, {'type': 'object'})}.json"
+    assert not primary.exists(), "the local model's answer must not be served as the metered provider's answer next time"
+    assert len(list(tmp_path.glob('*.json'))) == 1  # cached once, under the fallback's key
+
+
+def test_throttle_spaces_requests(monkeypatch):
+    import time as _t
+    p = Provider("nicrron", "https://example.invalid", "k", "m")
+    monkeypatch.setenv("NICRRON_RPM", "2")
+    monkeypatch.setattr(llm, "_RATE_STAMPS", {})
+    slept = []
+    monkeypatch.setattr(llm.time, "sleep", lambda s: slept.append(s))
+    base = _t.time()
+    monkeypatch.setattr(llm.time, "time", lambda: base)
+    llm._throttle(p); llm._throttle(p)
+    assert slept == []
+    # third call within the minute must wait; simulate the clock jumping past the window after one sleep
+    calls = {"n": 0}
+    def clock():
+        calls["n"] += 1
+        return base if calls["n"] < 3 else base + 61
+    monkeypatch.setattr(llm.time, "time", clock)
+    llm._throttle(p)
+    assert slept and slept[0] > 59
