@@ -12,8 +12,10 @@
    ledger-v3 run (crm · rules · store · verifier:claims · rules · consistency · checks · llm · verifier:quote · final_answer).
    Screenshot: docs/screenshots/prism_14_session_steps.jpg.
 2. Alert: https://prism.blockconvey.com/alerts — rules scoped to agent `ledger`: *model call stalled (>20 s)* and
-   *prompt blocked by a guardrail*; plus the older *trace failures per hour* rule that fired on Sep 23–24. Show a firing
-   from today's Nicrron run (a stalled call), or the Sep 24 firing if none today.
+   *prompt blocked by a guardrail*; plus the older *trace failures per hour* rule. **Fired on a real run on Oct 17,
+   09:29 ET**: *model call stalled* — latency 25,942 ms vs 20,000 on a naive-agent batch call (trace `5c55f46f…`), and
+   *trace failures per hour* 6/5 at 09:29:40 (the empty replies of finding 20). Both sit under "Requires attention"
+   on the Alerts page; screenshot docs/screenshots/prism_15_alert_fired.jpg.
 3. Root Cause: https://prism.blockconvey.com/root-cause — after today's run: the `ledger-v1` cluster (unsupported answers:
    fabricated quotes / amounts / day gaps caught by the post-hoc checks) and `ledger-v3` on the same deals no longer failing
    (finding 18 in FINDINGS.md explains why the v3 cluster existed before). Re-run clustering after the runs:
