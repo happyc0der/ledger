@@ -21,7 +21,7 @@
    pipeline reviews, undermining sales forecasting reliability"** — "the agent resolves only 1 of 15 such requests fully.
    Five of six documented failures involve hallucinated deal IDs, buyer quotes, and metrics absent from source data" — top
    action: **"add guardrails to prevent deal fabrication"**. That is the v3 design, in PRISM's words.
-   Root Cause: https://prism.blockconvey.com/root-cause — cluster `a986c666…` *failures in ledger-v1* (5 runs, Oct 17, rising, cause: prompt) beside the
+   Root Cause: https://prism.blockconvey.com/root-cause — cluster `a986c666…` *failures in ledger-v1* (7 runs on Oct 17 incl. the clean Sonnet run, rising, cause: tool — the post-hoc `check:*:mismatch` steps) beside the
    `ledger-v3` cluster whose last failure is Oct 16 14:45 UTC — nothing after the fix. After today's run: the `ledger-v1` cluster (unsupported answers:
    fabricated quotes / amounts / day gaps caught by the post-hoc checks) and `ledger-v3` on the same deals no longer failing
    (finding 18 in FINDINGS.md explains why the v3 cluster existed before). Re-run clustering after the runs:

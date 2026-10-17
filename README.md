@@ -99,17 +99,23 @@ benchmark was re-run on `anthropic/claude-sonnet-5-5` with no prompt changes (`L
 dataset copy `data/company_nicrron`, PRISM sessions tagged `-sonnet`). Same 235 deals, same
 snapshot, scored the same way:
 
-| metric | naive v1, Gemini (Sep) | Ledger v3, Gemini (Sep) | naive v1, Sonnet 5.5 (Oct 17) | Ledger v3, Sonnet 5.5 (Oct 17) |
-|---|---|---|---|---|
-| Revenue captured in the top 20 (of $113.8K) | 60% | **77%** | 64% | **71%** |
-| Pipeline total error | −5% | **0%** | +1.5% | **0%** |
-| Fabricated amounts / day-gaps / quotes | 97 | **0** | 6 | **0** |
-| Objection accuracy | 82% | **94%** | 68% | **95%** |
-| Next-action accuracy | 87% | **92%** | 87% | **94%** |
-| Brier score | 0.140 | **0.127** | 0.133 | **0.127** |
-| Semantic (M1–M10) recall / precision (naive = "list the issues" agent) | 32% / 62% | **92% / 100%** | 72% / 87% | **94% / 99%** |
-| Clean deals falsely flagged | 15 / 86 | **0 / 86** | 10 / 86 | **0 / 86** |
-| Cost of the v3 run (gateway meter) | ~$0.30 | | ~$6 | |
+| metric | naive v1, Gemini (Sep) | Ledger v3, Gemini (Sep) | naive v1, Sonnet 5.5 (Oct 17) | Ledger v3, Sonnet 5.5 (Oct 17) | Ledger v3, Opus 5.5 (Oct 17) |
+|---|---|---|---|---|---|
+| Revenue captured in the top 20 (of $113.8K) | 60% | **77%** | 64% | **71%** | 63% |
+| Pipeline total error | −5% | **0%** | +1.5% | **0%** | **0%** |
+| Fabricated amounts / day-gaps / quotes | 97 | **0** | 6 | **0** | **0** |
+| Objection accuracy | 82% | **94%** | 68% | **95%** | 94% |
+| Next-action accuracy | 87% | **92%** | 87% | **94%** | 94% |
+| Brier score | 0.140 | **0.127** | 0.133 | **0.127** | 0.132 |
+| Semantic (M1–M10) recall / precision (naive = "list the issues" agent) | 32% / 62% | **92% / 100%** | 72% / 87% | **94% / 99%** | **95% / 99%** |
+| Clean deals falsely flagged | 15 / 86 | **0 / 86** | 10 / 86 | **0 / 86** | **0 / 86** |
+| Cost of the v3 run (gateway meter) | ~$0.30 | | ~$6 | | ~$7 |
+
+Three readers, one finding: the **reading** layer improves with the model (semantic recall
+92% → 94% → 95%, false alarms 0 on all three), while the **judgement** layer — the same model
+asked for a win probability — does not (top-20 revenue 77% → 71% → 63%, Brier flat). A bigger
+reader does not buy a better judge; that is why the decision layer is designed to be a
+separate, calibrated model (Jev) rather than the reader asked a second question.
 
 A stronger model helps the naive agent a great deal — it fabricates 6 numbers instead of 97
 and finds 72% of the semantic issues instead of 32% — and it still invents, still flags 12%
