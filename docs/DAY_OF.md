@@ -8,8 +8,8 @@
 - `.env` holds a free-tier Gemini key (new project, no billing; verified Oct 16) with the estimated-spend cap at $20 — the key cannot bill anything. Stage default is `LLM_PROVIDER=gemini`; a 429 from the free tier or a 5xx falls over to the Mac mid-run. Untouched template → under 1 s from cache on every path; an edited 8-deal CSV → about 1.5 min on the free-tier Gemini key (measured Oct 16: 16 calls, median 4 s, one 39 s outlier, no fallback), 1 min on msi, 2 min on the Mac.
 
 **The three Money Operations PRISM proofs (required by the Builder Resource Pack)**
-1. Sessions → Steps: https://prism.blockconvey.com/sessions/v3-Niesha_Huffines → *Steps* tab shows the 10-step
-   ledger-v3 run (crm · rules · store · verifier:claims · rules · consistency · checks · llm · verifier:quote · final_answer).
+1. Sessions → Steps: https://prism.blockconvey.com/sessions/v3-Niesha_Huffines-sonnet → *Steps* tab shows the 12-step
+   ledger-v3 run from the event morning (plan · crm · rules · claim ledger · verification · checks · assessment · decide · verifier:quote · final_answer).
    Screenshot: docs/screenshots/prism_14_session_steps.jpg.
 2. Alert: https://prism.blockconvey.com/alerts — rules scoped to agent `ledger`: *model call stalled (>20 s)* and
    *prompt blocked by a guardrail*; plus the older *trace failures per hour* rule. **Fired on a real run on Oct 17,

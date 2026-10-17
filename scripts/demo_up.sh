@@ -38,7 +38,7 @@ Stage bookmarks
   1:40  naive on same   http://localhost:8787/?version=v1&deal=P9VFKNR0
   2:15  PRISM traces    https://prism.blockconvey.com/traces   (status: Flagged, range: 30 days)
         PRISM runs      https://prism.blockconvey.com/trajectories
-        proof 1 steps   https://prism.blockconvey.com/sessions/v3-Niesha_Huffines   (Steps tab)
+        proof 1 steps   https://prism.blockconvey.com/sessions/v3-Niesha_Huffines-sonnet   (Steps tab)
         proof 2 alert   https://prism.blockconvey.com/alerts
         proof 3 cause   https://prism.blockconvey.com/root-cause
         intelligence    https://prism.blockconvey.com/intelligence   (PRISM's own narrative on the naive agent)

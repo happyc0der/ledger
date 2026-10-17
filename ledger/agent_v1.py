@@ -118,7 +118,7 @@ def verify_rows(co: Company, rows: list[dict]) -> list[dict]:
     for r in rows:
         oid = str(r.get("opportunity_id", ""))
         if oid not in set(co.deals.opportunity_id):
-            out.append(tracing.step("check:deal:unknown", f"{oid}: not in the CRM", tool="verifier:crm", status="error")); n_fail += 1
+            out.append(tracing.step("check:deal:unknown", f"{oid}: not in the CRM", tool=f"verifier:crm:{oid}", status="error")); n_fail += 1
             continue
         d = co.deal(oid); acts = co.activities_for(oid)
         true_amt = deal_amount(co.products, d)
@@ -127,16 +127,16 @@ def verify_rows(co: Company, rows: list[dict]) -> list[dict]:
         except (TypeError, ValueError):
             amt_ok = False
         if not amt_ok:
-            out.append(tracing.step("check:amount:mismatch", f"{oid}: stated ${r.get('amount_usd')} vs ${true_amt:,.0f} in catalogue/CRM", tool="verifier:amount", status="error")); n_fail += 1
+            out.append(tracing.step("check:amount:mismatch", f"{oid}: stated ${r.get('amount_usd')} vs ${true_amt:,.0f} in catalogue/CRM", tool=f"verifier:amount:{oid}", status="error")); n_fail += 1
         true_gap = days_since_buyer_touch(acts, d.sales_agent)
         try:
             gap_ok = true_gap is None or int(r.get("days_since_last_buyer_touch")) == true_gap
         except (TypeError, ValueError):
             gap_ok = False
         if not gap_ok:
-            out.append(tracing.step("check:gap:mismatch", f"{oid}: stated {r.get('days_since_last_buyer_touch')}d vs {true_gap}d since a buyer-authored activity", tool="verifier:gap", status="error")); n_fail += 1
+            out.append(tracing.step("check:gap:mismatch", f"{oid}: stated {r.get('days_since_last_buyer_touch')}d vs {true_gap}d since a buyer-authored activity", tool=f"verifier:gap:{oid}", status="error")); n_fail += 1
         q = _norm(r.get("buyer_quote", "") or "")
         if q and q not in " ".join(_norm(a) for a in acts.text):
-            out.append(tracing.step("check:quote:mismatch", f"{oid}: quote not in the record: \u201c{str(r.get('buyer_quote'))[:120]}\u201d", tool="verifier:quote", status="error")); n_fail += 1
+            out.append(tracing.step("check:quote:mismatch", f"{oid}: quote not in the record: \u201c{str(r.get('buyer_quote'))[:120]}\u201d", tool=f"verifier:quote:{oid}", status="error")); n_fail += 1
     out.append(tracing.step("check:summary", f"{len(rows)} deals · {n_fail} claims not supported by the record", tool="checks"))
     return out

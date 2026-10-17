@@ -55,13 +55,15 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                                   f"{len(ledger['dropped'])} claim(s) had no verbatim buyer quote and will be dropped; "
                                   "now comparing what the buyer said with what the CRM says"))
         for slot in ledger["dropped"]:
-            steps.append(tracing.step("check:claim:dropped", f"dropped {slot}: no verbatim buyer quote", tool="verifier:claims"))
+            steps.append(tracing.step("check:claim:dropped", f"dropped {slot}: no verbatim buyer quote", tool=f"verifier:claims:{slot}"))
         issues = compare(co, oid, ledger)
         checks = rule_checks(co, oid, rules_by.get(oid, [])) + semantic_checks(co, oid, ledger, issues)
         for c in checks:
             if c.status == "fail":
                 i = next(x for x in issues + rules_by.get(oid, []) if x.type == c.type)
-                steps.append(tracing.step(f"check:{c.type}:fail", f"{i.detail} | “{i.evidence[:120]}”", tool="consistency" if c.type.startswith("M") else "rules"))
+                # one tool name per check: PRISM's EFF-001 reads a repeated tool name as a redundant call
+                steps.append(tracing.step(f"check:{c.type}:fail", f"{i.detail} | “{i.evidence[:120]}”",
+                                          tool=f"{'consistency' if c.type.startswith('M') else 'rules'}:{c.type.split('_')[0]}"))
         n_pass = sum(1 for c in checks if c.status == "pass"); n_skip = sum(1 for c in checks if c.status == "skipped")
         n_fail = len(checks) - n_pass - n_skip
         steps.append(tracing.step("assessment", (f"{n_fail} inconsistenc{'y' if n_fail == 1 else 'ies'} between the record and the CRM "

@@ -27,7 +27,7 @@ auditor caught it.
 
 **The three Money Operations proofs.** (1) *Sessions → Steps*: every deal is a 10–13-step
 run — crm · rules · claim ledger · verifier · consistency checks · decision · quote verifier ·
-final answer — `prism.blockconvey.com/sessions/v3-Niesha_Huffines`. (2) *Alert*: rules scoped to
+final answer — `prism.blockconvey.com/sessions/v3-Niesha_Huffines-sonnet`. (2) *Alert*: rules scoped to
 the ledger agent — "model call stalled > 20 s" and "prompt blocked by a guardrail" — the first
 fired on a real run on Oct 17 09:29 (25.9 s call). (3) *Root Cause*: the naive agent's runs
 cluster as failures (fabricated quotes, amounts and day gaps, recorded as `check:*:mismatch`

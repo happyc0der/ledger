@@ -6,7 +6,7 @@ organisers require** (:8789 keeps the September Gemini run for the "same pipelin
 Stage URLs: proof `localhost:8787/?view=proof` · the deal `?deal=P9VFKNR0` · sibling
 `?deal=OEBJXZN6` · the invented number `?version=v1&deal=CMCVD0N8` · the invented day gap
 `?version=v1&deal=GZ5M7MIQ` · digest `?digest=1` · live export `localhost:8788/?deal=2003` ·
-PRISM proof 1 `prism.blockconvey.com/sessions/v3-Niesha_Huffines` (Steps tab) · proof 2 `/alerts` ·
+PRISM proof 1 `prism.blockconvey.com/sessions/v3-Niesha_Huffines-sonnet` (Steps tab) · proof 2 `/alerts` ·
 proof 3 `/root-cause` and `/intelligence`. Backup video: `docs/video/ledger_demo_backup.mp4`.
 
 Setup before walking up: UI on :8787 (event run, v3 selected, Proof tab pre-loaded once), the
