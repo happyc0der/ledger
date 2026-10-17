@@ -32,6 +32,7 @@ def main():
     ap.add_argument("--no-prism", action="store_true", help="audit: skip PRISM reads")
     ap.add_argument("--label", default="audit", help="audit: report name under reports/")
     ap.add_argument("--recompute", action="store_true", help="issues: rebuild v3 issues from stored ledgers (no model calls)")
+    ap.add_argument("--workers", type=int, default=1, help="run reps in parallel threads (hosted providers; 1 = sequential)")
     a = ap.parse_args()
     co = load_company()
 
@@ -158,14 +159,26 @@ def main():
     out = RUNS_DIR / f"{a.version}.jsonl"
     out.write_text("")
     n = 0
-    for rep in reps:  # written after every rep so a crash keeps what was done
+
+    def _one(rep):
         t0 = time.time()
         r = run_rep(co, rep, limit=a.limit)
+        return rep, r, time.time() - t0
+
+    if a.workers > 1:  # per-rep work is independent until the cross-deal pass; the cache and spend ledger are thread-safe
+        from concurrent.futures import ThreadPoolExecutor
+        ex = ThreadPoolExecutor(max_workers=min(a.workers, len(reps)))
+        results = ex.map(_one, reps)
+    else:
+        results = map(_one, reps)
+    for rep, r, dt in results:  # written after every rep so a crash keeps what was done
         with out.open("a") as f:
             for x in r:
                 f.write(json.dumps(x, default=str) + "\n")
         n += len(r)
-        print(f"{rep}: {len(r)} deals in {time.time() - t0:.0f}s", flush=True)
+        print(f"{rep}: {len(r)} deals in {dt:.0f}s", flush=True)
+    if a.workers > 1:
+        ex.shutdown()
     if a.version == "v3":  # cross-deal checks across the whole team, then rewrite
         from ledger.agent_v3 import team_cross_deal
         rows = team_cross_deal(co, evaluate.load_rows(a.version))
