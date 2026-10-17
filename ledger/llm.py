@@ -110,6 +110,11 @@ def _openai(p: Provider, messages: list[dict], schema: dict | None) -> tuple[str
     from openai import OpenAI
     client = OpenAI(base_url=p.base_url, api_key=p.api_key, timeout=60.0, max_retries=2)  # never hang a run on one call
     kwargs = {}
+    # Gateways default to a small output cap (Nicrron: 4,096 tokens) and return *empty* content when a
+    # structured answer is cut off; a 30-deal naive-agent batch needs more. Explicit cap, overridable.
+    cap = os.getenv("LLM_MAX_TOKENS") or ("16384" if p.name == "nicrron" else "")
+    if cap:
+        kwargs["max_tokens"] = int(cap)
     if schema:
         # Strict schema where the provider supports it (Gemini, Groq); json_object otherwise.
         kwargs["response_format"] = {"type": "json_schema",
@@ -156,7 +161,8 @@ def chat(messages: list[dict], *, schema: dict | None = None, version: str, sess
             p = get_provider(fb)
             text, tin, tout = _ollama(p, messages, schema, num_ctx) if p.name == "ollama" else _openai(p, messages, schema)
         ms, cached = int((time.time() - t0) * 1000), False
-        cache.write_text(json.dumps({"text": text, "tin": tin, "tout": tout, "ms": ms}))
+        if text.strip():  # an empty reply (blocked, truncated, provider hiccup) must not be remembered as the answer
+            cache.write_text(json.dumps({"text": text, "tin": tin, "tout": tout, "ms": ms}))
     tracing.trace_llm(version=version, model=f"{p.name}/{p.model}", messages=messages, output=text,
                       latency_ms=ms, tokens_in=tin, tokens_out=tout, session_id=session_id,
                       metadata={**(metadata or {}), "cached": cached})
