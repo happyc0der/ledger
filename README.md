@@ -100,7 +100,7 @@ v2 changes the architecture, not the prompt:
 | Generic "re-engage" actions | 33 | 22 |
 | Brier score (lower = better calibrated) | 0.140 | **0.127** |
 
-Full table (v1, v2, v3): `reports/v1_v2_v3.md`. v2 and v3 share the decision layer, so their
+Full table (v1, v2, v3): `docs/reports/v1_v2_v3.md`. v2 and v3 share the decision layer, so their
 prioritisation numbers are the same; v3 adds the claim ledger and the consistency checks below.
 
 **Read the zero honestly.** v3's amounts and day-gaps come from code, so those fabrication
@@ -113,7 +113,7 @@ captured and Brier are scored against the real outcomes, which we never touched.
 tuned against these results; the changes made during the build were bug fixes in our data
 pipeline, found through PRISM. Both versions rate
 the genuinely unforeseeable losses (buyer said "PO next week", then vanished) above 90% —
-correctly, because nothing in the record predicts them. Full table: `reports/v1_v2.md`.
+correctly, because nothing in the record predicts them. Full table: `docs/reports/v1_v2.md`.
 
 **Read the commit number honestly.** Commit = probability ≥ 0.7 *and* no open finding. The
 second half is a policy, not a prediction, and on this benchmark it does not improve accuracy:
@@ -158,7 +158,7 @@ and finds 72% of the semantic issues instead of 32% — and it still invents, st
 of clean deals, and still hears the buyer's objection wrong a third of the time. The
 verification layer transfers unchanged: zero fabrications, zero pipeline error and zero false
 alarms on both models, by construction, and the reading layer finds slightly more on Sonnet.
-Per-type tables: `reports/issues_sonnet.md`; outcomes: `reports/v1_v3_sonnet.md`. One more
+Per-type tables: `docs/reports/issues_sonnet.md`; outcomes: `docs/reports/v1_v3_sonnet.md`. One more
 comparison fix was disclosed on the day (FINDINGS.md #23): Sonnet labels a conditional
 objection — "won't move forward unless it's on this year's roadmap" — as `commitment=paused`,
 which the timeline check had trusted blindly; a `paused` claim now has to be supported by pause
@@ -169,12 +169,25 @@ instrumentation fixes, #18–#19), and the day's gateway lessons are in
 
 ## How PRISM is used
 
-Every model call is a trace (`ledger-v1` / `ledger-v2`, one session per rep) with the
-version, deal and role in metadata. Every v2 deal is a trajectory: `crm_query` → `compute`
-→ `decide` → `explain` → `check:quote:match|mismatch|dropped` → `check:amount:match` →
-`final_answer`. Filtering traces by version is the before/after; opening a v1 trace is where
-the missing $66K and the invented day-gaps are visible; the v2 trajectory for the same deal
-shows the check steps that stop them. Wiring lives in `ledger/tracing.py`.
+Every model call is a trace (agent `ledger-<version>`, one session per rep and day, provider
+and deal in the metadata). Every deal is a run with 12–13 steps — `plan → crm_query → rules →
+claim_ledger → verification → check:… → assessment → check:summary → decide → check:quote:… →
+final_answer` — so the Sessions → Steps tab shows exactly what happened to a deal and the
+`check:*` steps are the receipts. The naive agent's runs carry the same CRM checks over its
+answers after the fact, so its fabrications are failed steps PRISM can cluster.
+
+The three Money Operations proofs are live in the dashboard: a run on the Steps tab; three alert
+rules scoped to the agent (stalled call > 20 s, guardrail block, empty reply), the first of which
+fired on a real run on Oct 17; and Root Cause clusters — the naive agent's runs as failures with a
+human-verified cause, Ledger's runs on the same inputs passing 17/17 trajectory rules. PRISM's
+Agent Intelligence narrative on the naive agent, unprompted: *"Agent fabricates deal data on
+pipeline reviews … add guardrails to prevent deal fabrication."*
+
+PRISM is also read back: the auditor (`ledger/audit.py`) pulls guardrail flags and rule
+evaluations after every run and attributes each failure to data, agent, guardrail or
+instrumentation. That loop found 27 failures so far (FINDINGS.md), including three in how we
+instrumented PRISM itself. Wiring lives in `ledger/tracing.py`; what we would change in PRISM is
+in [docs/PRISM_FEEDBACK.md](docs/PRISM_FEEDBACK.md) (42 items).
 
 ## Ledger v3: catching what doesn't add up
 
@@ -210,7 +223,7 @@ of 43 expired promises, and invented issues on 17% of clean deals — the KC-Ben
 reproduced. Ledger uses the same model; the difference is that it only *reads*, and code
 does the comparing.
 
-Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 · expired promise 100/91 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer 100/100 · arithmetic 100/100. Full table: `reports/issues.md`; every finding in the UI shows
+Per type (Ledger precision / recall): stage vs buyer 97/97 · contact contradictions 100/88 · expired promise 100/91 · timeline contradiction 100/92 · scope vs amount 100/100 · zombie deal 100/93 · cross-deal contact 100/88 · happy ears 100/93 · missing economic buyer 100/100 · arithmetic 100/100. Full table: `docs/reports/issues.md`; every finding in the UI shows
 the CRM value, the buyer's sentence and the recommended action.
 
 **What was adjusted after the first scoring, and what wasn't.** No prompt or model setting
@@ -259,19 +272,26 @@ decision model. `scripts/run.py audit --hours 24` → `reports/audit.md`.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env            # PRISM keys; optional GEMINI / GROQ / TYPESAFE keys
-./scripts/make_data.sh                         # build -> paraphrase -> plant anomalies (deterministic)
-.venv/bin/python scripts/run.py v1             # LLM_PROVIDER=ollama (default) | gemini | groq
-.venv/bin/python scripts/run.py v2
-.venv/bin/python scripts/run.py v3             # Ledger: rules + claim ledger + consistency + judgement
-.venv/bin/python scripts/run.py eval v1 v2     # reports/v1_v2.md + runs/*_verdicts.csv
-.venv/bin/python scripts/run.py issues v3      # rules vs Ledger on planted anomalies -> reports/issues.md
-.venv/bin/uvicorn ledger.app:app --port 8787   # http://localhost:8787
+cp .env.example .env            # PRISM keys; NICRRON_API_KEY for the gateway; optional GEMINI / GROQ / TYPESAFE
+./scripts/make_data.sh                                   # build -> paraphrase -> plant anomalies (deterministic)
+export LLM_PROVIDER=nicrron                              # or ollama (local, free) | gemini | groq | xai
+.venv/bin/python scripts/run.py v3 --workers 5           # Ledger: rules + claim ledger + consistency + judgement
+.venv/bin/python scripts/run.py v1 --workers 2           # the naive agent, same model
+.venv/bin/python scripts/run.py naive --workers 5        # the "list the issues" agent
+.venv/bin/python scripts/run.py eval v1 v3               # against real outcomes -> reports/
+.venv/bin/python scripts/run.py issues naive v3          # rules vs naive vs Ledger on planted anomalies -> reports/issues.md
+./scripts/demo_up.sh                                     # three UIs (:8787 event run, :8788 live, :8789 Gemini) + checks
+.venv/bin/python scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv \
+  --activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv \
+  --products data/company/products.csv --as-of 2026-10-19   # an editable export -> findings in ~12 s
 ```
 
-No paid inference is required: the default provider is a local Ollama model. The full
-comparison above cost about $0.30 on Gemini Flash-Lite; a spend guard in `ledger/llm.py` stops
-metered providers at `GEMINI_BUDGET_USD`.
+`LEDGER_DATA=data/<copy>` runs against another dataset directory (the per-model runs above used
+copies of `data/company`). Cost of a full 235-deal run: about $6 on Claude Sonnet 5.5 through
+Nicrron, about $0.30 on Gemini Flash-Lite, $0 on a local model (times in the table above); a
+weekly re-run costs cents because unchanged records reuse their ledger. A spend guard stops
+every metered provider at `<PROVIDER>_BUDGET_USD`. The scored tables referenced in this README
+are committed under [docs/reports/](docs/reports/).
 
 ## On data we did not write: 150 SaaS sales conversations with real outcomes
 

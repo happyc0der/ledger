@@ -1,3 +1,5 @@
+> Build log and plan as it evolved (Sep 21 – Oct 17). For what the product is and does, read README.md and docs/SYSTEM_DESIGN.md; for the event-day state, docs/SUBMISSION.md.
+
 # Ledger — pipeline review agent (revised 2026-09-23)
 
 AI × GTM Hackathon (Block Convey), Revenue Intelligence track, **Sat 2026-10-17** (postponed from 09-26 on 09-23; "bigger, more partners").

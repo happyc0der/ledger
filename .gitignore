@@ -2,7 +2,7 @@
 .venv/
 __pycache__/
 .cache/
-reports/
+/reports/
 .DS_Store
 data/acme_test/
 runs/
