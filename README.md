@@ -99,25 +99,28 @@ benchmark was re-run on `anthropic/claude-sonnet-5-5` with no prompt changes (`L
 dataset copy `data/company_nicrron`, PRISM sessions tagged `-sonnet`). Same 235 deals, same
 snapshot, scored the same way:
 
-| metric | Ledger v3 on Gemini Flash-Lite (Sep) | Ledger v3 on Claude Sonnet 5.5 (Oct 17) |
-|---|---|---|
-| Revenue captured in the top 20 (of $113.8K) | $87.6K (77%) | $80.7K (71%) |
-| Pipeline total error | 0% | 0% |
-| Fabricated amounts / day-gaps / quotes | 0 | 0 |
-| Objection accuracy | 94% | 95% |
-| Next-action accuracy | 92% | 94% |
-| Brier score | 0.127 | 0.127 |
-| Semantic (M1–M10) recall / precision | 92% / 100% | 94% / 99% |
-| Clean deals falsely flagged | 0 / 86 | 0 / 86 |
-| Cost of the run (gateway meter) | ~$0.30 | ~$6 |
+| metric | naive v1, Gemini (Sep) | Ledger v3, Gemini (Sep) | naive v1, Sonnet 5.5 (Oct 17) | Ledger v3, Sonnet 5.5 (Oct 17) |
+|---|---|---|---|---|
+| Revenue captured in the top 20 (of $113.8K) | 60% | **77%** | 64% | **71%** |
+| Pipeline total error | −5% | **0%** | +1.5% | **0%** |
+| Fabricated amounts / day-gaps / quotes | 97 | **0** | 6 | **0** |
+| Objection accuracy | 82% | **94%** | 68% | **95%** |
+| Next-action accuracy | 87% | **92%** | 87% | **94%** |
+| Brier score | 0.140 | **0.127** | 0.133 | **0.127** |
+| Semantic (M1–M10) recall / precision (naive = "list the issues" agent) | 32% / 62% | **92% / 100%** | 72% / 87% | **94% / 99%** |
+| Clean deals falsely flagged | 15 / 86 | **0 / 86** | 10 / 86 | **0 / 86** |
+| Cost of the v3 run (gateway meter) | ~$0.30 | | ~$6 | |
 
-The verification layer transfers unchanged: zero fabrications and zero pipeline error on both
-models by construction, and the reading layer finds slightly more on Sonnet. One more
+A stronger model helps the naive agent a great deal — it fabricates 6 numbers instead of 97
+and finds 72% of the semantic issues instead of 32% — and it still invents, still flags 12%
+of clean deals, and still hears the buyer's objection wrong a third of the time. The
+verification layer transfers unchanged: zero fabrications, zero pipeline error and zero false
+alarms on both models, by construction, and the reading layer finds slightly more on Sonnet.
+Per-type tables: `reports/issues_sonnet.md`; outcomes: `reports/v1_v3_sonnet.md`. One more
 comparison fix was disclosed on the day (FINDINGS.md #23): Sonnet labels a conditional
 objection — "won't move forward unless it's on this year's roadmap" — as `commitment=paused`,
 which the timeline check had trusted blindly; a `paused` claim now has to be supported by pause
-language in its own quote (5 false alarms → 0, recall unchanged, Gemini run unchanged). The
-naive-agent rows for Sonnet are in `reports/issues_sonnet.md` once that run completes.
+language in its own quote (5 false alarms → 0, recall unchanged, Gemini run unchanged). 
 PRISM's trajectory rules pass 17/17 on these runs (they failed two rules before the day's
 instrumentation fixes, #18–#19), and the day's gateway lessons are in
 [docs/NICRRON_NOTES.md](docs/NICRRON_NOTES.md).
