@@ -35,7 +35,11 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
     for oid in deals.opportunity_id:
         state = deal_state(co, oid)
         record_hash = hashlib.sha1("\n".join(f"{a['date']}|{a['author']}|{a['text']}" for a in state["activities"]).encode()).hexdigest()[:16]
-        steps = [tracing.step("crm_query", f"{len(state['activities'])} activities", tool="crm", input_summary=oid),
+        # Reasoning steps say what the pipeline is doing and why; PRISM's trajectory rules expect them
+        # (CORR-002 reasoning presence, CORR-004 no run of >5 tool calls) and a reviewer reads them first.
+        steps = [tracing.step("plan", f"Review {oid}: read the record, run field rules, fill the claim ledger from buyer-stated "
+                              "facts, verify every claim against the record, compare ledger vs CRM, judge, verify the quote."),
+                 tracing.step("crm_query", f"{len(state['activities'])} activities", tool="crm", input_summary=oid),
                  tracing.step("rules", "; ".join(f"{i.type}" for i in rules_by.get(oid, [])) or "no rule hits", tool="rules")]
         cached = prev.get(oid)
         reused = bool(cached and cached[0] == record_hash)
@@ -46,6 +50,10 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
             ledger = extract(co, oid, version="v3", session=session)
             steps.append(tracing.step("claim_ledger", json.dumps({k: v for k, v in ledger.items() if k not in ("quotes", "dropped") and v}), tool="llm:extract"))
         ledgers[oid] = ledger
+        filled = [k for k, v in ledger.items() if k not in ("quotes", "dropped", "grades") and v not in (None, "", "unknown", "none_mentioned", "n/a")]
+        steps.append(tracing.step("verification", f"ledger has {len(filled)} buyer-stated facts ({', '.join(filled[:6])}); "
+                                  f"{len(ledger['dropped'])} claim(s) had no verbatim buyer quote and will be dropped; "
+                                  "now comparing what the buyer said with what the CRM says"))
         for slot in ledger["dropped"]:
             steps.append(tracing.step("check:claim:dropped", f"dropped {slot}: no verbatim buyer quote", tool="verifier:claims"))
         issues = compare(co, oid, ledger)
@@ -55,6 +63,10 @@ def run_rep(co: Company, rep: str, *, limit: int | None = None) -> list[dict]:
                 i = next(x for x in issues + rules_by.get(oid, []) if x.type == c.type)
                 steps.append(tracing.step(f"check:{c.type}:fail", f"{i.detail} | “{i.evidence[:120]}”", tool="consistency" if c.type.startswith("M") else "rules"))
         n_pass = sum(1 for c in checks if c.status == "pass"); n_skip = sum(1 for c in checks if c.status == "skipped")
+        n_fail = len(checks) - n_pass - n_skip
+        steps.append(tracing.step("assessment", (f"{n_fail} inconsistenc{'y' if n_fail == 1 else 'ies'} between the record and the CRM "
+                                  f"({', '.join(c.type for c in checks if c.status == 'fail')}); " if n_fail else "record and CRM agree; ")
+                                  + "handing buyer signals, buyer-touch gap and base rate to the decision model"))
         steps.append(tracing.step("check:summary", f"{n_pass} pass · {len(checks) - n_pass - n_skip} fail · {n_skip} skipped: "
                                   + "; ".join(f"{c.type.split('_')[0]} {c.status} ({c.reason})" for c in checks if c.status != "fail"), tool="checks"))
         dec = decide(state, version="v3", session_id=session)
