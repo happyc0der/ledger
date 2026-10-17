@@ -20,6 +20,11 @@ ollama_check() {  # label, base url, model -> OK | NO MODEL | down
 }
 ollama_check mac http://localhost:11434 qwen3:14b
 ollama_check msi http://msi:11434 gemma4:12b
+if [ -n "$NICRRON_API_KEY" ]; then
+  printf "Nicrron       %s  (%s)\n" "$(curl -s -m 10 -o /dev/null -w '%{http_code}' https://api.nicrron.ai/v1/models -H "Authorization: Bearer $NICRRON_API_KEY" || echo down)" "${NICRRON_MODEL:-anthropic/claude-sonnet-5-5}"
+else
+  printf "Nicrron       NO KEY  (NICRRON_API_KEY missing in .env; organisers require model calls through Nicrron)\n"
+fi
 cat <<URLS
 
 Stage bookmarks
@@ -32,8 +37,9 @@ Stage bookmarks
   2:35  live export     http://localhost:8788/?deal=2003
         digest          http://localhost:8787/?digest=1
   live run (the untouched template is cached on every path -> instant):
-    default (free-tier Gemini key in .env; 429/5xx fall back to the Mac automatically):
-      LLM_PROVIDER=gemini .venv/bin/python scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv --activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv --products data/company/products.csv --as-of 2026-10-19
+    default (event requirement: Nicrron; 429/5xx fall back to the Mac automatically):
+      LLM_PROVIDER=nicrron .venv/bin/python scripts/live.py --preset hubspot --deals data/templates/hubspot_deals.csv --activities data/templates/hubspot_engagements.csv --contacts data/templates/hubspot_contacts.csv --products data/company/products.csv --as-of 2026-10-19
+    Gemini:      same command with LLM_PROVIDER=gemini   (free-tier key, ~1.5 min cold)
     no network:  same command with LLM_PROVIDER=ollama PRISM_DISABLED=1   (Mac qwen3:14b, 8 deals ~2 min cold)
     GPU:         prefix with OLLAMA_URL=http://msi:11434 OLLAMA_MODEL=gemma4:12b LLM_PROVIDER=ollama   (msi awake on Tailscale, ~1 min cold)
 URLS
