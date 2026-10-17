@@ -20,7 +20,7 @@
    returned nothing* fired at 12:55 ET on a run that reproduced finding 20 on purpose (trace `ae49e831…`, 4,096-token
    cap, empty answer, the deal scored on field rules only). Show that one first.
 3. Root Cause / Agent Intelligence. **Lead with the naive agent as the failure and Ledger as the fix** — same 235
-   inputs, same model: cluster `a986c666…` *failures in ledger-v1* (7 runs on Oct 17, cause: unsupported answers,
+   inputs, same model: cluster `a986c666…` *failures in ledger-v1* (8 runs on Oct 17 incl. the 12:55 empty-reply run, cause: unsupported answers,
    no recovery; human-verified “prompt”) vs ledger-v3 runs on the same deals passing 17/17 rules. The recipe's
    per-trace step was done on 8 of this morning's naive traces (Analyse selected) before Analyze now. The
    instrumentation story (finding 18) is the aside, not the proof: say it as “PRISM also caught us mislabelling
