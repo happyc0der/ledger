@@ -37,6 +37,7 @@ Stage bookmarks
         proof 1 steps   https://prism.blockconvey.com/sessions/v3-Niesha_Huffines   (Steps tab)
         proof 2 alert   https://prism.blockconvey.com/alerts
         proof 3 cause   https://prism.blockconvey.com/root-cause
+        intelligence    https://prism.blockconvey.com/intelligence   (PRISM's own narrative on the naive agent)
   2:35  live export     http://localhost:8788/?deal=2003
         digest          http://localhost:8787/?digest=1
   live run (the untouched template is cached on every path -> instant):
