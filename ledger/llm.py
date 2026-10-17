@@ -55,6 +55,17 @@ def _ollama(p: Provider, messages: list[dict], schema: dict | None, num_ctx: int
 # --- spend guard for metered providers -------------------------------------------------
 # Conservative $/M-token defaults; override with <PROVIDER>_PRICE_IN / _PRICE_OUT.
 _DEFAULT_PRICE = {"gemini": (0.30, 2.50), "xai": (0.20, 0.50), "groq": (0.0, 0.0)}  # gemini = 3.5-flash-lite
+# Nicrron prices depend on the routed model ($/M tokens, nicrron.ai/docs/models, 2026-10-17); unknown ids
+# are charged at the Sonnet rate so the estimate errs high.
+_NICRRON_PRICE = {
+    "anthropic/claude-sonnet-5-5": (2.0, 10.0), "anthropic/claude-sonnet-5": (2.0, 10.0),
+    "anthropic/claude-haiku-5-5": (0.10, 0.50), "anthropic/claude-opus-5-5": (4.0, 20.0),
+    "anthropic/claude-fable-5-1": (10.0, 50.0),
+    "openai/gpt-5.5": (5.0, 30.0), "openai/gpt-5.4": (2.5, 15.0), "openai/gpt-5.4-mini": (0.75, 4.5),
+    "openai/gpt-5.4-nano": (0.20, 1.25), "openai/gpt-6-sol": (2.0, 10.0), "openai/gpt-6-luna": (0.10, 0.50),
+    "openai/gpt-5-mini": (0.25, 2.0), "openai/gpt-4.1-mini": (0.40, 1.60),
+}
+_DEFAULT_BUDGET = {"nicrron": 200.0}  # event credits; everything else keeps the $2 default
 _USAGE = CACHE_DIR.parent / "usage.json"
 
 
@@ -73,7 +84,7 @@ def _read_usage() -> dict:
 
 
 def _spend(p: Provider, tin: int, tout: int) -> None:
-    pin, pout = _DEFAULT_PRICE.get(p.name, (0.0, 0.0))
+    pin, pout = _NICRRON_PRICE.get(p.model, (2.0, 10.0)) if p.name == "nicrron" else _DEFAULT_PRICE.get(p.name, (0.0, 0.0))
     pin = float(os.getenv(f"{p.name.upper()}_PRICE_IN", pin))
     pout = float(os.getenv(f"{p.name.upper()}_PRICE_OUT", pout))
     with _USAGE_LOCK:
@@ -89,7 +100,7 @@ def _spend(p: Provider, tin: int, tout: int) -> None:
             except OSError:
                 pass
         os.replace(tmp, _USAGE)  # atomic: readers see the old or the new file, never a partial one
-    budget = float(os.getenv(f"{p.name.upper()}_BUDGET_USD", 2.0))
+    budget = float(os.getenv(f"{p.name.upper()}_BUDGET_USD", _DEFAULT_BUDGET.get(p.name, 2.0)))
     if row["usd"] > budget:
         raise RuntimeError(f"{p.name} spend ${row['usd']:.2f} exceeds budget ${budget:.2f}; "
                            f"raise {p.name.upper()}_BUDGET_USD to continue")

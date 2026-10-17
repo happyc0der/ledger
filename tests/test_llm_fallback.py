@@ -47,3 +47,15 @@ def test_our_own_bad_request_surfaces(monkeypatch, tmp_path):
     gem = _wire(monkeypatch, tmp_path, _BadRequest("bad schema"))
     with pytest.raises(_BadRequest):
         llm.chat([{"role": "user", "content": "hi"}], schema={"type": "object"}, version="t", session_id="t", provider=gem, use_cache=False)
+
+
+def test_nicrron_provider_and_price(monkeypatch, tmp_path):
+    import json
+    from ledger import config
+    monkeypatch.setenv("NICRRON_API_KEY", "sk-af-test")
+    p = config.provider("nicrron")
+    assert p.base_url == "https://api.nicrron.ai/v1" and p.model == "anthropic/claude-sonnet-5-5"
+    monkeypatch.setattr(llm, "_USAGE", tmp_path / "usage.json")
+    llm._spend(p, 1_000_000, 100_000)  # $2 in + $1 out at the Sonnet 5.5 rate
+    u = json.loads((tmp_path / "usage.json").read_text())["nicrron"]
+    assert abs(u["usd"] - 3.0) < 1e-6 and u["calls"] == 1

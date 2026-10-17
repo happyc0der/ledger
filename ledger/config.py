@@ -94,6 +94,10 @@ PROVIDERS = {
     # $25 sign-up credit. Only if we want a bigger model on demo day.
     "xai": lambda: Provider("xai", "https://api.x.ai/v1",
                             os.environ["XAI_API_KEY"], os.getenv("XAI_MODEL", "grok-4-fast")),
+    # Money Talks 2 technology sponsor: one OpenAI-compatible key for 80+ models ("provider/model").
+    # Event credits ($260/participant) expire 2026-10-18 18:00 ET. Model ids: nicrron.ai/docs/models.
+    "nicrron": lambda: Provider("nicrron", os.getenv("NICRRON_URL", "https://api.nicrron.ai/v1"),
+                                os.environ["NICRRON_API_KEY"], os.getenv("NICRRON_MODEL", "anthropic/claude-sonnet-5-5")),
 }
 
 
