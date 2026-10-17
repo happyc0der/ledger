@@ -6,9 +6,11 @@ pkill -f "uvicorn ledger.app" 2>/dev/null; sleep 1
 mkdir -p runs/company runs/live
 nohup .venv/bin/uvicorn ledger.app:app --port 8787 > runs/company/ui.log 2>&1 &
 LEDGER_DATA=data/live nohup .venv/bin/uvicorn ledger.app:app --port 8788 > runs/live/ui.log 2>&1 &
+if [ -d data/company_nicrron ]; then mkdir -p runs/company_nicrron; LEDGER_DATA=data/company_nicrron nohup .venv/bin/uvicorn ledger.app:app --port 8789 > runs/company_nicrron/ui.log 2>&1 & fi
 sleep 3
 printf "benchmark UI  %s\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8787/api/meta)"
 printf "live UI       %s\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8788/api/meta)"
+[ -d data/company_nicrron ] && printf "nicrron UI    %s  (http://localhost:8789, Sonnet 5.5 benchmark)\n" "$(curl -s -o /dev/null -w '%{http_code}' localhost:8789/api/meta)"
 printf "PRISM         %s\n" "$(curl -sS -m 15 "$PRISM_HOST/api/setup-doctor?project_id=$PRISM_PROJECT_ID" -H "X-PRISMtrace-Key: $PRISM_API_KEY" | .venv/bin/python -c 'import json,sys; d=json.load(sys.stdin); print(d.get("overall"), "live_connected", d.get("live_connected"))' 2>/dev/null || echo unreachable)"
 ollama_check() {  # label, base url, model -> OK | NO MODEL | down
   tags=$(curl -s -m 5 "$2/api/tags" 2>/dev/null) || tags=""
@@ -21,7 +23,8 @@ ollama_check() {  # label, base url, model -> OK | NO MODEL | down
 ollama_check mac http://localhost:11434 qwen3:14b
 ollama_check msi http://msi:11434 gemma4:12b
 if [ -n "$NICRRON_API_KEY" ]; then
-  printf "Nicrron       %s  (%s)\n" "$(curl -s -m 10 https://api.nicrron.ai/v1/key -H "Authorization: Bearer $NICRRON_API_KEY" | .venv/bin/python -c 'import json,sys; d=json.load(sys.stdin)["data"]; print(f"balance ${d[\"balance\"]:.2f}, used ${d[\"usage\"]:.2f}, {d[\"rate_limit\"][\"requests\"]} req/{d[\"rate_limit\"][\"interval\"]}; cap NICRRON_BUDGET_USD=${NICRRON_BUDGET_USD:-200}")' 2>/dev/null || echo down)" "${NICRRON_MODEL:-anthropic/claude-sonnet-5-5}"
+  nic=$(curl -s -m 10 https://api.nicrron.ai/v1/key -H "Authorization: Bearer $NICRRON_API_KEY" | .venv/bin/python -c 'import json,sys,os; d=json.load(sys.stdin)["data"]; print("balance $%.2f, used $%.2f, %s req/%s; cap NICRRON_BUDGET_USD=%s" % (d["balance"], d["usage"], d["rate_limit"]["requests"], d["rate_limit"]["interval"], os.getenv("NICRRON_BUDGET_USD", "200")))' 2>/dev/null || echo down)
+  printf "Nicrron       %s  (%s)\n" "$nic" "${NICRRON_MODEL:-anthropic/claude-sonnet-5-5}"
 else
   printf "Nicrron       NO KEY  (NICRRON_API_KEY missing in .env; organisers require model calls through Nicrron)\n"
 fi
