@@ -21,7 +21,7 @@ ollama_check() {  # label, base url, model -> OK | NO MODEL | down
 ollama_check mac http://localhost:11434 qwen3:14b
 ollama_check msi http://msi:11434 gemma4:12b
 if [ -n "$NICRRON_API_KEY" ]; then
-  printf "Nicrron       %s  (%s)\n" "$(curl -s -m 10 -o /dev/null -w '%{http_code}' https://api.nicrron.ai/v1/models -H "Authorization: Bearer $NICRRON_API_KEY" || echo down)" "${NICRRON_MODEL:-anthropic/claude-sonnet-5-5}"
+  printf "Nicrron       %s  (%s)\n" "$(curl -s -m 10 https://api.nicrron.ai/v1/key -H "Authorization: Bearer $NICRRON_API_KEY" | .venv/bin/python -c 'import json,sys; d=json.load(sys.stdin)["data"]; print(f"balance ${d[\"balance\"]:.2f}, used ${d[\"usage\"]:.2f}, {d[\"rate_limit\"][\"requests\"]} req/{d[\"rate_limit\"][\"interval\"]}; cap NICRRON_BUDGET_USD=${NICRRON_BUDGET_USD:-200}")' 2>/dev/null || echo down)" "${NICRRON_MODEL:-anthropic/claude-sonnet-5-5}"
 else
   printf "Nicrron       NO KEY  (NICRRON_API_KEY missing in .env; organisers require model calls through Nicrron)\n"
 fi

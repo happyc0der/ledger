@@ -13,5 +13,7 @@ Measured behaviour, so the next team does not rediscover it:
 | `/v1/models` lists 87 models with ids as `provider/model`; prices on nicrron.ai/docs/models | spend guard prices per model (`_NICRRON_PRICE`), unknown ids at the Sonnet rate | `ledger/llm.py` |
 | Latency on `claude-sonnet-5-5`: 1–4 s for a 2–3k-token extraction, 25–30 s for a 9k-token naive batch | the PRISM "stalled call > 20 s" alert fires on naive batches, which is the behaviour we wanted to catch | PRISM alert rule |
 
+`GET /v1/key` returns the key's real `usage`, `balance` and `rate_limit` (undocumented; found by probing) — `scripts/demo_up.sh` prints it. Our per-model estimate ran ~6% under the gateway's meter ($7.30 vs $7.72 after 997 calls).
+
 Credits: $260 per participant, expire 2026-10-18 18:00 ET. Spend is logged per call in
 `.cache/usage.json` (`nicrron` row).
