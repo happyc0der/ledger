@@ -91,10 +91,10 @@ structural — the model only reads, code does the comparing."
 
 **CLICK** tab E.
 
-**SAY** "PRISM found failures in *our* agent this morning. It clustered 470 of our runs as
-failures. We had been telling PRISM 'error' whenever a deal had a finding. That was our
-instrumentation, not the agent. We fixed it, re-ran, and the same runs now pass 17 of 17 rules.
-Finding 18 in our log."
+**SAY** "This morning PRISM showed us our agent was misreporting itself. It clustered 470 of
+our runs as failures, because we sent 'error' to mean 'this deal needs attention'. We fixed how
+we instrument, re-ran the same 235 deals, and they pass 17 of 17 rules. Our auditor, reading
+PRISM back, caught two more rules the same way. Finding 18 in our log, 26 findings in all."
 
 **CLICK** tab F.
 
@@ -115,7 +115,7 @@ attention*. H: the 12 steps.
 
 **CLICK** terminal, press Enter. Then tab I.
 
-**SAY** "This is an eight-deal HubSpot export anyone can edit. It runs in seconds. Fabrikam:
+**SAY** "This is an eight-deal HubSpot export anyone can edit. It runs in twelve seconds. Fabrikam:
 the contact left, a 'PO next week' that is 31 days old, and the sibling deal still lists her.
 Every finding becomes a draft correction a human approves."
 
@@ -149,6 +149,12 @@ the receipts — every Monday, and before the CFO signs."
   are learned from the company's closed deals.
 - **Cost?** About $6 for 235 deals on Claude Sonnet through Nicrron; cents a week after that
   because unchanged records reuse their ledger. Free on a local model.
+- **So PRISM found bugs in your agent?** In how it reported itself, yes: 470 runs clustered as
+  failures because of our status semantics; two trajectory rules our auditor caught the same
+  way. The findings it showed the manager were already verified. The real output bug today —
+  five false alarms where the model called a condition a pause — came from our planted-anomaly
+  score, and is fixed and logged. In September PRISM's PII guardrail caught phone numbers our
+  paraphrase step had invented; that was a data failure PRISM found first.
 - **What did PRISM not do well?** Forty-two items of feedback in docs/PRISM_FEEDBACK.md. The
   big three: Root Cause does nothing until someone presses Analyze, rule semantics are not
   documented, and alerts fire once and go quiet.
