@@ -466,3 +466,7 @@ scripts/run.py           v1|v3|naive|eval|issues|audit|digest|export-approved|pr
 docs/                    SYSTEM_DESIGN, SUBMISSION, DEMO (root), DAY_OF, NICRRON_NOTES, PRISM_FEEDBACK, spec/, screenshots/, video/
 tests/                   45 tests, no model calls
 ```
+
+## License
+
+Copyright (C) 2026 Keshav Rajput. The code is free software, released under the GNU General Public License v3.0 or later: see [`LICENSE`](LICENSE). The datasets in `data/` come from the public sources described above (the Maven Analytics CRM Sales Opportunities dataset, with synthetic notes added) and keep their own terms.
