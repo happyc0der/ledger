@@ -413,8 +413,10 @@ agent's fabrications visible in PRISM as failed check steps; the commit rule mea
 outcomes (#27).
 
 **Also open:** a run on a real customer export (the only test that matters), learning the commit
-exclusion set from a company's closed deals (#27), chunking for very long records, and the
-forecast's judgement layer (Jev, above).
+exclusion set from a company's closed deals (#27), chunking for very long records, the
+forecast's judgement layer (Jev, above), and — once Jev is in — a top-down forecast band from the
+company's closed-deal history (Mistral Timestral, zero-shot, CPU) shown beside the bottom-up commit,
+so the two numbers can be reconciled deal by deal.
 
 ## Bring your own pipeline
 
